@@ -109,6 +109,31 @@
       font-size: 13px;
     }
 
+    .hero-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .hero-button {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 11px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+      color: #fffaf3;
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+      backdrop-filter: blur(6px);
+    }
+
     .jumpbar {
       position: sticky;
       top: 0;
@@ -388,6 +413,102 @@
       color: var(--muted);
     }
 
+    .qr-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(20, 29, 32, 0.74);
+      backdrop-filter: blur(10px);
+    }
+
+    .qr-overlay.open {
+      display: flex;
+    }
+
+    .qr-card {
+      width: min(100%, 420px);
+      padding: 18px;
+      border-radius: 24px;
+      background: #fffaf3;
+      color: var(--ink);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+    }
+
+    .qr-card h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      line-height: 1.2;
+    }
+
+    .qr-card p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .qr-image-wrap {
+      margin: 16px 0 14px;
+      padding: 16px;
+      border-radius: 18px;
+      background: #ffffff;
+      border: 1px solid rgba(32, 90, 97, 0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 260px;
+    }
+
+    .qr-image-wrap img {
+      width: min(100%, 260px);
+      height: auto;
+      border-radius: 12px;
+    }
+
+    .qr-url {
+      display: block;
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(32, 90, 97, 0.14);
+      background: #fff;
+      color: var(--ink);
+      font-size: 13px;
+      line-height: 1.45;
+      word-break: break-all;
+    }
+
+    .qr-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .qr-close,
+    .qr-copy {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      flex: 1;
+      min-height: 44px;
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .qr-close {
+      background: #edf5f4;
+      color: var(--teal);
+    }
+
+    .qr-copy {
+      background: var(--teal);
+      color: #fffaf3;
+    }
+
     .sources {
       display: grid;
       gap: 10px;
@@ -438,6 +559,9 @@
       <div class="meta-note">
         調査基準日: 2026年4月28日。<br>
         4月28日実装のPatch 7.5パッチノートで、フリートライアルは公式に「レベル80」「漆黒のヴィランズまで」へ拡張されました。
+      </div>
+      <div class="hero-actions">
+        <button class="hero-button" id="openQrButton" type="button">QRを開く</button>
       </div>
     </header>
 
@@ -542,6 +666,21 @@
         </div>
       </div>
     </section>
+  </div>
+
+  <div class="qr-overlay" id="qrOverlay" aria-hidden="true">
+    <div class="qr-card" role="dialog" aria-modal="true" aria-labelledby="qrTitle">
+      <h3 id="qrTitle">スマホ用QR</h3>
+      <p id="qrHelp">この公開ページのURLをQRで表示します。</p>
+      <div class="qr-image-wrap">
+        <img id="qrImage" alt="このページを開くQRコード" loading="lazy">
+      </div>
+      <span class="qr-url" id="qrUrl"></span>
+      <div class="qr-actions">
+        <button class="qr-copy" id="copyQrUrl" type="button">URLをコピー</button>
+        <button class="qr-close" id="closeQrButton" type="button">閉じる</button>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -864,6 +1003,52 @@
         <p>${row.text}</p>
       </div>
     `).join("");
+
+    const qrOverlay = document.getElementById("qrOverlay");
+    const qrImage = document.getElementById("qrImage");
+    const qrUrl = document.getElementById("qrUrl");
+    const qrHelp = document.getElementById("qrHelp");
+    const openQrButton = document.getElementById("openQrButton");
+    const closeQrButton = document.getElementById("closeQrButton");
+    const copyQrUrl = document.getElementById("copyQrUrl");
+    const shareUrl = window.location.href;
+
+    function openQr() {
+      qrUrl.textContent = shareUrl;
+      qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(shareUrl)}`;
+      qrHelp.textContent = "この公開ページのURLをQRで表示しています。スマホで読み取って開けます。";
+      qrOverlay.classList.add("open");
+      qrOverlay.setAttribute("aria-hidden", "false");
+    }
+
+    function closeQr() {
+      qrOverlay.classList.remove("open");
+      qrOverlay.setAttribute("aria-hidden", "true");
+    }
+
+    openQrButton.addEventListener("click", openQr);
+    closeQrButton.addEventListener("click", closeQr);
+    qrOverlay.addEventListener("click", (event) => {
+      if (event.target === qrOverlay) {
+        closeQr();
+      }
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeQr();
+      }
+    });
+    copyQrUrl.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+        copyQrUrl.textContent = "コピーしました";
+        setTimeout(() => {
+          copyQrUrl.textContent = "URLをコピー";
+        }, 1400);
+      } catch (error) {
+        qrHelp.textContent = "コピーできなかったので、下のURLをそのまま使ってください。";
+      }
+    });
   </script>
 </body>
 </html>

@@ -317,6 +317,27 @@
       flex: none;
     }
 
+    .combo-lane {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 4px 0 8px;
+      margin: 0 0 10px;
+      scrollbar-width: none;
+    }
+
+    .combo-lane::-webkit-scrollbar {
+      display: none;
+    }
+
+    .combo-arrow {
+      flex: none;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
     .section-card {
       padding: 16px;
       margin-bottom: 16px;
@@ -743,6 +764,8 @@
         label: "巴術士 / 単体中心",
         summary: "まだ“基本魔法 + ルビー + エナドレ消費”の超シンプル帯です。ここではボタンを腐らせないことが最重要。",
         actions: ["summonCarbuncle", "radiantAegis", "aethercharge", "summonRuby", "gemshine", "energyDrain", "miasmaBurst", "ruin"],
+        singleFlow: ["aethercharge", "summonRuby", "gemshine", "gemshine", "energyDrain", "miasmaBurst", "ruin"],
+        aoeFlow: ["ruin"],
         single: [
           "戦闘前にサモン・カーバンクルを出しておく。",
           "エーテルチャージを使う。",
@@ -766,6 +789,8 @@
         label: "巴術士 / 2属性回し",
         summary: "トパーズが増えて“ルビー2回 + トパーズ4回”の形になります。まだ範囲攻撃はほぼなく、単体の押し切りが中心です。",
         actions: ["summonTopaz", "summonRuby", "gemshine", "energyDrain", "miasmaBurst", "resurrection"],
+        singleFlow: ["aethercharge", "summonRuby", "gemshine", "gemshine", "summonTopaz", "gemshine", "gemshine", "energyDrain", "miasmaBurst"],
+        aoeFlow: ["ruin"],
         single: [
           "エーテルチャージを使う。",
           "サモン・ルビー → ルビー化ジェムシャイン2回。",
@@ -789,6 +814,8 @@
         label: "召喚士解放帯 / 範囲攻撃開始",
         summary: "ここから召喚士ジョブに入り、ルインラとアウトバーストが加わります。3体以上かどうかの判断が大事になります。",
         actions: ["ruinII", "outburst", "preciousBrilliance", "summonIfrit", "summonTopaz", "summonEmerald", "gemshine"],
+        singleFlow: ["aethercharge", "summonIfrit", "gemshine", "gemshine", "summonTopaz", "gemshine", "summonEmerald", "gemshine", "ruinII"],
+        aoeFlow: ["outburst", "summonIfrit", "preciousBrilliance", "summonTopaz", "preciousBrilliance", "summonEmerald", "preciousBrilliance"],
         single: [
           "ジョブクリスタルを装備したうえで、エーテルチャージを回す。",
           "サモン・イフリート → 属性ジェムシャイン2回。",
@@ -813,6 +840,8 @@
         label: "タイタン追加 / 範囲攻撃強化",
         summary: "Lv35のサモン・タイタン、Lv40のペインフレアが効いてきます。範囲攻撃での手数が一気に良くなります。",
         actions: ["summonIfrit", "summonTitan", "summonEmerald", "painflare", "outburst", "preciousBrilliance"],
+        singleFlow: ["aethercharge", "summonIfrit", "gemshine", "summonTitan", "gemshine", "summonEmerald", "gemshine", "ruinII"],
+        aoeFlow: ["outburst", "summonIfrit", "preciousBrilliance", "summonTitan", "preciousBrilliance", "summonEmerald", "preciousBrilliance", "painflare"],
         single: [
           "エーテルチャージを使う。",
           "サモン・イフリート → 属性ジェムシャイン2回。",
@@ -837,6 +866,8 @@
         label: "ガルーダ追加 / 3属性完成",
         summary: "Lv45でサモン・ガルーダが入り、Lv50では召喚時の一撃も強化されます。回しの形そのものは40帯の完成版です。",
         actions: ["summonIfrit", "summonTitan", "summonGaruda", "gemshine", "outburst", "preciousBrilliance", "painflare"],
+        singleFlow: ["aethercharge", "summonIfrit", "gemshine", "summonTitan", "gemshine", "summonGaruda", "gemshine", "ruinII"],
+        aoeFlow: ["outburst", "summonIfrit", "preciousBrilliance", "summonTitan", "preciousBrilliance", "summonGaruda", "preciousBrilliance", "painflare"],
         single: [
           "エーテルチャージを使う。",
           "サモン・イフリート / タイタン / ガルーダを順に回し、各属性の単体版を撃ち切る。",
@@ -860,6 +891,8 @@
         label: "トランス・バハムート開始",
         summary: "ここで回しの見た目が大きく変わります。旧エーテルチャージ枠がトランス・バハムートに変わり、デスフレアも入ります。",
         actions: ["dreadwyrmTrance", "astralImpulse", "astralFlare", "astralFlow", "deathflare", "ruinIII", "summonIfrit", "summonTitan", "summonGaruda"],
+        singleFlow: ["dreadwyrmTrance", "astralImpulse", "astralImpulse", "deathflare", "summonIfrit", "summonTitan", "summonGaruda", "ruinIII"],
+        aoeFlow: ["dreadwyrmTrance", "astralFlare", "deathflare", "outburst", "preciousBrilliance", "painflare"],
         single: [
           "トランス・バハムートを使う。",
           "フェーズ中はルインガがアストラルインパルスに変わるので、その間はアストラルインパルスを優先。",
@@ -884,6 +917,8 @@
         label: "バハムート本格化",
         summary: "Lv62でルインジャ、Lv66でシアリングライト、Lv70でサモン・バハムート。フェーズ管理がいよいよ完成形に近づきます。なおフェニックスはまだ80からです。",
         actions: ["ruinIV", "searingLight", "summonBahamut", "astralImpulse", "enkindleBahamut", "summonIfrit", "summonTitan", "summonGaruda"],
+        singleFlow: ["searingLight", "summonBahamut", "astralImpulse", "enkindleBahamut", "summonIfrit", "summonTitan", "summonGaruda", "ruinIV"],
+        aoeFlow: ["searingLight", "summonBahamut", "astralFlare", "enkindleBahamut", "outburst", "preciousBrilliance", "painflare"],
         single: [
           "戦闘前にカーバンクルを出しておく。",
           "シアリングライトを合わせてサモン・バハムートへ入る。",
@@ -909,6 +944,8 @@
         label: "フリートライアル到達点",
         summary: "Lv72でリチュアル化、Lv74でトライディザスター化、Lv80でサモン・フェニックスが追加。ここで“レベル80版の召喚士ループ”が完成します。",
         actions: ["searingLight", "summonBahamut", "enkindleBahamut", "rubyRite", "topazRite", "emeraldRite", "triDisaster", "summonPhoenix", "fountainOfFire", "brandOfPurgatory", "enkindlePhoenix"],
+        singleFlow: ["searingLight", "summonBahamut", "astralImpulse", "enkindleBahamut", "rubyRite", "topazRite", "emeraldRite", "summonPhoenix", "fountainOfFire", "enkindlePhoenix"],
+        aoeFlow: ["searingLight", "summonBahamut", "astralFlare", "enkindleBahamut", "triDisaster", "summonPhoenix", "brandOfPurgatory", "enkindlePhoenix"],
         single: [
           "基本ループは サモン・バハムート → 属性3種 → サモン・フェニックス → 属性3種。",
           "開幕はシアリングライトを合わせて、まずサモン・バハムート。",
@@ -956,6 +993,17 @@
       `;
     }
 
+    function comboLane(keys) {
+      return `
+        <div class="combo-lane">
+          ${keys.map((key, index) => `
+            ${index === 0 ? "" : '<span class="combo-arrow">→</span>'}
+            ${chip(key)}
+          `).join("")}
+        </div>
+      `;
+    }
+
     document.getElementById("milestones").innerHTML = milestones.map((item) => `
       <div class="milestone">
         <div class="lv">${item.level}</div>
@@ -979,10 +1027,12 @@
         <div class="section-grid">
           <div class="subcard">
             <h3>単体 / 1〜2体</h3>
+            ${comboLane(section.singleFlow)}
             <ol>${section.single.map((line) => `<li>${line}</li>`).join("")}</ol>
           </div>
           <div class="subcard">
             <h3>3体以上の範囲攻撃</h3>
+            ${comboLane(section.aoeFlow)}
             <ul>${section.aoe.map((line) => `<li>${line}</li>`).join("")}</ul>
           </div>
           <div class="subcard">

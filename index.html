@@ -1,0 +1,869 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>FF14 召喚士 フリートライアルLv80 ガイド</title>
+  <style>
+    :root {
+      --paper: #f7f2e9;
+      --paper-2: #fffaf3;
+      --sand: #eadcc5;
+      --ink: #1f2a2e;
+      --muted: #55656a;
+      --teal: #205a61;
+      --teal-soft: #d7ecea;
+      --ruby: #c94e46;
+      --gold: #ba8b2f;
+      --emerald: #2f7c66;
+      --phoenix: #c86921;
+      --bahamut: #315b86;
+      --card: rgba(255, 250, 243, 0.96);
+      --shadow: 0 16px 36px rgba(31, 42, 46, 0.12);
+      --radius: 22px;
+      --radius-sm: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "BIZ UDPGothic", "Hiragino Sans", "Yu Gothic UI", Meiryo, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(201, 78, 70, 0.14), transparent 26%),
+        radial-gradient(circle at top left, rgba(47, 124, 102, 0.12), transparent 28%),
+        linear-gradient(180deg, #fdf8ef 0%, #f7f2e9 46%, #f2eadf 100%);
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--teal);
+    }
+
+    .wrap {
+      width: min(100%, 860px);
+      margin: 0 auto;
+      padding: 18px 14px 40px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(32, 90, 97, 0.96), rgba(53, 92, 134, 0.92)),
+        linear-gradient(180deg, rgba(255,255,255,0.1), transparent);
+      color: #fff9f2;
+      border-radius: 28px;
+      padding: 22px 18px 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -48px;
+      top: -36px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 218, 153, 0.24), rgba(255, 218, 153, 0));
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(4px);
+    }
+
+    h1 {
+      margin: 12px 0 10px;
+      font-size: clamp(28px, 6vw, 42px);
+      line-height: 1.15;
+    }
+
+    .hero p {
+      margin: 0;
+      color: rgba(255, 249, 242, 0.92);
+      font-size: 14px;
+    }
+
+    .meta-note {
+      margin-top: 14px;
+      padding: 12px 13px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.12);
+      font-size: 13px;
+    }
+
+    .jumpbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      margin: 14px 0 16px;
+      padding: 10px 0 6px;
+      background: linear-gradient(180deg, rgba(247, 242, 233, 0.96), rgba(247, 242, 233, 0.86), rgba(247, 242, 233, 0));
+      backdrop-filter: blur(8px);
+    }
+
+    .jumpbar-track {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+
+    .jumpbar-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .jump {
+      white-space: nowrap;
+      text-decoration: none;
+      color: var(--ink);
+      background: rgba(255, 250, 243, 0.88);
+      border: 1px solid rgba(32, 90, 97, 0.12);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: 0 6px 18px rgba(31, 42, 46, 0.06);
+    }
+
+    .panel,
+    .section-card {
+      background: var(--card);
+      border: 1px solid rgba(32, 90, 97, 0.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .panel {
+      padding: 18px 16px;
+      margin-bottom: 16px;
+    }
+
+    .panel h2,
+    .section-card h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      line-height: 1.25;
+    }
+
+    .lead-grid,
+    .mini-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .lead-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .mini-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .quick-block {
+      padding: 14px;
+      border-radius: 18px;
+      background: var(--paper-2);
+      border: 1px solid rgba(32, 90, 97, 0.08);
+    }
+
+    .quick-block strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .flow-step {
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: var(--teal-soft);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .flow-step.ruby {
+      background: rgba(201, 78, 70, 0.12);
+      color: #8a2a24;
+    }
+
+    .flow-step.gold {
+      background: rgba(186, 139, 47, 0.14);
+      color: #76531a;
+    }
+
+    .flow-step.emerald {
+      background: rgba(47, 124, 102, 0.14);
+      color: #1d5e4b;
+    }
+
+    .flow-step.bahamut {
+      background: rgba(49, 91, 134, 0.14);
+      color: #22486b;
+    }
+
+    .flow-step.phoenix {
+      background: rgba(200, 105, 33, 0.14);
+      color: #8f4a12;
+    }
+
+    .milestones {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .milestone {
+      display: grid;
+      grid-template-columns: 68px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 12px;
+      border-radius: 18px;
+      background: var(--paper-2);
+      border: 1px solid rgba(32, 90, 97, 0.08);
+    }
+
+    .lv {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--teal);
+      background: #eef7f6;
+      border-radius: 14px;
+      padding: 10px 8px;
+      text-align: center;
+    }
+
+    .milestone p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .action-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 6px 10px 6px 6px;
+      border-radius: 999px;
+      background: #fffdf8;
+      border: 1px solid rgba(32, 90, 97, 0.12);
+      box-shadow: 0 4px 12px rgba(31, 42, 46, 0.05);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .action-chip img {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      flex: none;
+    }
+
+    .section-card {
+      padding: 16px;
+      margin-bottom: 16px;
+      scroll-margin-top: 78px;
+    }
+
+    .section-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .level-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(32, 90, 97, 0.08);
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .section-summary {
+      margin: 10px 0 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .section-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .subcard {
+      padding: 14px;
+      border-radius: 18px;
+      background: var(--paper-2);
+      border: 1px solid rgba(32, 90, 97, 0.08);
+    }
+
+    .subcard h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .subcard ol,
+    .subcard ul {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 14px;
+    }
+
+    .subcard li + li {
+      margin-top: 5px;
+    }
+
+    .mantra {
+      margin-top: 12px;
+      padding: 12px 13px;
+      border-left: 4px solid var(--teal);
+      border-radius: 14px;
+      background: #eef7f6;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .utility {
+      display: grid;
+      gap: 10px;
+    }
+
+    .utility-line {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 12px;
+      border-radius: 16px;
+      background: var(--paper-2);
+      border: 1px solid rgba(32, 90, 97, 0.08);
+    }
+
+    .utility-line p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .footer-note {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .sources {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .source-item {
+      padding: 12px;
+      border-radius: 16px;
+      background: var(--paper-2);
+      border: 1px solid rgba(32, 90, 97, 0.08);
+      font-size: 14px;
+    }
+
+    .source-item a {
+      font-weight: 700;
+    }
+
+    @media (min-width: 700px) {
+      .wrap {
+        padding: 24px 18px 54px;
+      }
+
+      .hero {
+        padding: 28px 26px 22px;
+      }
+
+      .lead-grid {
+        grid-template-columns: 1.1fr 0.9fr;
+      }
+
+      .mini-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .section-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="eyebrow">FFXIV Summoner Free Trial 2026-04-28</div>
+      <h1>召喚士 フリートライアルLv80<br>10レベル刻み回しガイド</h1>
+      <p>スマホで見返しやすいように、Lv10 / 20 / 30 / 40 / 50 / 60 / 70 / 80ごとに「今なにを押すか」へ絞って整理した資料です。</p>
+      <div class="meta-note">
+        調査基準日: 2026年4月28日。<br>
+        4月28日実装のPatch 7.5パッチノートで、フリートライアルは公式に「レベル80」「漆黒のヴィランズまで」へ拡張されました。
+      </div>
+    </header>
+
+    <nav class="jumpbar" aria-label="レベル移動">
+      <div class="jumpbar-track">
+        <a class="jump" href="#summary">まず結論</a>
+        <a class="jump" href="#lv10">Lv10</a>
+        <a class="jump" href="#lv20">Lv20</a>
+        <a class="jump" href="#lv30">Lv30</a>
+        <a class="jump" href="#lv40">Lv40</a>
+        <a class="jump" href="#lv50">Lv50</a>
+        <a class="jump" href="#lv60">Lv60</a>
+        <a class="jump" href="#lv70">Lv70</a>
+        <a class="jump" href="#lv80">Lv80</a>
+        <a class="jump" href="#sources">出典</a>
+      </div>
+    </nav>
+
+    <section class="panel" id="summary">
+      <h2>まず結論</h2>
+      <div class="lead-grid">
+        <div class="quick-block">
+          <strong>召喚士の覚え方はこの4段階</strong>
+          <div class="flow">
+            <span class="flow-step ruby">Lv1-57 基礎魔法 + 3属性</span>
+            <span class="flow-step bahamut">Lv58-69 トランス・バハムート</span>
+            <span class="flow-step bahamut">Lv70-79 バハムート</span>
+            <span class="flow-step phoenix">Lv80 フェニックス追加</span>
+          </div>
+          <div class="mantra">
+            ざっくり言うと、<br>
+            Lv10-50は「エーテルチャージ → 召喚3種 → 基本魔法」、<br>
+            Lv60は「トランス・バハムート → 召喚3種」、<br>
+            Lv70は「シアリングライト → サモン・バハムート → 召喚3種」、<br>
+            Lv80は「バハムート → 召喚3種 → フェニックス → 召喚3種」です。
+          </div>
+        </div>
+        <div class="quick-block">
+          <strong>最初に覚える3つ</strong>
+          <ul>
+            <li>単体はだいたい「通常魔法」より「属性中の専用魔法」が強い。</li>
+            <li>3体以上ならAoEへ切り替える。単体魔法を混ぜすぎない。</li>
+            <li>召喚士は「次に押せる強いボタンを腐らせない」だけでかなり火力が出る。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>成長マップ</h2>
+      <p class="footer-note">レベルシンクで急に押すボタンが減っても、この節目だけ覚えておけば戻しやすいです。</p>
+      <div class="milestones" id="milestones"></div>
+    </section>
+
+    <section class="panel">
+      <h2>共通ルール</h2>
+      <div class="mini-grid">
+        <div class="quick-block">
+          <strong>単体 / 少数戦</strong>
+          1〜2体は単体回し。まずは強化フェーズや召喚を優先して、空いたGCDを通常魔法で埋めます。
+        </div>
+        <div class="quick-block">
+          <strong>AoEへ切り替える基準</strong>
+          3体以上ならAoEへ。The Balanceのレベリングガイドも「3体以上」をAoE基準にしています。
+        </div>
+        <div class="quick-block">
+          <strong>召喚の順番</strong>
+          Lv80までは順番の縛りはそこまで強くありません。長詠唱のイフリートは足を止められるとき、動きたいときはタイタンやガルーダ寄りにすると楽です。
+        </div>
+        <div class="quick-block">
+          <strong>この資料の前提</strong>
+          高難度向けの最適化よりも、フリートライアル / レベリング / レベルシンクで迷わず押せることを優先しています。
+        </div>
+      </div>
+    </section>
+
+    <div id="sections"></div>
+
+    <section class="panel">
+      <h2>ユーティリティの使いどころ</h2>
+      <div class="utility" id="utility"></div>
+    </section>
+
+    <section class="panel" id="sources">
+      <h2>出典</h2>
+      <p class="footer-note">
+        回しの優先度は主にThe Balanceの召喚士レベリングガイド、アクション名・修得レベル・アイコンは公式ジョブガイド、フリートライアルLv80拡張はPatch 7.5パッチノートを参照しています。<br>
+        なお「Lv80でバハムートとフェニックスを交互に回す」というまとめは、公式の共有リキャスト仕様とレベリングガイドの優先度記述をあわせて整理した要約です。
+      </p>
+      <div class="sources">
+        <div class="source-item">
+          <a href="https://na.finalfantasyxiv.com/lodestone/topics/detail/07320affa7e0fcd9685afcbe54fbf55405b6d822" target="_blank" rel="noreferrer noopener">Patch 7.5 Notes</a><br>
+          2026年4月28日開始。フリートライアルの追加調整として「The level cap has been raised to 80」「Players will now have access to the expansion data of Shadowbringers.」を確認。
+        </div>
+        <div class="source-item">
+          <a href="https://jp.finalfantasyxiv.com/jobguide/summoner/" target="_blank" rel="noreferrer noopener">公式ジョブガイド 召喚士</a><br>
+          各アクションの修得レベル、名称、公式アイコン、トランス/バハムート/フェニックスの変化を確認。
+        </div>
+        <div class="source-item">
+          <a href="https://www.thebalanceffxiv.com/jobs/casters/summoner/leveling-guide/" target="_blank" rel="noreferrer noopener">The Balance Summoner Leveling Guide</a><br>
+          レベル帯ごとの単体/AoE優先度、各節目で回しに何が増えるかを確認。
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const actions = {
+      ruin: { name: "ルイン", icon: "https://lds-img.finalfantasyxiv.com/d/1c74fa1688f3d89d6f5b972ce384df15f62e35d1.png" },
+      summonCarbuncle: { name: "サモン・カーバンクル", icon: "https://lds-img.finalfantasyxiv.com/d/14a64b174c103f36179809458245dc5e4f4fe0a6.png" },
+      radiantAegis: { name: "守りの光", icon: "https://lds-img.finalfantasyxiv.com/d/a116b861109158ee5db8e36cf922fae8f923e7d5.png" },
+      physick: { name: "フィジク", icon: "https://lds-img.finalfantasyxiv.com/d/e51f309947cde0c36f3a0cd815ca01e268928eb6.png" },
+      aethercharge: { name: "エーテルチャージ", icon: "https://lds-img.finalfantasyxiv.com/d/ad9a8a02fa446a43dc54439c8ac1d04dad1384b2.png" },
+      summonRuby: { name: "サモン・ルビー", icon: "https://lds-img.finalfantasyxiv.com/d/23ce1df0ac3aa5df6aa4b22cdf2369ff364cabc0.png" },
+      gemshine: { name: "ジェムシャイン", icon: "https://lds-img.finalfantasyxiv.com/d/b1b0a655e18e0c446a0774ef264f010a8766db7f.png" },
+      miasmaBurst: { name: "ミアズマバースト", icon: "https://lds-img.finalfantasyxiv.com/d/34e34cc7ee016c8dc1493838cefc523aea784378.png" },
+      energyDrain: { name: "エナジードレイン", icon: "https://lds-img.finalfantasyxiv.com/d/92ea9227a8a09c62eb53852e2c26c0d6763a35c2.png" },
+      resurrection: { name: "リザレク", icon: "https://lds-img.finalfantasyxiv.com/d/9e61ea15caf1f7c0e4b44943dcbee0178e61a9fd.png" },
+      summonTopaz: { name: "サモン・トパーズ", icon: "https://lds-img.finalfantasyxiv.com/d/45345cb4f108a07c372f8a355b26c13661d51887.png" },
+      summonEmerald: { name: "サモン・エメラルド", icon: "https://lds-img.finalfantasyxiv.com/d/d9d328ec1a7b30579dd56ad69fad33981e197f70.png" },
+      outburst: { name: "アウトバースト", icon: "https://lds-img.finalfantasyxiv.com/d/2b85c12f6f9b3f7bd5d4599d9fb2d88f42e7d551.png" },
+      preciousBrilliance: { name: "プレシャスブリリアンス", icon: "https://lds-img.finalfantasyxiv.com/d/1fa3119e51a423fedea3e3a238497548d0c64960.png" },
+      ruinII: { name: "ルインラ", icon: "https://lds-img.finalfantasyxiv.com/d/d6875ae1008a9e4b2d04562cff42646752e919c5.png" },
+      summonIfrit: { name: "サモン・イフリート", icon: "https://lds-img.finalfantasyxiv.com/d/715b4b554a74c32f7c76258400c2e254c6b9d401.png" },
+      summonTitan: { name: "サモン・タイタン", icon: "https://lds-img.finalfantasyxiv.com/d/0e63c4fe037c46bb8fcb3b1402319d0cf1084711.png" },
+      painflare: { name: "ペインフレア", icon: "https://lds-img.finalfantasyxiv.com/d/f9335b8757ce19d93307eb4686a8271552de608d.png" },
+      summonGaruda: { name: "サモン・ガルーダ", icon: "https://lds-img.finalfantasyxiv.com/d/f0d45cc564da364190b10ea26b9978147b3813fd.png" },
+      energySiphon: { name: "エナジーサイフォン", icon: "https://lds-img.finalfantasyxiv.com/d/f7611746e0238a496d85af166ef6da7cff071f43.png" },
+      ruinIII: { name: "ルインガ", icon: "https://lds-img.finalfantasyxiv.com/d/d133d1c9ecf315375c76bc25ddd5c01d9ce56512.png" },
+      dreadwyrmTrance: { name: "トランス・バハムート", icon: "https://lds-img.finalfantasyxiv.com/d/7509846b70611448faedd354f58cb626c90fe0b5.png" },
+      astralImpulse: { name: "アストラルインパルス", icon: "https://lds-img.finalfantasyxiv.com/d/2ba7ab41cd2f8dac96ba0c89426eebff963d6be0.png" },
+      astralFlare: { name: "アストラルフレア", icon: "https://lds-img.finalfantasyxiv.com/d/41380367e3ff56dfc723ac049dbcacd00ac5c6f8.png" },
+      astralFlow: { name: "アストラルフロウ", icon: "https://lds-img.finalfantasyxiv.com/d/3fd44c9091d6888f7b3b3ee449d3f71d94d9b05a.png" },
+      deathflare: { name: "デスフレア", icon: "https://lds-img.finalfantasyxiv.com/d/e88a1de4bbb8cdaa4c08ef5717797c2872bb42dd.png" },
+      ruinIV: { name: "ルインジャ", icon: "https://lds-img.finalfantasyxiv.com/d/289900e8f6153efeabb601c5cce046b80eed4c88.png" },
+      searingLight: { name: "シアリングライト", icon: "https://lds-img.finalfantasyxiv.com/d/6c4b1ae3c69201feb415963f374cd3449a4ad7db.png" },
+      summonBahamut: { name: "サモン・バハムート", icon: "https://lds-img.finalfantasyxiv.com/d/88e476ec7f35cfb0f94120dc2ef1b7ed0c00768a.png" },
+      enkindleBahamut: { name: "エンキンドル・バハムート", icon: "https://lds-img.finalfantasyxiv.com/d/7841102eeddcd359b9bc0af66a8c51aee6c7b258.png" },
+      rubyRite: { name: "ルビー・リチュアル", icon: "https://lds-img.finalfantasyxiv.com/d/3c739e3604ba2d045b691a46c0dbef1a658951f3.png" },
+      topazRite: { name: "トパーズ・リチュアル", icon: "https://lds-img.finalfantasyxiv.com/d/4c4900529cf628e2f3fda4134c996741f8b465c3.png" },
+      emeraldRite: { name: "エメラルド・リチュアル", icon: "https://lds-img.finalfantasyxiv.com/d/87c16672ddea00204d4c0489b5417166cdb2546a.png" },
+      triDisaster: { name: "トライディザスター", icon: "https://lds-img.finalfantasyxiv.com/d/20e1e40922c159401231154ab0cc94c789b1f58f.png" },
+      summonPhoenix: { name: "サモン・フェニックス", icon: "https://lds-img.finalfantasyxiv.com/d/e38e769e9f268f4dcc345b25d310cd53d10d4795.png" },
+      fountainOfFire: { name: "霊泉の炎", icon: "https://lds-img.finalfantasyxiv.com/d/1b50beab981774f701d16ac61674bfc01747f38b.png" },
+      brandOfPurgatory: { name: "煉獄の炎", icon: "https://lds-img.finalfantasyxiv.com/d/daebb0133d31dbdcc989ecf9fd04ef3acf040cba.png" },
+      enkindlePhoenix: { name: "エンキンドル・フェニックス", icon: "https://lds-img.finalfantasyxiv.com/d/596917791c140eef84754e4488df04bfb7aabf87.png" }
+    };
+
+    const milestones = [
+      { level: "Lv10", text: "エナジードレイン + ミアズマバーストで、召喚士のoGCD管理が始まる。", icons: ["energyDrain", "miasmaBurst"] },
+      { level: "Lv20", text: "ルビー + トパーズの2属性回し。まだAoEは未習得。", icons: ["summonRuby", "summonTopaz"] },
+      { level: "Lv30", text: "召喚士ジョブ解放帯。ルインラとアウトバーストで基礎が一気に整う。", icons: ["ruinII", "outburst", "summonIfrit"] },
+      { level: "Lv40", text: "タイタンとペインフレア追加。AoE判断が実戦的になる。", icons: ["summonTitan", "painflare"] },
+      { level: "Lv50", text: "ガルーダまで揃って、3属性サイクルが完成。", icons: ["summonGaruda"] },
+      { level: "Lv60", text: "トランス・バハムート + デスフレアでフェーズ制が始まる。", icons: ["dreadwyrmTrance", "astralImpulse", "deathflare"] },
+      { level: "Lv70", text: "シアリングライトとサモン・バハムート追加。ここから本格的に“召喚士らしい”回し。", icons: ["searingLight", "summonBahamut", "enkindleBahamut"] },
+      { level: "Lv80", text: "リチュアル化、トライディザスター化、さらにフェニックス追加でループが完成。", icons: ["rubyRite", "triDisaster", "summonPhoenix"] }
+    ];
+
+    const sections = [
+      {
+        id: "lv10",
+        title: "Lv10時点",
+        label: "巴術士 / 単体中心",
+        summary: "まだ“基本魔法 + ルビー + エナドレ消費”の超シンプル帯です。ここではボタンを腐らせないことが最重要。",
+        actions: ["summonCarbuncle", "radiantAegis", "aethercharge", "summonRuby", "gemshine", "energyDrain", "miasmaBurst", "ruin"],
+        single: [
+          "戦闘前にサモン・カーバンクルを出しておく。",
+          "エーテルチャージを使う。",
+          "サモン・ルビーを押して、ルビー化したジェムシャインを2回撃つ。",
+          "空いたGCDはルインで埋める。",
+          "エナジードレインを挟み、得たスタックはミアズマバーストで使う。"
+        ],
+        aoe: [
+          "まだ本格AoEは未習得。",
+          "2体相手でも基本は単体回しでOK。"
+        ],
+        mistakes: [
+          "エナジードレインを使わず、ミアズマバーストの回数が減る。",
+          "カーバンクル未召喚で守りの光を押せない。"
+        ],
+        mantra: "覚え方: エーテルチャージ → サモン・ルビー → ジェムシャイン2回 → ルイン埋め"
+      },
+      {
+        id: "lv20",
+        title: "Lv20時点",
+        label: "巴術士 / 2属性回し",
+        summary: "トパーズが増えて“ルビー2回 + トパーズ4回”の形になります。まだAoEはなく、単体の押し切りが中心。",
+        actions: ["summonTopaz", "summonRuby", "gemshine", "energyDrain", "miasmaBurst", "resurrection"],
+        single: [
+          "エーテルチャージを使う。",
+          "サモン・ルビー → ルビー化ジェムシャイン2回。",
+          "サモン・トパーズ → トパーズ化ジェムシャイン4回。",
+          "空いたGCDはルイン。",
+          "エナジードレインのたびにミアズマバーストで消費。"
+        ],
+        aoe: [
+          "まだAoE専用回しはなし。",
+          "雑魚がばらけていても焦らず単体優先で落とす。"
+        ],
+        mistakes: [
+          "トパーズの4スタックを撃ち切る前に別行動へ流れる。",
+          "リザレクを覚えても、戦闘不能の味方を見落としやすい。"
+        ],
+        mantra: "覚え方: ルビー2回 → トパーズ4回 → ルイン"
+      },
+      {
+        id: "lv30",
+        title: "Lv30時点",
+        label: "召喚士解放帯 / AoE開始",
+        summary: "ここから召喚士ジョブに入り、ルインラとアウトバーストが加わります。3体以上かどうかの判断が大事になります。",
+        actions: ["ruinII", "outburst", "preciousBrilliance", "summonIfrit", "summonTopaz", "summonEmerald", "gemshine"],
+        single: [
+          "ジョブクリスタルを装備したうえで、エーテルチャージを回す。",
+          "サモン・イフリート → 属性ジェムシャイン2回。",
+          "サモン・トパーズ → 属性ジェムシャイン4回。",
+          "サモン・エメラルド → 属性ジェムシャイン4回。",
+          "空きはルインラ、oGCDはエナジードレイン → ミアズマバースト。"
+        ],
+        aoe: [
+          "3体以上なら通常魔法はアウトバーストに切り替える。",
+          "属性中はジェムシャインではなくプレシャスブリリアンス側を押す。",
+          "まだペインフレアはないので、AoEでもoGCDは単体寄りのまま。"
+        ],
+        mistakes: [
+          "単体相手にアウトバーストを連打してしまう。",
+          "属性中に単体のジェムシャインとAoEのプレシャスブリリアンスを混同する。"
+        ],
+        mantra: "覚え方: 単体はルインラ、3体以上はアウトバースト"
+      },
+      {
+        id: "lv40",
+        title: "Lv40時点",
+        label: "タイタン追加 / AoE強化",
+        summary: "Lv35のサモン・タイタン、Lv40のペインフレアが効いてきます。AoEでの手数が一気に良くなります。",
+        actions: ["summonIfrit", "summonTitan", "summonEmerald", "painflare", "outburst", "preciousBrilliance"],
+        single: [
+          "エーテルチャージを使う。",
+          "サモン・イフリート → 属性ジェムシャイン2回。",
+          "サモン・タイタン → 属性ジェムシャイン4回。",
+          "サモン・エメラルド → 属性ジェムシャイン4回。",
+          "空きはルインラ、単体のエーテルフロー消費はミアズマバースト。"
+        ],
+        aoe: [
+          "3体以上はアウトバースト。",
+          "属性中はプレシャスブリリアンスを使う。",
+          "AoE時のエーテルフロー消費はペインフレアを優先。"
+        ],
+        mistakes: [
+          "単体でもペインフレアを撃ってしまう。",
+          "エメラルドがまだ“ガルーダ前”だと忘れて、後の感覚で混乱する。"
+        ],
+        mantra: "覚え方: AoEだけはミアズマバーストをペインフレアへ差し替える"
+      },
+      {
+        id: "lv50",
+        title: "Lv50時点",
+        label: "ガルーダ追加 / 3属性完成",
+        summary: "Lv45でサモン・ガルーダが入り、Lv50では召喚時の一撃も強化されます。回しの形そのものは40帯の完成版です。",
+        actions: ["summonIfrit", "summonTitan", "summonGaruda", "gemshine", "outburst", "preciousBrilliance", "painflare"],
+        single: [
+          "エーテルチャージを使う。",
+          "サモン・イフリート / タイタン / ガルーダを順に回し、各属性の単体版を撃ち切る。",
+          "空いたGCDはルインラ。",
+          "エナジードレイン → ミアズマバーストを回す。"
+        ],
+        aoe: [
+          "3体以上はアウトバースト。",
+          "属性中はプレシャスブリリアンス。",
+          "AoEのエーテルフロー消費はペインフレア。"
+        ],
+        mistakes: [
+          "3属性を回し切る前に次のエーテルチャージだけ気にして崩れる。",
+          "単体中もAoE中も“属性中の強い専用魔法”を押し忘れる。"
+        ],
+        mantra: "覚え方: 50までは“3属性をちゃんと全部使い切る”が正義"
+      },
+      {
+        id: "lv60",
+        title: "Lv60時点",
+        label: "トランス・バハムート開始",
+        summary: "ここで回しの見た目が大きく変わります。旧エーテルチャージ枠がトランス・バハムートに変わり、デスフレアも入ります。",
+        actions: ["dreadwyrmTrance", "astralImpulse", "astralFlare", "astralFlow", "deathflare", "ruinIII", "summonIfrit", "summonTitan", "summonGaruda"],
+        single: [
+          "トランス・バハムートを使う。",
+          "フェーズ中はルインガがアストラルインパルスに変わるので、その間はアストラルインパルスを優先。",
+          "アストラルフロウからデスフレアを1回忘れずに入れる。",
+          "トランス後はイフリート / タイタン / ガルーダを回す。",
+          "それ以外はルインガ。"
+        ],
+        aoe: [
+          "トランス中はアウトバーストがアストラルフレアに変わる。",
+          "通常時はアウトバースト、属性中はプレシャスブリリアンス。",
+          "AoEのエーテルフロー消費はペインフレア。"
+        ],
+        mistakes: [
+          "トランス中なのにアストラルインパルスではなく別魔法を押してしまう。",
+          "デスフレアを撃ち忘れて、60帯の強みを落とす。"
+        ],
+        mantra: "覚え方: トランス・バハムート中は専用魔法、最後にデスフレア"
+      },
+      {
+        id: "lv70",
+        title: "Lv70時点",
+        label: "バハムート本格化",
+        summary: "Lv62でルインジャ、Lv66でシアリングライト、Lv70でサモン・バハムート。フェーズ管理がいよいよ完成形に近づきます。なおフェニックスはまだ80からです。",
+        actions: ["ruinIV", "searingLight", "summonBahamut", "astralImpulse", "enkindleBahamut", "summonIfrit", "summonTitan", "summonGaruda"],
+        single: [
+          "戦闘前にカーバンクルを出しておく。",
+          "シアリングライトを合わせてサモン・バハムートへ入る。",
+          "バハムート中はアストラルインパルスを優先し、エンキンドル・バハムートを早めに使う。",
+          "その後はイフリート / タイタン / ガルーダを回す。",
+          "エナジードレインで得たFurther Ruinはルインジャで消費し、空きはルインガ。"
+        ],
+        aoe: [
+          "バハムート中はアストラルフレア。",
+          "通常時はアウトバースト、属性中はプレシャスブリリアンス。",
+          "3体以上ではエナジーサイフォン → ペインフレアが強い。"
+        ],
+        mistakes: [
+          "カーバンクル未召喚でシアリングライトが押せない。",
+          "ルインジャを長く抱えすぎて、次のエナドレで上書きしそうになる。",
+          "70シンクなのに80のフェニックス感覚で押そうとして混乱する。"
+        ],
+        mantra: "覚え方: シアリングライト → バハムート → 3属性 → ルインジャ処理"
+      },
+      {
+        id: "lv80",
+        title: "Lv80時点",
+        label: "フリートライアル到達点",
+        summary: "Lv72でリチュアル化、Lv74でトライディザスター化、Lv80でサモン・フェニックスが追加。ここで“レベル80版の召喚士ループ”が完成します。",
+        actions: ["searingLight", "summonBahamut", "enkindleBahamut", "rubyRite", "topazRite", "emeraldRite", "triDisaster", "summonPhoenix", "fountainOfFire", "brandOfPurgatory", "enkindlePhoenix"],
+        single: [
+          "基本ループは サモン・バハムート → 属性3種 → サモン・フェニックス → 属性3種。",
+          "開幕はシアリングライトを合わせて、まずサモン・バハムート。",
+          "バハムート中はアストラルインパルス連打 + エンキンドル・バハムート。",
+          "属性フェーズでは ルビー・リチュアル2回 / トパーズ・リチュアル4回 / エメラルド・リチュアル4回を撃ち切る。",
+          "フェニックス中は霊泉の炎を優先し、エンキンドル・フェニックスも忘れずに使う。"
+        ],
+        aoe: [
+          "3体以上では通常時の基本AoEはトライディザスター。",
+          "バハムート中はアストラルフレア、フェニックス中は煉獄の炎。",
+          "属性フェーズ中はトライディザスターが各属性AoEへ変わるので、それを撃ち切る。",
+          "エナジーサイフォン → ペインフレアをAoE側で回す。"
+        ],
+        mistakes: [
+          "フェニックス追加後も、単体でルインガを押しすぎて専用魔法の回数が減る。",
+          "属性フェーズの弾を撃ち切る前に次フェーズへ意識が飛ぶ。",
+          "“Lv80の回し”を70シンク先でもやろうとして、存在しないボタンを探してしまう。"
+        ],
+        mantra: "覚え方: バハムート → 3属性 → フェニックス → 3属性 を繰り返す"
+      }
+    ];
+
+    const utility = [
+      {
+        actions: ["radiantAegis"],
+        text: "守りの光はソロや初見IDで遠慮なく使ってOK。カーバンクルが出ていないと使えません。"
+      },
+      {
+        actions: ["resurrection"],
+        text: "リザレクは召喚士の大きな強み。安全が取れるときだけ詠唱し、まずは自分が死なない位置取りを優先。"
+      },
+      {
+        actions: ["physick"],
+        text: "フィジクは主力ではありませんが、超序盤のソロ戦では立て直しに役立ちます。"
+      }
+    ];
+
+    function chip(key) {
+      const action = actions[key];
+      return `
+        <span class="action-chip">
+          <img src="${action.icon}" alt="${action.name}" loading="lazy">
+          <span>${action.name}</span>
+        </span>
+      `;
+    }
+
+    document.getElementById("milestones").innerHTML = milestones.map((item) => `
+      <div class="milestone">
+        <div class="lv">${item.level}</div>
+        <div>
+          <p>${item.text}</p>
+          <div class="action-row">${item.icons.map(chip).join("")}</div>
+        </div>
+      </div>
+    `).join("");
+
+    document.getElementById("sections").innerHTML = sections.map((section) => `
+      <section class="section-card" id="${section.id}">
+        <div class="section-top">
+          <div>
+            <div class="level-tag">${section.label}</div>
+            <h2>${section.title}</h2>
+          </div>
+        </div>
+        <p class="section-summary">${section.summary}</p>
+        <div class="action-row">${section.actions.map(chip).join("")}</div>
+        <div class="section-grid">
+          <div class="subcard">
+            <h3>単体 / 1〜2体</h3>
+            <ol>${section.single.map((line) => `<li>${line}</li>`).join("")}</ol>
+          </div>
+          <div class="subcard">
+            <h3>3体以上AoE</h3>
+            <ul>${section.aoe.map((line) => `<li>${line}</li>`).join("")}</ul>
+          </div>
+          <div class="subcard">
+            <h3>ミスしやすい点</h3>
+            <ul>${section.mistakes.map((line) => `<li>${line}</li>`).join("")}</ul>
+          </div>
+          <div class="subcard">
+            <h3>ひとことで覚える</h3>
+            <div class="mantra">${section.mantra}</div>
+          </div>
+        </div>
+      </section>
+    `).join("");
+
+    document.getElementById("utility").innerHTML = utility.map((row) => `
+      <div class="utility-line">
+        <div class="action-row">${row.actions.map(chip).join("")}</div>
+        <p>${row.text}</p>
+      </div>
+    `).join("");
+  </script>
+</body>
+</html>

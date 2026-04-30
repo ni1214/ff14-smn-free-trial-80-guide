@@ -848,6 +848,174 @@
       margin-top: 10px;
     }
 
+    .duty-panel {
+      border-color: rgba(47, 124, 102, 0.18);
+      background:
+        linear-gradient(180deg, rgba(255, 250, 243, 0.98), rgba(238, 247, 246, 0.96));
+    }
+
+    .duty-controls,
+    .character-controls {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .duty-control-row,
+    .character-row {
+      display: grid;
+      grid-template-columns: 0.8fr 1fr;
+      gap: 8px;
+    }
+
+    .duty-controls label,
+    .character-controls label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .duty-controls select,
+    .duty-controls input,
+    .character-controls input {
+      width: 100%;
+      min-height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(32, 90, 97, 0.16);
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      padding: 8px 10px;
+    }
+
+    .duty-button,
+    .character-button {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      min-height: 42px;
+      border-radius: 14px;
+      background: var(--teal);
+      color: #fffaf3;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .duty-summary,
+    .character-card {
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 15px;
+      background: var(--paper-2);
+      border: 1px solid rgba(32, 90, 97, 0.08);
+    }
+
+    .duty-summary h3,
+    .character-card h3 {
+      margin: 0 0 6px;
+      font-size: 15px;
+    }
+
+    .duty-summary p,
+    .character-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .mechanic-grid {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .mechanic-card {
+      display: grid;
+      grid-template-columns: 46px 1fr;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px;
+      border-radius: 14px;
+      background: var(--paper-2);
+      border: 1px solid rgba(32, 90, 97, 0.08);
+    }
+
+    .mechanic-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(32, 90, 97, 0.1);
+      color: var(--teal);
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .mechanic-card h3 {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    .mechanic-card p {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .character-panel {
+      border-color: rgba(186, 139, 47, 0.2);
+      background:
+        linear-gradient(180deg, rgba(255, 250, 243, 0.98), rgba(255, 247, 236, 0.96));
+    }
+
+    .character-preview {
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      gap: 10px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .character-preview img {
+      width: 82px;
+      height: 82px;
+      border-radius: 16px;
+      object-fit: cover;
+      background: #eef7f6;
+      border: 1px solid rgba(32, 90, 97, 0.12);
+    }
+
+    .character-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .character-links a,
+    .character-links button {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(32, 90, 97, 0.08);
+      color: var(--teal);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
     .qr-overlay {
       position: fixed;
       inset: 0;
@@ -1008,6 +1176,12 @@
       .gear-input-row {
         grid-template-columns: 1fr;
       }
+
+      .duty-control-row,
+      .character-row,
+      .character-preview {
+        grid-template-columns: 1fr;
+      }
     }
 
     .source-item a {
@@ -1056,8 +1230,10 @@
       <div class="jumpbar-track">
         <a class="jump" href="#summary">まず結論</a>
         <a class="jump" href="#cockpit">攻略</a>
+        <a class="jump" href="#dutyGuide">初見</a>
         <a class="jump" href="#nextPlanner">次の目標</a>
         <a class="jump" href="#gearFinder">装備</a>
+        <a class="jump" href="#characterPanel">キャラ</a>
         <a class="jump" href="#resourceHub">リンク集</a>
         <a class="jump" href="#lv10">Lv10</a>
         <a class="jump" href="#lv20">Lv20</a>
@@ -1095,6 +1271,34 @@
         <div class="answer-card" id="cockpitAnswer"></div>
         <div class="quick-solutions" id="quickSolutions"></div>
       </div>
+    </section>
+
+    <section class="panel duty-panel" id="dutyGuide">
+      <h2>初見ギミック即答ナビ</h2>
+      <p class="footer-note">IDや討滅戦で「これ、どう避けるの？」となった時に、攻撃の見た目から判断できる避け方を出します。</p>
+      <div class="duty-controls">
+        <div class="duty-control-row">
+          <div>
+            <label for="dutyType">種類</label>
+            <select id="dutyType">
+              <option value="all">ID + 討滅戦</option>
+              <option value="ダンジョン">ID</option>
+              <option value="討伐・討滅戦">討滅戦</option>
+            </select>
+          </div>
+          <div>
+            <label for="dutySearch">コンテンツ名</label>
+            <input id="dutySearch" type="search" placeholder="例: タイタン / サスタシャ / ハーデス">
+          </div>
+        </div>
+        <label for="dutySelect">選択</label>
+        <select id="dutySelect"></select>
+      </div>
+      <div class="duty-summary" id="dutySummary">
+        <h3>データ読み込み中</h3>
+        <p>日本語データからLv80までのIDと討滅戦を読み込んでいます。</p>
+      </div>
+      <div class="mechanic-grid" id="mechanicGrid"></div>
     </section>
 
     <section class="panel gear-panel" id="gearFinder">
@@ -1135,6 +1339,28 @@
       <h2>次の楽しみナビ</h2>
       <p class="footer-note">上のジョブ・レベル・メイン進行に合わせて、あと少しで解放される装備、スキル、遊びをまとめます。</p>
       <div class="next-board" id="nextBoard"></div>
+    </section>
+
+    <section class="panel character-panel" id="characterPanel">
+      <h2>キャラクター確認</h2>
+      <p class="footer-note">完全な装備自動取得はLodestone側の仕様でこの静的サイトだけでは難しいため、公式プロフィールをすぐ開けるメモとして使います。</p>
+      <div class="character-controls">
+        <div class="character-row">
+          <div>
+            <label for="lodestoneUrl">LodestoneキャラクターURL</label>
+            <input id="lodestoneUrl" type="url" placeholder="https://jp.finalfantasyxiv.com/lodestone/character/.../">
+          </div>
+          <div>
+            <label for="portraitUrl">キャラ画像URL 任意</label>
+            <input id="portraitUrl" type="url" placeholder="画像を貼るとこのページ内に表示">
+          </div>
+        </div>
+        <button class="character-button" id="saveCharacterButton" type="button">保存</button>
+      </div>
+      <div class="character-card" id="characterCard">
+        <h3>公式プロフィールを登録</h3>
+        <p>Lodestoneの自分のキャラクターページを貼ると、スマホからすぐ装備確認へ飛べます。</p>
+      </div>
     </section>
 
     <section class="panel" id="motivationBoard">
@@ -2017,6 +2243,115 @@
       { level: 80, title: "サモン・フェニックス", icon: "summonPhoenix", detail: "Lv80ループ完成。バハムートとフェニックスを交互に回します。" }
     ];
 
+    const universalMechanics = [
+      {
+        mark: "床",
+        title: "オレンジ床 / 予兆範囲",
+        detail: "表示されたら外へ出る。詠唱完了や床の発光が消えた瞬間に戻ると攻撃時間を減らせます。",
+        keywords: ["床", "aoe", "範囲", "円", "直線", "扇"]
+      },
+      {
+        mark: "頭",
+        title: "頭割り",
+        detail: "1人に矢印や集合マーカーが付いたら全員で重なる。1人受けすると大ダメージ。",
+        keywords: ["頭割り", "集合", "スタック"]
+      },
+      {
+        mark: "散",
+        title: "散開",
+        detail: "自分中心の円や線が付いたら味方から離れる。重ねると複数人が被弾します。",
+        keywords: ["散開", "円", "離れる"]
+      },
+      {
+        mark: "目",
+        title: "視線攻撃",
+        detail: "敵や目のマークを見ない。キャラの向きを外へ向けるだけで避けられることが多いです。",
+        keywords: ["視線", "目", "石化", "恐慌"]
+      },
+      {
+        mark: "吹",
+        title: "ノックバック",
+        detail: "吹き飛ばされる方向を見て、落下しない位置へ移動。中央寄りに立つと安全なことが多いです。",
+        keywords: ["ノックバック", "吹き飛ばし", "落下"]
+      },
+      {
+        mark: "隠",
+        title: "隠れる / 遮蔽物",
+        detail: "岩、柱、壁、氷などが出たら大技の合図。ボスとの間に遮蔽物を挟みます。",
+        keywords: ["隠れる", "岩", "柱", "遮蔽"]
+      },
+      {
+        mark: "塔",
+        title: "塔 / 踏み",
+        detail: "床に塔や円が出たら誰かが入る。空き塔は全体ダメージやデバフになりやすいです。",
+        keywords: ["塔", "踏む", "円"]
+      },
+      {
+        mark: "雑",
+        title: "雑魚優先",
+        detail: "ボスが無敵、詠唱中、中央固定になったら雑魚処理。召喚士は範囲攻撃へ切り替える。",
+        keywords: ["雑魚", "add", "優先"]
+      },
+      {
+        mark: "離",
+        title: "距離減衰",
+        detail: "床に大きな円や距離マーカーが出たらできるだけ離れる。端へ逃げるほど軽くなります。",
+        keywords: ["距離", "減衰", "離れる"]
+      },
+      {
+        mark: "詠",
+        title: "長い詠唱",
+        detail: "技名を見て動く準備。初見では詠唱中にボス周辺、外周、遮蔽物、味方の位置を確認。",
+        keywords: ["詠唱", "大技", "全体"]
+      }
+    ];
+
+    const dutyHintRules = [
+      { match: ["サスタシャ"], hints: ["泡や雑魚を放置しすぎない。敵が増えたら範囲攻撃へ。", "初IDなので、タンクより前に出ず、宝箱や分岐は落ち着いて進む。"], tags: ["雑魚優先", "基本練習"] },
+      { match: ["タムタラ"], hints: ["雑魚が出たらボスより雑魚を優先。詠唱やギミック装置を見落とさない。"], tags: ["雑魚優先"] },
+      { match: ["カッパーベル"], hints: ["ボスが硬い時は周囲の仕掛けや雑魚処理を見る。殴るだけで進まない場面があります。"], tags: ["仕掛け"] },
+      { match: ["トトラク"], hints: ["毒や床ダメージを踏み続けない。長い通路では敵をまとめすぎた時の範囲攻撃を意識。"], tags: ["毒床", "範囲"] },
+      { match: ["ハウケタ"], hints: ["ボスの範囲と雑魚を優先。部屋移動や調べる場所を見落とさない。"], tags: ["雑魚優先", "探索"] },
+      { match: ["ブレイフロクス"], hints: ["毒沼やブレスの向きに注意。味方とボス正面に固まらない。"], tags: ["毒沼", "正面注意"] },
+      { match: ["ストーンヴィジル"], hints: ["ドラゴン系は正面ブレスが多い。ボス正面に立たず、外周範囲を見て移動。"], tags: ["ブレス", "外周"] },
+      { match: ["ゼーメル"], hints: ["クリスタルの光や安全地帯を使う場面があります。床の色が変わったら移動。"], tags: ["安全地帯"] },
+      { match: ["オーラム"], hints: ["デバフが溜まったら実を食べる。毒床に長居しない。"], tags: ["実を食べる", "毒"] },
+      { match: ["イフリート"], hints: ["炎獄の楔は最優先で壊す。突進は外周の向きを見て安全地帯へ。"], tags: ["楔", "突進"] },
+      { match: ["タイタン"], hints: ["ランドスライドは直線から横へ避ける。外周落下に注意し、ノックバックは中央寄り。"], tags: ["落下注意", "ノックバック"] },
+      { match: ["ガルーダ"], hints: ["岩や柱が出たら大技の遮蔽物。ボスとの間に隠れる。"], tags: ["隠れる", "柱"] },
+      { match: ["モグル"], hints: ["小さいモーグリを順番に処理。王だけを殴り続けない。"], tags: ["雑魚優先"] },
+      { match: ["リヴァイアサン"], hints: ["船から落ちない位置取り。突進の方向を見て反対側へ。"], tags: ["落下注意", "突進"] },
+      { match: ["ラムウ"], hints: ["雷玉は取りすぎない。恐慌や線が付いたら味方の動きを見て処理。"], tags: ["雷玉", "線"] },
+      { match: ["シヴァ"], hints: ["武器が変わると攻撃範囲が変化。弓は散開、杖は範囲、剣は近づきすぎ注意。"], tags: ["武器変化", "散開"] },
+      { match: ["ビスマルク"], hints: ["雑魚処理と竜撃槍が大事。背中に乗れる時だけ本体を攻撃。"], tags: ["雑魚優先", "仕掛け"] },
+      { match: ["ラーヴァナ"], hints: ["外周落下に注意。防御バリアの向きや突進の順番を見て安全側へ。"], tags: ["外周", "突進"] },
+      { match: ["ナイツ"], hints: ["連続でマーカーが来ます。頭割りは集まり、個人円は散開を徹底。"], tags: ["頭割り", "散開"] },
+      { match: ["ニーズヘッグ"], hints: ["線、塔、頭割りが続きます。自分にマーカーが付いたらまず味方と重ねるか離れるか確認。"], tags: ["線", "塔", "頭割り"] },
+      { match: ["スサノオ"], hints: ["剣受け演出後は範囲回避。雷雲や岩戸は対象を見てすぐ処理。"], tags: ["演出", "範囲"] },
+      { match: ["ラクシュミ"], hints: "エーテルを使う専用ボタンが重要。大技前にバフを忘れない。".split("|"), tags: ["専用ボタン"] },
+      { match: ["神龍"], hints: ["落下と足場破壊に注意。距離減衰や尻尾など、攻撃ごとに安全地帯が大きく変わる。"], tags: ["落下注意", "距離減衰"] },
+      { match: ["ツクヨミ"], hints: ["白黒の床や月下彼岸花は色と立ち位置を見る。頭割りと散開も続きます。"], tags: ["床色", "頭割り"] },
+      { match: ["朱雀"], hints: ["床の模様と鳥の向きに注意。音ゲー風の場面は落ち着いて安全床へ。"], tags: ["床", "方向"] },
+      { match: ["青龍"], hints: ["外周からの攻撃方向を確認。線や円が付いたら味方と重ねない。"], tags: ["外周", "散開"] },
+      { match: ["ティターニア"], hints: ["雑魚フェーズが重要。水たまり、茨、頭割りを見て、止まらず処理。"], tags: ["雑魚優先", "茨"] },
+      { match: ["イノセンス"], hints: ["直線と扇範囲が多い。羽や剣の向きを見て横へ避ける。"], tags: ["直線", "扇"] },
+      { match: ["ハーデス"], hints: ["演出が長い大技後も油断しない。頭割り、塔、雑魚処理を順に見る。"], tags: ["塔", "雑魚優先"] }
+    ];
+
+    const fallbackDuties = [
+      { id: -1, name: "天然要害 サスタシャ浸食洞", level: 15, type: "ダンジョン", image: null, sort: 1 },
+      { id: -2, name: "封鎖坑道 カッパーベル銅山", level: 17, type: "ダンジョン", image: null, sort: 3 },
+      { id: -3, name: "真イフリート討滅戦", level: 20, type: "討伐・討滅戦", image: null, sort: 1 },
+      { id: -4, name: "真タイタン討滅戦", level: 34, type: "討伐・討滅戦", image: null, sort: 2 },
+      { id: -5, name: "真ガルーダ討滅戦", level: 44, type: "討伐・討滅戦", image: null, sort: 3 },
+      { id: -6, name: "最終決戦 魔導城プラエトリウム", level: 50, type: "ダンジョン", image: null, sort: 50 },
+      { id: -7, name: "邪竜血戦 ドラゴンズエアリー", level: 55, type: "ダンジョン", image: null, sort: 55 },
+      { id: -8, name: "ナイツ・オブ・ラウンド討滅戦", level: 60, type: "討伐・討滅戦", image: null, sort: 60 },
+      { id: -9, name: "スサノオ討滅戦", level: 63, type: "討伐・討滅戦", image: null, sort: 63 },
+      { id: -10, name: "ティターニア討滅戦", level: 73, type: "討伐・討滅戦", image: null, sort: 73 },
+      { id: -11, name: "ハーデス討滅戦", level: 80, type: "討伐・討滅戦", image: null, sort: 80 }
+    ];
+
     const cockpitLevel = document.getElementById("cockpitLevel");
     const cockpitMode = document.getElementById("cockpitMode");
     const cockpitAnswer = document.getElementById("cockpitAnswer");
@@ -2029,8 +2364,21 @@
     const gearSummary = document.getElementById("gearSummary");
     const gearList = document.getElementById("gearList");
     const nextBoard = document.getElementById("nextBoard");
+    const dutyType = document.getElementById("dutyType");
+    const dutySearch = document.getElementById("dutySearch");
+    const dutySelect = document.getElementById("dutySelect");
+    const dutySummary = document.getElementById("dutySummary");
+    const mechanicGrid = document.getElementById("mechanicGrid");
+    const lodestoneUrl = document.getElementById("lodestoneUrl");
+    const portraitUrl = document.getElementById("portraitUrl");
+    const saveCharacterButton = document.getElementById("saveCharacterButton");
+    const characterCard = document.getElementById("characterCard");
     let activeResourceCategory = "all";
     const pageParams = new URLSearchParams(window.location.search);
+    let duties = [];
+    if (pageParams.get("duty")) {
+      dutySearch.value = pageParams.get("duty");
+    }
 
     gearJob.innerHTML = gearJobs.map((job) => `
       <option value="${job.id}" ${job.id === "SMN" ? "selected" : ""}>${job.label}</option>
@@ -2419,6 +2767,160 @@
       nextBoard.innerHTML = intro + (await Promise.all(uniqueGoals.map((goal) => renderGoalCard(goal, level)))).join("");
     }
 
+    function assetFromPath(image) {
+      return image ? xivapiAsset(image) : "";
+    }
+
+    function normalizeDuty(result) {
+      const fields = result.fields || {};
+      return {
+        id: result.row_id,
+        name: fields.Name || "",
+        level: fields.ClassJobLevelRequired || 0,
+        type: fields.ContentType?.fields?.Name || "",
+        image: fields.Image || null,
+        sort: fields.SortKey || 9999,
+        itemLevel: fields.ItemLevelRequired || 0,
+        highEnd: Boolean(fields.HighEndDuty)
+      };
+    }
+
+    async function loadDuties() {
+      try {
+        const url = "https://v2.xivapi.com/api/search?sheets=ContentFinderCondition&fields=Name,ClassJobLevelRequired,ContentType.Name,Image,SortKey,HighEndDuty,ItemLevelRequired&language=ja&query=ClassJobLevelRequired%3C%3D80&limit=500";
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error("duty fetch failed");
+        }
+        const data = await response.json();
+        duties = (data.results || [])
+          .map(normalizeDuty)
+          .filter((duty) => duty.name && duty.level > 0)
+          .filter((duty) => duty.type === "ダンジョン" || duty.type === "討伐・討滅戦")
+          .filter((duty) => !duty.highEnd)
+          .sort((a, b) => a.level - b.level || a.sort - b.sort || a.name.localeCompare(b.name, "ja"));
+      } catch (error) {
+        duties = fallbackDuties;
+      }
+      renderDutyOptions();
+      renderDutyGuide();
+    }
+
+    function filteredDuties() {
+      const type = dutyType.value;
+      const query = dutySearch.value.trim();
+      return duties.filter((duty) => {
+        const matchType = type === "all" || duty.type === type;
+        const matchQuery = !query || duty.name.includes(query) || String(duty.level) === query;
+        return matchType && matchQuery;
+      });
+    }
+
+    function renderDutyOptions() {
+      const list = filteredDuties();
+      dutySelect.innerHTML = list.length
+        ? list.map((duty) => `<option value="${duty.id}">Lv${duty.level} ${duty.type === "ダンジョン" ? "ID" : "討滅"}: ${duty.name}</option>`).join("")
+        : `<option value="">該当なし</option>`;
+    }
+
+    function dutySpecificHints(duty) {
+      const matched = dutyHintRules.filter((rule) => rule.match.some((word) => duty.name.includes(word)));
+      if (matched.length) {
+        return matched.flatMap((rule) => rule.hints.map((hint) => ({
+          mark: "注",
+          title: rule.tags.join(" / "),
+          detail: hint
+        })));
+      }
+      if (duty.type === "討伐・討滅戦") {
+        return [
+          { mark: "見", title: "初見の見方", detail: "ボスの詠唱名、外周、味方の集合位置を優先して見る。頭割りと散開のマーカーを間違えなければ立て直しやすいです。" },
+          { mark: "転", title: "落下とノックバック", detail: "討滅戦は外周落下が多め。吹き飛ばしそうな詠唱では中央寄りに立つと安全です。" }
+        ];
+      }
+      return [
+        { mark: "道", title: "IDの基本", detail: "道中はタンクの近く、ボスは正面に立たない。雑魚が出たらボスより雑魚、床が出たら詠唱より回避を優先。" },
+        { mark: "箱", title: "仕掛けを見る", detail: "ボスが硬い、無敵、中央固定になった時は周囲の装置、雑魚、床、遮蔽物を探します。" }
+      ];
+    }
+
+    function renderMechanicCards(cards) {
+      mechanicGrid.innerHTML = cards.map((card) => `
+        <div class="mechanic-card">
+          <div class="mechanic-mark">${card.mark}</div>
+          <div>
+            <h3>${card.title}</h3>
+            <p>${card.detail}</p>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function renderDutyGuide() {
+      const selectedId = Number(dutySelect.value);
+      const duty = duties.find((item) => item.id === selectedId) || filteredDuties()[0];
+      if (!duty) {
+        dutySummary.innerHTML = `<h3>該当コンテンツなし</h3><p>検索語を短くするか、種類を「ID + 討滅戦」に戻してください。</p>`;
+        renderMechanicCards(universalMechanics.slice(0, 6));
+        return;
+      }
+      if (String(dutySelect.value) !== String(duty.id)) {
+        dutySelect.value = duty.id;
+      }
+      const imageUrl = assetFromPath(duty.image);
+      dutySummary.innerHTML = `
+        <h3>Lv${duty.level} ${duty.name}</h3>
+        <p>${duty.type} / 必要IL ${duty.itemLevel || "なし"}。初見では「床を見る」「味方と同じ方向へ避ける」「長い詠唱中に外周と遮蔽物を見る」の3つでかなり安定します。</p>
+        ${imageUrl ? `<div class="character-preview"><img src="${imageUrl}" alt="${duty.name}"><p>下のカードは、このコンテンツで特に見たい動きと、全ID/討滅戦で使う避け方辞書です。</p></div>` : ""}
+      `;
+      renderMechanicCards([...dutySpecificHints(duty), ...universalMechanics]);
+    }
+
+    function saveCharacter() {
+      const data = {
+        lodestoneUrl: lodestoneUrl.value.trim(),
+        portraitUrl: portraitUrl.value.trim()
+      };
+      localStorage.setItem("ff14-guide-character", JSON.stringify(data));
+      renderCharacter();
+    }
+
+    function loadCharacter() {
+      try {
+        const data = JSON.parse(localStorage.getItem("ff14-guide-character") || "{}");
+        lodestoneUrl.value = data.lodestoneUrl || "";
+        portraitUrl.value = data.portraitUrl || "";
+      } catch (error) {
+        lodestoneUrl.value = "";
+        portraitUrl.value = "";
+      }
+      renderCharacter();
+    }
+
+    function renderCharacter() {
+      const profile = lodestoneUrl.value.trim();
+      const portrait = portraitUrl.value.trim();
+      const validProfile = profile && profile.startsWith("https://jp.finalfantasyxiv.com/lodestone/character/");
+      characterCard.innerHTML = `
+        <h3>${validProfile ? "公式プロフィール登録済み" : "公式プロフィールを登録"}</h3>
+        <p>キャラクターの装備を完全自動でこのページ内に取り込むには公式APIが必要ですが、現在はLodestoneの公開ページをすぐ開く導線が一番確実です。</p>
+        ${portrait ? `<div class="character-preview"><img src="${portrait}" alt="登録したキャラクター画像"><p>画像URLを登録中。装備確認は公式プロフィールを開いて確認してください。</p></div>` : ""}
+        <div class="character-links">
+          ${validProfile ? `<a href="${profile}" target="_blank" rel="noreferrer noopener">公式プロフィールを開く</a>` : ""}
+          <button type="button" id="clearCharacterButton">登録を消す</button>
+        </div>
+      `;
+      const clearButton = document.getElementById("clearCharacterButton");
+      if (clearButton) {
+        clearButton.addEventListener("click", () => {
+          localStorage.removeItem("ff14-guide-character");
+          lodestoneUrl.value = "";
+          portraitUrl.value = "";
+          renderCharacter();
+        });
+      }
+    }
+
     async function renderGearFinder() {
       const job = gearJobs.find((item) => item.id === gearJob.value) || gearJobs.find((item) => item.id === "SMN");
       const level = Math.min(80, Math.max(1, Number(gearLevel.value) || 1));
@@ -2528,9 +3030,21 @@
     gearJob.addEventListener("change", renderGearFinder);
     gearLevel.addEventListener("change", renderGearFinder);
     storyStage.addEventListener("change", renderGearFinder);
+    dutyType.addEventListener("change", () => {
+      renderDutyOptions();
+      renderDutyGuide();
+    });
+    dutySearch.addEventListener("input", () => {
+      renderDutyOptions();
+      renderDutyGuide();
+    });
+    dutySelect.addEventListener("change", renderDutyGuide);
+    saveCharacterButton.addEventListener("click", saveCharacter);
     renderCockpit();
     renderResources();
     renderGearFinder();
+    loadDuties();
+    loadCharacter();
 
     const qrOverlay = document.getElementById("qrOverlay");
     const qrImage = document.getElementById("qrImage");

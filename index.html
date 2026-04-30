@@ -641,7 +641,7 @@
 
     .gear-input-row {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 8px;
     }
 
@@ -671,6 +671,11 @@
       font-weight: 800;
     }
 
+    .gear-button:disabled {
+      cursor: wait;
+      opacity: 0.72;
+    }
+
     .gear-summary {
       margin-top: 10px;
       padding: 12px;
@@ -688,6 +693,22 @@
       margin: 0;
       color: var(--muted);
       font-size: 13px;
+    }
+
+    .life-meter {
+      overflow: hidden;
+      height: 10px;
+      margin-top: 10px;
+      border-radius: 999px;
+      background: rgba(32, 90, 97, 0.1);
+    }
+
+    .life-meter span {
+      display: block;
+      height: 100%;
+      width: var(--meter, 0%);
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--emerald), var(--gold));
     }
 
     .gear-list {
@@ -746,6 +767,85 @@
       font-size: 12px;
       font-weight: 800;
       text-decoration: none;
+    }
+
+    .next-panel {
+      border-color: rgba(200, 105, 33, 0.18);
+      background:
+        linear-gradient(180deg, rgba(255, 250, 243, 0.98), rgba(255, 246, 238, 0.96));
+    }
+
+    .next-board {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .next-card {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px;
+      border-radius: 14px;
+      background: var(--paper-2);
+      border: 1px solid rgba(32, 90, 97, 0.08);
+    }
+
+    .next-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+      background: #eef7f6;
+      border: 1px solid rgba(32, 90, 97, 0.1);
+      object-fit: cover;
+    }
+
+    .next-card h3 {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .next-card p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .next-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 7px;
+    }
+
+    .next-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(32, 90, 97, 0.08);
+      color: var(--teal);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .next-pill.hot {
+      background: rgba(200, 105, 33, 0.14);
+      color: #8f4a12;
+    }
+
+    .next-pill.locked {
+      background: rgba(85, 101, 106, 0.09);
+      color: var(--muted);
+    }
+
+    .gear-note-grid {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
     }
 
     .qr-overlay {
@@ -956,6 +1056,7 @@
       <div class="jumpbar-track">
         <a class="jump" href="#summary">まず結論</a>
         <a class="jump" href="#cockpit">攻略</a>
+        <a class="jump" href="#nextPlanner">次の目標</a>
         <a class="jump" href="#gearFinder">装備</a>
         <a class="jump" href="#resourceHub">リンク集</a>
         <a class="jump" href="#lv10">Lv10</a>
@@ -1009,14 +1110,31 @@
             <label for="gearLevel">現在レベル</label>
             <input id="gearLevel" type="number" min="1" max="80" value="80">
           </div>
+          <div>
+            <label for="storyStage">メイン進行</label>
+            <select id="storyStage">
+              <option value="airship">三都巡り後</option>
+              <option value="gc" selected>グランドカンパニー加入済み</option>
+              <option value="arr">新生クリア後</option>
+              <option value="hw">蒼天進行中</option>
+              <option value="sb">紅蓮進行中</option>
+              <option value="shb">漆黒進行中</option>
+            </select>
+          </div>
         </div>
-        <button class="gear-button" id="findGearButton" type="button">装備を調べる</button>
+        <button class="gear-button" id="findGearButton" type="button">装備と次の目標を見る</button>
       </div>
       <div class="gear-summary" id="gearSummary">
         <h3>Lv80 召喚士のおすすめ</h3>
         <p>ボタンを押すと、武器・防具・アクセの候補をゲーム内アイコン付きで表示します。</p>
       </div>
       <div class="gear-list" id="gearList"></div>
+    </section>
+
+    <section class="panel next-panel" id="nextPlanner">
+      <h2>次の楽しみナビ</h2>
+      <p class="footer-note">上のジョブ・レベル・メイン進行に合わせて、あと少しで解放される装備、スキル、遊びをまとめます。</p>
+      <div class="next-board" id="nextBoard"></div>
     </section>
 
     <section class="panel" id="motivationBoard">
@@ -1027,7 +1145,7 @@
 
     <section class="panel" id="resourceHub">
       <h2>攻略リンク集</h2>
-      <p class="footer-note">大手サイトの強みを、迷わず使える入口としてまとめます。</p>
+      <p class="footer-note">外部へ移動する場合も、日本語の公式ページだけに絞っています。</p>
       <div class="resource-filter">
         <label>用途で絞り込み</label>
         <div class="resource-tabs" id="resourceTabs"></div>
@@ -1085,7 +1203,7 @@
         </div>
         <div class="quick-block">
           <strong>範囲攻撃へ切り替える基準</strong>
-          範囲攻撃は、複数の敵をまとめて早く削りたい時に必要です。基本は3体以上で範囲攻撃へ切り替えます。ダンジョンでタンクが敵をまとめた時や、雑魚が何体も同時に出た時に使うと効果が大きいです。The Balanceのレベリングガイドも「3体以上」を範囲攻撃基準にしています。
+          範囲攻撃は、複数の敵をまとめて早く削りたい時に必要です。基本は3体以上で範囲攻撃へ切り替えます。ダンジョンでタンクが敵をまとめた時や、雑魚が何体も同時に出た時に使うと効果が大きいです。
         </div>
         <div class="quick-block">
           <strong>召喚の順番</strong>
@@ -1108,21 +1226,21 @@
     <section class="panel" id="sources">
       <h2>出典</h2>
       <p class="footer-note">
-        回しの優先度は主にThe Balanceの召喚士レベリングガイド、アクション名・修得レベル・アイコンは公式ジョブガイド、フリートライアルLv80拡張はPatch 7.5パッチノートを参照しています。<br>
+        アクション名・修得レベル・アイコンは公式ジョブガイド、アイテム名・装備アイコンはXIVAPIの日本語データ、フリートライアルLv80拡張は日本語版Patch 7.5パッチノートを参照しています。<br>
         なお「Lv80でバハムートとフェニックスを交互に回す」というまとめは、公式の共有リキャスト仕様とレベリングガイドの優先度記述をあわせて整理した要約です。
       </p>
       <div class="sources">
         <div class="source-item">
-          <a href="https://na.finalfantasyxiv.com/lodestone/topics/detail/07320affa7e0fcd9685afcbe54fbf55405b6d822" target="_blank" rel="noreferrer noopener">Patch 7.5 Notes</a><br>
-          2026年4月28日開始。フリートライアルの追加調整として「The level cap has been raised to 80」「Players will now have access to the expansion data of Shadowbringers.」を確認。
+          <a href="https://jp.finalfantasyxiv.com/lodestone/topics/detail/36abe7b0b123e3dbbee0041b0b8d63b08a7141d9" target="_blank" rel="noreferrer noopener">7.5パッチノート 先行公開！</a><br>
+          2026年4月28日実装分のフリートライアル拡張、装備、システム更新の確認に使用。
         </div>
         <div class="source-item">
           <a href="https://jp.finalfantasyxiv.com/jobguide/summoner/" target="_blank" rel="noreferrer noopener">公式ジョブガイド 召喚士</a><br>
           各アクションの修得レベル、名称、公式アイコン、トランス/バハムート/フェニックスの変化を確認。
         </div>
         <div class="source-item">
-          <a href="https://www.thebalanceffxiv.com/jobs/casters/summoner/leveling-guide/" target="_blank" rel="noreferrer noopener">The Balance Summoner Leveling Guide</a><br>
-          レベル帯ごとの単体 / 範囲攻撃の優先度、各節目で回しに何が増えるかを確認。
+          <a href="https://jp.finalfantasyxiv.com/lodestone/playguide/db/" target="_blank" rel="noreferrer noopener">エオルゼアデータベース</a><br>
+          クエスト、アイテム、装備の日本語名と公式DB検索の導線に使用。
         </div>
       </div>
     </section>
@@ -1547,19 +1665,12 @@
     const resourceCategories = [
       { id: "all", label: "全部" },
       { id: "job", label: "ジョブ" },
-      { id: "tools", label: "便利ツール" },
-      { id: "wiki", label: "調べ物" },
+      { id: "guide", label: "公式ガイド" },
+      { id: "db", label: "公式DB" },
       { id: "motivation", label: "ワクワク" }
     ];
 
     const resources = [
-      {
-        title: "The Balance / Summoner",
-        url: "https://www.thebalanceffxiv.com/jobs/casters/summoner/",
-        category: "job",
-        tags: ["回し", "高難度", "更新日"],
-        text: "召喚士の専門ガイド。細かい最適化を知りたい時の一次目的地。"
-      },
       {
         title: "公式ジョブガイド 召喚士",
         url: "https://jp.finalfantasyxiv.com/jobguide/summoner/",
@@ -1568,74 +1679,74 @@
         text: "アクション名、修得レベル、アイコンを確認する公式情報。"
       },
       {
-        title: "Garland Tools",
-        url: "https://www.garlandtools.org/",
-        category: "tools",
-        tags: ["DB", "装備", "タイマー"],
-        text: "アイテム、クラフト、装備、採集タイマーまで広く探せる定番ツール。"
+        title: "エオルゼアデータベース",
+        url: "https://jp.finalfantasyxiv.com/lodestone/playguide/db/",
+        category: "db",
+        tags: ["公式", "アイテム", "クエスト"],
+        text: "公式の日本語データベース。装備名やクエスト名を正確に確認できます。"
       },
       {
-        title: "FFXIV Teamcraft",
-        url: "https://ffxivteamcraft.com/",
-        category: "tools",
-        tags: ["クラフト", "共有", "リスト"],
-        text: "クラフター・ギャザラー向けのリスト管理、シミュレーター、共有機能が強い。"
-      },
-      {
-        title: "Universalis",
-        url: "https://universalis.app/",
-        category: "tools",
-        tags: ["マーケット", "相場", "金策"],
-        text: "マーケットボードの相場確認。買う前、売る前の迷いを減らせます。"
-      },
-      {
-        title: "XIVAnalysis",
-        url: "https://xivanalysis.com/",
-        category: "job",
-        tags: ["ログ", "改善", "分析"],
-        text: "戦闘ログを見て改善点を確認するサイト。慣れてきた後の伸びしろ探しに。"
-      },
-      {
-        title: "ConsoleGamesWiki",
-        url: "https://ffxiv.consolegameswiki.com/wiki/FF14_Wiki",
-        category: "wiki",
-        tags: ["Wiki", "クエスト", "ID"],
-        text: "クエスト、ID、解放条件など、攻略の周辺情報を調べやすいWiki。"
-      },
-      {
-        title: "Eorzea Collection",
-        url: "https://ffxiv.eorzeacollection.com/",
+        title: "マンダヴィル・ゴールドソーサー",
+        url: "https://jp.finalfantasyxiv.com/lodestone/playguide/contentsguide/goldsaucer/",
         category: "motivation",
-        tags: ["ミラプリ", "見た目", "投稿"],
-        text: "ミラプリの着想を得られる場所。次に遊びたい気持ちを作るのに強い。"
+        tags: ["MGP", "ミニゲーム", "景品"],
+        text: "Lv15からの大きな寄り道。景品、MGP、遊びの入口を公式ページで確認できます。"
       },
       {
-        title: "FFXIV Collect",
-        url: "https://ffxivcollect.com/",
+        title: "初心者の館／メンターシステム",
+        url: "https://jp.finalfantasyxiv.com/lodestone/topics/detail/202607a056ee79716a0c0c362647a4e52bfc218d",
+        category: "guide",
+        tags: ["Lv15", "ビギナー装備", "練習"],
+        text: "Lv15からのロール練習とビギナー装備。序盤の装備更新で特に大事です。"
+      },
+      {
+        title: "マイチョコボと一緒に戦いたい",
+        url: "https://jp.finalfantasyxiv.com/uiguide/faq/faq-chocobo/chocobo_buddy.html",
+        category: "guide",
+        tags: ["Lv30", "バディ", "ソロ"],
+        text: "バディチョコボの解放と使い方。ソロ戦闘がかなり楽になります。"
+      },
+      {
+        title: "コンテンツサポーター",
+        url: "https://jp.finalfantasyxiv.com/game_manual/dutysupport/",
+        category: "guide",
+        tags: ["ソロ", "ID", "NPC"],
+        text: "対象IDをNPCと進められる公式機能。初見で落ち着いて練習したい時に便利。"
+      },
+      {
+        title: "ファッションチェック",
+        url: "https://jp.finalfantasyxiv.com/lodestone/playguide/contentsguide/goldsaucer/fashionreport/",
         category: "motivation",
-        tags: ["収集", "マウント", "ミニオン"],
-        text: "マウントやミニオンなどの収集進捗を眺めると、寄り道の目的が生まれます。"
+        tags: ["MGP", "見た目", "毎週"],
+        text: "ゴールドソーサーの毎週コンテンツ。ミラプリを考える理由にもなります。"
+      },
+      {
+        title: "UIガイド: 装備品を武具投影したい",
+        url: "https://jp.finalfantasyxiv.com/uiguide/fashion/equipment-glamours/glamours_about.html",
+        category: "motivation",
+        tags: ["ミラプリ", "見た目", "装備"],
+        text: "見た目を変える導線。お気に入り装備を集めるモチベーションになります。"
       }
     ];
 
     const gearJobs = [
-      { id: "PLD", label: "ナイト", min: 1 },
-      { id: "WAR", label: "戦士", min: 1 },
-      { id: "DRK", label: "暗黒騎士", min: 30 },
-      { id: "GNB", label: "ガンブレイカー", min: 60 },
-      { id: "WHM", label: "白魔道士", min: 1 },
-      { id: "SCH", label: "学者", min: 30 },
-      { id: "AST", label: "占星術師", min: 30 },
-      { id: "MNK", label: "モンク", min: 1 },
-      { id: "DRG", label: "竜騎士", min: 1 },
-      { id: "NIN", label: "忍者", min: 1 },
-      { id: "SAM", label: "侍", min: 50 },
-      { id: "BRD", label: "吟遊詩人", min: 1 },
-      { id: "MCH", label: "機工士", min: 30 },
-      { id: "DNC", label: "踊り子", min: 60 },
-      { id: "BLM", label: "黒魔道士", min: 1 },
-      { id: "SMN", label: "召喚士", min: 1 },
-      { id: "RDM", label: "赤魔道士", min: 50 }
+      { id: "PLD", label: "ナイト", min: 1, role: "tank", className: "剣術士" },
+      { id: "WAR", label: "戦士", min: 1, role: "tank", className: "斧術士" },
+      { id: "DRK", label: "暗黒騎士", min: 30, role: "tank" },
+      { id: "GNB", label: "ガンブレイカー", min: 60, role: "tank" },
+      { id: "WHM", label: "白魔道士", min: 1, role: "healer", className: "幻術士" },
+      { id: "SCH", label: "学者", min: 30, role: "healer", className: "巴術士" },
+      { id: "AST", label: "占星術師", min: 30, role: "healer" },
+      { id: "MNK", label: "モンク", min: 1, role: "melee", className: "格闘士" },
+      { id: "DRG", label: "竜騎士", min: 1, role: "melee", className: "槍術士" },
+      { id: "NIN", label: "忍者", min: 1, role: "melee", className: "双剣士" },
+      { id: "SAM", label: "侍", min: 50, role: "melee" },
+      { id: "BRD", label: "吟遊詩人", min: 1, role: "ranged", className: "弓術士" },
+      { id: "MCH", label: "機工士", min: 30, role: "ranged" },
+      { id: "DNC", label: "踊り子", min: 60, role: "ranged" },
+      { id: "BLM", label: "黒魔道士", min: 1, role: "caster", className: "呪術士" },
+      { id: "SMN", label: "召喚士", min: 1, role: "caster", className: "巴術士" },
+      { id: "RDM", label: "赤魔道士", min: 50, role: "caster" }
     ];
 
     const gearTiers = [
@@ -1688,6 +1799,223 @@
     ];
 
     const gearCache = new Map();
+    const iconCache = new Map();
+
+    const storyStages = {
+      airship: { rank: 1, label: "三都巡り後" },
+      gc: { rank: 2, label: "グランドカンパニー加入済み" },
+      arr: { rank: 3, label: "新生クリア後" },
+      hw: { rank: 4, label: "蒼天進行中" },
+      sb: { rank: 5, label: "紅蓮進行中" },
+      shb: { rank: 6, label: "漆黒進行中" }
+    };
+
+    const lowLevelGearPlans = [
+      {
+        min: 1,
+        max: 14,
+        title: "Lv1-14: クエスト報酬と店売りで十分",
+        iconName: "ビギナーリング",
+        items: [
+          "武器: クラスクエスト報酬を最優先。なければ今いる街の武器屋で装備Lvが近いもの。",
+          "防具: メインクエスト報酬をそのまま更新。胴・脚だけ遅れていたら防具屋で補強。",
+          "アクセ: まだ差は小さいので、持っているものを「さいきょう」で装備すればOK。"
+        ],
+        reason: "この帯は成長が早く、細かく最強を追うより武器を遅らせない方が強いです。"
+      },
+      {
+        min: 15,
+        max: 29,
+        title: "Lv15-29: 初心者の館ビギナー装備が主役",
+        iconName: "ビギナーリング",
+        items: [
+          "防具: 初心者の館のロール訓練でビギナー装備を回収。",
+          "指輪: ビギナーリング。Lv30まで経験値ボーナスがあるので最優先。",
+          "武器: IDドロップか店売りで、装備Lvが5以上古くなったら更新。"
+        ],
+        reason: "サスタシャ以降のIDに行く前に、胴・脚・足とリングを整えるとかなり楽になります。"
+      },
+      {
+        min: 30,
+        max: 44,
+        title: "Lv30-44: ジョブ化して武器だけ遅らせない",
+        iconName: "ビギナーリング",
+        items: [
+          "ジョブ: クラスからジョブへ。ジョブクリスタル装備を忘れない。",
+          "武器: Lv30 / 35 / 40付近でIDドロップか店売りを確認。",
+          "防具: ビギナー装備からIDドロップへ自然に入れ替え。胴・脚を優先。"
+        ],
+        reason: "この帯はジョブ化の効果が大きいです。装備は武器更新だけ意識すれば詰まりにくいです。"
+      },
+      {
+        min: 45,
+        max: 49,
+        title: "Lv45-49: ジョブクエスト装備でLv50へ",
+        iconName: "ビギナーリング",
+        items: [
+          "防具: Lv45ジョブクエストで専用防具を回収。",
+          "武器: 直近IDドロップか店売りで更新。古い武器だけは避ける。",
+          "次の目標: Lv50になったらガーロンドREへ一気に更新。"
+        ],
+        reason: "Lv50装備更新が近いので、ここで高額な買い物をしなくて大丈夫です。"
+      }
+    ];
+
+    const unlockGoals = [
+      {
+        level: 10,
+        title: "他クラス解放の準備",
+        category: "便利",
+        iconName: "ビギナーリング",
+        story: "airship",
+        detail: "Lv10クラスクエスト後、他クラスを触れるようになります。気分転換やサブジョブの入口。",
+        action: "まず今のクラスクエストを進める。"
+      },
+      {
+        level: 15,
+        title: "初心者の館とビギナー装備",
+        category: "装備",
+        iconName: "ビギナーリング",
+        story: "airship",
+        detail: "ロール練習とビギナー装備一式。序盤装備の大きな更新ポイント。",
+        action: "冒険者指導教官に話してロール訓練を進める。"
+      },
+      {
+        level: 15,
+        title: "ミラプリと染色",
+        category: "見た目",
+        iconName: "ミラージュプリズム",
+        story: "airship",
+        detail: "西ザナラーンのベスパーベイで見た目変更系が解放できます。装備集めのモチベが一段上がるポイント。",
+        action: "スウィルゲイム周辺のサブクエストを確認。"
+      },
+      {
+        level: 15,
+        title: "ゴールドソーサー",
+        category: "寄り道",
+        iconName: "MGPプラチナカード",
+        story: "airship",
+        detail: "チョコボレース、トリプルトライアド、景品集めの入口。戦闘以外の楽しみが増えます。",
+        action: "ウルダハ:ナル回廊の「羽振りのいい若者」を探す。"
+      },
+      {
+        level: 15,
+        title: "攻略手帳",
+        category: "育成",
+        iconName: "ベンチャースクリップ",
+        story: "airship",
+        detail: "毎週の経験値・ギル・MGPの目標表。サブジョブ育成のやる気に直結します。",
+        action: "リムサ・ロミンサ上甲板層で「忘れられた攻略手帳」を受注。"
+      },
+      {
+        level: 20,
+        title: "マイチョコボ",
+        category: "移動",
+        iconName: "チョコボホイッスル",
+        story: "gc",
+        detail: "グランドカンパニー加入後の大きな快適化。移動のストレスが一気に減ります。",
+        action: "所属GCの「念願のマイチョコボ」を進め、軍票でチョコボ支給券を用意。"
+      },
+      {
+        level: 30,
+        title: "ジョブ化",
+        category: "戦闘",
+        iconName: "ソウルクリスタル",
+        story: "airship",
+        detail: "クラスからジョブへ。火力・回復・防御の手札が増え、遊び味が大きく変わります。",
+        action: "Lv30クラスクエスト完了後、ジョブクエストを受ける。"
+      },
+      {
+        level: 30,
+        title: "チョコボバディ",
+        category: "ソロ",
+        iconName: "ギサールの野菜",
+        story: "gc",
+        detail: "マイチョコボと一緒にフィールド戦闘。ソロの回復・火力補助になって心強いです。",
+        action: "黒衣森:南部森林の「頼れる相棒」を進める。"
+      },
+      {
+        level: 50,
+        title: "ガーロンドRE装備",
+        category: "装備",
+        iconName: "アラガントームストーン:詩学",
+        story: "arr",
+        detail: "Lv50の大きな装備更新。詩学で揃えると新生終盤から蒼天序盤がかなり安定します。",
+        action: "モードゥナ、または三都市のロウェナ商会の商人で交換。"
+      },
+      {
+        level: 50,
+        title: "クリスタルタワー",
+        category: "コンテンツ",
+        iconName: "古代の民の迷宮",
+        story: "arr",
+        detail: "アライアンスレイドの入口。後のメイン進行にも関わる重要コンテンツです。",
+        action: "モードゥナ周辺のクロニクルクエストを確認。"
+      },
+      {
+        level: 60,
+        title: "イディルRE装備",
+        category: "装備",
+        iconName: "アラガントームストーン:詩学",
+        story: "hw",
+        detail: "Lv60の詩学更新。紅蓮序盤まで安心して進めやすくなります。",
+        action: "イディルシャイア、または三都市のロウェナ商会の商人で交換。"
+      },
+      {
+        level: 60,
+        title: "クロの空想帳",
+        category: "寄り道",
+        iconName: "クロの賞状:金賞",
+        story: "hw",
+        detail: "毎週の遊ぶ理由になる手帳。報酬狙いで古いコンテンツにも行きやすくなります。",
+        action: "イディルシャイアで関連クエストを確認。"
+      },
+      {
+        level: 70,
+        title: "スカエウァRE装備",
+        category: "装備",
+        iconName: "アラガントームストーン:詩学",
+        story: "sb",
+        detail: "Lv70の詩学更新。漆黒序盤まで装備の不安がかなり減ります。",
+        action: "ラールガーズリーチ、または三都市/クガネのロウェナ商会の商人で交換。"
+      },
+      {
+        level: 70,
+        title: "禁断の地 エウレカ",
+        category: "寄り道",
+        iconName: "乱属性クリスタル",
+        story: "sb",
+        detail: "専用フィールドで武器強化や見た目装備を狙う寄り道。ハマる人には長く遊べます。",
+        action: "紅蓮クリア後、クガネ周辺の解放クエストを確認。"
+      },
+      {
+        level: 80,
+        title: "クリプトラーカーRE装備",
+        category: "装備",
+        iconName: "アラガントームストーン:詩学",
+        story: "shb",
+        detail: "フリートライアルLv80到達点の大きな装備更新。IL530でかなり強くなります。",
+        action: "ユールモア、またはクリスタリウムのモーエン商会で交換。"
+      },
+      {
+        level: 80,
+        title: "漆黒ロールクエスト",
+        category: "物語",
+        iconName: "クリスタル",
+        story: "shb",
+        detail: "ジョブクエストの代わりにロールごとの物語を追う節目。世界観の理解も深まります。",
+        action: "クリスタリウムで自分のロールに合うクエストを確認。"
+      }
+    ];
+
+    const smnActionGoals = [
+      { level: 10, title: "エナジードレイン / ミアズマバースト", icon: "energyDrain", detail: "oGCD管理の入口。火力を腐らせない練習が始まります。" },
+      { level: 30, title: "召喚士ジョブ化", icon: "summonIfrit", detail: "召喚士として3属性回しの形が見え始めます。" },
+      { level: 40, title: "ペインフレア", icon: "painflare", detail: "まとめ狩りでエーテルフローを範囲火力へ変えられます。" },
+      { level: 58, title: "トランス・バハムート", icon: "dreadwyrmTrance", detail: "召喚士らしいフェーズ制が始まります。" },
+      { level: 70, title: "サモン・バハムート", icon: "summonBahamut", detail: "大技フェーズが本格化。見た目も火力も一気に気持ちよくなります。" },
+      { level: 80, title: "サモン・フェニックス", icon: "summonPhoenix", detail: "Lv80ループ完成。バハムートとフェニックスを交互に回します。" }
+    ];
 
     const cockpitLevel = document.getElementById("cockpitLevel");
     const cockpitMode = document.getElementById("cockpitMode");
@@ -1696,14 +2024,26 @@
     const siteSearchResults = document.getElementById("siteSearchResults");
     const gearJob = document.getElementById("gearJob");
     const gearLevel = document.getElementById("gearLevel");
+    const storyStage = document.getElementById("storyStage");
     const findGearButton = document.getElementById("findGearButton");
     const gearSummary = document.getElementById("gearSummary");
     const gearList = document.getElementById("gearList");
+    const nextBoard = document.getElementById("nextBoard");
     let activeResourceCategory = "all";
+    const pageParams = new URLSearchParams(window.location.search);
 
     gearJob.innerHTML = gearJobs.map((job) => `
       <option value="${job.id}" ${job.id === "SMN" ? "selected" : ""}>${job.label}</option>
     `).join("");
+    if (gearJobs.some((job) => job.id === pageParams.get("job"))) {
+      gearJob.value = pageParams.get("job");
+    }
+    if (pageParams.get("level")) {
+      gearLevel.value = pageParams.get("level");
+    }
+    if (storyStages[pageParams.get("story")]) {
+      storyStage.value = pageParams.get("story");
+    }
 
     cockpitLevel.innerHTML = sections.map((section) => `
       <option value="${section.id}">${section.title}</option>
@@ -1824,8 +2164,47 @@
       return `https://jp.finalfantasyxiv.com/lodestone/playguide/db/search/?q=${encodeURIComponent(name)}`;
     }
 
-    function wikiItemSearch(name) {
-      return `https://ffxiv.consolegameswiki.com/wiki/Special:Search?search=${encodeURIComponent(name)}`;
+    async function fetchItemIconByName(name) {
+      if (!name) {
+        return "";
+      }
+      if (iconCache.has(name)) {
+        return iconCache.get(name);
+      }
+      try {
+        const query = `Name@ja~"${name}"`;
+        const url = `https://v2.xivapi.com/api/search?sheets=Item&fields=Name,Icon&language=ja&query=${encodeURIComponent(query)}&limit=1`;
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error("icon fetch failed");
+        }
+        const data = await response.json();
+        const icon = data.results?.[0]?.fields?.Icon;
+        const iconUrl = xivapiAsset(icon);
+        iconCache.set(name, iconUrl);
+        return iconUrl;
+      } catch (error) {
+        iconCache.set(name, "");
+        return "";
+      }
+    }
+
+    function iconBox(url, alt, className = "next-icon") {
+      return url
+        ? `<img class="${className}" src="${url}" alt="${alt}">`
+        : `<div class="${className}" aria-hidden="true"></div>`;
+    }
+
+    function storyRank() {
+      return storyStages[storyStage.value]?.rank || 1;
+    }
+
+    function storyLabel() {
+      return storyStages[storyStage.value]?.label || "三都巡り後";
+    }
+
+    function levelDelta(level, target) {
+      return Math.max(0, target - level);
     }
 
     async function fetchGearItem(tier, jobId, slot) {
@@ -1834,12 +2213,12 @@
         return gearCache.get(cacheKey);
       }
       const query = [
-        `+Name~"${tier.name}"`,
+        `+Name@en~"${tier.name}"`,
         `+ClassJobCategory.${jobId}=true`,
         `+EquipSlotCategory.${slot.field}=1`,
         `+LevelEquip=${tier.min}`
       ].join(" ");
-      const url = `https://v2.xivapi.com/api/search?sheets=Item&fields=Name,Icon,LevelEquip,LevelItem,ItemUICategory.Name,EquipSlotCategory,ClassJobCategory&query=${encodeURIComponent(query)}&limit=10`;
+      const url = `https://v2.xivapi.com/api/search?sheets=Item&fields=Name,Icon,LevelEquip,LevelItem,ItemUICategory.Name,EquipSlotCategory,ClassJobCategory&language=ja&query=${encodeURIComponent(query)}&limit=10`;
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error("gear fetch failed");
@@ -1852,39 +2231,192 @@
       return item || null;
     }
 
-    function renderLowLevelGear(job, level) {
+    async function renderLowLevelGear(job, level) {
+      const plan = lowLevelGearPlans.find((item) => level >= item.min && level <= item.max) || lowLevelGearPlans[0];
+      const iconUrl = await fetchItemIconByName(plan.iconName);
+      const nextTier = gearTiers[gearTiers.length - 1];
       gearSummary.innerHTML = `
-        <h3>Lv${level} ${job.label} は更新が早い帯です</h3>
-        <p>Lv50未満は数レベルごとにIDドロップやメインクエスト報酬で入れ替わります。最強を細かく追うより、下の順番で更新すると楽です。</p>
+        <h3>Lv${level} ${job.label}: ${plan.title}</h3>
+        <p>${plan.reason}<br>あと${levelDelta(level, 50)}Lvで${nextTier.label} IL${nextTier.ilvl}が見えてきます。</p>
+        <div class="life-meter" aria-hidden="true"><span style="--meter:${Math.min(100, Math.round((level / 50) * 100))}%"></span></div>
       `;
       gearList.innerHTML = [
         {
-          title: "まずは推奨装備を押す",
-          text: "キャラクター画面の「さいきょう」更新で、今持っている中の最高候補を即装備。",
-          link: "https://jp.finalfantasyxiv.com/lodestone/playguide/db/search/?q=%E6%8E%A8%E5%A5%A8%E8%A3%85%E5%82%99"
+          title: "今の装備方針",
+          text: plan.items.join(" / ")
         },
         {
-          title: "Lv15以降はビギナー装備",
-          text: "初心者の館で防具一式を取得。序盤の見た目と性能が一気に安定します。",
-          link: "https://jp.finalfantasyxiv.com/lodestone/playguide/db/search/?q=%E3%83%93%E3%82%AE%E3%83%8A%E3%83%BC"
+          title: "部位の優先度",
+          text: "武器が最優先。次に胴・脚。その後に頭・手・足・アクセを「さいきょう」で自然更新。"
         },
         {
-          title: "5レベルごとにID/店売り/HQを確認",
-          text: "Lv50になったらガーロンドREへ更新。ここから装備チェッカーの本領です。",
-          link: "https://ffxiv.consolegameswiki.com/wiki/Leveling_Gear_Guide"
+          title: "次の大更新",
+          text: `Lv50で${nextTier.label}へ。詩学交換なので、Lv50到達後はこの装備チェッカーで部位ごとに確認できます。`
         }
-      ].map((item) => `
+      ].map((item, index) => `
         <div class="gear-card">
-          <div class="gear-icon" aria-hidden="true"></div>
+          ${iconBox(index === 0 ? iconUrl : "", item.title, "gear-icon")}
           <div>
             <h3>${item.title}</h3>
             <p>${item.text}</p>
-            <div class="gear-links">
-              <a href="${item.link}" target="_blank" rel="noreferrer noopener">調べる</a>
-            </div>
           </div>
         </div>
       `).join("");
+    }
+
+    function gearLife(level, tier) {
+      if (!tier) {
+        return 0;
+      }
+      if (tier.min === 80) {
+        return 100;
+      }
+      const nextTier = gearTiers.filter((item) => item.min > tier.min).sort((a, b) => a.min - b.min)[0];
+      if (!nextTier) {
+        return 100;
+      }
+      return Math.max(5, Math.min(100, Math.round(((level - tier.min) / (nextTier.min - tier.min)) * 100)));
+    }
+
+    function nextGearText(level, tier) {
+      if (!tier) {
+        return `あと${levelDelta(level, 50)}LvでガーロンドRE装備。Lv50までは武器と胴脚を遅らせない運用でOKです。`;
+      }
+      const nextTier = gearTiers.filter((item) => item.min > tier.min).sort((a, b) => a.min - b.min)[0];
+      if (!nextTier) {
+        return "Lv80帯の到達装備です。ここからはコンテンツ目的や見た目集めを増やすと楽しいです。";
+      }
+      return `この装備はLv${nextTier.min - 1}まで安心。あと${levelDelta(level, nextTier.min)}Lvで${nextTier.label} IL${nextTier.ilvl}に更新できます。`;
+    }
+
+    function nextJobGoal(job, level) {
+      if (job.id === "SMN") {
+        const next = smnActionGoals.find((goal) => goal.level >= level) || smnActionGoals[smnActionGoals.length - 1];
+        return {
+          level: next.level,
+          title: next.title,
+          category: "召喚士",
+          detail: next.detail,
+          action: next.level > level ? `あと${next.level - level}Lv。` : "今のレベルで使えます。",
+          actionIcon: next.icon
+        };
+      }
+      if (level < 30 && job.min <= 1) {
+        return {
+          level: 30,
+          title: `${job.label}へのジョブ化`,
+          category: "ジョブ",
+          detail: `${job.className || "クラス"}Lv30とクラスクエスト完了で、ジョブとして本格的に遊べるようになります。`,
+          action: `あと${30 - level}Lv。ジョブクリスタル装備を忘れずに。`,
+          iconName: "ソウルクリスタル"
+        };
+      }
+      const nextLevel = [50, 60, 70, 80].find((target) => target >= level) || 80;
+      return {
+        level: nextLevel,
+        title: `${job.label} Lv${nextLevel}節目`,
+        category: "ジョブ",
+        detail: "節目レベルではジョブクエスト、ロールクエスト、装備更新が重なりやすいです。",
+        action: nextLevel > level ? `あと${nextLevel - level}Lv。装備更新とセットで見ると迷いにくいです。` : "今の節目で装備とクエストを確認。",
+        iconName: "ソウルクリスタル"
+      };
+    }
+
+    function goalState(goal, level) {
+      if (level < goal.level) {
+        return { label: `あと${goal.level - level}Lv`, className: "locked" };
+      }
+      if (storyRank() < storyStages[goal.story]?.rank) {
+        return { label: `${goal.story ? storyStages[goal.story].label : ""}条件`, className: "locked" };
+      }
+      return { label: "今できる", className: "hot" };
+    }
+
+    async function renderGoalCard(goal, level, extra = "") {
+      const state = goalState(goal, level);
+      const iconUrl = goal.actionIcon
+        ? actions[goal.actionIcon]?.icon
+        : await fetchItemIconByName(goal.iconName);
+      return `
+        <div class="next-card">
+          ${iconBox(iconUrl, goal.title)}
+          <div>
+            <h3>${goal.title}</h3>
+            <p>${goal.detail}</p>
+            <p>${goal.action}${extra ? `<br>${extra}` : ""}</p>
+            <div class="next-meta">
+              <span class="next-pill ${state.className}">${state.label}</span>
+              <span class="next-pill">${goal.category}</span>
+              <span class="next-pill">Lv${goal.level}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    async function renderNextPlanner(job, level) {
+      const tier = getGearTier(level);
+      const nextTier = tier
+        ? gearTiers.filter((item) => item.min > tier.min).sort((a, b) => a.min - b.min)[0]
+        : gearTiers[gearTiers.length - 1];
+      const gearGoal = nextTier
+        ? {
+          level: nextTier.min,
+          title: `${nextTier.label} IL${nextTier.ilvl}`,
+          category: "装備",
+          iconName: "アラガントームストーン:詩学",
+          story: nextTier.min === 50 ? "arr" : nextTier.min === 60 ? "hw" : nextTier.min === 70 ? "sb" : "shb",
+          detail: `${job.label}の次の大きな装備更新。${nextTier.vendor}`,
+          action: nextTier.min > level ? `あと${nextTier.min - level}Lv。詩学を温存しておくと更新が早いです。` : "今すぐ更新候補です。"
+        }
+        : {
+          level: 80,
+          title: "Lv80到達後の遊び",
+          category: "目標",
+          iconName: "チョコボホイッスル",
+          story: "shb",
+          detail: "クリプトラーカーREを揃えたら、ミラプリ、収集、未解放コンテンツを広げると長く遊べます。",
+          action: "装備は強くなったので、次は遊ぶ理由を増やす段階です。"
+        };
+
+      const nearGoals = unlockGoals
+        .filter((goal) => goal.level >= level && goal.level <= level + 5)
+        .sort((a, b) => a.level - b.level)
+        .slice(0, 6);
+      const fallbackGoals = unlockGoals
+        .filter((goal) => goal.level > level + 5)
+        .sort((a, b) => a.level - b.level)
+        .slice(0, 3);
+      const availableGoals = unlockGoals
+        .filter((goal) => goal.level <= level && storyRank() >= storyStages[goal.story]?.rank)
+        .sort((a, b) => b.level - a.level)
+        .slice(0, 2);
+      const goals = [
+        gearGoal,
+        nextJobGoal(job, level),
+        ...(nearGoals.length ? nearGoals : fallbackGoals),
+        ...availableGoals
+      ];
+
+      const uniqueGoals = goals.filter((goal, index, array) => (
+        array.findIndex((item) => item.title === goal.title && item.level === goal.level) === index
+      )).slice(0, 8);
+
+      const intro = `
+        <div class="next-card">
+          <div class="next-icon" aria-hidden="true"></div>
+          <div>
+            <h3>Lv${level} ${job.label} / ${storyLabel()} の今日メニュー</h3>
+            <p>${level < 50 ? "まずはLv50装備更新まで、武器と解放コンテンツを取り逃がさないのが近道です。" : nextGearText(level, tier)}</p>
+            <div class="next-meta">
+              <span class="next-pill hot">次に遊ぶ理由</span>
+              <span class="next-pill">スマホ用</span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      nextBoard.innerHTML = intro + (await Promise.all(uniqueGoals.map((goal) => renderGoalCard(goal, level)))).join("");
     }
 
     async function renderGearFinder() {
@@ -1897,12 +2429,14 @@
           <p>今のレベルではまだ選んだジョブになれません。ジョブ解放後にもう一度調べてください。</p>
         `;
         gearList.innerHTML = "";
+        await renderNextPlanner(job, level);
         return;
       }
 
       const tier = getGearTier(level);
       if (!tier) {
-        renderLowLevelGear(job, level);
+        await renderLowLevelGear(job, level);
+        await renderNextPlanner(job, level);
         return;
       }
 
@@ -1910,7 +2444,8 @@
       findGearButton.textContent = "取得中...";
       gearSummary.innerHTML = `
         <h3>Lv${level} ${job.label}: ${tier.label} IL${tier.ilvl}</h3>
-        <p>${tier.vendor}<br>${tier.unlock}</p>
+        <p>${tier.vendor}<br>${tier.unlock}<br>${nextGearText(level, tier)}</p>
+        <div class="life-meter" aria-hidden="true"><span style="--meter:${gearLife(level, tier)}%"></span></div>
       `;
       gearList.innerHTML = `<div class="gear-card"><div class="gear-icon" aria-hidden="true"></div><div><h3>アイコン取得中</h3><p>ゲーム内アイコンをXIVAPIから読み込んでいます。</p></div></div>`;
 
@@ -1922,16 +2457,15 @@
         })));
         gearList.innerHTML = items.map(({ slot, item }) => {
           if (!item) {
-            const query = `${tier.name} ${job.id} ${slot.label}`;
+            const query = `${tier.label} ${job.label} ${slot.label}`;
             return `
               <div class="gear-card">
                 <div class="gear-icon" aria-hidden="true"></div>
                 <div>
-                  <h3>${slot.label}: 候補を検索</h3>
-                  <p>この枠は自動取得できませんでした。検索リンクから確認してください。</p>
+                  <h3>${slot.label}: ${tier.label} ${slot.label}</h3>
+                  <p>${tier.vendor} この枠だけ自動取得できなかったため、必要な時だけ公式DBで確認できます。</p>
                   <div class="gear-links">
-                    <a href="${officialItemSearch(query)}" target="_blank" rel="noreferrer noopener">公式DB検索</a>
-                    <a href="${wikiItemSearch(query)}" target="_blank" rel="noreferrer noopener">入手方法</a>
+                    <a href="${officialItemSearch(query)}" target="_blank" rel="noreferrer noopener">公式DB</a>
                   </div>
                 </div>
               </div>
@@ -1944,10 +2478,9 @@
               ${iconUrl ? `<img class="gear-icon" src="${iconUrl}" alt="${item.Name}">` : `<div class="gear-icon" aria-hidden="true"></div>`}
               <div>
                 <h3>${slot.label}: ${item.Name}</h3>
-                <p>装備Lv${item.LevelEquip} / IL${levelItem}</p>
+                <p>装備Lv${item.LevelEquip} / IL${levelItem}。入手は ${tier.vendor}</p>
                 <div class="gear-links">
-                  <a href="${officialItemSearch(item.Name)}" target="_blank" rel="noreferrer noopener">公式DB検索</a>
-                  <a href="${wikiItemSearch(item.Name)}" target="_blank" rel="noreferrer noopener">入手方法</a>
+                  <a href="${officialItemSearch(item.Name)}" target="_blank" rel="noreferrer noopener">公式DB</a>
                 </div>
               </div>
             </div>
@@ -1965,7 +2498,8 @@
         `;
       } finally {
         findGearButton.disabled = false;
-        findGearButton.textContent = "装備を調べる";
+        findGearButton.textContent = "装備と次の目標を見る";
+        await renderNextPlanner(job, level);
       }
     }
 
@@ -1991,6 +2525,9 @@
     });
     siteSearch.addEventListener("input", renderSearchResults);
     findGearButton.addEventListener("click", renderGearFinder);
+    gearJob.addEventListener("change", renderGearFinder);
+    gearLevel.addEventListener("change", renderGearFinder);
+    storyStage.addEventListener("change", renderGearFinder);
     renderCockpit();
     renderResources();
     renderGearFinder();

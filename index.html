@@ -939,6 +939,93 @@
       color: var(--muted);
     }
 
+    .saved-check {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .saved-check input {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--teal);
+    }
+
+    .next-section-title {
+      margin: 4px 0 -2px;
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .shopping-panel,
+    .route-panel,
+    .reward-panel {
+      border-color: rgba(32, 90, 97, 0.16);
+      background:
+        linear-gradient(180deg, rgba(255, 250, 243, 0.98), rgba(240, 247, 246, 0.96));
+    }
+
+    .shopping-head {
+      display: grid;
+      grid-template-columns: 1fr 0.72fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .shopping-head label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .shopping-head input {
+      width: 100%;
+      min-height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(32, 90, 97, 0.16);
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      padding: 8px 10px;
+    }
+
+    .shopping-summary {
+      padding: 10px;
+      border-radius: 14px;
+      background: rgba(32, 90, 97, 0.08);
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .route-step {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 8px;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .route-step span {
+      display: grid;
+      place-items: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: rgba(32, 90, 97, 0.1);
+      color: var(--teal);
+      font-weight: 900;
+    }
+
     .gear-note-grid {
       display: grid;
       gap: 8px;
@@ -1281,7 +1368,8 @@
       }
 
       .profile-input-row,
-      .story-visual {
+      .story-visual,
+      .shopping-head {
         grid-template-columns: 1fr;
       }
 
@@ -1378,6 +1466,9 @@
         <button class="jump feature-tab active" type="button" data-tab="gear">装備</button>
         <button class="jump feature-tab" type="button" data-tab="rotation">スキル/成長</button>
         <button class="jump feature-tab" type="button" data-tab="goals">楽しみナビ</button>
+        <button class="jump feature-tab" type="button" data-tab="shopping">買い物</button>
+        <button class="jump feature-tab" type="button" data-tab="route">迷子ナビ</button>
+        <button class="jump feature-tab" type="button" data-tab="rewards">ごほうび</button>
         <button class="jump feature-tab" type="button" data-tab="duty">初見ギミック</button>
         <button class="jump feature-tab" type="button" data-tab="character">キャラ確認</button>
         <button class="jump feature-tab" type="button" data-tab="links">リンク/出典</button>
@@ -1442,8 +1533,33 @@
 
     <section class="panel next-panel feature-panel" id="nextPlanner" data-feature="goals">
       <h2>次の楽しみナビ</h2>
-      <p class="footer-note">上のジョブ・レベル・メイン進行に合わせて、あと少しで解放される装備、スキル、遊びをまとめます。</p>
+      <p class="footer-note">今日やる3つ、あと少しで解放される要素、ジョブが気持ちよくなる節目をまとめます。チェックはスマホごとに保存されます。</p>
       <div class="next-board" id="nextBoard"></div>
+    </section>
+
+    <section class="panel shopping-panel feature-panel" id="shoppingPanel" data-feature="shopping">
+      <h2>買い物リスト</h2>
+      <p class="footer-note">今のレベルで買う装備を優先順に並べます。所持詩学とチェック状況はこのスマホに保存されます。</p>
+      <div class="shopping-head">
+        <div>
+          <label for="poeticsInput">今持っている詩学</label>
+          <input id="poeticsInput" type="number" min="0" max="2000" step="10" value="0">
+        </div>
+        <div class="shopping-summary" id="shoppingSummary">所持詩学を入れると今日買える目安を出します。</div>
+      </div>
+      <div class="next-board" id="shoppingBoard"></div>
+    </section>
+
+    <section class="panel route-panel feature-panel" id="routePanel" data-feature="route">
+      <h2>迷子防止ナビ</h2>
+      <p class="footer-note">次に行く場所、NPC、座標だけをスマホで見やすくまとめます。解放済みと近い目標を優先表示します。</p>
+      <div class="next-board" id="routeBoard"></div>
+    </section>
+
+    <section class="panel reward-panel feature-panel" id="rewardPanel" data-feature="rewards">
+      <h2>ごほうび図鑑</h2>
+      <p class="footer-note">強さ以外のモチベ用。マウント、ミニオン、ミラプリ、MGPなど、次に集める理由を表示します。</p>
+      <div class="next-board" id="rewardBoard"></div>
     </section>
 
     <section class="panel character-panel feature-panel" id="characterPanel" data-feature="character">
@@ -1541,6 +1657,14 @@
         <div class="source-item">
           <a href="https://jp.finalfantasyxiv.com/lodestone/playguide/db/" target="_blank" rel="noreferrer noopener">エオルゼアデータベース</a><br>
           クエスト、アイテム、装備の日本語名と公式DB検索の導線に使用。
+        </div>
+        <div class="source-item">
+          <a href="https://game8.jp/ff14/283755" target="_blank" rel="noreferrer noopener">Game8 討滅戦攻略一覧</a><br>
+          討滅戦の詳細予習先として使用。アプリ内の表示は初見向けに短く要約。
+        </div>
+        <div class="source-item">
+          <a href="https://game8.jp/ff14/275813" target="_blank" rel="noreferrer noopener">Game8 ダンジョン攻略一覧</a><br>
+          IDの一覧確認先として使用。アプリ内の表示は初見向けに短く要約。
         </div>
         <div class="source-item">
           <a href="https://jp.finalfantasyxiv.com/uiguide/party/party-how/party_practice.html" target="_blank" rel="noreferrer noopener">UIガイド: パーティプレイの戦い方を練習したい</a><br>
@@ -1909,6 +2033,20 @@
         category: "db",
         tags: ["公式", "アイテム", "クエスト"],
         text: "公式の日本語データベース。装備名やクエスト名を正確に確認できます。"
+      },
+      {
+        title: "Game8 討滅戦攻略一覧",
+        url: "https://game8.jp/ff14/283755",
+        category: "guide",
+        tags: ["日本語攻略", "討滅戦", "予習"],
+        text: "討滅戦や極討滅戦の詳細確認用。アプリ内では要点だけ短く見られるように整理しています。"
+      },
+      {
+        title: "Game8 ダンジョン攻略一覧",
+        url: "https://game8.jp/ff14/275813",
+        category: "guide",
+        tags: ["日本語攻略", "ID", "予習"],
+        text: "IDの詳細確認用。新生から漆黒までの一覧確認に使用しています。"
       },
       {
         title: "マンダヴィル・ゴールドソーサー",
@@ -2419,7 +2557,7 @@
         level: 50,
         title: "クリスタルタワー",
         category: "コンテンツ",
-        iconName: "古代の民の迷宮",
+        iconName: "クリスタル",
         story: "arr",
         detail: "アライアンスレイドの入口。後のメイン進行にも関わる重要コンテンツです。",
         action: "モードゥナ周辺のクロニクルクエストを確認。"
@@ -2487,6 +2625,205 @@
       { level: 58, title: "トランス・バハムート", icon: "dreadwyrmTrance", detail: "召喚士らしいフェーズ制が始まります。" },
       { level: 70, title: "サモン・バハムート", icon: "summonBahamut", detail: "大技フェーズが本格化。見た目も火力も一気に気持ちよくなります。" },
       { level: 80, title: "サモン・フェニックス", icon: "summonPhoenix", detail: "Lv80ループ完成。バハムートとフェニックスを交互に回します。" }
+    ];
+
+    const jobFunMoments = {
+      PLD: [
+        { level: 30, title: "盾役の形ができる", actionName: "アイアンウィル", detail: "スタンスを入れて敵視を安定させると、IDの先導がぐっと楽になります。" },
+        { level: 50, title: "ロイヤルアソリティで剣筋が完成", actionName: "ロイヤルアソリティ", detail: "単体コンボの締めが強くなり、ボス戦で押す順番がわかりやすくなります。" },
+        { level: 64, title: "魔法剣パートが気持ちいい", actionName: "ホーリースピリット", detail: "遠くからでも火力を出しやすくなり、動かされるボス戦が快適になります。" }
+      ],
+      WAR: [
+        { level: 10, title: "範囲でまとめが楽になる", actionName: "オーバーパワー", detail: "複数敵をまとめて受ける感覚が早くから身につきます。" },
+        { level: 54, title: "フェルクリーヴ解禁", actionName: "フェルクリーヴ", detail: "戦士の気持ちよさが一気に来る大技。ゲージを溜める目的が明確になります。" },
+        { level: 70, title: "原初の解放で連打が楽しい", actionName: "原初の解放", detail: "バースト中に強い一撃を叩き込む時間ができます。" }
+      ],
+      DRK: [
+        { level: 30, title: "暗黒騎士スタート", actionName: "ハードスラッシュ", detail: "大剣ジョブとして始まります。まずは単体コンボと範囲を分けるだけでOK。" },
+        { level: 40, title: "アンリーシュで範囲敵視が安定", actionName: "アンリーシュ", detail: "IDまとめで敵をこぼしにくくなります。" },
+        { level: 60, title: "漆黒の剣が気持ちいい", actionName: "漆黒の剣", detail: "MPを火力へ変える感覚が出て、暗黒騎士らしさが増します。" }
+      ],
+      GNB: [
+        { level: 60, title: "ガンブレイカー解放直後から派手", actionName: "キーンエッジ", detail: "コンボとソイル消費で、タンクでも攻撃している感触が強いです。" },
+        { level: 60, title: "ノー・マーシーに合わせる", actionName: "ノー・マーシー", detail: "強い技をバフ中に寄せる考え方がわかりやすくなります。" },
+        { level: 70, title: "ビートファング連撃", actionName: "ビートファング", detail: "短い連続コンボが入り、操作の気持ちよさが上がります。" }
+      ],
+      WHM: [
+        { level: 30, title: "白魔道士として回復が安定", actionName: "リジェネ", detail: "継続回復を入れて攻撃に戻る、ヒーラーの基本が楽しくなります。" },
+        { level: 45, title: "ホーリーでまとめ狩りが快感", actionName: "ホーリー", detail: "範囲攻撃とスタンでIDの雑魚戦が一気に気持ちよくなります。" },
+        { level: 56, title: "アサイズで攻撃と回復を両立", actionName: "アサイズ", detail: "押すだけで回復も火力も進む、白魔道士らしい便利技です。" }
+      ],
+      SCH: [
+        { level: 30, title: "フェアリーと一緒に戦う", actionName: "サモン・エオス", detail: "妖精の回復が入り、攻撃しながら支える感覚が出ます。" },
+        { level: 45, title: "陣で味方を守る", actionName: "気炎法", detail: "攻撃しながら妖精とバリアで支える楽しさが増えます。" },
+        { level: 62, title: "連環計でバースト貢献", actionName: "連環計", detail: "味方の強い時間に合わせる意識が生まれます。" }
+      ],
+      AST: [
+        { level: 30, title: "カードで味方を伸ばす", actionName: "プレイI", detail: "回復しながら火力支援を配る、占星術師の楽しい部分が始まります。" },
+        { level: 50, title: "アストラルドローで手札管理", actionName: "アストラルドロー", detail: "引いたカードを誰に渡すか考える楽しみが増えます。" },
+        { level: 50, title: "ディヴィネーションで全体支援", actionName: "ディヴィネーション", detail: "パーティ全体の火力に合わせる節目スキルです。" }
+      ],
+      MNK: [
+        { level: 6, title: "連撃から型が始まる", actionName: "連撃", detail: "方向指定と型を回す、モンクらしいテンポが出ます。" },
+        { level: 50, title: "双竜脚で回しが締まる", actionName: "双竜脚", detail: "型とバフを保つ意識ができ、殴っている感覚が強くなります。" },
+        { level: 70, title: "紅蓮の極意で一気に攻める", actionName: "紅蓮の極意", detail: "バーストに技を寄せる楽しさが出ます。" }
+      ],
+      DRG: [
+        { level: 30, title: "ジャンプ解禁", actionName: "ジャンプ", detail: "竜騎士らしい派手さが出る最初の節目です。" },
+        { level: 50, title: "桜華繚乱でコンボが伸びる", actionName: "桜華繚乱", detail: "コンボルートを選んで維持する楽しさが増えます。" },
+        { level: 60, title: "ゲイルスコグルで槍が派手に", actionName: "ゲイルスコグル", detail: "大きな直線攻撃でバースト感が出ます。" }
+      ],
+      NIN: [
+        { level: 30, title: "忍者へ。忍術が始まる", actionName: "風遁の術", detail: "印を結ぶ遊びが始まり、操作の個性が一気に出ます。" },
+        { level: 35, title: "雷遁で強い一撃", actionName: "雷遁の術", detail: "忍術を攻撃に変える気持ちよさがわかります。" },
+        { level: 45, title: "土遁でまとめ狩り", actionName: "土遁の術", detail: "敵が多い場所に置くとID道中が楽しくなります。" }
+      ],
+      SAM: [
+        { level: 50, title: "侍解放直後から完成感あり", actionName: "刃風", detail: "雪月花を集めて居合に使う目的が最初からわかりやすいです。" },
+        { level: 50, title: "乱れ雪月花が気持ちいい", actionName: "乱れ雪月花", detail: "侍の大きな一撃。まずはここを撃てる流れを覚えるだけで楽しいです。" },
+        { level: 52, title: "天下五剣で範囲も爽快", actionName: "天下五剣", detail: "敵が多い場面でも侍らしい居合が使えます。" }
+      ],
+      BRD: [
+        { level: 30, title: "歌で支援する弓術士へ", actionName: "賢人のバラード", detail: "攻撃しながら歌で戦う、吟遊詩人らしさが始まります。" },
+        { level: 52, title: "旅神のメヌエットで火力支援", actionName: "旅神のメヌエット", detail: "歌を切り替える楽しさが増えます。" },
+        { level: 70, title: "強ショットが爽快", actionName: "リフルジェントアロー", detail: "procを拾って強い一撃へつなげる感覚が楽しいです。" }
+      ],
+      MCH: [
+        { level: 30, title: "機工士スタート", actionName: "スプリットショット", detail: "銃でテンポよく撃つレンジDPSとして始まります。" },
+        { level: 58, title: "ドリルがとにかく気持ちいい", actionName: "ドリル", detail: "強い一撃をリキャストごとに撃つ目的がはっきりします。" },
+        { level: 66, title: "エアアンカーでさらに派手に", actionName: "エアアンカー", detail: "大技が増えて、バーストの満足感が上がります。" }
+      ],
+      DNC: [
+        { level: 60, title: "踊り子解放。ステップが楽しい", actionName: "スタンダードステップ", detail: "ボタンを順番に踏んで大きなダメージへつなげます。" },
+        { level: 60, title: "パートナーを決める", actionName: "クローズドポジション", detail: "誰を伸ばすか選べるので、二人で遊ぶ時にも気持ちが上がります。" },
+        { level: 70, title: "テクニカルステップで全体支援", actionName: "テクニカルステップ", detail: "大きな支援バーストが入り、パーティ貢献がわかりやすくなります。" }
+      ],
+      BLM: [
+        { level: 2, title: "火と氷の切り替えが始まる", actionName: "ファイア", detail: "MPを使う火、MPを戻す氷の基本が黒魔道士の面白さです。" },
+        { level: 35, title: "ファイガで火力モードへ", actionName: "ファイガ", detail: "火へ一気に切り替える流れが気持ちよくなります。" },
+        { level: 60, title: "ファイジャで本格化", actionName: "ファイジャ", detail: "立ち位置を決めて強い魔法を撃ち込む楽しさが出ます。" }
+      ],
+      SMN: [
+        { level: 30, title: "召喚士として3属性が見える", actionName: "サモン・イフリート", detail: "イフリート、タイタン、ガルーダを回す形が始まります。" },
+        { level: 70, title: "バハムート召喚", actionName: "サモン・バハムート", detail: "画面も火力も一気に派手になります。" },
+        { level: 80, title: "フェニックス召喚", actionName: "サモン・フェニックス", detail: "Lv80の大きなごほうび。召喚士の完成感が出ます。" }
+      ],
+      RDM: [
+        { level: 50, title: "赤魔道士解放。連続魔が楽しい", actionName: "ジョルト", detail: "詠唱と無詠唱を交互に使うテンポが気持ちいいです。" },
+        { level: 50, title: "近接コンボへ飛び込む", actionName: "リポスト", detail: "魔法でゲージを溜めて剣で締める流れがわかりやすいです。" },
+        { level: 68, title: "ヴァルフレアで締めが派手に", actionName: "ヴァルフレア", detail: "近接コンボ後の大魔法で赤魔道士らしさが増します。" }
+      ]
+    };
+
+    const routeGuides = [
+      {
+        level: 15,
+        story: "airship",
+        title: "初心者の館",
+        iconName: "ビギナーリング",
+        detail: "Lv15以上のバトルクラスで、冒険者指導教官に話すと解放。開放後はメインコマンド「コンテンツ情報」→「初心者の館」から再挑戦できます。",
+        steps: ["リムサ: 上甲板層 X11.5 Y11.3 / グリダニア: 新市街 X11.7 Y13.1 / ウルダハ: ナル回廊 X11.8 Y9.6", "ロール訓練を最後まで進める", "ビギナーリングとビギナー装備を受け取る"]
+      },
+      {
+        level: 15,
+        story: "airship",
+        title: "ミラプリと染色",
+        iconName: "ミラージュプリズム",
+        detail: "西ザナラーンのベスパーベイで見た目変更系のサブクエストを確認。装備集めの楽しみが増えます。",
+        steps: ["西ザナラーン: ベスパーベイへ行く", "スウィルゲイム周辺の青いクエストを見る", "ミラージュプリズムを使う装備は後で増やす"]
+      },
+      {
+        level: 15,
+        story: "airship",
+        title: "ゴールドソーサー",
+        iconName: "MGPプラチナカード",
+        detail: "戦闘に疲れた時の寄り道。MGP景品、ミニゲーム、ファッションチェックの入口です。",
+        steps: ["ウルダハ: ナル回廊の「羽振りのいい若者」を探す", "クエストでゴールドソーサーへ移動", "週課はファッションチェックだけでもOK"]
+      },
+      {
+        level: 15,
+        story: "airship",
+        title: "攻略手帳",
+        iconName: "ベンチャースクリップ",
+        detail: "毎週の経験値、ギル、MGPの目標表。サブジョブ育成が楽になります。",
+        steps: ["リムサ・ロミンサ上甲板層へ", "クエスト「忘れられた攻略手帳」を受注", "毎週の達成項目を少しだけ埋める"]
+      },
+      {
+        level: 20,
+        story: "gc",
+        title: "マイチョコボ",
+        iconName: "チョコボホイッスル",
+        detail: "グランドカンパニー加入後の大きな快適化。移動がかなり楽になります。",
+        steps: ["所属グランドカンパニーで「念願のマイチョコボ」を受注", "軍票でチョコボ支給券を交換", "報告してチョコボホイッスルを使う"]
+      },
+      {
+        level: 30,
+        story: "airship",
+        title: "ジョブクエスト",
+        iconName: "ソウルクリスタル",
+        detail: "Lv30以降はジョブクリスタルが最優先。強いアクションの入口です。",
+        steps: ["Lv30クラスクエストを完了", "続きのジョブクエストを受注", "装備画面でソウルクリスタルを装備"]
+      },
+      {
+        level: 30,
+        story: "gc",
+        title: "チョコボバディ",
+        iconName: "ギサールの野菜",
+        detail: "マイチョコボと一緒にフィールド戦闘。ソロの回復や火力補助になります。",
+        steps: ["黒衣森:南部森林の「頼れる相棒」を進める", "ギサールの野菜を用意", "フィールドで呼び出して一緒に戦う"]
+      },
+      {
+        level: 50,
+        story: "arr",
+        title: "ガーロンドRE交換",
+        iconName: "アラガントームストーン:詩学",
+        detail: "Lv50の大きな装備更新。武器、胴、脚から順に交換すると失敗しにくいです。",
+        steps: ["新生メイン「究極幻想アルテマウェポン」後まで進める", "モードゥナ X:22.7 Y:6.7 のオーリアナへ", "詩学で武器、胴、脚から交換"]
+      },
+      {
+        level: 50,
+        story: "arr",
+        title: "クリスタルタワー",
+        iconName: "クリスタル",
+        detail: "新生終盤から今後のメインにも関わる重要導線。アライアンスレイドの入口です。",
+        steps: ["モードゥナ周辺のクロニクルクエストを確認", "シルクスの塔まで進める", "未予習でも床と味方の位置を見れば大丈夫"]
+      },
+      {
+        level: 60,
+        story: "hw",
+        title: "イディルRE交換",
+        iconName: "アラガントームストーン:詩学",
+        detail: "Lv60の詩学更新。蒼天クリア後の次の土台です。",
+        steps: ["イディルシャイア X:5.7 Y:5.2 のヒスメナへ", "武器、胴、脚を優先", "紅蓮に入る前に主要部位だけでも更新"]
+      },
+      {
+        level: 70,
+        story: "sb",
+        title: "スカエウァRE交換",
+        iconName: "アラガントームストーン:詩学",
+        detail: "Lv70の詩学更新。漆黒序盤までかなり楽になります。",
+        steps: ["ラールガーズリーチ X:13.8 Y:11.6 のエンナへ", "武器、胴、脚を優先", "詩学が足りなければルレを1回"]
+      },
+      {
+        level: 80,
+        story: "shb",
+        title: "クリプトラーカーRE交換",
+        iconName: "アラガントームストーン:詩学",
+        detail: "フリートライアルLv80到達点の装備更新。ここまで来たごほうびです。",
+        steps: ["ユールモア X:10.2 Y:11.8 のアイマークへ", "武器、胴、脚から交換", "残りは見た目集めや未解放コンテンツへ"]
+      }
+    ];
+
+    const rewardGoals = [
+      { level: 15, story: "airship", title: "ミラプリ開放", category: "見た目", iconName: "ミラージュプリズム", detail: "装備の見た目を変えられるようになると、ダンジョン装備を拾う理由が増えます。", action: "ベスパーベイで見た目系クエストを確認。" },
+      { level: 15, story: "airship", title: "ゴールドソーサー景品", category: "MGP", iconName: "MGPプラチナカード", detail: "マウント、髪型、エモート、ミニオンなど寄り道の宝庫。週1のファッションチェックだけでも楽しいです。", action: "ウルダハからゴールドソーサーへ。" },
+      { level: 20, story: "gc", title: "マイチョコボ", category: "マウント", iconName: "チョコボホイッスル", detail: "自分のチョコボが移動を支えてくれます。最初の大きな相棒枠です。", action: "所属GCでチョコボ支給券を交換。" },
+      { level: 30, story: "gc", title: "チョコボバディ", category: "ソロ", iconName: "ギサールの野菜", detail: "フィールドで一緒に戦えるようになります。回復型にするとソロがかなり安心。", action: "黒衣森:南部森林の「頼れる相棒」へ。" },
+      { level: 50, story: "arr", title: "クリスタルタワー報酬", category: "見た目", iconName: "クリスタル", detail: "アライアンスレイド装備や物語の節目。後のメインにもつながります。", action: "モードゥナのクロニクルクエストを進める。" },
+      { level: 60, story: "hw", title: "クロの空想帳", category: "週課", iconName: "クロの賞状:金賞", detail: "毎週のビンゴ感覚で経験値とごほうびを狙えます。埋められる範囲だけでOK。", action: "イディルシャイアでクロの空想帳を確認。" },
+      { level: 60, story: "hw", title: "リテイナーベンチャー", category: "収集", iconName: "ベンチャースクリップ", detail: "素材や掘り出し物が増えると、ログインする理由が少し増えます。", action: "ベンチャースクリップを少し持っておく。" },
+      { level: 70, story: "sb", title: "紅蓮エリアの景色集め", category: "旅", iconName: "チョコボホイッスル", detail: "飛べるエリアが増えるほど、マウント移動の気持ちよさが上がります。", action: "風脈を見つけたらこまめに触る。" },
+      { level: 80, story: "shb", title: "Lv80ミラプリ更新", category: "見た目", iconName: "ミラージュプリズム", detail: "クリプトラーカーREやダンジョン装備で見た目更新。到達記念の一式を作ると楽しいです。", action: "気に入った胴装備を中心に集める。" }
     ];
 
     const universalMechanics = [
@@ -2581,21 +2918,211 @@
       { match: ["青龍"], hints: ["外周からの攻撃方向を確認。線や円が付いたら味方と重ねない。"], tags: ["外周", "散開"] },
       { match: ["ティターニア"], hints: ["雑魚フェーズが重要。水たまり、茨、頭割りを見て、止まらず処理。"], tags: ["雑魚優先", "茨"] },
       { match: ["イノセンス"], hints: ["直線と扇範囲が多い。羽や剣の向きを見て横へ避ける。"], tags: ["直線", "扇"] },
-      { match: ["ハーデス"], hints: ["演出が長い大技後も油断しない。頭割り、塔、雑魚処理を順に見る。"], tags: ["塔", "雑魚優先"] }
+      { match: ["ハーデス"], hints: ["演出が長い大技後も油断しない。頭割り、塔、雑魚処理を順に見る。"], tags: ["塔", "雑魚優先"] },
+      { match: ["ハラタリ"], hints: ["雑魚とギミック装置を見落とさない。床が光ったら離れる。"], tags: ["装置", "床"] },
+      { match: ["カルン"], hints: ["死の宣告や床スイッチに注意。光る床、石像、ギミックを優先して見る。"], tags: ["宣告", "床"] },
+      { match: ["カッターズクライ"], hints: ["キマイラ系は目の色と詠唱名を見る。氷は離れ、雷は近づく感覚で覚える。"], tags: ["詠唱", "距離"] },
+      { match: ["ワンダラーパレス"], hints: ["追いかけてくる敵やギミックを無視しすぎない。ボスより仕掛けを優先する場面があります。"], tags: ["追跡", "仕掛け"] },
+      { match: ["カストルム", "プラエトリウム", "魔導城"], hints: ["大きな演出が多いID。初見は味方について行き、ボスの長い詠唱と外周を確認。"], tags: ["メイン", "演出"] },
+      { match: ["アムダプール"], hints: ["雑魚処理と視線・範囲に注意。石像や扉など、殴る以外の処理が出たら優先。"], tags: ["雑魚", "仕掛け"] },
+      { match: ["シリウス"], hints: ["雑魚が増えやすいので放置しない。床範囲とボス周辺の爆発を見て動く。"], tags: ["雑魚", "範囲"] },
+      { match: ["スノークローク"], hints: ["氷や雪玉などのギミックを使う場面があります。ボスだけを殴り続けない。"], tags: ["氷", "仕掛け"] },
+      { match: ["黙約"], hints: ["ドラゴンの向きと広い範囲攻撃に注意。雑魚や装置が出たらすぐ処理。"], tags: ["ブレス", "装置"] },
+      { match: ["ダスクヴィジル"], hints: ["雑魚の増援と広い床範囲に注意。初見はタンクの少し後ろを維持。"], tags: ["雑魚", "床"] },
+      { match: ["ソーム・アル"], hints: ["毒、ブレス、外周攻撃を確認。ドラゴン系は正面に立たない。"], tags: ["毒", "ブレス"] },
+      { match: ["ドラゴンズエアリー"], hints: ["竜のブレスと雑魚処理が多め。味方が集まったら同じ場所へ。"], tags: ["ブレス", "雑魚"] },
+      { match: ["教皇庁"], hints: ["連続範囲と突進を見て横へ避ける。終盤は焦らず味方と同じ方向へ。"], tags: ["突進", "連続範囲"] },
+      { match: ["グブラ"], hints: ["本や床のギミックを読むID。床の模様、球、雑魚処理を優先。"], tags: ["床", "仕掛け"] },
+      { match: ["魔科学"], hints: ["ボスごとに攻撃パターンが変わる長めのID。詠唱名と外周をよく見る。"], tags: ["詠唱", "外周"] },
+      { match: ["ネバーリープ"], hints: ["風で動かされる場面に注意。落下しない位置取りを優先。"], tags: ["風", "落下注意"] },
+      { match: ["フラクタル"], hints: ["床、線、雑魚処理が多い。見慣れない敵が出たらボスより先に処理。"], tags: ["雑魚", "線"] },
+      { match: ["モシャーヌ"], hints: ["毒、蜂、植物ギミックに注意。デバフが増えたら解除や回復を厚めに。"], tags: ["毒", "雑魚"] },
+      { match: ["逆さの塔"], hints: ["床や人形ギミックを見て動く。大きな範囲の予兆を優先。"], tags: ["床", "仕掛け"] },
+      { match: ["ソール・カイ"], hints: ["竜の向き、突進、外周に注意。飛び上がったらフィールド全体を見る。"], tags: ["突進", "外周"] },
+      { match: ["ゼルファトル"], hints: ["風と外周、雑魚の増援に注意。広い範囲は早めに横へ。"], tags: ["風", "雑魚"] },
+      { match: ["バエサル"], hints: ["直線範囲と雑魚処理を優先。魔導兵器は向きと詠唱を見る。"], tags: ["直線", "雑魚"] },
+      { match: ["セイレーン海"], hints: ["魅了や範囲に注意。味方から離れる攻撃と集まる攻撃を見分ける。"], tags: ["魅了", "散開"] },
+      { match: ["紫水宮"], hints: ["水中風の床範囲と誘惑系ギミックに注意。ボスの向きと外周を見る。"], tags: ["床", "外周"] },
+      { match: ["バルダム"], hints: ["試練フェーズは攻撃より回避。床と矢印を見て避ける練習場です。"], tags: ["回避", "試練"] },
+      { match: ["ドマ城"], hints: ["兵器の直線範囲と雑魚処理に注意。通路では前に出すぎない。"], tags: ["直線", "雑魚"] },
+      { match: ["アバニア"], hints: ["魔導兵器の範囲と外周攻撃を見る。ボスの向きが変わったら横へ。"], tags: ["兵器", "外周"] },
+      { match: ["アラミゴ"], hints: ["範囲が広いボスが多い。長い詠唱中は外周と味方の位置を確認。"], tags: ["範囲", "詠唱"] },
+      { match: ["クガネ城"], hints: ["ギミック装置や雑魚処理を優先。派手な範囲は見た目より早めに避ける。"], tags: ["装置", "雑魚"] },
+      { match: ["星導山"], hints: ["拳法系の直線・円範囲が多い。ボスの向きと足元を見る。"], tags: ["直線", "円"] },
+      { match: ["スカラ"], hints: ["変身や床ギミックに注意。見慣れないアイコンが付いたら動きを止めず確認。"], tags: ["変身", "床"] },
+      { match: ["獄之蓋"], hints: ["火山の床範囲と外周攻撃が多い。赤い予兆から早めに離れる。"], tags: ["火床", "外周"] },
+      { match: ["ガンエン"], hints: ["和風ボスの直線・扇範囲に注意。線が付いたら味方と重ねない。"], tags: ["扇", "線"] },
+      { match: ["ザ・バーン"], hints: ["乾いた床の広範囲攻撃とミストドラゴン系の隠れる処理に注意。"], tags: ["広範囲", "隠れる"] },
+      { match: ["ギムリト"], hints: ["戦場型IDで範囲が多い。味方NPCや敵の向きを見て安全側へ。"], tags: ["戦場", "範囲"] },
+      { match: ["ホルミンスター"], hints: ["罪喰いの広範囲攻撃が多い。床と詠唱を見て、戻りを急がない。"], tags: ["床", "詠唱"] },
+      { match: ["ドォーヌ・メグ"], hints: ["水路や橋などの移動ギミックに注意。ボスの演出中も足元を見る。"], tags: ["移動", "床"] },
+      { match: ["キタンナ"], hints: ["石像、光、外周攻撃を見る。隠れる/離れる場面を優先。"], tags: ["石像", "外周"] },
+      { match: ["マリカ"], hints: ["直線範囲と設置物を見て回避。ボス周辺だけでなく外周も確認。"], tags: ["直線", "設置物"] },
+      { match: ["グルグ"], hints: ["白い範囲と直線攻撃が多い。ボスの向きとフィールド端を見る。"], tags: ["直線", "外周"] },
+      { match: ["アーモロート"], hints: ["終末演出で範囲が広い。詠唱が長い時は安全地帯を先に探す。"], tags: ["広範囲", "詠唱"] },
+      { match: ["ツイニング"], hints: ["時間差範囲や直線攻撃に注意。床が出た順番を軽く覚える。"], tags: ["時間差", "直線"] },
+      { match: ["アナイダ"], hints: ["水、雷、雑魚処理など研究施設らしいギミック。床の色をよく見る。"], tags: ["床色", "雑魚"] },
+      { match: ["グラン・コスモス"], hints: ["家具や炎を使う処理があります。燃やす/隠れる対象を見落とさない。"], tags: ["家具", "炎"] },
+      { match: ["アニドラス"], hints: ["海底の広範囲攻撃と雑魚処理に注意。外周から来る攻撃方向を見る。"], tags: ["外周", "雑魚"] },
+      { match: ["ノルヴラント"], hints: ["各ロールの動きが試される総まとめ。頭割り、散開、塔を順番に見る。"], tags: ["総まとめ", "塔"] },
+      { match: ["マトーヤ"], hints: ["魔法の仕掛けと床範囲を見て動く。雑魚処理を遅らせない。"], tags: ["仕掛け", "雑魚"] },
+      { match: ["パガルザン"], hints: ["広い戦場で外周攻撃と突進が多い。安全地帯を早めに探す。"], tags: ["突進", "外周"] },
+      { match: ["リットアティン"], hints: ["現在はソロ寄りの節目戦。範囲を避けつつ、詠唱中に距離を取る。"], tags: ["節目", "範囲"] },
+      { match: ["アルテマウェポン"], hints: ["連続範囲と演出が多い。長い詠唱中はボス周囲と外周を確認。"], tags: ["連続範囲", "演出"] },
+      { match: ["ナプリアレス"], hints: ["玉や隕石処理に注意。時間停止のような場面では味方の位置を見る。"], tags: ["玉", "隕石"] },
+      { match: ["セフィロト"], hints: ["巨大化後は左右やノックバックを意識。落下しない位置取りを優先。"], tags: ["ノックバック", "落下"] },
+      { match: ["ソフィア"], hints: ["天秤で床が傾く。重さと落下方向を見て安全側へ。"], tags: ["天秤", "落下"] },
+      { match: ["ズルワーン"], hints: ["床の色分けと散開に注意。自分に付いた色やマーカーを見る。"], tags: ["床色", "散開"] },
+      { match: ["白虎"], hints: ["玉、線、落下演出に注意。外周へ飛ばされる前提で中央寄りに立つ。"], tags: ["玉", "落下"] },
+      { match: ["リオレウス"], hints: ["FF14通常戦闘と少し違い、回復薬や敵視の感覚が特殊。尻尾と突進をよく見る。"], tags: ["特殊戦闘", "突進"] },
+      { match: ["ルビーウェポン"], hints: ["広い範囲と突進、後半の形態変化に注意。床の安全地帯を優先。"], tags: ["突進", "形態変化"] },
+      { match: ["ウォーリア・オブ・ライト"], hints: ["頭割り、散開、LB風の大技が続く総まとめ。マーカーを見て即判断。"], tags: ["頭割り", "散開"] },
+      { match: ["エメラルドウェポン"], hints: ["魔導兵器の線・直線・設置範囲に注意。詠唱中に外周を見る。"], tags: ["線", "直線"] },
+      { match: ["ダイヤウェポン"], hints: ["足場移動が重要。移動できるタイミングで反対側へ渡る準備。"], tags: ["足場", "移動"] }
     ];
 
     const fallbackDuties = [
-      { id: -1, name: "天然要害 サスタシャ浸食洞", level: 15, type: "ダンジョン", image: null, sort: 1 },
-      { id: -2, name: "封鎖坑道 カッパーベル銅山", level: 17, type: "ダンジョン", image: null, sort: 3 },
-      { id: -3, name: "真イフリート討滅戦", level: 20, type: "討伐・討滅戦", image: null, sort: 1 },
-      { id: -4, name: "真タイタン討滅戦", level: 34, type: "討伐・討滅戦", image: null, sort: 2 },
-      { id: -5, name: "真ガルーダ討滅戦", level: 44, type: "討伐・討滅戦", image: null, sort: 3 },
-      { id: -6, name: "最終決戦 魔導城プラエトリウム", level: 50, type: "ダンジョン", image: null, sort: 50 },
-      { id: -7, name: "邪竜血戦 ドラゴンズエアリー", level: 55, type: "ダンジョン", image: null, sort: 55 },
-      { id: -8, name: "ナイツ・オブ・ラウンド討滅戦", level: 60, type: "討伐・討滅戦", image: null, sort: 60 },
-      { id: -9, name: "スサノオ討滅戦", level: 63, type: "討伐・討滅戦", image: null, sort: 63 },
-      { id: -10, name: "ティターニア討滅戦", level: 73, type: "討伐・討滅戦", image: null, sort: 73 },
-      { id: -11, name: "ハーデス討滅戦", level: 80, type: "討伐・討滅戦", image: null, sort: 80 }
+      { id: -101, name: "天然要害 サスタシャ浸食洞", level: 15, type: "ダンジョン", image: null, sort: 101 },
+      { id: -102, name: "地下霊殿 タムタラの墓所", level: 16, type: "ダンジョン", image: null, sort: 102 },
+      { id: -103, name: "封鎖坑道 カッパーベル銅山", level: 17, type: "ダンジョン", image: null, sort: 103 },
+      { id: -104, name: "魔獣領域 ハラタリ修練所", level: 20, type: "ダンジョン", image: null, sort: 104 },
+      { id: -105, name: "監獄廃墟 トトラクの千獄", level: 24, type: "ダンジョン", image: null, sort: 105 },
+      { id: -106, name: "名門屋敷 ハウケタ御用邸", level: 28, type: "ダンジョン", image: null, sort: 106 },
+      { id: -107, name: "奪還支援 ブレイフロクスの野営地", level: 32, type: "ダンジョン", image: null, sort: 107 },
+      { id: -108, name: "遺跡探索 カルン埋没寺院", level: 35, type: "ダンジョン", image: null, sort: 108 },
+      { id: -109, name: "流砂迷宮 カッターズクライ", level: 38, type: "ダンジョン", image: null, sort: 109 },
+      { id: -110, name: "城塞攻略 ストーンヴィジル", level: 41, type: "ダンジョン", image: null, sort: 110 },
+      { id: -111, name: "掃討作戦 ゼーメル要塞", level: 44, type: "ダンジョン", image: null, sort: 111 },
+      { id: -112, name: "霧中行軍 オーラムヴェイル", level: 47, type: "ダンジョン", image: null, sort: 112 },
+      { id: -113, name: "旅神聖域 ワンダラーパレス", level: 50, type: "ダンジョン", image: null, sort: 113 },
+      { id: -114, name: "外郭攻略 カストルム・メリディアヌム", level: 50, type: "ダンジョン", image: null, sort: 114 },
+      { id: -115, name: "最終決戦 魔導城プラエトリウム", level: 50, type: "ダンジョン", image: null, sort: 115 },
+      { id: -116, name: "邪教排撃 古城アムダプール", level: 50, type: "ダンジョン", image: null, sort: 116 },
+      { id: -117, name: "怪鳥巨塔 シリウス大灯台", level: 50, type: "ダンジョン", image: null, sort: 117 },
+      { id: -118, name: "騒乱坑道 カッパーベル銅山", level: 50, type: "ダンジョン", image: null, sort: 118 },
+      { id: -119, name: "妖異屋敷 ハウケタ御用邸", level: 50, type: "ダンジョン", image: null, sort: 119 },
+      { id: -120, name: "腐敗遺跡 古アムダプール市街", level: 50, type: "ダンジョン", image: null, sort: 120 },
+      { id: -121, name: "剣闘領域 ハラタリ修練所", level: 50, type: "ダンジョン", image: null, sort: 121 },
+      { id: -122, name: "財宝伝説 ハルブレーカー・アイル", level: 50, type: "ダンジョン", image: null, sort: 122 },
+      { id: -123, name: "惨劇霊殿 タムタラの墓所", level: 50, type: "ダンジョン", image: null, sort: 123 },
+      { id: -124, name: "城塞奪回 ストーンヴィジル", level: 50, type: "ダンジョン", image: null, sort: 124 },
+      { id: -125, name: "氷結潜窟 スノークローク大氷壁", level: 50, type: "ダンジョン", image: null, sort: 125 },
+      { id: -126, name: "逆襲要害 サスタシャ浸食洞", level: 50, type: "ダンジョン", image: null, sort: 126 },
+      { id: -127, name: "遺跡救援 カルン埋没寺院", level: 50, type: "ダンジョン", image: null, sort: 127 },
+      { id: -128, name: "幻龍残骸 黙約の塔", level: 50, type: "ダンジョン", image: null, sort: 128 },
+      { id: -129, name: "武装聖域 ワンダラーパレス", level: 50, type: "ダンジョン", image: null, sort: 129 },
+      { id: -130, name: "邪念排撃 古城アムダプール", level: 50, type: "ダンジョン", image: null, sort: 130 },
+      { id: -201, name: "廃砦捜索 ダスクヴィジル", level: 51, type: "ダンジョン", image: null, sort: 201 },
+      { id: -202, name: "霊峰踏破 ソーム・アル", level: 53, type: "ダンジョン", image: null, sort: 202 },
+      { id: -203, name: "邪竜血戦 ドラゴンズエアリー", level: 55, type: "ダンジョン", image: null, sort: 203 },
+      { id: -204, name: "強硬突入 イシュガルド教皇庁", level: 57, type: "ダンジョン", image: null, sort: 204 },
+      { id: -205, name: "禁書回収 グブラ幻想図書館", level: 59, type: "ダンジョン", image: null, sort: 205 },
+      { id: -206, name: "蒼天聖戦 魔科学研究所", level: 60, type: "ダンジョン", image: null, sort: 206 },
+      { id: -207, name: "神域浮島 ネバーリープ", level: 60, type: "ダンジョン", image: null, sort: 207 },
+      { id: -208, name: "博物戦艦 フラクタル・コンティニアム", level: 60, type: "ダンジョン", image: null, sort: 208 },
+      { id: -209, name: "草木庭園 聖モシャーヌ植物園", level: 60, type: "ダンジョン", image: null, sort: 209 },
+      { id: -210, name: "制圧巨塔 シリウス大灯台", level: 60, type: "ダンジョン", image: null, sort: 210 },
+      { id: -211, name: "星海観測 逆さの塔", level: 60, type: "ダンジョン", image: null, sort: 211 },
+      { id: -212, name: "神聖遺跡 古アムダプール市街", level: 60, type: "ダンジョン", image: null, sort: 212 },
+      { id: -213, name: "天竜宮殿 ソール・カイ", level: 60, type: "ダンジョン", image: null, sort: 213 },
+      { id: -214, name: "黒渦伝説 ハルブレーカー・アイル", level: 60, type: "ダンジョン", image: null, sort: 214 },
+      { id: -215, name: "峻厳渓谷 ゼルファトル", level: 60, type: "ダンジョン", image: null, sort: 215 },
+      { id: -216, name: "稀書回収 グブラ幻想図書館", level: 60, type: "ダンジョン", image: null, sort: 216 },
+      { id: -217, name: "巨大防壁 バエサルの長城", level: 60, type: "ダンジョン", image: null, sort: 217 },
+      { id: -218, name: "霊峰浄化 ソーム・アル", level: 60, type: "ダンジョン", image: null, sort: 218 },
+      { id: -301, name: "漂流海域 セイレーン海", level: 61, type: "ダンジョン", image: null, sort: 301 },
+      { id: -302, name: "海底宮殿 紫水宮", level: 63, type: "ダンジョン", image: null, sort: 302 },
+      { id: -303, name: "伝統試練 バルダム覇道", level: 65, type: "ダンジョン", image: null, sort: 303 },
+      { id: -304, name: "解放決戦 ドマ城", level: 67, type: "ダンジョン", image: null, sort: 304 },
+      { id: -305, name: "巨砲要塞 カストルム・アバニア", level: 69, type: "ダンジョン", image: null, sort: 305 },
+      { id: -306, name: "紅蓮決戦 アラミゴ", level: 70, type: "ダンジョン", image: null, sort: 306 },
+      { id: -307, name: "悪党成敗 クガネ城", level: 70, type: "ダンジョン", image: null, sort: 307 },
+      { id: -308, name: "壊神修行 星導山寺院", level: 70, type: "ダンジョン", image: null, sort: 308 },
+      { id: -309, name: "水没遺構 スカラ", level: 70, type: "ダンジョン", image: null, sort: 309 },
+      { id: -310, name: "紅玉火山 獄之蓋", level: 70, type: "ダンジョン", image: null, sort: 310 },
+      { id: -311, name: "暴走戦艦 フラクタル・コンティニアム", level: 70, type: "ダンジョン", image: null, sort: 311 },
+      { id: -312, name: "風水霊殿 ガンエン廟", level: 70, type: "ダンジョン", image: null, sort: 312 },
+      { id: -313, name: "永久焦土 ザ・バーン", level: 70, type: "ダンジョン", image: null, sort: 313 },
+      { id: -314, name: "草木汚染 聖モシャーヌ植物園", level: 70, type: "ダンジョン", image: null, sort: 314 },
+      { id: -315, name: "境界戦線 ギムリトダーク", level: 70, type: "ダンジョン", image: null, sort: 315 },
+      { id: -401, name: "殺戮郷村 ホルミンスター", level: 71, type: "ダンジョン", image: null, sort: 401 },
+      { id: -402, name: "水妖幻園 ドォーヌ・メグ", level: 73, type: "ダンジョン", image: null, sort: 402 },
+      { id: -403, name: "古跡探索 キタンナ神影洞", level: 75, type: "ダンジョン", image: null, sort: 403 },
+      { id: -404, name: "爽涼離宮 マリカの大井戸", level: 77, type: "ダンジョン", image: null, sort: 404 },
+      { id: -405, name: "偽造天界 グルグ火山", level: 79, type: "ダンジョン", image: null, sort: 405 },
+      { id: -406, name: "終末幻想 アーモロート", level: 80, type: "ダンジョン", image: null, sort: 406 },
+      { id: -407, name: "異界遺構 シルクス・ツイニング", level: 80, type: "ダンジョン", image: null, sort: 407 },
+      { id: -408, name: "創造機関 アナイダアカデミア", level: 80, type: "ダンジョン", image: null, sort: 408 },
+      { id: -409, name: "魔法宮殿 グラン・コスモス", level: 80, type: "ダンジョン", image: null, sort: 409 },
+      { id: -410, name: "黒風海底 アニドラス・アナムネーシス", level: 80, type: "ダンジョン", image: null, sort: 410 },
+      { id: -411, name: "漆黒決戦 ノルヴラント", level: 80, type: "ダンジョン", image: null, sort: 411 },
+      { id: -412, name: "魔術工房 マトーヤのアトリエ", level: 80, type: "ダンジョン", image: null, sort: 412 },
+      { id: -413, name: "黄金平原 パガルザン", level: 80, type: "ダンジョン", image: null, sort: 413 },
+      { id: -501, name: "イフリート討伐戦", level: 20, type: "討伐・討滅戦", image: null, sort: 501 },
+      { id: -502, name: "タイタン討伐戦", level: 34, type: "討伐・討滅戦", image: null, sort: 502 },
+      { id: -503, name: "ガルーダ討伐戦", level: 44, type: "討伐・討滅戦", image: null, sort: 503 },
+      { id: -504, name: "リットアティン強襲戦", level: 50, type: "討伐・討滅戦", image: null, sort: 504 },
+      { id: -505, name: "真イフリート討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 505 },
+      { id: -506, name: "真ガルーダ討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 506 },
+      { id: -507, name: "真タイタン討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 507 },
+      { id: -508, name: "究極幻想 アルテマウェポン破壊作戦", level: 50, type: "討伐・討滅戦", image: null, sort: 508 },
+      { id: -509, name: "善王モグル・モグXII世討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 509 },
+      { id: -510, name: "真リヴァイアサン討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 510 },
+      { id: -511, name: "真ラムウ討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 511 },
+      { id: -512, name: "真シヴァ討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 512 },
+      { id: -513, name: "アシエン・ナプリアレス討伐戦", level: 50, type: "討伐・討滅戦", image: null, sort: 513 },
+      { id: -514, name: "皇都イシュガルド防衛戦", level: 50, type: "討伐・討滅戦", image: null, sort: 514 },
+      { id: -515, name: "極イフリート討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 515 },
+      { id: -516, name: "極ガルーダ討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 516 },
+      { id: -517, name: "極タイタン討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 517 },
+      { id: -518, name: "極王モグル・モグXII世討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 518 },
+      { id: -519, name: "極リヴァイアサン討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 519 },
+      { id: -520, name: "極ラムウ討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 520 },
+      { id: -521, name: "極シヴァ討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 521 },
+      { id: -601, name: "真ラーヴァナ討滅戦", level: 53, type: "討伐・討滅戦", image: null, sort: 601 },
+      { id: -602, name: "真ビスマルク討滅戦", level: 57, type: "討伐・討滅戦", image: null, sort: 602 },
+      { id: -603, name: "ナイツ・オブ・ラウンド討滅戦", level: 60, type: "討伐・討滅戦", image: null, sort: 603 },
+      { id: -604, name: "ニーズヘッグ征竜戦", level: 60, type: "討伐・討滅戦", image: null, sort: 604 },
+      { id: -605, name: "魔神セフィロト討滅戦", level: 60, type: "討伐・討滅戦", image: null, sort: 605 },
+      { id: -606, name: "女神ソフィア討滅戦", level: 60, type: "討伐・討滅戦", image: null, sort: 606 },
+      { id: -607, name: "鬼神ズルワーン討滅戦", level: 60, type: "討伐・討滅戦", image: null, sort: 607 },
+      { id: -608, name: "極ラーヴァナ討滅戦", level: 60, type: "討伐・討滅戦", image: null, sort: 608 },
+      { id: -609, name: "極ビスマルク討滅戦", level: 60, type: "討伐・討滅戦", image: null, sort: 609 },
+      { id: -610, name: "蒼天幻想 ナイツ・オブ・ラウンド討滅戦", level: 60, type: "討伐・討滅戦", image: null, sort: 610 },
+      { id: -611, name: "極ニーズヘッグ征竜戦", level: 60, type: "討伐・討滅戦", image: null, sort: 611 },
+      { id: -612, name: "極魔神セフィロト討滅戦", level: 60, type: "討伐・討滅戦", image: null, sort: 612 },
+      { id: -613, name: "極女神ソフィア討滅戦", level: 60, type: "討伐・討滅戦", image: null, sort: 613 },
+      { id: -614, name: "極鬼神ズルワーン討滅戦", level: 60, type: "討伐・討滅戦", image: null, sort: 614 },
+      { id: -701, name: "スサノオ討滅戦", level: 63, type: "討伐・討滅戦", image: null, sort: 701 },
+      { id: -702, name: "ラクシュミ討滅戦", level: 67, type: "討伐・討滅戦", image: null, sort: 702 },
+      { id: -703, name: "神龍討滅戦", level: 70, type: "討伐・討滅戦", image: null, sort: 703 },
+      { id: -704, name: "白虎征魂戦", level: 70, type: "討伐・討滅戦", image: null, sort: 704 },
+      { id: -705, name: "ツクヨミ討滅戦", level: 70, type: "討伐・討滅戦", image: null, sort: 705 },
+      { id: -706, name: "朱雀征魂戦", level: 70, type: "討伐・討滅戦", image: null, sort: 706 },
+      { id: -707, name: "青龍征魂戦", level: 70, type: "討伐・討滅戦", image: null, sort: 707 },
+      { id: -708, name: "リオレウス狩猟戦", level: 70, type: "討伐・討滅戦", image: null, sort: 708 },
+      { id: -709, name: "極スサノオ討滅戦", level: 70, type: "討伐・討滅戦", image: null, sort: 709 },
+      { id: -710, name: "極ラクシュミ討滅戦", level: 70, type: "討伐・討滅戦", image: null, sort: 710 },
+      { id: -711, name: "極神龍討滅戦", level: 70, type: "討伐・討滅戦", image: null, sort: 711 },
+      { id: -712, name: "極白虎征魂戦", level: 70, type: "討伐・討滅戦", image: null, sort: 712 },
+      { id: -713, name: "極ツクヨミ討滅戦", level: 70, type: "討伐・討滅戦", image: null, sort: 713 },
+      { id: -714, name: "極朱雀征魂戦", level: 70, type: "討伐・討滅戦", image: null, sort: 714 },
+      { id: -715, name: "極青龍征魂戦", level: 70, type: "討伐・討滅戦", image: null, sort: 715 },
+      { id: -716, name: "極リオレウス狩猟戦", level: 70, type: "討伐・討滅戦", image: null, sort: 716 },
+      { id: -801, name: "ティターニア討滅戦", level: 73, type: "討伐・討滅戦", image: null, sort: 801 },
+      { id: -802, name: "イノセンス討滅戦", level: 79, type: "討伐・討滅戦", image: null, sort: 802 },
+      { id: -803, name: "ハーデス討滅戦", level: 80, type: "討伐・討滅戦", image: null, sort: 803 },
+      { id: -804, name: "ルビーウェポン破壊作戦", level: 80, type: "討伐・討滅戦", image: null, sort: 804 },
+      { id: -805, name: "ウォーリア・オブ・ライト討滅戦", level: 80, type: "討伐・討滅戦", image: null, sort: 805 },
+      { id: -806, name: "エメラルドウェポン破壊作戦", level: 80, type: "討伐・討滅戦", image: null, sort: 806 },
+      { id: -807, name: "ダイヤウェポン捕獲作戦", level: 80, type: "討伐・討滅戦", image: null, sort: 807 },
+      { id: -808, name: "極ティターニア討滅戦", level: 80, type: "討伐・討滅戦", image: null, sort: 808 },
+      { id: -809, name: "極イノセンス討滅戦", level: 80, type: "討伐・討滅戦", image: null, sort: 809 },
+      { id: -810, name: "極ハーデス討滅戦", level: 80, type: "討伐・討滅戦", image: null, sort: 810 },
+      { id: -811, name: "極ルビーウェポン破壊作戦", level: 80, type: "討伐・討滅戦", image: null, sort: 811 },
+      { id: -812, name: "極ウォーリア・オブ・ライト討滅戦", level: 80, type: "討伐・討滅戦", image: null, sort: 812 },
+      { id: -813, name: "極エメラルドウェポン破壊作戦", level: 80, type: "討伐・討滅戦", image: null, sort: 813 },
+      { id: -814, name: "極ダイヤウェポン捕獲作戦", level: 80, type: "討伐・討滅戦", image: null, sort: 814 }
     ];
 
     const featureTabs = document.querySelectorAll(".feature-tab");
@@ -2616,6 +3143,11 @@
     const gearSummary = document.getElementById("gearSummary");
     const gearList = document.getElementById("gearList");
     const nextBoard = document.getElementById("nextBoard");
+    const shoppingBoard = document.getElementById("shoppingBoard");
+    const shoppingSummary = document.getElementById("shoppingSummary");
+    const poeticsInput = document.getElementById("poeticsInput");
+    const routeBoard = document.getElementById("routeBoard");
+    const rewardBoard = document.getElementById("rewardBoard");
     const dutyType = document.getElementById("dutyType");
     const dutySearch = document.getElementById("dutySearch");
     const dutySelect = document.getElementById("dutySelect");
@@ -2627,6 +3159,9 @@
     const characterCard = document.getElementById("characterCard");
     let activeResourceCategory = "all";
     const pageParams = new URLSearchParams(window.location.search);
+    const PROFILE_STORAGE_KEY = "ff14-guide-profile-v1";
+    const CHECK_STORAGE_KEY = "ff14-guide-checks-v1";
+    let savedChecks = {};
     let duties = [];
     let actionIconOverrides = {};
     let itemIconOverrides = {};
@@ -2647,6 +3182,8 @@
     gearJob.innerHTML = gearJobs.map((job) => `
       <option value="${job.id}" ${job.id === "SMN" ? "selected" : ""}>${job.label}</option>
     `).join("");
+    loadSavedProfile();
+    loadGuideChecks();
     if (gearJobs.some((job) => job.id === pageParams.get("job"))) {
       gearJob.value = pageParams.get("job");
     }
@@ -2804,6 +3341,61 @@
       return url
         ? `<img class="${className}" src="${url}" alt="${alt}">`
         : `<div class="${className}" aria-hidden="true"></div>`;
+    }
+
+    function loadSavedProfile() {
+      try {
+        const data = JSON.parse(localStorage.getItem(PROFILE_STORAGE_KEY) || "{}");
+        if (gearJobs.some((job) => job.id === data.job)) {
+          gearJob.value = data.job;
+        }
+        if (data.level) {
+          gearLevel.value = Math.min(80, Math.max(1, Number(data.level) || 80));
+        }
+        if (storyStages[data.story]) {
+          storyStage.value = data.story;
+        }
+        if (data.poetics !== undefined) {
+          poeticsInput.value = Math.min(2000, Math.max(0, Number(data.poetics) || 0));
+        }
+      } catch (error) {
+        poeticsInput.value = 0;
+      }
+    }
+
+    function saveProfile() {
+      const data = {
+        job: gearJob.value,
+        level: Math.min(80, Math.max(1, Number(gearLevel.value) || 1)),
+        story: storyStage.value,
+        poetics: Math.min(2000, Math.max(0, Number(poeticsInput.value) || 0))
+      };
+      localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function loadGuideChecks() {
+      try {
+        savedChecks = JSON.parse(localStorage.getItem(CHECK_STORAGE_KEY) || "{}");
+      } catch (error) {
+        savedChecks = {};
+      }
+    }
+
+    function saveGuideChecks() {
+      localStorage.setItem(CHECK_STORAGE_KEY, JSON.stringify(savedChecks));
+    }
+
+    function isChecked(key) {
+      return Boolean(savedChecks[key]);
+    }
+
+    function checkControl(key, label = "できた") {
+      return `
+        <label class="saved-check">
+          <input type="checkbox" data-check-key="${key}" ${isChecked(key) ? "checked" : ""}>
+          <span>${label}</span>
+        </label>
+      `;
     }
 
     function selectedRotationJob() {
@@ -3143,9 +3735,13 @@
 
     async function renderGoalCard(goal, level, extra = "") {
       const state = goalState(goal, level);
-      const iconUrl = goal.actionIcon
-        ? actions[goal.actionIcon]?.icon
-        : await fetchItemIconByName(goal.iconName);
+      let iconUrl = goal.actionIcon ? actions[goal.actionIcon]?.icon : "";
+      if (!iconUrl && goal.actionName) {
+        iconUrl = await fetchActionIconByName(goal.actionName);
+      }
+      if (!iconUrl) {
+        iconUrl = await fetchItemIconByName(goal.iconName || "ソウルクリスタル");
+      }
       return `
         <div class="next-card">
           ${iconBox(iconUrl, goal.title)}
@@ -3161,6 +3757,179 @@
           </div>
         </div>
       `;
+    }
+
+    function currentJobAndLevel() {
+      const job = gearJobs.find((item) => item.id === gearJob.value) || gearJobs.find((item) => item.id === "SMN");
+      const level = Math.min(80, Math.max(1, Number(gearLevel.value) || 1));
+      return { job, level };
+    }
+
+    function nextUnlockGoal(level) {
+      return unlockGoals
+        .filter((goal) => goal.level >= level && storyRank() >= Math.min(storyStages[goal.story]?.rank || 1, storyRank() + 1))
+        .sort((a, b) => a.level - b.level)[0]
+        || unlockGoals.filter((goal) => goal.level >= level).sort((a, b) => a.level - b.level)[0]
+        || unlockGoals[unlockGoals.length - 1];
+    }
+
+    function buildTodayTasks(job, level) {
+      const tasks = [];
+      const tier = getGearTier(level);
+      const nextTier = tier
+        ? gearTiers.filter((item) => item.min > tier.min).sort((a, b) => a.min - b.min)[0]
+        : gearTiers[gearTiers.length - 1];
+      if (level < 15) {
+        tasks.push({ level: 15, title: "まずLv15へ進める", category: "今日", iconName: "ビギナーリング", story: "airship", detail: "初心者の館と初IDが見える節目です。メインとクラスクエストを優先。", action: "今の街のメインクエストを1つ進める。" });
+      } else if (level < 30) {
+        tasks.push({ level: 15, title: "初心者の館を終わらせる", category: "今日", iconName: "ビギナーリング", story: "airship", detail: "ビギナー装備とビギナーリングでLv30まで快適になります。", action: "冒険者指導教官からロール訓練へ。" });
+      } else if (level < 50) {
+        tasks.push({ level: level, title: "ジョブクエスト確認", category: "今日", iconName: "ソウルクリスタル", story: "airship", detail: "Lv30以降はジョブクエストで重要アクションや装備が増えます。", action: "受注中/未受注のジョブクエストを確認。" });
+      } else {
+        tasks.push({ level: tier?.min || 50, title: "詩学装備を1部位進める", category: "今日", iconName: "アラガントームストーン:詩学", story: storyStage.value, detail: "武器、胴、脚から更新すると強さを感じやすいです。", action: "所持詩学を見て買い物タブでチェック。" });
+      }
+      tasks.push(nextJobGoal(job, level));
+      const unlock = nextUnlockGoal(level);
+      if (unlock) {
+        tasks.push(unlock);
+      } else if (nextTier) {
+        tasks.push({ level: nextTier.min, title: `${nextTier.label}の準備`, category: "装備", iconName: "アラガントームストーン:詩学", story: nextTier.min === 50 ? "arr" : nextTier.min === 60 ? "hw" : nextTier.min === 70 ? "sb" : "shb", detail: nextTier.vendor, action: `あと${Math.max(0, nextTier.min - level)}Lv。詩学を少し貯めておく。` });
+      }
+      return tasks.filter((task, index, array) => array.findIndex((item) => item.title === task.title) === index).slice(0, 3);
+    }
+
+    function jobFunMoment(job, level) {
+      const moments = jobFunMoments[job.id] || [];
+      return moments.find((item) => item.level >= level) || moments[moments.length - 1] || {
+        level,
+        title: `${job.label}の次の気持ちいい節目`,
+        actionName: "",
+        detail: "次のスキルや装備更新を楽しみに、今日の1コンテンツだけ進めればOKです。"
+      };
+    }
+
+    async function renderCheckableGoal(goal, level, prefix) {
+      return (await renderGoalCard(goal, level, checkControl(`${prefix}:${goal.title}:${goal.level}`, "今日できた")));
+    }
+
+    function shoppingTierForLevel(level) {
+      return getGearTier(level) || gearTiers[gearTiers.length - 1];
+    }
+
+    function shoppingItems(job, level) {
+      const tier = shoppingTierForLevel(level);
+      const catalogItems = catalogGearItems(job, tier);
+      const priorityFields = ["MainHand", "OffHand", "Body", "Legs", "Head", "Gloves", "Feet", "Ears", "Neck", "Wrists", "FingerL"];
+      const costs = { MainHand: 600, OffHand: 200, Body: 510, Legs: 510, Head: 345, Gloves: 345, Feet: 345, Ears: 280, Neck: 280, Wrists: 280, FingerL: 280 };
+      if (catalogItems) {
+        return priorityFields
+          .map((field) => catalogItems.find((item) => item.slot === field))
+          .filter(Boolean)
+          .map((item) => ({ title: `${slotLabelByField(item.slot)}: ${item.name}`, iconUrl: item.icon, cost: costs[item.slot] || 280, text: `${tier.label} IL${tier.ilvl}。${gearPriorityText(item.slot)}`, href: item.href, key: `${job.id}:${tier.min}:${item.slot}` }));
+      }
+      return priorityFields
+        .map((field) => gearSlots.find((slot) => slot.field === field))
+        .filter((slot) => slot && (!slot.jobs || slot.jobs.includes(job.id)))
+        .map((slot) => ({ title: staticGearTitle(tier, job, slot), iconName: "アラガントームストーン:詩学", cost: costs[slot.field] || 280, text: `${tier.vendor} ${gearPriorityText(slot.field)}`, href: officialItemSearch(`${tier.label} ${job.label} ${slot.label}`), key: `${job.id}:${tier.min}:${slot.field}` }));
+    }
+
+    async function renderShoppingList() {
+      const { job, level } = currentJobAndLevel();
+      await iconDataReady;
+      const tier = shoppingTierForLevel(level);
+      const poetics = Math.min(2000, Math.max(0, Number(poeticsInput.value) || 0));
+      poeticsInput.value = poetics;
+      const items = shoppingItems(job, level);
+      const firstUnchecked = items.find((item) => !isChecked(`shopping:${item.key}`));
+      shoppingSummary.textContent = firstUnchecked
+        ? `次は「${firstUnchecked.title}」。目安${firstUnchecked.cost}詩学、今は${poetics}。${poetics >= firstUnchecked.cost ? "今日買えます。" : `あと${firstUnchecked.cost - poetics}詩学です。`}`
+        : `${tier.label}の主要部位はチェック済み。次は見た目や未解放コンテンツへ。`;
+      const cards = await Promise.all(items.map(async (item, index) => {
+        const iconUrl = item.iconUrl || await fetchItemIconByName(item.iconName);
+        return `
+          <div class="next-card">
+            ${iconBox(iconUrl, item.title)}
+            <div>
+              <h3>${index + 1}. ${item.title}</h3>
+              <p>${item.text}<br>目安: ${item.cost}詩学</p>
+              <div class="gear-links">
+                <a href="${item.href}" target="_blank" rel="noreferrer noopener">公式DB</a>
+              </div>
+              ${checkControl(`shopping:${item.key}`, "交換した")}
+            </div>
+          </div>
+        `;
+      }));
+      shoppingBoard.innerHTML = `<div class="next-section-title">交換優先順</div>${cards.join("")}`;
+    }
+
+    async function renderNavigationGuide() {
+      const { level } = currentJobAndLevel();
+      const rank = storyRank();
+      const routes = routeGuides
+        .filter((route) => route.level <= level + 10 && storyStages[route.story].rank <= rank + 1)
+        .sort((a, b) => {
+          const aDone = level >= a.level && rank >= storyStages[a.story].rank;
+          const bDone = level >= b.level && rank >= storyStages[b.story].rank;
+          if (aDone !== bDone) {
+            return Number(aDone) - Number(bDone);
+          }
+          return aDone ? b.level - a.level : a.level - b.level;
+        })
+        .slice(0, 8);
+      const cards = await Promise.all(routes.map(async (route) => {
+        const iconUrl = await fetchItemIconByName(route.iconName);
+        const state = goalState(route, level);
+        return `
+          <div class="next-card">
+            ${iconBox(iconUrl, route.title)}
+            <div>
+              <h3>${route.title}</h3>
+              <p>${route.detail}</p>
+              ${route.steps.map((step, index) => `<div class="route-step"><span>${index + 1}</span><div>${step}</div></div>`).join("")}
+              <div class="next-meta">
+                <span class="next-pill ${state.className}">${state.label}</span>
+                <span class="next-pill">Lv${route.level}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }));
+      routeBoard.innerHTML = cards.join("");
+    }
+
+    async function renderRewardsGallery() {
+      const { level } = currentJobAndLevel();
+      const rank = storyRank();
+      const rewards = rewardGoals
+        .filter((reward) => reward.level <= level + 20 && storyStages[reward.story].rank <= rank + 1)
+        .sort((a, b) => {
+          const aReady = level >= a.level && rank >= storyStages[a.story].rank;
+          const bReady = level >= b.level && rank >= storyStages[b.story].rank;
+          return Number(bReady) - Number(aReady) || a.level - b.level;
+        })
+        .slice(0, 9);
+      const cards = await Promise.all(rewards.map(async (reward) => {
+        const state = goalState(reward, level);
+        const iconUrl = await fetchItemIconByName(reward.iconName);
+        return `
+          <div class="next-card">
+            ${iconBox(iconUrl, reward.title)}
+            <div>
+              <h3>${reward.title}</h3>
+              <p>${reward.detail}</p>
+              <p>${reward.action}</p>
+              <div class="next-meta">
+                <span class="next-pill ${state.className}">${state.label}</span>
+                <span class="next-pill">${reward.category}</span>
+                <span class="next-pill">Lv${reward.level}</span>
+              </div>
+              ${checkControl(`reward:${reward.title}:${reward.level}`, "集めたい")}
+            </div>
+          </div>
+        `;
+      }));
+      rewardBoard.innerHTML = cards.join("");
     }
 
     async function renderNextPlanner(job, level) {
@@ -3210,6 +3979,18 @@
       const uniqueGoals = goals.filter((goal, index, array) => (
         array.findIndex((item) => item.title === goal.title && item.level === goal.level) === index
       )).slice(0, 8);
+      const todayTasks = buildTodayTasks(job, level);
+      const fun = jobFunMoment(job, level);
+      const funGoal = {
+        level: fun.level,
+        title: fun.title,
+        category: "気持ちいい",
+        actionName: fun.actionName,
+        iconName: "ソウルクリスタル",
+        story: "airship",
+        detail: fun.detail,
+        action: fun.level > level ? `あと${fun.level - level}Lvで触れます。` : "今のレベルで楽しめます。"
+      };
 
       const intro = `
         <div class="next-card">
@@ -3225,7 +4006,17 @@
         </div>
       `;
 
-      nextBoard.innerHTML = intro + (await Promise.all(uniqueGoals.map((goal) => renderGoalCard(goal, level)))).join("");
+      const todayCards = await Promise.all(todayTasks.map((goal) => renderCheckableGoal(goal, level, "today")));
+      const nextCards = await Promise.all(uniqueGoals.map((goal) => renderGoalCard(goal, level)));
+      nextBoard.innerHTML = `
+        ${intro}
+        <div class="next-section-title">今日やることはこの3つ</div>
+        ${todayCards.join("")}
+        <div class="next-section-title">あと少しで解放</div>
+        ${nextCards.join("")}
+        <div class="next-section-title">ジョブの気持ちいい瞬間</div>
+        ${await renderGoalCard(funGoal, level, checkControl(`fun:${job.id}:${fun.level}`, "楽しみにする"))}
+      `;
     }
 
     async function loadDuties() {
@@ -3241,7 +4032,7 @@
         const matchType = type === "all" || duty.type === type;
         const matchQuery = !query || duty.name.includes(query) || String(duty.level) === query;
         return matchType && matchQuery;
-      });
+      }).sort((a, b) => (a.sort || a.level) - (b.sort || b.level) || a.name.localeCompare(b.name, "ja"));
     }
 
     function renderDutyOptions() {
@@ -3296,12 +4087,17 @@
         dutySelect.value = duty.id;
       }
       const imageUrl = "";
+      const specificHints = dutySpecificHints(duty);
+      const preview = [...specificHints, ...universalMechanics].slice(0, 3);
       dutySummary.innerHTML = `
         <h3>Lv${duty.level} ${duty.name}</h3>
-        <p>${duty.type} / 必要IL ${duty.itemLevel || "なし"}。初見では「床を見る」「味方と同じ方向へ避ける」「長い詠唱中に外周と遮蔽物を見る」の3つでかなり安定します。</p>
+        <p>${duty.type} / 必要IL ${duty.itemLevel || "なし"}。初見30秒予習は下の3つだけ先に見ればOKです。</p>
+        <div class="next-meta">
+          ${preview.map((hint) => `<span class="next-pill hot">${hint.title}</span>`).join("")}
+        </div>
         ${imageUrl ? `<div class="character-preview"><img src="${imageUrl}" alt="${duty.name}"><p>下のカードは、このコンテンツで特に見たい動きと、全ID/討滅戦で使う避け方辞書です。</p></div>` : ""}
       `;
-      renderMechanicCards([...dutySpecificHints(duty), ...universalMechanics]);
+      renderMechanicCards([...specificHints, ...universalMechanics]);
     }
 
     function saveCharacter() {
@@ -3451,9 +4247,13 @@
     }
 
     function refreshAll() {
+      saveProfile();
       updateStoryVisual();
       renderGearFinder();
       renderCockpit();
+      renderShoppingList();
+      renderNavigationGuide();
+      renderRewardsGallery();
     }
 
     featureTabs.forEach((tab) => {
@@ -3487,6 +4287,19 @@
     gearJob.addEventListener("change", refreshAll);
     gearLevel.addEventListener("change", refreshAll);
     storyStage.addEventListener("change", refreshAll);
+    poeticsInput.addEventListener("input", () => {
+      saveProfile();
+      renderShoppingList();
+    });
+    document.addEventListener("change", (event) => {
+      const check = event.target.closest("[data-check-key]");
+      if (!check) {
+        return;
+      }
+      savedChecks[check.dataset.checkKey] = check.checked;
+      saveGuideChecks();
+      renderShoppingList();
+    });
     dutyType.addEventListener("change", () => {
       renderDutyOptions();
       renderDutyGuide();
@@ -3502,6 +4315,9 @@
     renderCockpit();
     renderResources();
     renderGearFinder();
+    renderShoppingList();
+    renderNavigationGuide();
+    renderRewardsGallery();
     loadDuties();
     loadCharacter();
 

@@ -1,0 +1,86 @@
+{
+  "SMN": {
+    "50": [
+      {
+        "slot": "MainHand",
+        "name": "ガーロンド・マジテックグリモアRE",
+        "icon": "https://lds-img.finalfantasyxiv.com/itemicon/2c/2cd3f0ef35b3b02b09cfb9cd9ecd00d257fef830.png?n7.5",
+        "href": "https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/041eef4590b/",
+        "itemLevel": 130,
+        "equipLevel": 50
+      },
+      {
+        "slot": "Head",
+        "name": "ガーロンド・キャスターフードRE",
+        "icon": "https://lds-img.finalfantasyxiv.com/itemicon/70/7073ad965696df6b656de88a35f34684a0c5b1af.png?n7.5",
+        "href": "https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/66dd70a6506/",
+        "itemLevel": 130,
+        "equipLevel": 50
+      },
+      {
+        "slot": "Body",
+        "name": "ガーロンド・キャスターダブレットRE",
+        "icon": "https://lds-img.finalfantasyxiv.com/itemicon/83/833405a85f1237910fd7af60db2e888f7f447c05.png?n7.5",
+        "href": "https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/2d842825597/",
+        "itemLevel": 130,
+        "equipLevel": 50
+      },
+      {
+        "slot": "Gloves",
+        "name": "ガーロンド・キャスターグローブRE",
+        "icon": "https://lds-img.finalfantasyxiv.com/itemicon/86/86da4d50a0a6e3cc5f172701b7e186f8e089be98.png?n7.5",
+        "href": "https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/d4ef4b13d18/",
+        "itemLevel": 130,
+        "equipLevel": 50
+      },
+      {
+        "slot": "Legs",
+        "name": "ガーロンド・キャスターブリーチRE",
+        "icon": "https://lds-img.finalfantasyxiv.com/itemicon/83/831628ac8d56dfd5cffecd52e54aa42803b3b616.png?n7.5",
+        "href": "https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/4be4c0f5243/",
+        "itemLevel": 130,
+        "equipLevel": 50
+      },
+      {
+        "slot": "Feet",
+        "name": "ガーロンド・キャスターブーツRE",
+        "icon": "https://lds-img.finalfantasyxiv.com/itemicon/fe/fe68006f7b113e0ffdeec4ea08c5cdaa4e2b255e.png?n7.5",
+        "href": "https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/7ed1b009fa4/",
+        "itemLevel": 130,
+        "equipLevel": 50
+      },
+      {
+        "slot": "Ears",
+        "name": "ガーロンド・キャスターイヤリングRE",
+        "icon": "https://lds-img.finalfantasyxiv.com/itemicon/6d/6d19f5f2387a74b08ad71d880cee6321a7fbbb69.png?n7.5",
+        "href": "https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/b0a028333a8/",
+        "itemLevel": 130,
+        "equipLevel": 50
+      },
+      {
+        "slot": "Neck",
+        "name": "ガーロンド・キャスターチョーカーRE",
+        "icon": "https://lds-img.finalfantasyxiv.com/itemicon/1b/1b004845939e33cba1c06f32557be5a62fc5d32d.png?n7.5",
+        "href": "https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/b09284e2fa1/",
+        "itemLevel": 130,
+        "equipLevel": 50
+      },
+      {
+        "slot": "Wrists",
+        "name": "ガーロンド・キャスターブレスレットRE",
+        "icon": "https://lds-img.finalfantasyxiv.com/itemicon/0b/0b0c10ebb9a78253537e8110929b556ad6272c32.png?n7.5",
+        "href": "https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/d5deef3f472/",
+        "itemLevel": 130,
+        "equipLevel": 50
+      },
+      {
+        "slot": "FingerL",
+        "name": "ガーロンド・キャスターリングRE",
+        "icon": "https://lds-img.finalfantasyxiv.com/itemicon/03/03e55719709ac2723362f49444e8062048f8f085.png?n7.5",
+        "href": "https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/a399ffd5a76/",
+        "itemLevel": 130,
+        "equipLevel": 50
+      }
+    ]
+  }
+}

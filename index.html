@@ -109,6 +109,46 @@
       font-size: 12px;
     }
 
+    .story-visual {
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 108px 1fr;
+      gap: 10px;
+      align-items: center;
+      margin-top: 12px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .story-visual img {
+      width: 108px;
+      height: 86px;
+      object-fit: cover;
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .story-visual > div {
+      padding: 8px 10px 8px 0;
+    }
+
+    .story-visual strong,
+    .story-visual span {
+      display: block;
+    }
+
+    .story-visual strong {
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    .story-visual span {
+      margin-top: 3px;
+      color: rgba(255, 249, 242, 0.86);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
     .hero-actions {
       display: flex;
       gap: 10px;
@@ -186,6 +226,62 @@
 
     .feature-panel.active {
       display: block;
+    }
+
+    .profile-panel {
+      margin: 10px 0 8px;
+      background:
+        linear-gradient(180deg, rgba(255, 250, 243, 0.98), rgba(239, 247, 246, 0.96));
+    }
+
+    .profile-panel h2 {
+      margin-bottom: 4px;
+    }
+
+    .profile-controls {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .profile-input-row {
+      display: grid;
+      grid-template-columns: 1fr 0.62fr 1fr;
+      gap: 8px;
+    }
+
+    .profile-controls label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .profile-controls select,
+    .profile-controls input {
+      width: 100%;
+      min-height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(32, 90, 97, 0.16);
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      padding: 8px 10px;
+    }
+
+    .profile-action {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      min-height: 42px;
+      border-radius: 14px;
+      background: var(--teal);
+      color: #fffaf3;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 800;
     }
 
     .panel,
@@ -1183,6 +1279,20 @@
       .character-preview {
         grid-template-columns: 1fr;
       }
+
+      .profile-input-row,
+      .story-visual {
+        grid-template-columns: 1fr;
+      }
+
+      .story-visual img {
+        width: 100%;
+        height: 148px;
+      }
+
+      .story-visual > div {
+        padding: 0 12px 12px;
+      }
     }
 
     .source-item a {
@@ -1222,16 +1332,52 @@
         調査基準日: 2026年4月28日。<br>
         4月28日実装のPatch 7.5パッチノートで、フリートライアルは公式に「レベル80」「漆黒のヴィランズまで」へ拡張されました。
       </div>
+      <div class="story-visual" id="storyVisual">
+        <img id="storyImage" alt="メイン進行に合わせた公式画像" loading="lazy">
+        <div>
+          <strong id="storyImageTitle">新生エオルゼア</strong>
+          <span id="storyImageCaption">メイン進行に合わせて公式画像を切り替えます。</span>
+        </div>
+      </div>
       <div class="hero-actions">
         <button class="hero-button" id="openQrButton" type="button">QRを開く</button>
       </div>
     </header>
 
+    <section class="panel profile-panel" id="adventureProfile">
+      <h2>今の設定</h2>
+      <p class="footer-note">ここだけ変えれば、装備、スキル回し、成長マップ、楽しみナビが同じジョブ・レベル・進行で切り替わります。</p>
+      <div class="profile-controls">
+        <div class="profile-input-row">
+          <div>
+            <label for="gearJob">ジョブ</label>
+            <select id="gearJob"></select>
+          </div>
+          <div>
+            <label for="gearLevel">現在レベル</label>
+            <input id="gearLevel" type="number" min="1" max="80" value="80">
+          </div>
+          <div>
+            <label for="storyStage">メイン進行</label>
+            <select id="storyStage">
+              <option value="airship">三都巡り後</option>
+              <option value="gc" selected>グランドカンパニー加入済み</option>
+              <option value="arr">新生クリア後</option>
+              <option value="hw">蒼天進行中</option>
+              <option value="sb">紅蓮進行中</option>
+              <option value="shb">漆黒進行中</option>
+            </select>
+          </div>
+        </div>
+        <button class="profile-action" id="findGearButton" type="button">この設定で更新</button>
+      </div>
+    </section>
+
     <nav class="jumpbar" aria-label="機能切り替え">
       <div class="jumpbar-track">
         <button class="jump feature-tab active" type="button" data-tab="gear">装備</button>
-        <button class="jump feature-tab" type="button" data-tab="rotation">スキル回し</button>
-        <button class="jump feature-tab" type="button" data-tab="home">成長マップ</button>
+        <button class="jump feature-tab" type="button" data-tab="rotation">スキル/成長</button>
+        <button class="jump feature-tab" type="button" data-tab="goals">楽しみナビ</button>
         <button class="jump feature-tab" type="button" data-tab="duty">初見ギミック</button>
         <button class="jump feature-tab" type="button" data-tab="character">キャラ確認</button>
         <button class="jump feature-tab" type="button" data-tab="links">リンク/出典</button>
@@ -1240,26 +1386,16 @@
 
     <section class="panel cockpit-panel feature-panel" id="cockpit" data-feature="rotation">
       <h2>ジョブレベル別スキル回し</h2>
-      <p class="footer-note">ジョブとレベルを入れると、その時点での基本回しを公式アイコン付きで表示します。</p>
+      <p class="footer-note">上の「今の設定」に合わせて、その時点での基本回しを公式アイコン付きで表示します。</p>
       <div class="tool-grid">
         <div class="control-card">
-          <div class="select-row">
-            <div>
-              <label for="cockpitJob">ジョブ</label>
-              <select id="cockpitJob"></select>
-            </div>
-            <div>
-              <label for="cockpitLevel">現在レベル</label>
-              <input id="cockpitLevel" type="number" min="1" max="80" value="80">
-            </div>
-            <div>
-              <label for="cockpitMode">状況</label>
-              <select id="cockpitMode">
-                <option value="single">単体 / ボス</option>
-                <option value="aoe">3体以上 / まとめ</option>
-                <option value="opener">開幕/バースト</option>
-              </select>
-            </div>
+          <div>
+            <label for="cockpitMode">見たい回し</label>
+            <select id="cockpitMode">
+              <option value="single">単体 / ボス</option>
+              <option value="aoe">3体以上 / まとめ</option>
+              <option value="opener">開幕/バースト</option>
+            </select>
           </div>
         </div>
         <div class="answer-card" id="cockpitAnswer"></div>
@@ -1296,31 +1432,7 @@
 
     <section class="panel gear-panel feature-panel active" id="gearFinder" data-feature="gear">
       <h2>最強装備チェッカー</h2>
-      <p class="footer-note">今のレベルとジョブから、無料範囲でまず揃えたい最強候補装備と入手先を出します。</p>
-      <div class="gear-controls">
-        <div class="gear-input-row">
-          <div>
-            <label for="gearJob">ジョブ</label>
-            <select id="gearJob"></select>
-          </div>
-          <div>
-            <label for="gearLevel">現在レベル</label>
-            <input id="gearLevel" type="number" min="1" max="80" value="80">
-          </div>
-          <div>
-            <label for="storyStage">メイン進行</label>
-            <select id="storyStage">
-              <option value="airship">三都巡り後</option>
-              <option value="gc" selected>グランドカンパニー加入済み</option>
-              <option value="arr">新生クリア後</option>
-              <option value="hw">蒼天進行中</option>
-              <option value="sb">紅蓮進行中</option>
-              <option value="shb">漆黒進行中</option>
-            </select>
-          </div>
-        </div>
-        <button class="gear-button" id="findGearButton" type="button">装備と次の目標を見る</button>
-      </div>
+      <p class="footer-note">上の「今の設定」から、無料範囲でまず揃えたい最強候補装備と入手先を出します。</p>
       <div class="gear-summary" id="gearSummary">
         <h3>Lv80 召喚士のおすすめ</h3>
         <p>ボタンを押すと、武器・防具・アクセの候補をゲーム内アイコン付きで表示します。</p>
@@ -1328,7 +1440,7 @@
       <div class="gear-list" id="gearList"></div>
     </section>
 
-    <section class="panel next-panel feature-panel active" id="nextPlanner" data-feature="gear">
+    <section class="panel next-panel feature-panel" id="nextPlanner" data-feature="goals">
       <h2>次の楽しみナビ</h2>
       <p class="footer-note">上のジョブ・レベル・メイン進行に合わせて、あと少しで解放される装備、スキル、遊びをまとめます。</p>
       <div class="next-board" id="nextBoard"></div>
@@ -1371,18 +1483,18 @@
       <div class="resource-grid" id="resourceGrid"></div>
     </section>
 
-    <section class="panel feature-panel" id="summary" data-feature="home">
+    <section class="panel feature-panel" id="summary" data-feature="rotation">
       <h2>まず結論</h2>
       <div class="lead-grid" id="jobSummaryGrid"></div>
     </section>
 
-    <section class="panel feature-panel" data-feature="home">
+    <section class="panel feature-panel" data-feature="rotation">
       <h2 id="growthTitle">成長マップ</h2>
       <p class="footer-note" id="growthNote">レベルシンクで急に押すボタンが減っても、この節目だけ覚えておけば戻しやすいです。</p>
       <div class="milestones" id="milestones"></div>
     </section>
 
-    <section class="panel feature-panel" data-feature="home">
+    <section class="panel feature-panel" data-feature="rotation">
       <h2>共通ルール</h2>
       <div class="mini-grid">
         <div class="quick-block">
@@ -1404,9 +1516,9 @@
       </div>
     </section>
 
-    <div class="feature-panel" id="sections" data-feature="home"></div>
+    <div class="feature-panel" id="sections" data-feature="rotation"></div>
 
-    <section class="panel feature-panel" data-feature="home">
+    <section class="panel feature-panel" data-feature="rotation">
       <h2>ユーティリティの使いどころ</h2>
       <div class="utility" id="utility"></div>
     </section>
@@ -1429,6 +1541,30 @@
         <div class="source-item">
           <a href="https://jp.finalfantasyxiv.com/lodestone/playguide/db/" target="_blank" rel="noreferrer noopener">エオルゼアデータベース</a><br>
           クエスト、アイテム、装備の日本語名と公式DB検索の導線に使用。
+        </div>
+        <div class="source-item">
+          <a href="https://jp.finalfantasyxiv.com/uiguide/party/party-how/party_practice.html" target="_blank" rel="noreferrer noopener">UIガイド: パーティプレイの戦い方を練習したい</a><br>
+          初心者の館の解放条件、冒険者指導教官、ビギナーリングの説明に使用。
+        </div>
+        <div class="source-item">
+          <a href="https://jp.finalfantasyxiv.com/uiguide/equipment/equipment-saikyo/equipment_best.html" target="_blank" rel="noreferrer noopener">UIガイド: さいきょう装備</a><br>
+          Lv30-49の装備更新で、現在の所持品から自動装備する導線に使用。
+        </div>
+        <div class="source-item">
+          <a href="https://jp.finalfantasyxiv.com/a_realm_reborn/" target="_blank" rel="noreferrer noopener">新生エオルゼア 公式サイト</a><br>
+          メイン進行「新生」表示の公式画像に使用。
+        </div>
+        <div class="source-item">
+          <a href="https://jp.finalfantasyxiv.com/heavensward/" target="_blank" rel="noreferrer noopener">蒼天のイシュガルド 公式サイト</a><br>
+          メイン進行「蒼天」表示の公式画像に使用。
+        </div>
+        <div class="source-item">
+          <a href="https://jp.finalfantasyxiv.com/stormblood/" target="_blank" rel="noreferrer noopener">紅蓮のリベレーター 公式サイト</a><br>
+          メイン進行「紅蓮」表示の公式画像に使用。
+        </div>
+        <div class="source-item">
+          <a href="https://jp.finalfantasyxiv.com/shadowbringers/" target="_blank" rel="noreferrer noopener">漆黒のヴィランズ 公式サイト</a><br>
+          メイン進行「漆黒」表示の公式画像に使用。
         </div>
       </div>
     </section>
@@ -2079,6 +2215,45 @@
       shb: { rank: 6, label: "漆黒進行中" }
     };
 
+    const storyImages = {
+      airship: {
+        title: "新生エオルゼア",
+        caption: "三都市、初ID、グランドカンパニーへ向かう序盤帯。",
+        image: "https://lds-img.finalfantasyxiv.com/promo/h/w/nXiBCv4RD0zSx2oHMfKs8URO24.png",
+        source: "https://jp.finalfantasyxiv.com/a_realm_reborn/"
+      },
+      gc: {
+        title: "新生エオルゼア",
+        caption: "マイチョコボ、初心者の館、Lv50ガーロンドREへつながる土台作り。",
+        image: "https://lds-img.finalfantasyxiv.com/promo/h/w/nXiBCv4RD0zSx2oHMfKs8URO24.png",
+        source: "https://jp.finalfantasyxiv.com/a_realm_reborn/"
+      },
+      arr: {
+        title: "新生エオルゼア",
+        caption: "新生クリア後は詩学装備、クリスタルタワー、蒼天への準備。",
+        image: "https://lds-img.finalfantasyxiv.com/promo/h/w/nXiBCv4RD0zSx2oHMfKs8URO24.png",
+        source: "https://jp.finalfantasyxiv.com/a_realm_reborn/"
+      },
+      hw: {
+        title: "蒼天のイシュガルド",
+        caption: "Lv60イディルREと空の旅。蒼天エリアの物語に合わせて更新。",
+        image: "https://lds-img.finalfantasyxiv.com/promo/h/K/IlXNJWr-P-1Mrm2VkeKbIWFYek.jpg",
+        source: "https://jp.finalfantasyxiv.com/heavensward/"
+      },
+      sb: {
+        title: "紅蓮のリベレーター",
+        caption: "Lv70スカエウァREを目標に、紅蓮エリアの解放を進める段階。",
+        image: "https://lds-img.finalfantasyxiv.com/promo/h/5/jMux8ZqzKMhECxQuhgu4NrbqrA.png",
+        source: "https://jp.finalfantasyxiv.com/stormblood/"
+      },
+      shb: {
+        title: "漆黒のヴィランズ",
+        caption: "Lv80クリプトラーカーREへ。フリートライアル到達点の大きな節目。",
+        image: "https://lds-img.finalfantasyxiv.com/promo/h/l/Wpxdd7E1zDgSN7d4ITTbSMymfI.png",
+        source: "https://jp.finalfantasyxiv.com/shadowbringers/"
+      }
+    };
+
     const lowLevelGearPlans = [
       {
         min: 1,
@@ -2424,13 +2599,14 @@
     ];
 
     const featureTabs = document.querySelectorAll(".feature-tab");
-    const cockpitJob = document.getElementById("cockpitJob");
-    const cockpitLevel = document.getElementById("cockpitLevel");
     const cockpitMode = document.getElementById("cockpitMode");
     const cockpitAnswer = document.getElementById("cockpitAnswer");
     const jobSummaryGrid = document.getElementById("jobSummaryGrid");
     const growthTitle = document.getElementById("growthTitle");
     const growthNote = document.getElementById("growthNote");
+    const storyImage = document.getElementById("storyImage");
+    const storyImageTitle = document.getElementById("storyImageTitle");
+    const storyImageCaption = document.getElementById("storyImageCaption");
     const siteSearch = document.getElementById("siteSearch");
     const siteSearchResults = document.getElementById("siteSearchResults");
     const gearJob = document.getElementById("gearJob");
@@ -2454,12 +2630,15 @@
     let duties = [];
     let actionIconOverrides = {};
     let itemIconOverrides = {};
+    let gearCatalog = {};
     const iconDataReady = Promise.all([
       fetch("action-icons.json").then((response) => response.ok ? response.json() : {}).catch(() => ({})),
-      fetch("item-icons.json").then((response) => response.ok ? response.json() : {}).catch(() => ({}))
-    ]).then(([actionIcons, itemIcons]) => {
+      fetch("item-icons.json").then((response) => response.ok ? response.json() : {}).catch(() => ({})),
+      fetch("gear-catalog.json").then((response) => response.ok ? response.json() : {}).catch(() => ({}))
+    ]).then(([actionIcons, itemIcons, catalog]) => {
       actionIconOverrides = actionIcons;
       itemIconOverrides = itemIcons;
+      gearCatalog = catalog;
     });
     if (pageParams.get("duty")) {
       dutySearch.value = pageParams.get("duty");
@@ -2468,24 +2647,15 @@
     gearJob.innerHTML = gearJobs.map((job) => `
       <option value="${job.id}" ${job.id === "SMN" ? "selected" : ""}>${job.label}</option>
     `).join("");
-    cockpitJob.innerHTML = gearJobs.map((job) => `
-      <option value="${job.id}" ${job.id === "SMN" ? "selected" : ""}>${job.label}</option>
-    `).join("");
     if (gearJobs.some((job) => job.id === pageParams.get("job"))) {
       gearJob.value = pageParams.get("job");
-      cockpitJob.value = pageParams.get("job");
     }
     if (pageParams.get("level")) {
       gearLevel.value = pageParams.get("level");
-      cockpitLevel.value = pageParams.get("level");
     }
     if (storyStages[pageParams.get("story")]) {
       storyStage.value = pageParams.get("story");
     }
-    if (!pageParams.get("level")) {
-      cockpitLevel.value = gearLevel.value || 80;
-    }
-
     document.getElementById("resourceTabs").innerHTML = resourceCategories.map((category) => `
       <button class="resource-tab ${category.id === "all" ? "active" : ""}" type="button" data-category="${category.id}">
         ${category.label}
@@ -2495,7 +2665,6 @@
     async function renderCockpit() {
       const job = selectedRotationJob();
       const level = selectedRotationLevel();
-      cockpitLevel.value = level;
       const guide = rotationGuides[job.id];
       const mode = cockpitMode.value;
       const modeTitle = {
@@ -2638,11 +2807,11 @@
     }
 
     function selectedRotationJob() {
-      return gearJobs.find((item) => item.id === cockpitJob.value) || gearJobs.find((item) => item.id === "SMN");
+      return gearJobs.find((item) => item.id === gearJob.value) || gearJobs.find((item) => item.id === "SMN");
     }
 
     function selectedRotationLevel() {
-      return Math.min(80, Math.max(1, Number(cockpitLevel.value) || Number(gearLevel.value) || 1));
+      return Math.min(80, Math.max(1, Number(gearLevel.value) || 1));
     }
 
     function getRotationTier(jobId, level) {
@@ -2766,6 +2935,14 @@
       return storyStages[storyStage.value]?.label || "三都巡り後";
     }
 
+    function updateStoryVisual() {
+      const visual = storyImages[storyStage.value] || storyImages.gc;
+      storyImage.src = visual.image;
+      storyImage.alt = `${visual.title} 公式画像`;
+      storyImageTitle.textContent = visual.title;
+      storyImageCaption.textContent = visual.caption;
+    }
+
     function levelDelta(level, target) {
       return Math.max(0, target - level);
     }
@@ -2779,13 +2956,11 @@
         <p>${plan.reason}<br>あと${levelDelta(level, 50)}Lvで${nextTier.label} IL${nextTier.ilvl}が見えてきます。</p>
         <div class="life-meter" aria-hidden="true"><span style="--meter:${Math.min(100, Math.round((level / 50) * 100))}%"></span></div>
       `;
-      const concreteItems = [
+      const beginnerHallCards = [
         {
-          name: plan.iconName,
-          title: "武器: レベルに近いもの",
-          text: level < 30
-            ? `${job.className || job.label}クエスト報酬を最優先。古ければ現在行ける街の武器屋、または直近IDドロップで更新。`
-            : `${job.label}で装備できる武器を、ジョブクエスト報酬、直近IDドロップ、店売りの順で確認。武器だけは5Lv以上古い状態を避けます。`
+          name: "ビギナーリング",
+          title: "初心者の館への行き方",
+          text: "Lv15以上のバトルクラスで、三都市の冒険者ギルド付近にいるNPC「冒険者指導教官」へ。リムサ・ロミンサ: 上甲板層 X11.5 Y11.3、グリダニア: 新市街 X11.7 Y13.1、ウルダハ: ナル回廊 X11.8 Y9.6 が目印です。開放後はメインコマンド「コンテンツ情報」→「初心者の館」から再挑戦できます。最後まで進めるとビギナーリングがもらえます。"
         },
         ...beginnerItems.map((item) => ({
           name: item.name,
@@ -2793,12 +2968,40 @@
           text: `${item.source}で入手。Lv15-29の防具と指輪はここを取れば十分強く、Lv20でも迷わずこれでOKです。`
         })),
         {
+          name: plan.iconName,
+          title: "武器: レベルに近いもの",
+          text: `${job.className || job.label}クエスト報酬を最優先。古ければ現在行ける街の武器屋、または直近IDドロップで更新。`
+        }
+      ];
+      const levelingCards = [
+        {
           name: "ソウルクリスタル",
-          title: level >= 30 ? "ジョブクリスタル" : "Lv30でジョブ化",
-          text: level >= 30
-            ? "装備画面でジョブクリスタルが入っているか確認。入っていないとジョブの強いアクションが使えません。"
-            : `あと${levelDelta(level, 30)}Lvでジョブ化。Lv30クラスクエスト完了後に必ず装備します。`
+          title: "ジョブクリスタル",
+          text: "Lv30以降はジョブクリスタル装備が最優先。クラスのままだと強いアクションが使えません。"
         },
+        {
+          name: plan.iconName,
+          title: "武器: ジョブクエスト報酬 / 直近IDドロップ",
+          text: `${job.label}で装備できる武器を、ジョブクエスト報酬、直近IDドロップ、店売りの順で更新。Lv40ならビギナー武器ではなく、Lv35-41付近の武器を狙います。`
+        },
+        {
+          name: "ビギナーリング",
+          title: "ビギナー装備は卒業目安",
+          text: "Lv40でビギナー装備が主役として出るのは不親切でした。Lv30以降は「マイキャラクター」→「さいきょう」で更新し、足りない部位を直近IDドロップ、メイン/ジョブクエスト報酬、グランドカンパニー軍票装備、店売りで補います。"
+        },
+        {
+          name: "クリスタル",
+          title: "Lv45ジョブクエスト防具",
+          text: "Lv45になったらジョブクエストで専用防具を回収。Lv50直前なので高額な買い物は避け、Lv50でガーロンドREへ一気に更新します。"
+        }
+      ];
+      const concreteItems = [
+        ...(level < 30 ? beginnerHallCards : levelingCards),
+        ...(level < 30 ? [{
+          name: "ソウルクリスタル",
+          title: "Lv30でジョブ化",
+          text: `あと${levelDelta(level, 30)}Lvでジョブ化。Lv30クラスクエスト完了後に必ずジョブクリスタルを装備します。`
+        }] : []),
         {
           name: "アラガントームストーン:詩学",
           title: "次の大更新: ガーロンドRE",
@@ -2850,6 +3053,24 @@
         return `${slot.label}: ${tier.label} ナイト盾`;
       }
       return `${slot.label}: ${tier.label} ${gearRoleLabel(job)}装備`;
+    }
+
+    function slotLabelByField(field) {
+      return gearSlots.find((slot) => slot.field === field)?.label || field;
+    }
+
+    function catalogGearItems(job, tier) {
+      return gearCatalog[job.id]?.[String(tier.min)] || null;
+    }
+
+    function gearPriorityText(field) {
+      if (field === "MainHand") {
+        return "最優先。火力と回復量が一番伸びます。";
+      }
+      if (["Body", "Legs"].includes(field)) {
+        return "武器の次に優先。防御とメインステータスが大きく伸びます。";
+      }
+      return "武器、胴、脚の後に順番に交換。";
     }
 
     function gearLife(level, tier) {
@@ -3157,28 +3378,37 @@
         <div class="life-meter" aria-hidden="true"><span style="--meter:${gearLife(level, tier)}%"></span></div>
       `;
       const poeticsIcon = await fetchItemIconByName("アラガントームストーン:詩学");
-      const slots = gearSlots.filter((slot) => !slot.jobs || slot.jobs.includes(job.id));
-      const itemCards = slots.map((slot) => {
-        const title = staticGearTitle(tier, job, slot);
-        const query = `${tier.label} ${job.label} ${slot.label}`;
-        const priority = slot.field === "MainHand"
-          ? "最優先。火力と回復量が一番伸びます。"
-          : ["Body", "Legs"].includes(slot.field)
-            ? "武器の次に優先。防御とメインステータスが大きく伸びます。"
-            : "武器、胴、脚の後に順番に交換。";
-        return `
+      await iconDataReady;
+      const catalogItems = catalogGearItems(job, tier);
+      const itemCards = catalogItems
+        ? catalogItems.map((item) => `
           <div class="gear-card">
-            ${iconBox(poeticsIcon, title, "gear-icon")}
+            ${iconBox(item.icon, item.name, "gear-icon")}
             <div>
-              <h3>${title}</h3>
-              <p>装備Lv${tier.min} / IL${tier.ilvl}。交換画面で「${gearRoleLabel(job)}」または「${job.label}武器」を選びます。${priority}</p>
+              <h3>${slotLabelByField(item.slot)}: ${item.name}</h3>
+              <p>装備Lv${item.equipLevel} / IL${item.itemLevel}。${tier.vendor} ${gearPriorityText(item.slot)}</p>
               <div class="gear-links">
-                <a href="${officialItemSearch(query)}" target="_blank" rel="noreferrer noopener">公式DB</a>
+                <a href="${item.href}" target="_blank" rel="noreferrer noopener">公式DB</a>
               </div>
             </div>
           </div>
-        `;
-      }).join("");
+        `).join("")
+        : gearSlots.filter((slot) => !slot.jobs || slot.jobs.includes(job.id)).map((slot) => {
+          const title = staticGearTitle(tier, job, slot);
+          const query = `${tier.label} ${job.label} ${slot.label}`;
+          return `
+            <div class="gear-card">
+              ${iconBox(poeticsIcon, title, "gear-icon")}
+              <div>
+                <h3>${title}</h3>
+                <p>装備Lv${tier.min} / IL${tier.ilvl}。交換画面で「${gearRoleLabel(job)}」または「${job.label}武器」を選びます。${gearPriorityText(slot.field)}</p>
+                <div class="gear-links">
+                  <a href="${officialItemSearch(query)}" target="_blank" rel="noreferrer noopener">公式DB</a>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join("");
       const poeticsCards = poeticsRoutes.map((route) => `
         <div class="gear-card">
           ${iconBox(poeticsIcon, route.title, "gear-icon")}
@@ -3190,16 +3420,21 @@
       `).join("");
       gearList.innerHTML = itemCards + poeticsCards;
       findGearButton.disabled = false;
-      findGearButton.textContent = "装備と次の目標を見る";
+      findGearButton.textContent = "この設定で更新";
       await renderNextPlanner(job, level);
     }
 
+    function normalizeFeature(feature) {
+      return feature === "home" ? "rotation" : feature;
+    }
+
     function activateFeature(feature) {
+      const activeFeature = normalizeFeature(feature);
       document.querySelectorAll(".feature-panel").forEach((panel) => {
-        panel.classList.toggle("active", panel.dataset.feature === feature);
+        panel.classList.toggle("active", panel.dataset.feature === activeFeature);
       });
       featureTabs.forEach((tab) => {
-        tab.classList.toggle("active", tab.dataset.tab === feature);
+        tab.classList.toggle("active", tab.dataset.tab === activeFeature);
       });
     }
 
@@ -3209,21 +3444,14 @@
       }
       const id = decodeURIComponent(hash.replace(/^#/, ""));
       if ([...featureTabs].some((tab) => tab.dataset.tab === id)) {
-        return id;
+        return normalizeFeature(id);
       }
       const target = document.getElementById(id);
-      return target?.closest("[data-feature]")?.dataset.feature || "";
+      return normalizeFeature(target?.closest("[data-feature]")?.dataset.feature || "");
     }
 
-    function syncRotationFromGear() {
-      cockpitJob.value = gearJob.value;
-      cockpitLevel.value = gearLevel.value;
-      renderCockpit();
-    }
-
-    function syncGearFromRotation() {
-      gearJob.value = cockpitJob.value;
-      gearLevel.value = cockpitLevel.value;
+    function refreshAll() {
+      updateStoryVisual();
       renderGearFinder();
       renderCockpit();
     }
@@ -3245,8 +3473,6 @@
         activateFeature(feature);
       }
     });
-    cockpitJob.addEventListener("change", syncGearFromRotation);
-    cockpitLevel.addEventListener("change", syncGearFromRotation);
     cockpitMode.addEventListener("change", renderCockpit);
     document.getElementById("resourceTabs").addEventListener("click", (event) => {
       const button = event.target.closest(".resource-tab");
@@ -3257,16 +3483,10 @@
       renderResources();
     });
     siteSearch.addEventListener("input", renderSearchResults);
-    findGearButton.addEventListener("click", renderGearFinder);
-    gearJob.addEventListener("change", () => {
-      renderGearFinder();
-      syncRotationFromGear();
-    });
-    gearLevel.addEventListener("change", () => {
-      renderGearFinder();
-      syncRotationFromGear();
-    });
-    storyStage.addEventListener("change", renderGearFinder);
+    findGearButton.addEventListener("click", refreshAll);
+    gearJob.addEventListener("change", refreshAll);
+    gearLevel.addEventListener("change", refreshAll);
+    storyStage.addEventListener("change", refreshAll);
     dutyType.addEventListener("change", () => {
       renderDutyOptions();
       renderDutyGuide();
@@ -3277,7 +3497,8 @@
     });
     dutySelect.addEventListener("change", renderDutyGuide);
     saveCharacterButton.addEventListener("click", saveCharacter);
-    activateFeature(pageParams.get("tab") || featureFromHash(window.location.hash) || "gear");
+    activateFeature(normalizeFeature(pageParams.get("tab") || featureFromHash(window.location.hash) || "gear"));
+    updateStoryVisual();
     renderCockpit();
     renderResources();
     renderGearFinder();

@@ -434,174 +434,6 @@
       color: var(--muted);
     }
 
-    .progress-panel {
-      border-color: rgba(186, 139, 47, 0.24);
-      background:
-        linear-gradient(180deg, rgba(255, 250, 243, 0.98), rgba(255, 247, 236, 0.96));
-    }
-
-    .sync-status {
-      display: inline-flex;
-      align-items: center;
-      min-height: 30px;
-      margin: 6px 0 10px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(32, 90, 97, 0.08);
-      color: var(--teal);
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .sync-status.is-local {
-      background: rgba(186, 139, 47, 0.14);
-      color: #76531a;
-    }
-
-    .profile-switch {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .profile-button,
-    .progress-check,
-    .goal-save {
-      appearance: none;
-      border: 0;
-      cursor: pointer;
-      font-family: inherit;
-    }
-
-    .profile-button {
-      min-height: 42px;
-      border-radius: 14px;
-      background: #fffdf8;
-      border: 1px solid rgba(32, 90, 97, 0.12);
-      color: var(--ink);
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .profile-button.active {
-      background: var(--teal);
-      color: #fffaf3;
-      border-color: var(--teal);
-    }
-
-    .progress-summary {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .progress-stat {
-      padding: 10px 8px;
-      border-radius: 14px;
-      background: var(--paper-2);
-      border: 1px solid rgba(32, 90, 97, 0.08);
-      text-align: center;
-    }
-
-    .progress-stat strong {
-      display: block;
-      font-size: 18px;
-      line-height: 1.1;
-      color: var(--teal);
-    }
-
-    .progress-stat span {
-      display: block;
-      margin-top: 4px;
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--muted);
-    }
-
-    .goal-box {
-      display: grid;
-      gap: 8px;
-      padding: 10px;
-      border-radius: 14px;
-      background: var(--paper-2);
-      border: 1px solid rgba(32, 90, 97, 0.08);
-      margin-bottom: 10px;
-    }
-
-    .goal-box label {
-      font-size: 12px;
-      font-weight: 800;
-      color: var(--teal);
-    }
-
-    .goal-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 8px;
-    }
-
-    .goal-row input {
-      width: 100%;
-      min-height: 42px;
-      border-radius: 12px;
-      border: 1px solid rgba(32, 90, 97, 0.16);
-      background: #fffdf8;
-      color: var(--ink);
-      font: inherit;
-      font-size: 14px;
-      padding: 8px 10px;
-    }
-
-    .goal-save {
-      min-width: 68px;
-      min-height: 42px;
-      border-radius: 12px;
-      background: var(--gold);
-      color: #fffaf3;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .progress-checklist {
-      display: grid;
-      gap: 8px;
-    }
-
-    .progress-item {
-      display: grid;
-      grid-template-columns: 56px 1fr;
-      gap: 10px;
-      align-items: center;
-      padding: 10px;
-      border-radius: 14px;
-      background: var(--paper-2);
-      border: 1px solid rgba(32, 90, 97, 0.08);
-    }
-
-    .progress-actions {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-    }
-
-    .progress-check {
-      min-height: 36px;
-      border-radius: 12px;
-      background: #fffdf8;
-      border: 1px solid rgba(32, 90, 97, 0.12);
-      color: var(--ink);
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .progress-check.done {
-      background: #eef7f6;
-      border-color: rgba(32, 90, 97, 0.28);
-      color: var(--teal);
-    }
-
     .cockpit-panel {
       background:
         linear-gradient(180deg, rgba(255, 250, 243, 0.98), rgba(239, 247, 246, 0.96));
@@ -787,6 +619,135 @@
       margin-top: 10px;
     }
 
+    .gear-panel {
+      border-color: rgba(49, 91, 134, 0.18);
+      background:
+        linear-gradient(180deg, rgba(255, 250, 243, 0.98), rgba(241, 246, 250, 0.96));
+    }
+
+    .gear-controls {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .gear-controls label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .gear-input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .gear-controls select,
+    .gear-controls input {
+      width: 100%;
+      min-height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(32, 90, 97, 0.16);
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      padding: 8px 10px;
+    }
+
+    .gear-button {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      min-height: 44px;
+      border-radius: 14px;
+      background: var(--bahamut);
+      color: #fffaf3;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .gear-summary {
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 15px;
+      background: var(--paper-2);
+      border: 1px solid rgba(32, 90, 97, 0.08);
+    }
+
+    .gear-summary h3 {
+      margin: 0 0 6px;
+      font-size: 15px;
+    }
+
+    .gear-summary p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .gear-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .gear-card {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 10px;
+      border-radius: 14px;
+      background: var(--paper-2);
+      border: 1px solid rgba(32, 90, 97, 0.08);
+    }
+
+    .gear-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+      background: #eef7f6;
+      border: 1px solid rgba(32, 90, 97, 0.1);
+      object-fit: cover;
+    }
+
+    .gear-card h3 {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    .gear-card p {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .gear-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 7px;
+    }
+
+    .gear-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: rgba(32, 90, 97, 0.08);
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
     .qr-overlay {
       position: fixed;
       inset: 0;
@@ -940,19 +901,11 @@
         flex-direction: column;
       }
 
-      .progress-summary {
-        grid-template-columns: 1fr;
-      }
-
-      .goal-row {
-        grid-template-columns: 1fr;
-      }
-
-      .progress-item {
-        grid-template-columns: 1fr;
-      }
-
       .select-row {
+        grid-template-columns: 1fr;
+      }
+
+      .gear-input-row {
         grid-template-columns: 1fr;
       }
     }
@@ -1002,8 +955,8 @@
     <nav class="jumpbar" aria-label="レベル移動">
       <div class="jumpbar-track">
         <a class="jump" href="#summary">まず結論</a>
-        <a class="jump" href="#partyProgress">進捗</a>
         <a class="jump" href="#cockpit">攻略</a>
+        <a class="jump" href="#gearFinder">装備</a>
         <a class="jump" href="#resourceHub">リンク集</a>
         <a class="jump" href="#lv10">Lv10</a>
         <a class="jump" href="#lv20">Lv20</a>
@@ -1016,28 +969,6 @@
         <a class="jump" href="#sources">出典</a>
       </div>
     </nav>
-
-    <section class="panel progress-panel" id="partyProgress">
-      <h2>二人の進捗</h2>
-      <div class="sync-status" id="syncStatus">Firebaseへ接続中</div>
-      <div class="profile-switch" role="group" aria-label="表示する人">
-        <button class="profile-button active" type="button" data-profile="me">自分</button>
-        <button class="profile-button" type="button" data-profile="senpai">先輩</button>
-      </div>
-      <div class="progress-summary" aria-label="進捗まとめ">
-        <div class="progress-stat"><strong id="readCount">0/8</strong><span>読んだ</span></div>
-        <div class="progress-stat"><strong id="practiceCount">0/8</strong><span>練習した</span></div>
-        <div class="progress-stat"><strong id="readyCount">0/8</strong><span>自信あり</span></div>
-      </div>
-      <div class="goal-box">
-        <label for="dailyGoal">今日の目標</label>
-        <div class="goal-row">
-          <input id="dailyGoal" type="text" maxlength="60" placeholder="例: Lv50の3属性を迷わず回す">
-          <button class="goal-save" id="saveGoal" type="button">保存</button>
-        </div>
-      </div>
-      <div class="progress-checklist" id="progressChecklist"></div>
-    </section>
 
     <section class="panel cockpit-panel" id="cockpit">
       <h2>攻略コックピット</h2>
@@ -1063,6 +994,29 @@
         <div class="answer-card" id="cockpitAnswer"></div>
         <div class="quick-solutions" id="quickSolutions"></div>
       </div>
+    </section>
+
+    <section class="panel gear-panel" id="gearFinder">
+      <h2>最強装備チェッカー</h2>
+      <p class="footer-note">今のレベルとジョブから、無料範囲でまず揃えたい最強候補装備と入手先を出します。</p>
+      <div class="gear-controls">
+        <div class="gear-input-row">
+          <div>
+            <label for="gearJob">ジョブ</label>
+            <select id="gearJob"></select>
+          </div>
+          <div>
+            <label for="gearLevel">現在レベル</label>
+            <input id="gearLevel" type="number" min="1" max="80" value="80">
+          </div>
+        </div>
+        <button class="gear-button" id="findGearButton" type="button">装備を調べる</button>
+      </div>
+      <div class="gear-summary" id="gearSummary">
+        <h3>Lv80 召喚士のおすすめ</h3>
+        <p>ボタンを押すと、武器・防具・アクセの候補をゲーム内アイコン付きで表示します。</p>
+      </div>
+      <div class="gear-list" id="gearList"></div>
     </section>
 
     <section class="panel" id="motivationBoard">
@@ -1664,12 +1618,92 @@
       }
     ];
 
+    const gearJobs = [
+      { id: "PLD", label: "ナイト", min: 1 },
+      { id: "WAR", label: "戦士", min: 1 },
+      { id: "DRK", label: "暗黒騎士", min: 30 },
+      { id: "GNB", label: "ガンブレイカー", min: 60 },
+      { id: "WHM", label: "白魔道士", min: 1 },
+      { id: "SCH", label: "学者", min: 30 },
+      { id: "AST", label: "占星術師", min: 30 },
+      { id: "MNK", label: "モンク", min: 1 },
+      { id: "DRG", label: "竜騎士", min: 1 },
+      { id: "NIN", label: "忍者", min: 1 },
+      { id: "SAM", label: "侍", min: 50 },
+      { id: "BRD", label: "吟遊詩人", min: 1 },
+      { id: "MCH", label: "機工士", min: 30 },
+      { id: "DNC", label: "踊り子", min: 60 },
+      { id: "BLM", label: "黒魔道士", min: 1 },
+      { id: "SMN", label: "召喚士", min: 1 },
+      { id: "RDM", label: "赤魔道士", min: 50 }
+    ];
+
+    const gearTiers = [
+      {
+        min: 80,
+        name: "Augmented Cryptlurker",
+        label: "クリプトラーカーRE",
+        ilvl: 530,
+        vendor: "ユールモア X:10.2 Y:11.8 のアイマーク、またはクリスタリウムのモーエン商会。詩学で交換。",
+        unlock: "漆黒メインクエスト進行後に利用。Lv80のフリートライアル到達点としてまずここ。"
+      },
+      {
+        min: 70,
+        name: "Augmented Scaevan",
+        label: "スカエウァRE",
+        ilvl: 400,
+        vendor: "ラールガーズリーチ X:13.8 Y:11.6 のエンナ、または三都市/クガネのロウェナ商会の商人。詩学で交換。",
+        unlock: "紅蓮メインクエスト進行後に利用。Lv70から漆黒序盤まで長く使いやすい。"
+      },
+      {
+        min: 60,
+        name: "Augmented Shire",
+        label: "イディルRE",
+        ilvl: 270,
+        vendor: "イディルシャイア X:5.7 Y:5.2 のヒスメナ、または三都市のロウェナ商会の商人。詩学で交換。",
+        unlock: "蒼天メインクエスト進行後に利用。Lv60から紅蓮序盤の土台。"
+      },
+      {
+        min: 50,
+        name: "Augmented Ironworks",
+        label: "ガーロンドRE",
+        ilvl: 130,
+        vendor: "モードゥナ X:22.7 Y:6.7 のオーリアナ、または三都市のロウェナ商会の商人。詩学で交換。",
+        unlock: "新生メインクエスト「究極幻想アルテマウェポン」後の節目装備。"
+      }
+    ];
+
+    const gearSlots = [
+      { field: "MainHand", label: "武器" },
+      { field: "OffHand", label: "盾", jobs: ["PLD"] },
+      { field: "Head", label: "頭" },
+      { field: "Body", label: "胴" },
+      { field: "Gloves", label: "手" },
+      { field: "Legs", label: "脚" },
+      { field: "Feet", label: "足" },
+      { field: "Ears", label: "耳" },
+      { field: "Neck", label: "首" },
+      { field: "Wrists", label: "腕" },
+      { field: "FingerL", label: "指輪" }
+    ];
+
+    const gearCache = new Map();
+
     const cockpitLevel = document.getElementById("cockpitLevel");
     const cockpitMode = document.getElementById("cockpitMode");
     const cockpitAnswer = document.getElementById("cockpitAnswer");
     const siteSearch = document.getElementById("siteSearch");
     const siteSearchResults = document.getElementById("siteSearchResults");
+    const gearJob = document.getElementById("gearJob");
+    const gearLevel = document.getElementById("gearLevel");
+    const findGearButton = document.getElementById("findGearButton");
+    const gearSummary = document.getElementById("gearSummary");
+    const gearList = document.getElementById("gearList");
     let activeResourceCategory = "all";
+
+    gearJob.innerHTML = gearJobs.map((job) => `
+      <option value="${job.id}" ${job.id === "SMN" ? "selected" : ""}>${job.label}</option>
+    `).join("");
 
     cockpitLevel.innerHTML = sections.map((section) => `
       <option value="${section.id}">${section.title}</option>
@@ -1774,6 +1808,167 @@
         : `<div class="search-result"><h3>見つかりませんでした</h3><p>Lv、スキル名、単体、範囲、フェニックスなどで試してください。</p></div>`;
     }
 
+    function getGearTier(level) {
+      return gearTiers.find((tier) => level >= tier.min) || null;
+    }
+
+    function xivapiAsset(icon) {
+      if (!icon || (!icon.path_hr1 && !icon.path)) {
+        return "";
+      }
+      const path = icon.path_hr1 || icon.path;
+      return `https://v2.xivapi.com/api/asset?path=${encodeURIComponent(path)}&format=png`;
+    }
+
+    function officialItemSearch(name) {
+      return `https://jp.finalfantasyxiv.com/lodestone/playguide/db/search/?q=${encodeURIComponent(name)}`;
+    }
+
+    function wikiItemSearch(name) {
+      return `https://ffxiv.consolegameswiki.com/wiki/Special:Search?search=${encodeURIComponent(name)}`;
+    }
+
+    async function fetchGearItem(tier, jobId, slot) {
+      const cacheKey = `${tier.name}:${jobId}:${slot.field}`;
+      if (gearCache.has(cacheKey)) {
+        return gearCache.get(cacheKey);
+      }
+      const query = [
+        `+Name~"${tier.name}"`,
+        `+ClassJobCategory.${jobId}=true`,
+        `+EquipSlotCategory.${slot.field}=1`,
+        `+LevelEquip=${tier.min}`
+      ].join(" ");
+      const url = `https://v2.xivapi.com/api/search?sheets=Item&fields=Name,Icon,LevelEquip,LevelItem,ItemUICategory.Name,EquipSlotCategory,ClassJobCategory&query=${encodeURIComponent(query)}&limit=10`;
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error("gear fetch failed");
+      }
+      const data = await response.json();
+      const item = (data.results || [])
+        .map((result) => ({ rowId: result.row_id, ...result.fields }))
+        .find((candidate) => candidate.ClassJobCategory?.fields?.[jobId]);
+      gearCache.set(cacheKey, item || null);
+      return item || null;
+    }
+
+    function renderLowLevelGear(job, level) {
+      gearSummary.innerHTML = `
+        <h3>Lv${level} ${job.label} は更新が早い帯です</h3>
+        <p>Lv50未満は数レベルごとにIDドロップやメインクエスト報酬で入れ替わります。最強を細かく追うより、下の順番で更新すると楽です。</p>
+      `;
+      gearList.innerHTML = [
+        {
+          title: "まずは推奨装備を押す",
+          text: "キャラクター画面の「さいきょう」更新で、今持っている中の最高候補を即装備。",
+          link: "https://jp.finalfantasyxiv.com/lodestone/playguide/db/search/?q=%E6%8E%A8%E5%A5%A8%E8%A3%85%E5%82%99"
+        },
+        {
+          title: "Lv15以降はビギナー装備",
+          text: "初心者の館で防具一式を取得。序盤の見た目と性能が一気に安定します。",
+          link: "https://jp.finalfantasyxiv.com/lodestone/playguide/db/search/?q=%E3%83%93%E3%82%AE%E3%83%8A%E3%83%BC"
+        },
+        {
+          title: "5レベルごとにID/店売り/HQを確認",
+          text: "Lv50になったらガーロンドREへ更新。ここから装備チェッカーの本領です。",
+          link: "https://ffxiv.consolegameswiki.com/wiki/Leveling_Gear_Guide"
+        }
+      ].map((item) => `
+        <div class="gear-card">
+          <div class="gear-icon" aria-hidden="true"></div>
+          <div>
+            <h3>${item.title}</h3>
+            <p>${item.text}</p>
+            <div class="gear-links">
+              <a href="${item.link}" target="_blank" rel="noreferrer noopener">調べる</a>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    async function renderGearFinder() {
+      const job = gearJobs.find((item) => item.id === gearJob.value) || gearJobs.find((item) => item.id === "SMN");
+      const level = Math.min(80, Math.max(1, Number(gearLevel.value) || 1));
+      gearLevel.value = level;
+      if (level < job.min) {
+        gearSummary.innerHTML = `
+          <h3>${job.label}はLv${job.min}から使えます</h3>
+          <p>今のレベルではまだ選んだジョブになれません。ジョブ解放後にもう一度調べてください。</p>
+        `;
+        gearList.innerHTML = "";
+        return;
+      }
+
+      const tier = getGearTier(level);
+      if (!tier) {
+        renderLowLevelGear(job, level);
+        return;
+      }
+
+      findGearButton.disabled = true;
+      findGearButton.textContent = "取得中...";
+      gearSummary.innerHTML = `
+        <h3>Lv${level} ${job.label}: ${tier.label} IL${tier.ilvl}</h3>
+        <p>${tier.vendor}<br>${tier.unlock}</p>
+      `;
+      gearList.innerHTML = `<div class="gear-card"><div class="gear-icon" aria-hidden="true"></div><div><h3>アイコン取得中</h3><p>ゲーム内アイコンをXIVAPIから読み込んでいます。</p></div></div>`;
+
+      try {
+        const slots = gearSlots.filter((slot) => !slot.jobs || slot.jobs.includes(job.id));
+        const items = await Promise.all(slots.map(async (slot) => ({
+          slot,
+          item: await fetchGearItem(tier, job.id, slot)
+        })));
+        gearList.innerHTML = items.map(({ slot, item }) => {
+          if (!item) {
+            const query = `${tier.name} ${job.id} ${slot.label}`;
+            return `
+              <div class="gear-card">
+                <div class="gear-icon" aria-hidden="true"></div>
+                <div>
+                  <h3>${slot.label}: 候補を検索</h3>
+                  <p>この枠は自動取得できませんでした。検索リンクから確認してください。</p>
+                  <div class="gear-links">
+                    <a href="${officialItemSearch(query)}" target="_blank" rel="noreferrer noopener">公式DB検索</a>
+                    <a href="${wikiItemSearch(query)}" target="_blank" rel="noreferrer noopener">入手方法</a>
+                  </div>
+                </div>
+              </div>
+            `;
+          }
+          const levelItem = item.LevelItem?.value || tier.ilvl;
+          const iconUrl = xivapiAsset(item.Icon);
+          return `
+            <div class="gear-card">
+              ${iconUrl ? `<img class="gear-icon" src="${iconUrl}" alt="${item.Name}">` : `<div class="gear-icon" aria-hidden="true"></div>`}
+              <div>
+                <h3>${slot.label}: ${item.Name}</h3>
+                <p>装備Lv${item.LevelEquip} / IL${levelItem}</p>
+                <div class="gear-links">
+                  <a href="${officialItemSearch(item.Name)}" target="_blank" rel="noreferrer noopener">公式DB検索</a>
+                  <a href="${wikiItemSearch(item.Name)}" target="_blank" rel="noreferrer noopener">入手方法</a>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join("");
+      } catch (error) {
+        gearList.innerHTML = `
+          <div class="gear-card">
+            <div class="gear-icon" aria-hidden="true"></div>
+            <div>
+              <h3>装備データを取得できませんでした</h3>
+              <p>通信状況を確認して、もう一度押してください。公式DB検索リンクは利用できます。</p>
+            </div>
+          </div>
+        `;
+      } finally {
+        findGearButton.disabled = false;
+        findGearButton.textContent = "装備を調べる";
+      }
+    }
+
     cockpitLevel.addEventListener("change", renderCockpit);
     cockpitMode.addEventListener("change", renderCockpit);
     document.getElementById("quickSolutions").addEventListener("click", (event) => {
@@ -1795,8 +1990,10 @@
       renderResources();
     });
     siteSearch.addEventListener("input", renderSearchResults);
+    findGearButton.addEventListener("click", renderGearFinder);
     renderCockpit();
     renderResources();
+    renderGearFinder();
 
     const qrOverlay = document.getElementById("qrOverlay");
     const qrImage = document.getElementById("qrImage");
@@ -1843,214 +2040,6 @@
         qrHelp.textContent = "コピーできなかったので、下のURLをそのまま使ってください。";
       }
     });
-  </script>
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-    import { getAuth, signInAnonymously, browserLocalPersistence, setPersistence } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-    import { getFirestore, doc, onSnapshot, serverTimestamp, setDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyB40Nk8wU05_XMMQyje5IkU-JAJJZBrUlM",
-      authDomain: "sakuzu-dashboard.firebaseapp.com",
-      projectId: "sakuzu-dashboard",
-      storageBucket: "sakuzu-dashboard.firebasestorage.app",
-      messagingSenderId: "123708617079",
-      appId: "1:123708617079:web:00857dd2c915f67f17b172",
-      measurementId: "G-QKL1V99QSQ"
-    };
-
-    const progressLevels = [
-      { id: "lv10", label: "Lv10" },
-      { id: "lv20", label: "Lv20" },
-      { id: "lv30", label: "Lv30" },
-      { id: "lv40", label: "Lv40" },
-      { id: "lv50", label: "Lv50" },
-      { id: "lv60", label: "Lv60" },
-      { id: "lv70", label: "Lv70" },
-      { id: "lv80", label: "Lv80" }
-    ];
-    const progressKinds = [
-      { key: "read", label: "読んだ" },
-      { key: "practice", label: "練習" },
-      { key: "ready", label: "自信" }
-    ];
-    const storagePrefix = "ff14-summoner-progress-v1";
-    const status = document.getElementById("syncStatus");
-    const checklist = document.getElementById("progressChecklist");
-    const goalInput = document.getElementById("dailyGoal");
-    const saveGoal = document.getElementById("saveGoal");
-    const profileButtons = [...document.querySelectorAll(".profile-button")];
-    let activeProfile = localStorage.getItem(`${storagePrefix}:activeProfile`) || "me";
-    let activeData = defaultData();
-    let db = null;
-    let unsubscribe = null;
-    let firebaseReady = false;
-
-    function defaultData() {
-      return {
-        dailyGoal: "",
-        checks: Object.fromEntries(progressLevels.map((level) => [
-          level.id,
-          { read: false, practice: false, ready: false }
-        ]))
-      };
-    }
-
-    function localKey(profile) {
-      return `${storagePrefix}:${profile}`;
-    }
-
-    function setStatus(text, isLocal = false) {
-      status.textContent = text;
-      status.classList.toggle("is-local", isLocal);
-    }
-
-    function loadLocal(profile) {
-      try {
-        const saved = JSON.parse(localStorage.getItem(localKey(profile)) || "null");
-        return mergeData(saved);
-      } catch (error) {
-        return defaultData();
-      }
-    }
-
-    function saveLocal(profile, data) {
-      localStorage.setItem(localKey(profile), JSON.stringify(data));
-    }
-
-    function mergeData(data) {
-      const merged = defaultData();
-      if (!data || typeof data !== "object") {
-        return merged;
-      }
-      merged.dailyGoal = typeof data.dailyGoal === "string" ? data.dailyGoal : "";
-      progressLevels.forEach((level) => {
-        merged.checks[level.id] = {
-          ...merged.checks[level.id],
-          ...(data.checks && data.checks[level.id] ? data.checks[level.id] : {})
-        };
-      });
-      return merged;
-    }
-
-    function render() {
-      profileButtons.forEach((button) => {
-        button.classList.toggle("active", button.dataset.profile === activeProfile);
-      });
-      goalInput.value = activeData.dailyGoal;
-      document.getElementById("readCount").textContent = `${countDone("read")}/8`;
-      document.getElementById("practiceCount").textContent = `${countDone("practice")}/8`;
-      document.getElementById("readyCount").textContent = `${countDone("ready")}/8`;
-      checklist.innerHTML = progressLevels.map((level) => `
-        <div class="progress-item">
-          <div class="lv">${level.label}</div>
-          <div class="progress-actions">
-            ${progressKinds.map((kind) => `
-              <button
-                class="progress-check ${activeData.checks[level.id][kind.key] ? "done" : ""}"
-                type="button"
-                data-level="${level.id}"
-                data-kind="${kind.key}"
-                aria-pressed="${activeData.checks[level.id][kind.key] ? "true" : "false"}"
-              >${kind.label}</button>
-            `).join("")}
-          </div>
-        </div>
-      `).join("");
-    }
-
-    function countDone(kind) {
-      return progressLevels.filter((level) => activeData.checks[level.id][kind]).length;
-    }
-
-    function profileDoc(profile) {
-      return doc(db, "ff14SummonerGuide", "v1", "profiles", profile);
-    }
-
-    async function persist() {
-      saveLocal(activeProfile, activeData);
-      if (!firebaseReady) {
-        setStatus("端末内に保存中", true);
-        return;
-      }
-      try {
-        await setDoc(profileDoc(activeProfile), {
-          ...activeData,
-          updatedAt: serverTimestamp()
-        }, { merge: true });
-        setStatus("Firebaseで同期中");
-      } catch (error) {
-        setStatus("Firebase未接続。端末内に保存中", true);
-      }
-    }
-
-    function watchProfile(profile) {
-      if (unsubscribe) {
-        unsubscribe();
-      }
-      activeData = loadLocal(profile);
-      render();
-      if (!firebaseReady) {
-        setStatus("端末内に保存中", true);
-        return;
-      }
-      unsubscribe = onSnapshot(profileDoc(profile), (snapshot) => {
-        activeData = mergeData(snapshot.exists() ? snapshot.data() : activeData);
-        saveLocal(profile, activeData);
-        render();
-        setStatus("Firebaseで同期中");
-      }, () => {
-        setStatus("Firebase未接続。端末内に保存中", true);
-      });
-    }
-
-    profileButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        activeProfile = button.dataset.profile;
-        localStorage.setItem(`${storagePrefix}:activeProfile`, activeProfile);
-        watchProfile(activeProfile);
-      });
-    });
-
-    checklist.addEventListener("click", async (event) => {
-      const button = event.target.closest(".progress-check");
-      if (!button) {
-        return;
-      }
-      const { level, kind } = button.dataset;
-      activeData.checks[level][kind] = !activeData.checks[level][kind];
-      render();
-      await persist();
-    });
-
-    saveGoal.addEventListener("click", async () => {
-      activeData.dailyGoal = goalInput.value.trim();
-      render();
-      await persist();
-      saveGoal.textContent = "保存済";
-      setTimeout(() => {
-        saveGoal.textContent = "保存";
-      }, 1200);
-    });
-
-    goalInput.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") {
-        saveGoal.click();
-      }
-    });
-
-    try {
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-      db = getFirestore(app);
-      await setPersistence(auth, browserLocalPersistence);
-      await signInAnonymously(auth);
-      firebaseReady = true;
-      watchProfile(activeProfile);
-    } catch (error) {
-      firebaseReady = false;
-      watchProfile(activeProfile);
-    }
   </script>
 </body>
 </html>

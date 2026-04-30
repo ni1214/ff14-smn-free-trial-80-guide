@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>FF14 召喚士 フリートライアルLv80 ガイド</title>
+  <title>FF14 フリートライアルLv80 攻略アプリ</title>
   <style>
     :root {
       --paper: #f7f2e9;
@@ -158,17 +158,34 @@
     }
 
     .jump {
+      appearance: none;
+      border: 1px solid rgba(32, 90, 97, 0.12);
+      cursor: pointer;
+      font-family: inherit;
       white-space: nowrap;
       text-decoration: none;
       color: var(--ink);
       background: rgba(255, 250, 243, 0.88);
-      border: 1px solid rgba(32, 90, 97, 0.12);
       padding: 8px 11px;
       border-radius: 999px;
       font-size: 12px;
       font-weight: 700;
       box-shadow: 0 6px 18px rgba(31, 42, 46, 0.06);
       scroll-snap-align: start;
+    }
+
+    .feature-tab.active {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: #fffaf3;
+    }
+
+    .feature-panel {
+      display: none;
+    }
+
+    .feature-panel.active {
+      display: block;
     }
 
     .panel,
@@ -446,7 +463,6 @@
 
     .control-card,
     .answer-card,
-    .motivation-card,
     .resource-card,
     .search-result {
       padding: 12px;
@@ -467,11 +483,12 @@
 
     .select-row {
       display: grid;
-      grid-template-columns: 0.8fr 1fr;
+      grid-template-columns: 1fr 0.7fr 1fr;
       gap: 8px;
     }
 
     .control-card select,
+    .control-card input,
     .search-card input {
       width: 100%;
       min-height: 42px;
@@ -485,7 +502,6 @@
     }
 
     .answer-card h3,
-    .motivation-card h3,
     .resource-card h3,
     .search-result h3 {
       margin: 0 0 6px;
@@ -494,7 +510,6 @@
     }
 
     .answer-card p,
-    .motivation-card p,
     .resource-card p,
     .search-result p {
       margin: 0;
@@ -502,46 +517,10 @@
       font-size: 13px;
     }
 
-    .quick-solutions,
     .resource-grid,
     .search-results {
       display: grid;
       gap: 8px;
-      margin-top: 10px;
-    }
-
-    .quick-solution {
-      appearance: none;
-      border: 1px solid rgba(32, 90, 97, 0.1);
-      cursor: pointer;
-      display: block;
-      width: 100%;
-      min-height: 54px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: #fffdf8;
-      color: var(--ink);
-      font-family: inherit;
-      text-align: left;
-    }
-
-    .quick-solution strong {
-      display: block;
-      font-size: 13px;
-      color: var(--teal);
-    }
-
-    .quick-solution span {
-      display: block;
-      margin-top: 3px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .motivation-grid {
-      display: grid;
-      gap: 10px;
       margin-top: 10px;
     }
 
@@ -617,6 +596,28 @@
 
     .search-card {
       margin-top: 10px;
+    }
+
+    .rotation-flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 10px 0;
+    }
+
+    .rotation-note-list {
+      display: grid;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .rotation-note {
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: #eef7f6;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 700;
     }
 
     .gear-panel {
@@ -1214,9 +1215,9 @@
 <body>
   <div class="wrap">
     <header class="hero">
-      <div class="eyebrow">FFXIV Summoner Free Trial 2026-04-28</div>
-      <h1>召喚士 フリートライアルLv80<br>10レベル刻み回しガイド</h1>
-      <p>スマホで見返しやすいように、Lv10 / 20 / 30 / 40 / 50 / 60 / 70 / 80ごとに「今なにを押すか」へ絞って整理した資料です。</p>
+      <div class="eyebrow">FFXIV Free Trial Lv80 2026-04-28</div>
+      <h1>FF14 フリートライアルLv80<br>二人用攻略アプリ</h1>
+      <p>スマホで見返しやすいように、装備、次の目標、全ジョブのレベル別スキル回し、初見ギミックをタブで切り替えて見られる資料です。</p>
       <div class="meta-note">
         調査基準日: 2026年4月28日。<br>
         4月28日実装のPatch 7.5パッチノートで、フリートライアルは公式に「レベル80」「漆黒のヴィランズまで」へ拡張されました。
@@ -1226,54 +1227,46 @@
       </div>
     </header>
 
-    <nav class="jumpbar" aria-label="レベル移動">
+    <nav class="jumpbar" aria-label="機能切り替え">
       <div class="jumpbar-track">
-        <a class="jump" href="#summary">まず結論</a>
-        <a class="jump" href="#cockpit">攻略</a>
-        <a class="jump" href="#dutyGuide">初見</a>
-        <a class="jump" href="#nextPlanner">次の目標</a>
-        <a class="jump" href="#gearFinder">装備</a>
-        <a class="jump" href="#characterPanel">キャラ</a>
-        <a class="jump" href="#resourceHub">リンク集</a>
-        <a class="jump" href="#lv10">Lv10</a>
-        <a class="jump" href="#lv20">Lv20</a>
-        <a class="jump" href="#lv30">Lv30</a>
-        <a class="jump" href="#lv40">Lv40</a>
-        <a class="jump" href="#lv50">Lv50</a>
-        <a class="jump" href="#lv60">Lv60</a>
-        <a class="jump" href="#lv70">Lv70</a>
-        <a class="jump" href="#lv80">Lv80</a>
-        <a class="jump" href="#sources">出典</a>
+        <button class="jump feature-tab active" type="button" data-tab="gear">装備</button>
+        <button class="jump feature-tab" type="button" data-tab="rotation">スキル回し</button>
+        <button class="jump feature-tab" type="button" data-tab="home">成長マップ</button>
+        <button class="jump feature-tab" type="button" data-tab="duty">初見ギミック</button>
+        <button class="jump feature-tab" type="button" data-tab="character">キャラ確認</button>
+        <button class="jump feature-tab" type="button" data-tab="links">リンク/出典</button>
       </div>
     </nav>
 
-    <section class="panel cockpit-panel" id="cockpit">
-      <h2>攻略コックピット</h2>
-      <p class="footer-note">レベルシンクやID前に、今見るべき部分だけ取り出します。</p>
+    <section class="panel cockpit-panel feature-panel" id="cockpit" data-feature="rotation">
+      <h2>ジョブレベル別スキル回し</h2>
+      <p class="footer-note">ジョブとレベルを入れると、その時点での基本回しを公式アイコン付きで表示します。</p>
       <div class="tool-grid">
         <div class="control-card">
           <div class="select-row">
             <div>
-              <label for="cockpitLevel">レベル</label>
-              <select id="cockpitLevel"></select>
+              <label for="cockpitJob">ジョブ</label>
+              <select id="cockpitJob"></select>
+            </div>
+            <div>
+              <label for="cockpitLevel">現在レベル</label>
+              <input id="cockpitLevel" type="number" min="1" max="80" value="80">
             </div>
             <div>
               <label for="cockpitMode">状況</label>
               <select id="cockpitMode">
                 <option value="single">単体 / ボス</option>
                 <option value="aoe">3体以上 / まとめ</option>
-                <option value="mistakes">ミス確認</option>
-                <option value="mantra">ひとことで覚える</option>
+                <option value="opener">開幕/バースト</option>
               </select>
             </div>
           </div>
         </div>
         <div class="answer-card" id="cockpitAnswer"></div>
-        <div class="quick-solutions" id="quickSolutions"></div>
       </div>
     </section>
 
-    <section class="panel duty-panel" id="dutyGuide">
+    <section class="panel duty-panel feature-panel" id="dutyGuide" data-feature="duty">
       <h2>初見ギミック即答ナビ</h2>
       <p class="footer-note">IDや討滅戦で「これ、どう避けるの？」となった時に、攻撃の見た目から判断できる避け方を出します。</p>
       <div class="duty-controls">
@@ -1301,7 +1294,7 @@
       <div class="mechanic-grid" id="mechanicGrid"></div>
     </section>
 
-    <section class="panel gear-panel" id="gearFinder">
+    <section class="panel gear-panel feature-panel active" id="gearFinder" data-feature="gear">
       <h2>最強装備チェッカー</h2>
       <p class="footer-note">今のレベルとジョブから、無料範囲でまず揃えたい最強候補装備と入手先を出します。</p>
       <div class="gear-controls">
@@ -1335,13 +1328,13 @@
       <div class="gear-list" id="gearList"></div>
     </section>
 
-    <section class="panel next-panel" id="nextPlanner">
+    <section class="panel next-panel feature-panel active" id="nextPlanner" data-feature="gear">
       <h2>次の楽しみナビ</h2>
       <p class="footer-note">上のジョブ・レベル・メイン進行に合わせて、あと少しで解放される装備、スキル、遊びをまとめます。</p>
       <div class="next-board" id="nextBoard"></div>
     </section>
 
-    <section class="panel character-panel" id="characterPanel">
+    <section class="panel character-panel feature-panel" id="characterPanel" data-feature="character">
       <h2>キャラクター確認</h2>
       <p class="footer-note">完全な装備自動取得はLodestone側の仕様でこの静的サイトだけでは難しいため、公式プロフィールをすぐ開けるメモとして使います。</p>
       <div class="character-controls">
@@ -1363,13 +1356,7 @@
       </div>
     </section>
 
-    <section class="panel" id="motivationBoard">
-      <h2>モチベボード</h2>
-      <p class="footer-note">攻略サイトを“読む場所”から、次に遊びたくなる場所へ寄せます。</p>
-      <div class="motivation-grid" id="motivationGrid"></div>
-    </section>
-
-    <section class="panel" id="resourceHub">
+    <section class="panel feature-panel" id="resourceHub" data-feature="links">
       <h2>攻略リンク集</h2>
       <p class="footer-note">外部へ移動する場合も、日本語の公式ページだけに絞っています。</p>
       <div class="resource-filter">
@@ -1384,56 +1371,31 @@
       <div class="resource-grid" id="resourceGrid"></div>
     </section>
 
-    <section class="panel" id="summary">
+    <section class="panel feature-panel" id="summary" data-feature="home">
       <h2>まず結論</h2>
-      <div class="lead-grid">
-        <div class="quick-block">
-          <strong>召喚士の覚え方はこの4段階</strong>
-          <div class="flow">
-            <span class="flow-step ruby">Lv1-57 基礎魔法 + 3属性</span>
-            <span class="flow-step bahamut">Lv58-69 トランス・バハムート</span>
-            <span class="flow-step bahamut">Lv70-79 バハムート</span>
-            <span class="flow-step phoenix">Lv80 フェニックス追加</span>
-          </div>
-          <div class="mantra">
-            ざっくり言うと、<br>
-            Lv10-50は「エーテルチャージ → 召喚3種 → 基本魔法」、<br>
-            Lv60は「トランス・バハムート → 召喚3種」、<br>
-            Lv70は「シアリングライト → サモン・バハムート → 召喚3種」、<br>
-            Lv80は「バハムート → 召喚3種 → フェニックス → 召喚3種」です。
-          </div>
-        </div>
-        <div class="quick-block">
-          <strong>最初に覚える3つ</strong>
-          <ul>
-            <li>単体はだいたい「通常魔法」より「属性中の専用魔法」が強い。</li>
-            <li>3体以上なら範囲攻撃へ切り替える。単体魔法を混ぜすぎない。</li>
-            <li>召喚士は「次に押せる強いボタンを腐らせない」だけでかなり火力が出る。</li>
-          </ul>
-        </div>
-      </div>
+      <div class="lead-grid" id="jobSummaryGrid"></div>
     </section>
 
-    <section class="panel">
-      <h2>成長マップ</h2>
-      <p class="footer-note">レベルシンクで急に押すボタンが減っても、この節目だけ覚えておけば戻しやすいです。</p>
+    <section class="panel feature-panel" data-feature="home">
+      <h2 id="growthTitle">成長マップ</h2>
+      <p class="footer-note" id="growthNote">レベルシンクで急に押すボタンが減っても、この節目だけ覚えておけば戻しやすいです。</p>
       <div class="milestones" id="milestones"></div>
     </section>
 
-    <section class="panel">
+    <section class="panel feature-panel" data-feature="home">
       <h2>共通ルール</h2>
       <div class="mini-grid">
         <div class="quick-block">
           <strong>単体 / 少数戦</strong>
-          1〜2体は単体回し。まずは強化フェーズや召喚を優先して、空いたGCDを通常魔法で埋めます。
+          1〜2体は単体回し。まずはコンボ、DoT、ジョブゲージ、バーストなど、そのジョブの軸になる行動を優先します。
         </div>
         <div class="quick-block">
           <strong>範囲攻撃へ切り替える基準</strong>
           範囲攻撃は、複数の敵をまとめて早く削りたい時に必要です。基本は3体以上で範囲攻撃へ切り替えます。ダンジョンでタンクが敵をまとめた時や、雑魚が何体も同時に出た時に使うと効果が大きいです。
         </div>
         <div class="quick-block">
-          <strong>召喚の順番</strong>
-          Lv80までは順番の縛りはそこまで強くありません。長詠唱のイフリートは足を止められるとき、動きたいときはタイタンやガルーダ寄りにすると楽です。
+          <strong>レベルシンク</strong>
+          低レベルIDでは使えるボタンが減ります。今のジョブタブで、そのレベル帯の単体・範囲だけ見れば立て直しやすいです。
         </div>
         <div class="quick-block">
           <strong>この資料の前提</strong>
@@ -1442,18 +1404,18 @@
       </div>
     </section>
 
-    <div id="sections"></div>
+    <div class="feature-panel" id="sections" data-feature="home"></div>
 
-    <section class="panel">
+    <section class="panel feature-panel" data-feature="home">
       <h2>ユーティリティの使いどころ</h2>
       <div class="utility" id="utility"></div>
     </section>
 
-    <section class="panel" id="sources">
+    <section class="panel feature-panel" id="sources" data-feature="links">
       <h2>出典</h2>
       <p class="footer-note">
-        アクション名・修得レベル・アイコンは公式ジョブガイド、アイテム名・装備アイコンはXIVAPIの日本語データ、フリートライアルLv80拡張は日本語版Patch 7.5パッチノートを参照しています。<br>
-        なお「Lv80でバハムートとフェニックスを交互に回す」というまとめは、公式の共有リキャスト仕様とレベリングガイドの優先度記述をあわせて整理した要約です。
+        アクション名・修得レベル・アイコンは公式ジョブガイド、アイテム名・装備アイコンはエオルゼアデータベース、フリートライアルLv80拡張は日本語版Patch 7.5パッチノートを参照しています。<br>
+        なおレベル別スキル回しは、高難度の最適化よりもフリートライアル、レベリング、初見IDで迷わず押せることを優先した要約です。
       </p>
       <div class="sources">
         <div class="source-item">
@@ -1461,8 +1423,8 @@
           2026年4月28日実装分のフリートライアル拡張、装備、システム更新の確認に使用。
         </div>
         <div class="source-item">
-          <a href="https://jp.finalfantasyxiv.com/jobguide/summoner/" target="_blank" rel="noreferrer noopener">公式ジョブガイド 召喚士</a><br>
-          各アクションの修得レベル、名称、公式アイコン、トランス/バハムート/フェニックスの変化を確認。
+          <a href="https://jp.finalfantasyxiv.com/jobguide/" target="_blank" rel="noreferrer noopener">公式ジョブガイド</a><br>
+          各ジョブのアクション名、修得レベル、公式アイコンを確認。
         </div>
         <div class="source-item">
           <a href="https://jp.finalfantasyxiv.com/lodestone/playguide/db/" target="_blank" rel="noreferrer noopener">エオルゼアデータベース</a><br>
@@ -1787,106 +1749,7 @@
       `;
     }
 
-    document.getElementById("milestones").innerHTML = milestones.map((item) => `
-      <div class="milestone">
-        <div class="lv">${item.level}</div>
-        <div>
-          <p>${item.text}</p>
-          <div class="action-row">${item.icons.map(chip).join("")}</div>
-        </div>
-      </div>
-    `).join("");
-
-    document.getElementById("sections").innerHTML = sections.map((section) => `
-      <section class="section-card" id="${section.id}">
-        <div class="section-top">
-          <div>
-            <div class="level-tag">${section.label}</div>
-            <h2>${section.title}</h2>
-          </div>
-        </div>
-        <p class="section-summary">${section.summary}</p>
-        <div class="action-row">${section.actions.map(chip).join("")}</div>
-        <div class="section-grid">
-          <div class="subcard">
-            <h3>単体 / 1〜2体</h3>
-            ${comboLane(section.singleFlow)}
-            <ol>${section.single.map((line) => `<li>${line}</li>`).join("")}</ol>
-          </div>
-          <div class="subcard">
-            <h3>3体以上の範囲攻撃</h3>
-            ${comboLane(section.aoeFlow)}
-            <ul>${section.aoe.map((line) => `<li>${line}</li>`).join("")}</ul>
-          </div>
-          <div class="subcard">
-            <h3>ミスしやすい点</h3>
-            <ul>${section.mistakes.map((line) => `<li>${line}</li>`).join("")}</ul>
-          </div>
-          <div class="subcard">
-            <h3>ひとことで覚える</h3>
-            <div class="mantra">${section.mantra}</div>
-          </div>
-        </div>
-      </section>
-    `).join("");
-
-    document.getElementById("utility").innerHTML = utility.map((row) => `
-      <div class="utility-line">
-        <div class="action-row">${row.actions.map(chip).join("")}</div>
-        <p>${row.text}</p>
-      </div>
-    `).join("");
-
-    const quickSolutions = [
-      {
-        title: "ID前30秒",
-        text: "今のLvに合わせて単体と範囲の切替だけ確認。",
-        level: "lv80",
-        mode: "aoe"
-      },
-      {
-        title: "レベルシンクで迷った",
-        text: "押せないボタンを探す前に、節目の回しへ戻す。",
-        level: "lv50",
-        mode: "mantra"
-      },
-      {
-        title: "まとめ狩りが不安",
-        text: "3体以上の範囲攻撃とペインフレアの使い分けを見る。",
-        level: "lv40",
-        mode: "aoe"
-      },
-      {
-        title: "Lv80らしさを出したい",
-        text: "バハムートとフェニックスの往復だけを頭に入れる。",
-        level: "lv80",
-        mode: "single"
-      },
-      {
-        title: "死なない召喚士になる",
-        text: "ありがちなミスと守りの光・リザレクを見直す。",
-        level: "lv70",
-        mode: "mistakes"
-      }
-    ];
-
-    const motivationCards = [
-      {
-        title: "今日の一歩",
-        text: "一度に全部覚えなくてOK。今日は“3体以上なら範囲”だけ持ち帰れば勝ちです。",
-        badges: ["軽く読む", "ID前に見る", "1つ試す"]
-      },
-      {
-        title: "先輩と遊ぶ日の流れ",
-        text: "集合前に今日の目標を書き、ID後に自信チェックを1つ増やすと、攻略が思い出になります。",
-        badges: ["目標", "実戦", "振り返り"]
-      },
-      {
-        title: "召喚士の気持ちよさ",
-        text: "Lv80はバハムート、3属性、フェニックス、3属性。大技の周期が見えると一気に楽しくなります。",
-        badges: ["バハムート", "フェニックス", "ループ完成"]
-      }
-    ];
+    let currentGuideSections = [];
 
     const resourceCategories = [
       { id: "all", label: "全部" },
@@ -1898,8 +1761,8 @@
 
     const resources = [
       {
-        title: "公式ジョブガイド 召喚士",
-        url: "https://jp.finalfantasyxiv.com/jobguide/summoner/",
+        title: "公式ジョブガイド",
+        url: "https://jp.finalfantasyxiv.com/jobguide/",
         category: "job",
         tags: ["公式", "スキル名", "修得Lv"],
         text: "アクション名、修得レベル、アイコンを確認する公式情報。"
@@ -1975,6 +1838,186 @@
       { id: "RDM", label: "赤魔道士", min: 50, role: "caster" }
     ];
 
+    const beginnerGearByRole = {
+      tank: [
+        { name: "ビギナーキュイラス", slot: "胴", source: "初心者の館のタンク訓練" },
+        { name: "ビギナートラウザー", slot: "脚", source: "初心者の館のタンク訓練" },
+        { name: "ビギナーサバトン", slot: "足", source: "初心者の館のタンク訓練" },
+        { name: "ビギナーリング", slot: "指", source: "初心者の館の最終訓練" }
+      ],
+      healer: [
+        { name: "ビギナーローブ", slot: "胴", source: "初心者の館のヒーラー訓練" },
+        { name: "ビギナーグローブ", slot: "手", source: "初心者の館のヒーラー訓練" },
+        { name: "ビギナースカート", slot: "脚", source: "初心者の館のヒーラー訓練" },
+        { name: "ビギナーブーツ", slot: "足", source: "初心者の館のヒーラー訓練" },
+        { name: "ビギナーリング", slot: "指", source: "初心者の館の最終訓練" }
+      ],
+      melee: [
+        { name: "ビギナータバード", slot: "胴", source: "初心者の館のDPS訓練" },
+        { name: "ビギナーグローブ", slot: "手", source: "初心者の館のDPS訓練" },
+        { name: "ビギナートラウザー", slot: "脚", source: "初心者の館のDPS訓練" },
+        { name: "ビギナーサイブーツ", slot: "足", source: "初心者の館のDPS訓練" },
+        { name: "ビギナーリング", slot: "指", source: "初心者の館の最終訓練" }
+      ],
+      ranged: [
+        { name: "ビギナータバード", slot: "胴", source: "初心者の館のDPS訓練" },
+        { name: "ビギナーグローブ", slot: "手", source: "初心者の館のDPS訓練" },
+        { name: "ビギナートラウザー", slot: "脚", source: "初心者の館のDPS訓練" },
+        { name: "ビギナーサイブーツ", slot: "足", source: "初心者の館のDPS訓練" },
+        { name: "ビギナーリング", slot: "指", source: "初心者の館の最終訓練" }
+      ],
+      caster: [
+        { name: "ビギナーローブ", slot: "胴", source: "初心者の館のDPS訓練" },
+        { name: "ビギナーグローブ", slot: "手", source: "初心者の館のDPS訓練" },
+        { name: "ビギナースカート", slot: "脚", source: "初心者の館のDPS訓練" },
+        { name: "ビギナーブーツ", slot: "足", source: "初心者の館のDPS訓練" },
+        { name: "ビギナーリング", slot: "指", source: "初心者の館の最終訓練" }
+      ]
+    };
+
+    const poeticsRoutes = [
+      { title: "毎日1回: コンテンツルーレット", text: "レベリング、討伐・討滅戦、メインクエスト、アライアンスレイド、50/60/70/80ダンジョンを解放済みの範囲で回す。迷ったらまずこれ。" },
+      { title: "初回攻略ボーナス", text: "未クリアID・討滅戦・レイドを進める。経験値、解放、詩学が同時に進むので一番気持ちよく強くなれます。" },
+      { title: "短時間で少しだけ", text: "討伐・討滅戦ルーレットや短いIDを1回。時間がない日の詩学補給向きです。" },
+      { title: "装備更新の優先順", text: "武器 → 胴/脚 → 頭/手/足 → アクセ。全部一気に無理なら武器と胴脚だけ先に交換。" },
+      { title: "躓かない流れ", text: "Lv到達 → メインを節目まで進める → 交換NPCを開放 → ルーレットで詩学 → 優先順に交換。" }
+    ];
+
+    const rotationGuides = {
+      PLD: {
+        name: "ナイト",
+        tiers: [
+          { min: 1, title: "低レベル基本", single: ["ファストブレード", "ライオットソード"], aoe: ["トータルエクリプス"], opener: ["アイアンウィル", "ファストブレード", "ライオットソード"], tips: ["盾役はアイアンウィルを入れる。単体はコンボ、敵が3体以上なら範囲。"] },
+          { min: 50, title: "Lv50帯", single: ["ファストブレード", "ライオットソード", "ロイヤルアソリティ", "ゴアブレード"], aoe: ["トータルエクリプス", "プロミネンス"], opener: ["ファイト・オア・フライト", "ゴアブレード", "ファストブレード", "ライオットソード", "ロイヤルアソリティ"], tips: ["ファイト・オア・フライト中に強いコンボを入れる。防御バフはまとめ前に使う。"] },
+          { min: 70, title: "Lv70-80帯", single: ["ファイト・オア・フライト", "ゴアブレード", "ロイヤルアソリティ", "レクイエスカット", "ホーリースピリット", "コンフィテオル"], aoe: ["トータルエクリプス", "プロミネンス", "レクイエスカット", "ホーリーサークル"], opener: ["ファイト・オア・フライト", "ゴアブレード", "レクイエスカット", "ホーリースピリット", "コンフィテオル"], tips: ["物理バーストと魔法バーストを順番に使う。"] }
+        ]
+      },
+      WAR: {
+        name: "戦士",
+        tiers: [
+          { min: 1, title: "低レベル基本", single: ["ヘヴィスウィング", "メイム"], aoe: ["オーバーパワー"], opener: ["ディフェンダー", "ヘヴィスウィング", "メイム"], tips: ["敵3体以上はオーバーパワー。防御バフはまとめ開始で使う。"] },
+          { min: 50, title: "Lv50帯", single: ["ヘヴィスウィング", "メイム", "シュトルムブレハ", "シュトルムヴィント", "フェルクリーヴ"], aoe: ["オーバーパワー", "ミスリルテンペスト"], opener: ["バーサク", "シュトルムブレハ", "フェルクリーヴ"], tips: ["ブレハ系の強化を維持して、ゲージはフェルクリーヴへ。"] },
+          { min: 70, title: "Lv70-80帯", single: ["原初の解放", "フェルクリーヴ", "アップヒーバル", "ヘヴィスウィング", "メイム", "シュトルムヴィント"], aoe: ["原初の解放", "デシメート", "オーバーパワー", "ミスリルテンペスト"], opener: ["原初の解放", "フェルクリーヴ", "フェルクリーヴ", "アップヒーバル"], tips: ["原初の解放中に強い技を集中。自己回復も強いので落ち着いて。"] }
+        ]
+      },
+      DRK: {
+        name: "暗黒騎士",
+        tiers: [
+          { min: 30, title: "解放直後", single: ["ハードスラッシュ", "サイフォンストライク", "ソウルイーター"], aoe: ["アンリーシュ"], opener: ["グリットスタンス", "ハードスラッシュ", "サイフォンストライク", "ソウルイーター"], tips: ["MPを使い切らず、暗黒系の攻撃に回す。"] },
+          { min: 60, title: "Lv60帯", single: ["ブラッドウェポン", "ハードスラッシュ", "サイフォンストライク", "ソウルイーター", "ブラッドスピラー"], aoe: ["アンリーシュ", "ストルワートソウル", "漆黒の波動"], opener: ["ブラッドウェポン", "漆黒の剣", "ソウルイーター", "ブラッドスピラー"], tips: ["MPは漆黒の剣、範囲は漆黒の波動へ。"] },
+          { min: 70, title: "Lv70-80帯", single: ["ブラッドウェポン", "ブラッドデリリアム", "ブラッドスピラー", "漆黒の剣", "ソウルイーター"], aoe: ["ブラッドデリリアム", "クワイタス", "アンリーシュ", "ストルワートソウル", "漆黒の波動"], opener: ["ブラッドウェポン", "ブラッドデリリアム", "ブラッドスピラー", "漆黒の剣"], tips: ["ブラッドデリリアム中にゲージ技を集中。ブラックナイトは痛い攻撃前。"] }
+        ]
+      },
+      GNB: {
+        name: "ガンブレイカー",
+        tiers: [
+          { min: 60, title: "解放直後", single: ["キーンエッジ", "ブルータルシェル", "ソリッドバレル", "バーストストライク"], aoe: ["デーモンスライス", "デーモンスローター"], opener: ["ロイヤルガード", "ノー・マーシー", "ソリッドバレル", "バーストストライク"], tips: ["ソイルはバーストストライクへ。ノー・マーシー中に強い技。"] },
+          { min: 70, title: "Lv70-80帯", single: ["ノー・マーシー", "ビートファング", "サベッジクロウ", "ウィケッドタロン", "バーストストライク"], aoe: ["ノー・マーシー", "デーモンスライス", "デーモンスローター", "フェイテッドサークル"], opener: ["ノー・マーシー", "ビートファング", "サベッジクロウ", "ウィケッドタロン"], tips: ["ビートファング連続コンボをノー・マーシーに合わせる。"] }
+        ]
+      },
+      WHM: {
+        name: "白魔道士",
+        tiers: [
+          { min: 1, title: "低レベル基本", single: ["エアロ", "ストーン"], aoe: ["ストーン"], opener: ["エアロ", "ストーン"], tips: ["DoTを入れて、回復が必要な時だけケアル。攻撃できる時間を増やす。"] },
+          { min: 45, title: "Lv45以降", single: ["エアロ", "ストーン", "リジェネ"], aoe: ["ホーリー"], opener: ["リジェネ", "エアロ", "ストーン"], tips: ["3体以上はホーリーでスタンも強い。"] },
+          { min: 72, title: "Lv72-80帯", single: ["ディア", "グレア", "アサイズ", "ハート・オブ・ミゼリ"], aoe: ["ディア", "ホーリー", "アサイズ", "ハート・オブ・ミゼリ"], opener: ["ディア", "アサイズ", "グレア"], tips: ["ディア維持、アサイズを腐らせない。回復リリーは無理なく使う。"] }
+        ]
+      },
+      SCH: {
+        name: "学者",
+        tiers: [
+          { min: 30, title: "解放直後", single: ["バイオ", "ルイン"], aoe: ["ルイン"], opener: ["サモン・エオス", "バイオ", "ルイン"], tips: ["フェアリーを出す。DoTを入れてルイン、回復は先に鼓舞。"] },
+          { min: 50, title: "Lv50帯", single: ["バイオラ", "気炎法", "エナジードレイン"], aoe: ["破陣法"], opener: ["連環計", "バイオラ", "気炎法", "エナジードレイン"], tips: ["連環計はパーティ火力に合わせる。"] },
+          { min: 70, title: "Lv70-80帯", single: ["連環計", "バイオラ", "気炎法", "エナジードレイン"], aoe: ["破陣法", "エナジードレイン"], opener: ["連環計", "バイオラ", "気炎法"], tips: ["回復アビリティを先に使い、GCD攻撃を止めすぎない。"] }
+        ]
+      },
+      AST: {
+        name: "占星術師",
+        tiers: [
+          { min: 30, title: "解放直後", single: ["コンバス", "マレフィク", "アストラルドロー", "プレイI"], aoe: ["マレフィク"], opener: ["アストラルドロー", "プレイI", "コンバス", "マレフィク"], tips: ["カードを引いたら味方へ。DoT維持。"] },
+          { min: 50, title: "Lv50帯", single: ["コンバス", "マレフィク", "アストラルドロー", "プレイI"], aoe: ["グラビデ"], opener: ["アストラルドロー", "プレイI", "コンバス", "マレフィク"], tips: ["3体以上はグラビデ。カードを腐らせない。"] },
+          { min: 70, title: "Lv70-80帯", single: ["ディヴィネーション", "コンバス", "マレフィク", "アストラルドロー", "プレイI"], aoe: ["ディヴィネーション", "グラビデ"], opener: ["アストラルドロー", "プレイI", "ディヴィネーション", "コンバス"], tips: ["ディヴィネーションをバーストに合わせる。"] }
+        ]
+      },
+      MNK: {
+        name: "モンク",
+        tiers: [
+          { min: 1, title: "低レベル基本", single: ["連撃", "正拳突き", "崩拳"], aoe: ["壊神衝"], opener: ["連撃", "正拳突き", "崩拳"], tips: ["型に沿ってコンボ。方向指定は取れる時だけでOK。"] },
+          { min: 50, title: "Lv50帯", single: ["双竜脚", "双掌打", "破砕拳", "連撃", "正拳突き", "崩拳"], aoe: ["壊神衝", "四面脚", "地烈斬"], opener: ["双竜脚", "双掌打", "破砕拳"], tips: ["双掌打と破砕拳を切らさない意識。"] },
+          { min: 70, title: "Lv70-80帯", single: ["紅蓮の極意", "双竜脚", "双掌打", "破砕拳", "連撃", "正拳突き", "崩拳"], aoe: ["紅蓮の極意", "壊神衝", "四面脚", "地烈斬"], opener: ["紅蓮の極意", "双竜脚", "双掌打", "破砕拳"], tips: ["バフ中に強いGCDを詰める。"] }
+        ]
+      },
+      DRG: {
+        name: "竜騎士",
+        tiers: [
+          { min: 1, title: "低レベル基本", single: ["トゥルースラスト", "ボーパルスラスト", "フルスラスト"], aoe: ["ドゥームスパイク"], opener: ["トゥルースラスト", "ボーパルスラスト", "フルスラスト"], tips: ["ジャンプ系は使えるたびに。敵正面には立たない。"] },
+          { min: 50, title: "Lv50帯", single: ["トゥルースラスト", "ディセムボウル", "桜華繚乱", "トゥルースラスト", "ボーパルスラスト", "フルスラスト"], aoe: ["ドゥームスパイク", "ソニックスラスト"], opener: ["ランスチャージ", "ジャンプ", "桜華繚乱"], tips: ["桜華系DoTとディセム系強化を維持。"] },
+          { min: 70, title: "Lv70-80帯", single: ["ランスチャージ", "ゲイルスコグル", "ナーストレンド", "桜華繚乱", "フルスラスト"], aoe: ["ドゥームスパイク", "ソニックスラスト", "クルザントーメント"], opener: ["ランスチャージ", "ゲイルスコグル", "ジャンプ"], tips: ["ジャンプ系とゲイルスコグルを腐らせない。"] }
+        ]
+      },
+      NIN: {
+        name: "忍者",
+        tiers: [
+          { min: 1, title: "低レベル基本", single: ["双刃旋", "風断ち", "旋風刃"], aoe: ["血花五月雨"], opener: ["双刃旋", "風断ち", "旋風刃"], tips: ["忍術を覚えたら雷遁を単体、土遁を複数へ。"] },
+          { min: 45, title: "Lv45以降", single: ["風遁の術", "双刃旋", "風断ち", "旋風刃", "雷遁の術"], aoe: ["土遁の術", "血花五月雨", "八卦無刃殺"], opener: ["風遁の術", "だまし討ち", "雷遁の術"], tips: ["風遁維持。だまし討ち中に忍術と強い技。"] },
+          { min: 70, title: "Lv70-80帯", single: ["風遁の術", "だまし討ち", "夢幻三段", "雷遁の術", "旋風刃"], aoe: ["土遁の術", "血花五月雨", "八卦無刃殺"], opener: ["風遁の術", "だまし討ち", "夢幻三段", "雷遁の術"], tips: ["バーストに忍術を集中。印の失敗は気にしすぎず次へ。"] }
+        ]
+      },
+      SAM: {
+        name: "侍",
+        tiers: [
+          { min: 50, title: "解放直後", single: ["刃風", "陣風", "月光", "刃風", "士風", "花車", "雪風", "乱れ雪月花"], aoe: ["風雅", "満月", "桜花"], opener: ["明鏡止水", "月光", "花車", "雪風", "乱れ雪月花"], tips: ["雪月花の3閃を集めて乱れ雪月花。彼岸花は長く殴る敵に。"] },
+          { min: 70, title: "Lv70-80帯", single: ["明鏡止水", "月光", "花車", "雪風", "乱れ雪月花", "彼岸花"], aoe: ["風雅", "満月", "桜花", "天下五剣"], opener: ["明鏡止水", "月光", "花車", "雪風", "乱れ雪月花"], tips: ["剣気は溢れそうなら消費。範囲は2閃から天下五剣。"] }
+        ]
+      },
+      BRD: {
+        name: "吟遊詩人",
+        tiers: [
+          { min: 1, title: "低レベル基本", single: ["ヘヴィショット", "ストレートショット"], aoe: ["クイックノック"], opener: ["ベノムバイト", "ヘヴィショット"], tips: ["DoTを覚えたら維持。Procしたら強い矢を撃つ。"] },
+          { min: 50, title: "Lv50帯", single: ["ベノムバイト", "ウィンドバイト", "旅神のメヌエット", "ヘヴィショット", "ストレートショット"], aoe: ["クイックノック", "シャドウバイト"], opener: ["猛者の撃", "旅神のメヌエット", "ベノムバイト", "ウィンドバイト"], tips: ["歌を切らさない。DoT維持、Procを優先。"] },
+          { min: 70, title: "Lv70-80帯", single: ["旅神のメヌエット", "賢人のバラード", "軍神のパイオン", "バーストショット", "リフルジェントアロー"], aoe: ["クイックノック", "シャドウバイト"], opener: ["猛者の撃", "旅神のメヌエット", "バーストショット"], tips: ["歌を回し続けるのが一番大事。"] }
+        ]
+      },
+      MCH: {
+        name: "機工士",
+        tiers: [
+          { min: 30, title: "解放直後", single: ["スプリットショット", "スラッグショット", "クリーンショット"], aoe: ["スプレッドショット"], opener: ["ホットショット", "スプリットショット", "スラッグショット", "クリーンショット"], tips: ["コンボを回して、強いアビリティは使えるたびに。"] },
+          { min: 58, title: "Lv58以降", single: ["ドリル", "エアアンカー", "スプリットショット", "スラッグショット", "クリーンショット", "ハイパーチャージ", "ヒートブラスト"], aoe: ["バイオブラスト", "スプレッドショット", "オートボウガン"], opener: ["ドリル", "エアアンカー", "ワイルドファイア", "ハイパーチャージ", "ヒートブラスト"], tips: ["ドリルとエアアンカーを腐らせない。ワイルドファイア中にヒートブラスト。"] },
+          { min: 70, title: "Lv70-80帯", single: ["ドリル", "エアアンカー", "ワイルドファイア", "ハイパーチャージ", "ヒートブラスト", "クリーンショット"], aoe: ["バイオブラスト", "オートボウガン", "スプレッドショット"], opener: ["ドリル", "エアアンカー", "ワイルドファイア", "ハイパーチャージ"], tips: ["整備はドリルなど強い一撃へ。"] }
+        ]
+      },
+      DNC: {
+        name: "踊り子",
+        tiers: [
+          { min: 60, title: "解放直後", single: ["スタンダードステップ", "カスケード", "ファウンテン", "リバースカスケード", "ファウンテンフォール"], aoe: ["スタンダードステップ", "ウィンドミル", "ブレードシャワー"], opener: ["クローズドポジション", "スタンダードステップ", "カスケード", "ファウンテン"], tips: ["スタンダードステップを最優先。Procした光る技を押す。"] },
+          { min: 70, title: "Lv70-80帯", single: ["テクニカルステップ", "スタンダードステップ", "カスケード", "ファウンテン", "剣の舞い", "扇の舞い"], aoe: ["テクニカルステップ", "ウィンドミル", "ブレードシャワー", "剣の舞い"], opener: ["クローズドポジション", "テクニカルステップ", "スタンダードステップ", "剣の舞い"], tips: ["ステップ2種を腐らせない。Procとエスプリを消費。"] }
+        ]
+      },
+      BLM: {
+        name: "黒魔道士",
+        tiers: [
+          { min: 1, title: "低レベル基本", single: ["サンダー", "ファイア", "ブリザド"], aoe: ["ブリザド"], opener: ["サンダー", "ファイア", "ファイア", "ブリザド"], tips: ["MPがある間は火、MP回復は氷。サンダー系DoTを維持。"] },
+          { min: 50, title: "Lv50帯", single: ["サンダー", "ファイガ", "ファイア", "ブリザガ"], aoe: ["フリーズ", "ファイラ", "フレア"], opener: ["サンダー", "ファイガ", "ファイア", "ブリザガ"], tips: ["火で攻撃、氷でMP回復。動きすぎない位置取りが火力。"] },
+          { min: 60, title: "Lv60-80帯", single: ["サンダー", "ファイガ", "ファイジャ", "デスペア", "ブリザガ", "ブリザジャ"], aoe: ["フリーズ", "フレア"], opener: ["サンダー", "ファイガ", "ファイジャ", "デスペア"], tips: ["ファイジャ中心、最後にデスペア、氷で立て直す。"] }
+        ]
+      },
+      SMN: {
+        name: "召喚士",
+        tiers: [
+          { min: 1, title: "低レベル基本", single: ["エーテルチャージ", "サモン・ルビー", "ジェムシャイン", "ルイン"], aoe: ["アウトバースト"], opener: ["サモン・カーバンクル", "エーテルチャージ", "サモン・ルビー"], tips: ["召喚中の専用魔法を撃ち切る。"] },
+          { min: 50, title: "Lv50帯", single: ["エーテルチャージ", "サモン・イフリート", "ジェムシャイン", "サモン・タイタン", "ジェムシャイン", "サモン・ガルーダ", "ジェムシャイン"], aoe: ["アウトバースト", "プレシャスブリリアンス", "ペインフレア"], opener: ["エーテルチャージ", "サモン・イフリート", "サモン・タイタン", "サモン・ガルーダ"], tips: ["3属性を撃ち切る。3体以上は範囲版。"] },
+          { min: 70, title: "Lv70-80帯", single: ["シアリングライト", "サモン・バハムート", "アストラルインパルス", "エンキンドル・バハムート", "サモン・フェニックス", "霊泉の炎"], aoe: ["トライディザスター", "アストラルフレア", "煉獄の炎"], opener: ["シアリングライト", "サモン・バハムート", "エンキンドル・バハムート"], tips: ["Lv80はバハムート→3属性→フェニックス→3属性。"] }
+        ]
+      },
+      RDM: {
+        name: "赤魔道士",
+        tiers: [
+          { min: 50, title: "解放直後", single: ["ジョルト", "ヴァルサンダー", "ヴァルエアロ", "リポスト", "ツヴェルクハウ", "ルドゥブルマン"], aoe: ["スキャッター", "エンムーリネ・アン"], opener: ["ジョルト", "ヴァルサンダー", "ジョルト", "ヴァルエアロ"], tips: ["連続魔で長詠唱を即撃ち。白黒マナを近づける。"] },
+          { min: 70, title: "Lv70-80帯", single: ["ジョルト", "ヴァルサンダー", "ヴァルエアロ", "リポスト", "ツヴェルクハウ", "ルドゥブルマン", "ヴァルフレア"], aoe: ["インパクト", "エンムーリネ・アン"], opener: ["エンボルデン", "ジョルト", "ヴァルサンダー", "ヴァルエアロ"], tips: ["マナが溜まったら近接コンボへ。蘇生も大きな強み。"] }
+        ]
+      }
+    };
+
     const gearTiers = [
       {
         min: 80,
@@ -2024,8 +2067,8 @@
       { field: "FingerL", label: "指輪" }
     ];
 
-    const gearCache = new Map();
     const iconCache = new Map();
+    const actionIconCache = new Map();
 
     const storyStages = {
       airship: { rank: 1, label: "三都巡り後" },
@@ -2086,6 +2129,34 @@
         reason: "Lv50装備更新が近いので、ここで高額な買い物をしなくて大丈夫です。"
       }
     ];
+
+    const roleUtilityByRole = {
+      tank: [
+        { title: "最初に入れる", text: "IDではタンクスタンスをオン。敵視が安定し、先輩も攻撃に集中しやすくなります。", actions: ["アイアンウィル", "ディフェンダー", "グリットスタンス", "ロイヤルガード"] },
+        { title: "まとめる前", text: "敵を複数持つ前に防御バフを1枚。HPが減ってからより、殴られる前に使うのが快適です。", actions: ["ランパート", "リプライザル"] },
+        { title: "ボス戦", text: "ボス正面を味方へ向けない。大きい詠唱に軽減を合わせると安定します。", actions: ["挑発", "ロウブロウ"] }
+      ],
+      healer: [
+        { title: "攻撃の型", text: "DoTを入れて単体魔法。回復は先読みアビリティを優先し、GCD攻撃を止めすぎないのが目標です。", actions: ["エアロ", "バイオ", "コンバス"] },
+        { title: "IDまとめ", text: "タンクがまとめたら範囲攻撃へ。危ない時は攻撃より回復を先にして、立て直しを優先します。", actions: ["ホーリー", "破陣法", "グラビデ"] },
+        { title: "蘇生", text: "蘇生は迅速魔とセットで使うと安全。自分が床を避けられるタイミングで使います。", actions: ["迅速魔", "レイズ", "リザレク"] }
+      ],
+      melee: [
+        { title: "基本姿勢", text: "敵の正面を避けて背面か側面。方向指定は取れる時だけでOK、まずコンボを止めないことを優先。", actions: ["トゥルーノース", "牽制"] },
+        { title: "範囲切替", text: "3体以上なら範囲コンボへ。ID道中は単体コンボを続けるより全体が早く終わります。", actions: ["ブラッドバス", "内丹"] },
+        { title: "バースト", text: "自己強化中に強い技を集める。光ったProcやジョブゲージを溢れさせないのが第一歩です。", actions: ["牽制", "アームズレングス"] }
+      ],
+      ranged: [
+        { title: "動ける強み", text: "遠隔物理は移動しながら攻撃しやすいロール。床を避けながらGCDを止めない練習に向いています。", actions: ["内丹", "プロトン"] },
+        { title: "範囲切替", text: "3体以上なら範囲攻撃。歌、ドリル、ステップなどジョブの強い軸を腐らせない。", actions: ["タクティシャン", "アームズレングス"] },
+        { title: "支援", text: "全体攻撃前に軽減。移動中はプロトンで道中のテンポも良くできます。", actions: ["プロトン", "ヘッドグレイズ"] }
+      ],
+      caster: [
+        { title: "詠唱の型", text: "詠唱職は先に立ち位置を見る。長い詠唱を無理に通すより、避けてから再開した方が安定します。", actions: ["迅速魔", "アドル"] },
+        { title: "範囲切替", text: "3体以上なら範囲魔法へ。召喚士と赤魔道士は蘇生も大きな強みです。", actions: ["ルーシッドドリーム", "リザレク", "ヴァルレイズ"] },
+        { title: "火力を落としにくくする", text: "バースト、Proc、ジョブゲージを見て、強いボタンを温存しすぎない。", actions: ["堅実魔", "アドル"] }
+      ]
+    };
 
     const unlockGoals = [
       {
@@ -2352,9 +2423,14 @@
       { id: -11, name: "ハーデス討滅戦", level: 80, type: "討伐・討滅戦", image: null, sort: 80 }
     ];
 
+    const featureTabs = document.querySelectorAll(".feature-tab");
+    const cockpitJob = document.getElementById("cockpitJob");
     const cockpitLevel = document.getElementById("cockpitLevel");
     const cockpitMode = document.getElementById("cockpitMode");
     const cockpitAnswer = document.getElementById("cockpitAnswer");
+    const jobSummaryGrid = document.getElementById("jobSummaryGrid");
+    const growthTitle = document.getElementById("growthTitle");
+    const growthNote = document.getElementById("growthNote");
     const siteSearch = document.getElementById("siteSearch");
     const siteSearchResults = document.getElementById("siteSearchResults");
     const gearJob = document.getElementById("gearJob");
@@ -2376,6 +2452,15 @@
     let activeResourceCategory = "all";
     const pageParams = new URLSearchParams(window.location.search);
     let duties = [];
+    let actionIconOverrides = {};
+    let itemIconOverrides = {};
+    const iconDataReady = Promise.all([
+      fetch("action-icons.json").then((response) => response.ok ? response.json() : {}).catch(() => ({})),
+      fetch("item-icons.json").then((response) => response.ok ? response.json() : {}).catch(() => ({}))
+    ]).then(([actionIcons, itemIcons]) => {
+      actionIconOverrides = actionIcons;
+      itemIconOverrides = itemIcons;
+    });
     if (pageParams.get("duty")) {
       dutySearch.value = pageParams.get("duty");
     }
@@ -2383,37 +2468,23 @@
     gearJob.innerHTML = gearJobs.map((job) => `
       <option value="${job.id}" ${job.id === "SMN" ? "selected" : ""}>${job.label}</option>
     `).join("");
+    cockpitJob.innerHTML = gearJobs.map((job) => `
+      <option value="${job.id}" ${job.id === "SMN" ? "selected" : ""}>${job.label}</option>
+    `).join("");
     if (gearJobs.some((job) => job.id === pageParams.get("job"))) {
       gearJob.value = pageParams.get("job");
+      cockpitJob.value = pageParams.get("job");
     }
     if (pageParams.get("level")) {
       gearLevel.value = pageParams.get("level");
+      cockpitLevel.value = pageParams.get("level");
     }
     if (storyStages[pageParams.get("story")]) {
       storyStage.value = pageParams.get("story");
     }
-
-    cockpitLevel.innerHTML = sections.map((section) => `
-      <option value="${section.id}">${section.title}</option>
-    `).join("");
-    cockpitLevel.value = "lv80";
-
-    document.getElementById("quickSolutions").innerHTML = quickSolutions.map((item) => `
-      <button class="quick-solution" type="button" data-level="${item.level}" data-mode="${item.mode}">
-        <strong>${item.title}</strong>
-        <span>${item.text}</span>
-      </button>
-    `).join("");
-
-    document.getElementById("motivationGrid").innerHTML = motivationCards.map((card) => `
-      <div class="motivation-card">
-        <h3>${card.title}</h3>
-        <p>${card.text}</p>
-        <div class="badge-row">${card.badges.map((badge, index) => `
-          <span class="badge-pill ${index > 1 ? "locked" : ""}">${badge}</span>
-        `).join("")}</div>
-      </div>
-    `).join("");
+    if (!pageParams.get("level")) {
+      cockpitLevel.value = gearLevel.value || 80;
+    }
 
     document.getElementById("resourceTabs").innerHTML = resourceCategories.map((category) => `
       <button class="resource-tab ${category.id === "all" ? "active" : ""}" type="button" data-category="${category.id}">
@@ -2421,31 +2492,44 @@
       </button>
     `).join("");
 
-    function renderCockpit() {
-      const section = sections.find((item) => item.id === cockpitLevel.value) || sections[sections.length - 1];
+    async function renderCockpit() {
+      const job = selectedRotationJob();
+      const level = selectedRotationLevel();
+      cockpitLevel.value = level;
+      const guide = rotationGuides[job.id];
       const mode = cockpitMode.value;
-      let title = "単体 / ボス";
-      let body = comboLane(section.singleFlow) + `<ol>${section.single.map((line) => `<li>${line}</li>`).join("")}</ol>`;
+      const modeTitle = {
+        single: "単体 / ボス",
+        aoe: "3体以上 / まとめ",
+        opener: "開幕 / バースト"
+      }[mode] || "単体 / ボス";
 
-      if (mode === "aoe") {
-        title = "3体以上 / まとめ";
-        body = comboLane(section.aoeFlow) + `<ul>${section.aoe.map((line) => `<li>${line}</li>`).join("")}</ul>`;
-      }
-      if (mode === "mistakes") {
-        title = "ミス確認";
-        body = `<ul>${section.mistakes.map((line) => `<li>${line}</li>`).join("")}</ul>`;
-      }
-      if (mode === "mantra") {
-        title = "ひとことで覚える";
-        body = `<div class="mantra">${section.mantra}</div>`;
+      if (!guide || level < job.min) {
+        cockpitAnswer.innerHTML = `
+          <h3>${job.label}はLv${job.min}から使えます</h3>
+          <p>今のレベルではまだ選択したジョブになれません。解放レベルに到達したら、このタブがそのジョブ用に切り替わります。</p>
+        `;
+        await renderJobGuide();
+        return;
       }
 
+      const tier = getRotationTier(job.id, level);
+      const names = tier[mode]?.length ? tier[mode] : tier.single;
       cockpitAnswer.innerHTML = `
-        <h3>${section.title} - ${title}</h3>
-        <p>${section.summary}</p>
-        ${body}
-        <p class="footer-note"><a href="#${section.id}">詳しい説明へ移動</a></p>
+        <h3>Lv${level} ${guide.name}: ${tier.title} - ${modeTitle}</h3>
+        <p>アイコンを読み込んでいます。</p>
       `;
+      cockpitAnswer.innerHTML = `
+        <h3>Lv${level} ${guide.name}: ${tier.title} - ${modeTitle}</h3>
+        <p>${tier.tips.join(" ")}</p>
+        ${await rotationLane(names)}
+        <div class="rotation-note-list">
+          ${tier.tips.map((tip) => `<div class="rotation-note">${tip}</div>`).join("")}
+          <div class="rotation-note">3体以上は範囲、ボスや1〜2体は単体。迷ったら今のタブの並びを上から押します。</div>
+        </div>
+        <p class="footer-note"><a href="#job-${job.id.toLowerCase()}-${tier.min}">このレベル帯の詳しいカードへ移動</a></p>
+      `;
+      await renderJobGuide();
     }
 
     function renderResources() {
@@ -2470,20 +2554,7 @@
         siteSearchResults.innerHTML = "";
         return;
       }
-      const results = sections
-        .map((section) => ({
-          title: section.title,
-          href: `#${section.id}`,
-          text: [
-            section.label,
-            section.summary,
-            section.single.join(" "),
-            section.aoe.join(" "),
-            section.mistakes.join(" "),
-            section.mantra,
-            section.actions.map((key) => actions[key].name).join(" ")
-          ].join(" ")
-        }))
+      const results = currentGuideSections
         .filter((result) => `${result.title} ${result.text}`.toLowerCase().includes(query))
         .slice(0, 6);
       siteSearchResults.innerHTML = results.length
@@ -2500,14 +2571,6 @@
       return gearTiers.find((tier) => level >= tier.min) || null;
     }
 
-    function xivapiAsset(icon) {
-      if (!icon || (!icon.path_hr1 && !icon.path)) {
-        return "";
-      }
-      const path = icon.path_hr1 || icon.path;
-      return `https://v2.xivapi.com/api/asset?path=${encodeURIComponent(path)}&format=png`;
-    }
-
     function officialItemSearch(name) {
       return `https://jp.finalfantasyxiv.com/lodestone/playguide/db/search/?q=${encodeURIComponent(name)}`;
     }
@@ -2516,25 +2579,56 @@
       if (!name) {
         return "";
       }
+      await iconDataReady;
+      if (itemIconOverrides[name]) {
+        return itemIconOverrides[name];
+      }
       if (iconCache.has(name)) {
         return iconCache.get(name);
       }
-      try {
-        const query = `Name@ja~"${name}"`;
-        const url = `https://v2.xivapi.com/api/search?sheets=Item&fields=Name,Icon&language=ja&query=${encodeURIComponent(query)}&limit=1`;
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error("icon fetch failed");
-        }
-        const data = await response.json();
-        const icon = data.results?.[0]?.fields?.Icon;
-        const iconUrl = xivapiAsset(icon);
-        iconCache.set(name, iconUrl);
-        return iconUrl;
-      } catch (error) {
-        iconCache.set(name, "");
+      iconCache.set(name, "");
+      return "";
+    }
+
+    async function fetchActionIconByName(name) {
+      if (!name) {
         return "";
       }
+      const known = Object.values(actions).find((action) => action.name === name);
+      if (known) {
+        return known.icon;
+      }
+      await iconDataReady;
+      if (actionIconOverrides[name]) {
+        return actionIconOverrides[name];
+      }
+      if (actionIconCache.has(name)) {
+        return actionIconCache.get(name);
+      }
+      actionIconCache.set(name, "");
+      return "";
+    }
+
+    async function actionChipByName(name) {
+      const iconUrl = await fetchActionIconByName(name);
+      return `
+        <span class="action-chip">
+          ${iconUrl ? `<img src="${iconUrl}" alt="${name}" loading="lazy">` : ""}
+          <span>${name}</span>
+        </span>
+      `;
+    }
+
+    async function rotationLane(names) {
+      const chips = await Promise.all((names || []).map(actionChipByName));
+      return `
+        <div class="combo-lane">
+          ${chips.map((html, index) => `
+            ${index === 0 ? "" : '<span class="combo-arrow">→</span>'}
+            ${html}
+          `).join("")}
+        </div>
+      `;
     }
 
     function iconBox(url, alt, className = "next-icon") {
@@ -2542,6 +2636,127 @@
         ? `<img class="${className}" src="${url}" alt="${alt}">`
         : `<div class="${className}" aria-hidden="true"></div>`;
     }
+
+    function selectedRotationJob() {
+      return gearJobs.find((item) => item.id === cockpitJob.value) || gearJobs.find((item) => item.id === "SMN");
+    }
+
+    function selectedRotationLevel() {
+      return Math.min(80, Math.max(1, Number(cockpitLevel.value) || Number(gearLevel.value) || 1));
+    }
+
+    function getRotationTier(jobId, level) {
+      const tiers = rotationGuides[jobId]?.tiers || [];
+      return tiers
+        .filter((tier) => level >= tier.min)
+        .sort((a, b) => b.min - a.min)[0] || tiers[0];
+    }
+
+    function flowClass(index) {
+      return ["ruby", "gold", "emerald", "bahamut", "phoenix"][index % 5];
+    }
+
+    async function renderUtilityForJob(job, tier) {
+      const roleRows = roleUtilityByRole[job.role] || roleUtilityByRole.caster;
+      const rows = await Promise.all(roleRows.map(async (row) => `
+        <div class="utility-line">
+          <div class="action-row">${(await Promise.all(row.actions.map(actionChipByName))).join("")}</div>
+          <p><strong>${row.title}</strong><br>${row.text}</p>
+        </div>
+      `));
+      document.getElementById("utility").innerHTML = rows.join("");
+    }
+
+    async function renderJobGuide() {
+      const job = selectedRotationJob();
+      const level = selectedRotationLevel();
+      const guide = rotationGuides[job.id];
+      if (!guide) {
+        return;
+      }
+      const currentTier = getRotationTier(job.id, level);
+      const steps = guide.tiers.map((tier, index) => `
+        <span class="flow-step ${flowClass(index)}">Lv${tier.min}+ ${tier.title}</span>
+      `).join("");
+      jobSummaryGrid.innerHTML = `
+        <div class="quick-block">
+          <strong>${guide.name}の覚え方</strong>
+          <div class="flow">${steps}</div>
+          <div class="mantra">
+            今は「${currentTier.title}」。単体、範囲、開幕の3つだけをタブで確認すれば、レベルシンクしても戻しやすいです。
+          </div>
+        </div>
+        <div class="quick-block">
+          <strong>まず覚える3つ</strong>
+          <ul>
+            <li>${currentTier.tips[0] || "強いボタンを腐らせない。"}</li>
+            <li>3体以上なら範囲、ボスや1〜2体なら単体へ切り替える。</li>
+            <li>解放されたばかりのジョブは、最初に基本コンボとジョブゲージだけ見ればOK。</li>
+          </ul>
+        </div>
+      `;
+      growthTitle.textContent = `${guide.name} 成長マップ`;
+      growthNote.textContent = `選んだジョブとレベルに合わせて節目を表示しています。装備タブのジョブを変えるとここも同じジョブへ切り替わります。`;
+
+      const milestoneHtml = await Promise.all(guide.tiers.map(async (tier) => `
+        <div class="milestone">
+          <div class="lv">Lv${tier.min}</div>
+          <div>
+            <p>${tier.title}: ${tier.tips[0] || "このレベル帯の基本を確認。"}</p>
+            <div class="action-row">${(await Promise.all((tier.single || []).slice(0, 4).map(actionChipByName))).join("")}</div>
+          </div>
+        </div>
+      `));
+      document.getElementById("milestones").innerHTML = milestoneHtml.join("");
+
+      currentGuideSections = guide.tiers.map((tier) => ({
+        title: `Lv${tier.min}+ ${guide.name}: ${tier.title}`,
+        href: `#job-${job.id.toLowerCase()}-${tier.min}`,
+        text: [
+          guide.name,
+          tier.title,
+          (tier.single || []).join(" "),
+          (tier.aoe || []).join(" "),
+          (tier.opener || []).join(" "),
+          (tier.tips || []).join(" ")
+        ].join(" ")
+      }));
+
+      const cards = await Promise.all(guide.tiers.map(async (tier) => `
+        <section class="section-card" id="job-${job.id.toLowerCase()}-${tier.min}">
+          <div class="section-top">
+            <div>
+              <div class="level-tag">${guide.name} / Lv${tier.min}+</div>
+              <h2>${tier.title}</h2>
+            </div>
+          </div>
+          <p class="section-summary">${tier.tips.join(" ")}</p>
+          <div class="action-row">${(await Promise.all((tier.single || []).slice(0, 6).map(actionChipByName))).join("")}</div>
+          <div class="section-grid">
+            <div class="subcard">
+              <h3>単体 / ボス</h3>
+              ${await rotationLane(tier.single)}
+            </div>
+            <div class="subcard">
+              <h3>3体以上の範囲攻撃</h3>
+              ${await rotationLane(tier.aoe)}
+            </div>
+            <div class="subcard">
+              <h3>開幕 / バースト</h3>
+              ${await rotationLane(tier.opener)}
+            </div>
+            <div class="subcard">
+              <h3>見落とし防止</h3>
+              <ul>${tier.tips.map((tip) => `<li>${tip}</li>`).join("")}</ul>
+            </div>
+          </div>
+        </section>
+      `));
+      document.getElementById("sections").innerHTML = cards.join("");
+      await renderUtilityForJob(job, currentTier);
+      renderSearchResults();
+    }
+
 
     function storyRank() {
       return storyStages[storyStage.value]?.rank || 1;
@@ -2555,61 +2770,86 @@
       return Math.max(0, target - level);
     }
 
-    async function fetchGearItem(tier, jobId, slot) {
-      const cacheKey = `${tier.name}:${jobId}:${slot.field}`;
-      if (gearCache.has(cacheKey)) {
-        return gearCache.get(cacheKey);
-      }
-      const query = [
-        `+Name@en~"${tier.name}"`,
-        `+ClassJobCategory.${jobId}=true`,
-        `+EquipSlotCategory.${slot.field}=1`,
-        `+LevelEquip=${tier.min}`
-      ].join(" ");
-      const url = `https://v2.xivapi.com/api/search?sheets=Item&fields=Name,Icon,LevelEquip,LevelItem,ItemUICategory.Name,EquipSlotCategory,ClassJobCategory&language=ja&query=${encodeURIComponent(query)}&limit=10`;
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error("gear fetch failed");
-      }
-      const data = await response.json();
-      const item = (data.results || [])
-        .map((result) => ({ rowId: result.row_id, ...result.fields }))
-        .find((candidate) => candidate.ClassJobCategory?.fields?.[jobId]);
-      gearCache.set(cacheKey, item || null);
-      return item || null;
-    }
-
     async function renderLowLevelGear(job, level) {
       const plan = lowLevelGearPlans.find((item) => level >= item.min && level <= item.max) || lowLevelGearPlans[0];
-      const iconUrl = await fetchItemIconByName(plan.iconName);
+      const beginnerItems = beginnerGearByRole[job.role] || beginnerGearByRole.caster;
       const nextTier = gearTiers[gearTiers.length - 1];
       gearSummary.innerHTML = `
         <h3>Lv${level} ${job.label}: ${plan.title}</h3>
         <p>${plan.reason}<br>あと${levelDelta(level, 50)}Lvで${nextTier.label} IL${nextTier.ilvl}が見えてきます。</p>
         <div class="life-meter" aria-hidden="true"><span style="--meter:${Math.min(100, Math.round((level / 50) * 100))}%"></span></div>
       `;
-      gearList.innerHTML = [
+      const concreteItems = [
         {
-          title: "今の装備方針",
-          text: plan.items.join(" / ")
+          name: plan.iconName,
+          title: "武器: レベルに近いもの",
+          text: level < 30
+            ? `${job.className || job.label}クエスト報酬を最優先。古ければ現在行ける街の武器屋、または直近IDドロップで更新。`
+            : `${job.label}で装備できる武器を、ジョブクエスト報酬、直近IDドロップ、店売りの順で確認。武器だけは5Lv以上古い状態を避けます。`
+        },
+        ...beginnerItems.map((item) => ({
+          name: item.name,
+          title: `${item.slot}: ${item.name}`,
+          text: `${item.source}で入手。Lv15-29の防具と指輪はここを取れば十分強く、Lv20でも迷わずこれでOKです。`
+        })),
+        {
+          name: "ソウルクリスタル",
+          title: level >= 30 ? "ジョブクリスタル" : "Lv30でジョブ化",
+          text: level >= 30
+            ? "装備画面でジョブクリスタルが入っているか確認。入っていないとジョブの強いアクションが使えません。"
+            : `あと${levelDelta(level, 30)}Lvでジョブ化。Lv30クラスクエスト完了後に必ず装備します。`
         },
         {
-          title: "部位の優先度",
-          text: "武器が最優先。次に胴・脚。その後に頭・手・足・アクセを「さいきょう」で自然更新。"
-        },
-        {
-          title: "次の大更新",
-          text: `Lv50で${nextTier.label}へ。詩学交換なので、Lv50到達後はこの装備チェッカーで部位ごとに確認できます。`
+          name: "アラガントームストーン:詩学",
+          title: "次の大更新: ガーロンドRE",
+          text: `Lv50到達後、新生クリアで${nextTier.label} IL${nextTier.ilvl}へ。武器、胴、脚から交換すると一気に楽になります。`
         }
-      ].map((item, index) => `
+      ];
+      const cards = await Promise.all(concreteItems.map(async (item) => ({
+        ...item,
+        iconUrl: await fetchItemIconByName(item.name)
+      })));
+      gearList.innerHTML = cards.map((item) => `
         <div class="gear-card">
-          ${iconBox(index === 0 ? iconUrl : "", item.title, "gear-icon")}
+          ${iconBox(item.iconUrl, item.title, "gear-icon")}
           <div>
             <h3>${item.title}</h3>
             <p>${item.text}</p>
           </div>
         </div>
       `).join("");
+    }
+
+    function gearRoleLabel(job) {
+      if (job.role === "tank") {
+        return "ディフェンダー";
+      }
+      if (job.role === "healer") {
+        return "ヒーラー";
+      }
+      if (job.role === "ranged") {
+        return "レンジャー";
+      }
+      if (job.role === "caster") {
+        return "キャスター";
+      }
+      if (job.id === "DRG") {
+        return "スレイヤー";
+      }
+      if (job.id === "NIN") {
+        return "スカウト";
+      }
+      return "ストライカー";
+    }
+
+    function staticGearTitle(tier, job, slot) {
+      if (slot.field === "MainHand") {
+        return `${slot.label}: ${tier.label} ${job.label}武器`;
+      }
+      if (slot.field === "OffHand") {
+        return `${slot.label}: ${tier.label} ナイト盾`;
+      }
+      return `${slot.label}: ${tier.label} ${gearRoleLabel(job)}装備`;
     }
 
     function gearLife(level, tier) {
@@ -2767,41 +3007,8 @@
       nextBoard.innerHTML = intro + (await Promise.all(uniqueGoals.map((goal) => renderGoalCard(goal, level)))).join("");
     }
 
-    function assetFromPath(image) {
-      return image ? xivapiAsset(image) : "";
-    }
-
-    function normalizeDuty(result) {
-      const fields = result.fields || {};
-      return {
-        id: result.row_id,
-        name: fields.Name || "",
-        level: fields.ClassJobLevelRequired || 0,
-        type: fields.ContentType?.fields?.Name || "",
-        image: fields.Image || null,
-        sort: fields.SortKey || 9999,
-        itemLevel: fields.ItemLevelRequired || 0,
-        highEnd: Boolean(fields.HighEndDuty)
-      };
-    }
-
     async function loadDuties() {
-      try {
-        const url = "https://v2.xivapi.com/api/search?sheets=ContentFinderCondition&fields=Name,ClassJobLevelRequired,ContentType.Name,Image,SortKey,HighEndDuty,ItemLevelRequired&language=ja&query=ClassJobLevelRequired%3C%3D80&limit=500";
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error("duty fetch failed");
-        }
-        const data = await response.json();
-        duties = (data.results || [])
-          .map(normalizeDuty)
-          .filter((duty) => duty.name && duty.level > 0)
-          .filter((duty) => duty.type === "ダンジョン" || duty.type === "討伐・討滅戦")
-          .filter((duty) => !duty.highEnd)
-          .sort((a, b) => a.level - b.level || a.sort - b.sort || a.name.localeCompare(b.name, "ja"));
-      } catch (error) {
-        duties = fallbackDuties;
-      }
+      duties = fallbackDuties;
       renderDutyOptions();
       renderDutyGuide();
     }
@@ -2867,7 +3074,7 @@
       if (String(dutySelect.value) !== String(duty.id)) {
         dutySelect.value = duty.id;
       }
-      const imageUrl = assetFromPath(duty.image);
+      const imageUrl = "";
       dutySummary.innerHTML = `
         <h3>Lv${duty.level} ${duty.name}</h3>
         <p>${duty.type} / 必要IL ${duty.itemLevel || "なし"}。初見では「床を見る」「味方と同じ方向へ避ける」「長い詠唱中に外周と遮蔽物を見る」の3つでかなり安定します。</p>
@@ -2949,74 +3156,98 @@
         <p>${tier.vendor}<br>${tier.unlock}<br>${nextGearText(level, tier)}</p>
         <div class="life-meter" aria-hidden="true"><span style="--meter:${gearLife(level, tier)}%"></span></div>
       `;
-      gearList.innerHTML = `<div class="gear-card"><div class="gear-icon" aria-hidden="true"></div><div><h3>アイコン取得中</h3><p>ゲーム内アイコンをXIVAPIから読み込んでいます。</p></div></div>`;
-
-      try {
-        const slots = gearSlots.filter((slot) => !slot.jobs || slot.jobs.includes(job.id));
-        const items = await Promise.all(slots.map(async (slot) => ({
-          slot,
-          item: await fetchGearItem(tier, job.id, slot)
-        })));
-        gearList.innerHTML = items.map(({ slot, item }) => {
-          if (!item) {
-            const query = `${tier.label} ${job.label} ${slot.label}`;
-            return `
-              <div class="gear-card">
-                <div class="gear-icon" aria-hidden="true"></div>
-                <div>
-                  <h3>${slot.label}: ${tier.label} ${slot.label}</h3>
-                  <p>${tier.vendor} この枠だけ自動取得できなかったため、必要な時だけ公式DBで確認できます。</p>
-                  <div class="gear-links">
-                    <a href="${officialItemSearch(query)}" target="_blank" rel="noreferrer noopener">公式DB</a>
-                  </div>
-                </div>
-              </div>
-            `;
-          }
-          const levelItem = item.LevelItem?.value || tier.ilvl;
-          const iconUrl = xivapiAsset(item.Icon);
-          return `
-            <div class="gear-card">
-              ${iconUrl ? `<img class="gear-icon" src="${iconUrl}" alt="${item.Name}">` : `<div class="gear-icon" aria-hidden="true"></div>`}
-              <div>
-                <h3>${slot.label}: ${item.Name}</h3>
-                <p>装備Lv${item.LevelEquip} / IL${levelItem}。入手は ${tier.vendor}</p>
-                <div class="gear-links">
-                  <a href="${officialItemSearch(item.Name)}" target="_blank" rel="noreferrer noopener">公式DB</a>
-                </div>
-              </div>
-            </div>
-          `;
-        }).join("");
-      } catch (error) {
-        gearList.innerHTML = `
+      const poeticsIcon = await fetchItemIconByName("アラガントームストーン:詩学");
+      const slots = gearSlots.filter((slot) => !slot.jobs || slot.jobs.includes(job.id));
+      const itemCards = slots.map((slot) => {
+        const title = staticGearTitle(tier, job, slot);
+        const query = `${tier.label} ${job.label} ${slot.label}`;
+        const priority = slot.field === "MainHand"
+          ? "最優先。火力と回復量が一番伸びます。"
+          : ["Body", "Legs"].includes(slot.field)
+            ? "武器の次に優先。防御とメインステータスが大きく伸びます。"
+            : "武器、胴、脚の後に順番に交換。";
+        return `
           <div class="gear-card">
-            <div class="gear-icon" aria-hidden="true"></div>
+            ${iconBox(poeticsIcon, title, "gear-icon")}
             <div>
-              <h3>装備データを取得できませんでした</h3>
-              <p>通信状況を確認して、もう一度押してください。公式DB検索リンクは利用できます。</p>
+              <h3>${title}</h3>
+              <p>装備Lv${tier.min} / IL${tier.ilvl}。交換画面で「${gearRoleLabel(job)}」または「${job.label}武器」を選びます。${priority}</p>
+              <div class="gear-links">
+                <a href="${officialItemSearch(query)}" target="_blank" rel="noreferrer noopener">公式DB</a>
+              </div>
             </div>
           </div>
         `;
-      } finally {
-        findGearButton.disabled = false;
-        findGearButton.textContent = "装備と次の目標を見る";
-        await renderNextPlanner(job, level);
-      }
+      }).join("");
+      const poeticsCards = poeticsRoutes.map((route) => `
+        <div class="gear-card">
+          ${iconBox(poeticsIcon, route.title, "gear-icon")}
+          <div>
+            <h3>${route.title}</h3>
+            <p>${route.text}</p>
+          </div>
+        </div>
+      `).join("");
+      gearList.innerHTML = itemCards + poeticsCards;
+      findGearButton.disabled = false;
+      findGearButton.textContent = "装備と次の目標を見る";
+      await renderNextPlanner(job, level);
     }
 
-    cockpitLevel.addEventListener("change", renderCockpit);
-    cockpitMode.addEventListener("change", renderCockpit);
-    document.getElementById("quickSolutions").addEventListener("click", (event) => {
-      const button = event.target.closest(".quick-solution");
-      if (!button) {
+    function activateFeature(feature) {
+      document.querySelectorAll(".feature-panel").forEach((panel) => {
+        panel.classList.toggle("active", panel.dataset.feature === feature);
+      });
+      featureTabs.forEach((tab) => {
+        tab.classList.toggle("active", tab.dataset.tab === feature);
+      });
+    }
+
+    function featureFromHash(hash) {
+      if (!hash) {
+        return "";
+      }
+      const id = decodeURIComponent(hash.replace(/^#/, ""));
+      if ([...featureTabs].some((tab) => tab.dataset.tab === id)) {
+        return id;
+      }
+      const target = document.getElementById(id);
+      return target?.closest("[data-feature]")?.dataset.feature || "";
+    }
+
+    function syncRotationFromGear() {
+      cockpitJob.value = gearJob.value;
+      cockpitLevel.value = gearLevel.value;
+      renderCockpit();
+    }
+
+    function syncGearFromRotation() {
+      gearJob.value = cockpitJob.value;
+      gearLevel.value = cockpitLevel.value;
+      renderGearFinder();
+      renderCockpit();
+    }
+
+    featureTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        activateFeature(tab.dataset.tab);
+        history.replaceState(null, "", `#${tab.dataset.tab}`);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    });
+    document.addEventListener("click", (event) => {
+      const anchor = event.target.closest('a[href^="#"]');
+      if (!anchor) {
         return;
       }
-      cockpitLevel.value = button.dataset.level;
-      cockpitMode.value = button.dataset.mode;
-      renderCockpit();
-      document.getElementById("cockpit").scrollIntoView({ behavior: "smooth", block: "start" });
+      const feature = featureFromHash(anchor.getAttribute("href"));
+      if (feature) {
+        activateFeature(feature);
+      }
     });
+    cockpitJob.addEventListener("change", syncGearFromRotation);
+    cockpitLevel.addEventListener("change", syncGearFromRotation);
+    cockpitMode.addEventListener("change", renderCockpit);
     document.getElementById("resourceTabs").addEventListener("click", (event) => {
       const button = event.target.closest(".resource-tab");
       if (!button) {
@@ -3027,8 +3258,14 @@
     });
     siteSearch.addEventListener("input", renderSearchResults);
     findGearButton.addEventListener("click", renderGearFinder);
-    gearJob.addEventListener("change", renderGearFinder);
-    gearLevel.addEventListener("change", renderGearFinder);
+    gearJob.addEventListener("change", () => {
+      renderGearFinder();
+      syncRotationFromGear();
+    });
+    gearLevel.addEventListener("change", () => {
+      renderGearFinder();
+      syncRotationFromGear();
+    });
     storyStage.addEventListener("change", renderGearFinder);
     dutyType.addEventListener("change", () => {
       renderDutyOptions();
@@ -3040,6 +3277,7 @@
     });
     dutySelect.addEventListener("change", renderDutyGuide);
     saveCharacterButton.addEventListener("click", saveCharacter);
+    activateFeature(pageParams.get("tab") || featureFromHash(window.location.hash) || "gear");
     renderCockpit();
     renderResources();
     renderGearFinder();

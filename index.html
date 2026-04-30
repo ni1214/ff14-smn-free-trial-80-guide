@@ -41,6 +41,7 @@
         radial-gradient(circle at top left, rgba(47, 124, 102, 0.12), transparent 28%),
         linear-gradient(180deg, #fdf8ef 0%, #f7f2e9 46%, #f2eadf 100%);
       line-height: 1.65;
+      padding-bottom: calc(86px + env(safe-area-inset-bottom));
     }
 
     a {
@@ -174,14 +175,74 @@
       backdrop-filter: blur(6px);
     }
 
+    .hero-details,
+    .more-details {
+      margin-top: 10px;
+    }
+
+    .hero-details summary,
+    .more-details summary {
+      cursor: pointer;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 800;
+      list-style: none;
+    }
+
+    .hero-details summary {
+      background: rgba(255, 255, 255, 0.14);
+      color: #fffaf3;
+    }
+
+    .more-details summary {
+      border: 1px solid rgba(32, 90, 97, 0.1);
+      background: rgba(255, 250, 243, 0.84);
+      color: var(--teal);
+    }
+
+    .hero-details summary::-webkit-details-marker,
+    .more-details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .hero-details summary::after,
+    .more-details summary::after {
+      content: "+";
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .hero-details[open] summary::after,
+    .more-details[open] summary::after {
+      content: "−";
+    }
+
+    .folded-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
     .jumpbar {
-      position: sticky;
-      top: 0;
+      position: fixed;
+      left: 50%;
+      right: auto;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: min(100%, 860px);
       z-index: 20;
-      margin: 10px 0 12px;
-      padding: 6px 0 4px;
-      background: linear-gradient(180deg, rgba(247, 242, 233, 0.96), rgba(247, 242, 233, 0.86), rgba(247, 242, 233, 0));
-      backdrop-filter: blur(8px);
+      margin: 0;
+      padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+      background: rgba(255, 250, 243, 0.94);
+      border-top: 1px solid rgba(32, 90, 97, 0.12);
+      box-shadow: 0 -12px 30px rgba(31, 42, 46, 0.12);
+      backdrop-filter: blur(14px);
     }
 
     .jumpbar-track {
@@ -199,18 +260,19 @@
 
     .jump {
       appearance: none;
-      border: 1px solid rgba(32, 90, 97, 0.12);
+      border: 1px solid transparent;
       cursor: pointer;
       font-family: inherit;
       white-space: nowrap;
       text-decoration: none;
       color: var(--ink);
-      background: rgba(255, 250, 243, 0.88);
-      padding: 8px 11px;
-      border-radius: 999px;
-      font-size: 12px;
+      background: rgba(32, 90, 97, 0.06);
+      min-width: 70px;
+      min-height: 50px;
+      padding: 7px 9px;
+      border-radius: 16px;
+      font-size: 11px;
       font-weight: 700;
-      box-shadow: 0 6px 18px rgba(31, 42, 46, 0.06);
       scroll-snap-align: start;
     }
 
@@ -238,6 +300,89 @@
       margin-bottom: 4px;
     }
 
+    .profile-summary-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 16px;
+      background: var(--paper-2);
+      border: 1px solid rgba(32, 90, 97, 0.08);
+    }
+
+    .profile-summary-card strong,
+    .profile-summary-card span {
+      display: block;
+    }
+
+    .profile-summary-card strong {
+      font-size: 15px;
+      line-height: 1.3;
+    }
+
+    .profile-summary-card span {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .settings-button {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      min-height: 42px;
+      padding: 9px 12px;
+      border-radius: 14px;
+      background: var(--teal);
+      color: #fffaf3;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .settings-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 45;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 16px 12px calc(16px + env(safe-area-inset-bottom));
+      background: rgba(20, 29, 32, 0.58);
+      backdrop-filter: blur(10px);
+    }
+
+    .settings-overlay.open {
+      display: flex;
+    }
+
+    .settings-card {
+      width: min(100%, 520px);
+      max-height: min(86vh, 720px);
+      overflow-y: auto;
+      padding: 16px;
+      border-radius: 24px;
+      background: #fffaf3;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+    }
+
+    .settings-card h3 {
+      margin: 0 0 4px;
+      font-size: 20px;
+      line-height: 1.25;
+    }
+
+    .settings-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
     .profile-controls {
       display: grid;
       gap: 8px;
@@ -246,7 +391,7 @@
 
     .profile-input-row {
       display: grid;
-      grid-template-columns: 1fr 0.62fr 1fr;
+      grid-template-columns: 1fr 0.62fr;
       gap: 8px;
     }
 
@@ -279,6 +424,26 @@
       border-radius: 14px;
       background: var(--teal);
       color: #fffaf3;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .settings-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .settings-close {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      min-height: 42px;
+      border-radius: 14px;
+      background: #edf5f4;
+      color: var(--teal);
       font-family: inherit;
       font-size: 14px;
       font-weight: 800;
@@ -1353,6 +1518,11 @@
         flex-direction: column;
       }
 
+      .profile-summary-card,
+      .settings-actions {
+        grid-template-columns: 1fr;
+      }
+
       .select-row {
         grid-template-columns: 1fr;
       }
@@ -1415,27 +1585,43 @@
     <header class="hero">
       <div class="eyebrow">FFXIV Free Trial Lv80 2026-04-28</div>
       <h1>FF14 フリートライアルLv80<br>二人用攻略アプリ</h1>
-      <p>スマホで見返しやすいように、装備、次の目標、全ジョブのレベル別スキル回し、初見ギミックをタブで切り替えて見られる資料です。</p>
-      <div class="meta-note">
-        調査基準日: 2026年4月28日。<br>
-        4月28日実装のPatch 7.5パッチノートで、フリートライアルは公式に「レベル80」「漆黒のヴィランズまで」へ拡張されました。
-      </div>
-      <div class="story-visual" id="storyVisual">
-        <img id="storyImage" alt="メイン進行に合わせた公式画像" loading="lazy">
-        <div>
-          <strong id="storyImageTitle">新生エオルゼア</strong>
-          <span id="storyImageCaption">メイン進行に合わせて公式画像を切り替えます。</span>
+      <p>今のジョブとレベルから、今日見るべき装備・次の目標・初見ギミックだけを先に出します。</p>
+      <details class="hero-details">
+        <summary>調査メモと進行画像</summary>
+        <div class="meta-note">
+          調査基準日: 2026年4月28日。<br>
+          4月28日実装のPatch 7.5パッチノートで、フリートライアルは公式に「レベル80」「漆黒のヴィランズまで」へ拡張されました。
         </div>
-      </div>
-      <div class="hero-actions">
-        <button class="hero-button" id="openQrButton" type="button">QRを開く</button>
-      </div>
+        <div class="story-visual" id="storyVisual">
+          <img id="storyImage" alt="メイン進行に合わせた公式画像" loading="lazy">
+          <div>
+            <strong id="storyImageTitle">新生エオルゼア</strong>
+            <span id="storyImageCaption">メイン進行に合わせて公式画像を切り替えます。</span>
+          </div>
+        </div>
+        <div class="hero-actions">
+          <button class="hero-button" id="openQrButton" type="button">QRを開く</button>
+        </div>
+      </details>
     </header>
 
     <section class="panel profile-panel" id="adventureProfile">
       <h2>今の設定</h2>
-      <p class="footer-note">ここだけ変えれば、装備、スキル/成長、楽しみナビ、買い物、迷子ナビ、ごほうびが同じジョブ・レベル・進行で切り替わります。初見ギミックは検索で選びます。</p>
-      <div class="profile-controls">
+      <p class="footer-note">入力はポップアップにまとめました。普段はここで現在値だけ確認します。</p>
+      <div class="profile-summary-card">
+        <div id="profileSummary">
+          <strong>召喚士 / Lv20</strong>
+          <span>グランドカンパニー加入済み / 詩学0</span>
+        </div>
+        <button class="settings-button" id="openSettingsButton" type="button">設定</button>
+      </div>
+    </section>
+
+    <div class="settings-overlay" id="settingsOverlay" aria-hidden="true">
+      <div class="settings-card" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+        <h3 id="settingsTitle">今の設定を変える</h3>
+        <p>ここを変えると、装備、スキル/成長、楽しみナビ、買い物、迷子ナビ、ごほうびがまとめて切り替わります。</p>
+        <div class="profile-controls">
         <div class="profile-input-row">
           <div>
             <label for="gearJob">ジョブ</label>
@@ -1445,6 +1631,8 @@
             <label for="gearLevel">現在レベル</label>
             <input id="gearLevel" type="number" min="1" max="80" value="20">
           </div>
+        </div>
+        <div class="profile-input-row">
           <div>
             <label for="storyStage">メイン進行</label>
             <select id="storyStage">
@@ -1456,10 +1644,18 @@
               <option value="shb">漆黒進行中</option>
             </select>
           </div>
+          <div>
+            <label for="poeticsInput">詩学</label>
+            <input id="poeticsInput" type="number" min="0" max="2000" step="10" value="0">
+          </div>
         </div>
-        <button class="profile-action" id="findGearButton" type="button">この設定で更新</button>
+        <div class="settings-actions">
+          <button class="settings-close" id="closeSettingsButton" type="button">閉じる</button>
+          <button class="profile-action" id="findGearButton" type="button">この設定で更新</button>
+        </div>
       </div>
-    </section>
+      </div>
+    </div>
 
     <nav class="jumpbar" aria-label="機能切り替え">
       <div class="jumpbar-track">
@@ -1541,10 +1737,6 @@
       <h2>買い物リスト</h2>
       <p class="footer-note">Lv50未満は「買わずに済ませる準備」、Lv50以降は詩学装備の交換順を出します。所持詩学とチェック状況はこのスマホに保存されます。</p>
       <div class="shopping-head">
-        <div>
-          <label for="poeticsInput">今持っている詩学（Lv50以降）</label>
-          <input id="poeticsInput" type="number" min="0" max="2000" step="10" value="0">
-        </div>
         <div class="shopping-summary" id="shoppingSummary">所持詩学を入れると今日買える目安を出します。</div>
       </div>
       <div class="next-board" id="shoppingBoard"></div>
@@ -3148,6 +3340,10 @@
     const shoppingBoard = document.getElementById("shoppingBoard");
     const shoppingSummary = document.getElementById("shoppingSummary");
     const poeticsInput = document.getElementById("poeticsInput");
+    const profileSummary = document.getElementById("profileSummary");
+    const settingsOverlay = document.getElementById("settingsOverlay");
+    const openSettingsButton = document.getElementById("openSettingsButton");
+    const closeSettingsButton = document.getElementById("closeSettingsButton");
     const routeBoard = document.getElementById("routeBoard");
     const rewardBoard = document.getElementById("rewardBoard");
     const dutyType = document.getElementById("dutyType");
@@ -3254,6 +3450,7 @@
           <div class="resource-tags">${resource.tags.map((tag) => `<span class="resource-tag">${tag}</span>`).join("")}</div>
         </div>
       `).join("");
+      foldContainer(document.getElementById("resourceGrid"), 3, "リンクをすべて見る");
     }
 
     function renderSearchResults() {
@@ -3447,6 +3644,7 @@
         </div>
       `));
       document.getElementById("utility").innerHTML = rows.join("");
+      foldContainer(document.getElementById("utility"), 3, "補助スキルをすべて見る");
     }
 
     async function renderJobGuide() {
@@ -3582,7 +3780,12 @@
           </div>
         </section>
       `));
-      document.getElementById("sections").innerHTML = cards.join("");
+      document.getElementById("sections").innerHTML = `
+        <details class="more-details">
+          <summary>レベル帯の詳細カードを開く（${cards.length}件）</summary>
+          <div class="folded-grid">${cards.join("")}</div>
+        </details>
+      `;
       await renderUtilityForJob(job, currentTier);
       renderSearchResults();
     }
@@ -3706,6 +3909,7 @@
           </div>
         </div>
       `).join("");
+      foldContainer(gearList, 3, "低レベル装備の詳細を開く");
     }
 
     function gearRoleLabel(job) {
@@ -3856,6 +4060,42 @@
       const job = gearJobs.find((item) => item.id === gearJob.value) || gearJobs.find((item) => item.id === "SMN");
       const level = Math.min(80, Math.max(1, Number(gearLevel.value) || 1));
       return { job, level };
+    }
+
+    function updateProfileSummary() {
+      const { job, level } = currentJobAndLevel();
+      const poetics = Math.min(2000, Math.max(0, Number(poeticsInput.value) || 0));
+      profileSummary.innerHTML = `
+        <strong>${job.label} / Lv${level}</strong>
+        <span>${storyLabel()} / 詩学${poetics}</span>
+      `;
+    }
+
+    function openSettings() {
+      settingsOverlay.classList.add("open");
+      settingsOverlay.setAttribute("aria-hidden", "false");
+      setTimeout(() => gearLevel.focus(), 0);
+    }
+
+    function closeSettings() {
+      settingsOverlay.classList.remove("open");
+      settingsOverlay.setAttribute("aria-hidden", "true");
+    }
+
+    function foldContainer(container, visibleCount = 3, label = "詳細を開く") {
+      const cards = [...container.children].filter((child) => !child.classList.contains("next-section-title"));
+      if (cards.length <= visibleCount) {
+        return;
+      }
+      const details = document.createElement("details");
+      details.className = "more-details";
+      const summary = document.createElement("summary");
+      summary.textContent = `${label}（残り${cards.length - visibleCount}件）`;
+      const grid = document.createElement("div");
+      grid.className = "folded-grid";
+      cards.slice(visibleCount).forEach((card) => grid.appendChild(card));
+      details.append(summary, grid);
+      container.appendChild(details);
     }
 
     function nextUnlockGoal(level) {
@@ -4096,6 +4336,7 @@
         `;
       }));
       shoppingBoard.innerHTML = `<div class="next-section-title">${level < 50 ? "Lv50までの準備順" : "交換優先順"}</div>${cards.join("")}`;
+      foldContainer(shoppingBoard, 3, "買い物候補をすべて見る");
     }
 
     async function renderNavigationGuide() {
@@ -4131,6 +4372,7 @@
         `;
       }));
       routeBoard.innerHTML = cards.join("");
+      foldContainer(routeBoard, 3, "行き先候補をすべて見る");
     }
 
     async function renderRewardsGallery() {
@@ -4165,6 +4407,7 @@
         `;
       }));
       rewardBoard.innerHTML = cards.join("");
+      foldContainer(rewardBoard, 3, "ごほうびをすべて見る");
     }
 
     async function renderNextPlanner(job, level) {
@@ -4244,14 +4487,19 @@
 
       const todayCards = await Promise.all(todayTasks.map((goal) => renderCheckableGoal(goal, level, "today")));
       const nextCards = await Promise.all(uniqueGoals.map((goal) => renderGoalCard(goal, level)));
+      const funCard = await renderGoalCard(funGoal, level, checkControl(`fun:${job.id}:${fun.level}`, "楽しみにする"));
       nextBoard.innerHTML = `
         ${intro}
         <div class="next-section-title">今日やることはこの3つ</div>
         ${todayCards.join("")}
-        <div class="next-section-title">あと少しで解放</div>
-        ${nextCards.join("")}
-        <div class="next-section-title">ジョブの気持ちいい瞬間</div>
-        ${await renderGoalCard(funGoal, level, checkControl(`fun:${job.id}:${fun.level}`, "楽しみにする"))}
+        <details class="more-details">
+          <summary>次に解放されるものを見る（${nextCards.length}件）</summary>
+          <div class="folded-grid">${nextCards.join("")}</div>
+        </details>
+        <details class="more-details">
+          <summary>ジョブの気持ちいい瞬間を見る</summary>
+          <div class="folded-grid">${funCard}</div>
+        </details>
       `;
     }
 
@@ -4309,6 +4557,7 @@
           </div>
         </div>
       `).join("");
+      foldContainer(mechanicGrid, 3, "ギミック辞書をすべて見る");
     }
 
     function renderDutyGuide() {
@@ -4473,6 +4722,7 @@
         </div>
       `).join("");
       gearList.innerHTML = itemCards + poeticsCards;
+      foldContainer(gearList, 3, "装備候補と詩学集めをすべて見る");
       findGearButton.disabled = false;
       findGearButton.textContent = "この設定で更新";
       await renderNextPlanner(job, level);
@@ -4526,14 +4776,14 @@
       if (!panel) {
         return;
       }
-      const jumpbar = document.querySelector(".jumpbar");
-      const offset = (jumpbar?.getBoundingClientRect().height || 0) + 16;
+      const offset = 16;
       const top = Math.max(0, panel.getBoundingClientRect().top + window.scrollY - offset);
       window.scrollTo({ top, behavior: "smooth" });
     }
 
     function refreshAll() {
       saveProfile();
+      updateProfileSummary();
       updateStoryVisual();
       renderGearFinder();
       renderCockpit();
@@ -4569,12 +4819,23 @@
       renderResources();
     });
     siteSearch.addEventListener("input", renderSearchResults);
-    findGearButton.addEventListener("click", refreshAll);
+    openSettingsButton.addEventListener("click", openSettings);
+    closeSettingsButton.addEventListener("click", closeSettings);
+    settingsOverlay.addEventListener("click", (event) => {
+      if (event.target === settingsOverlay) {
+        closeSettings();
+      }
+    });
+    findGearButton.addEventListener("click", () => {
+      refreshAll();
+      closeSettings();
+    });
     gearJob.addEventListener("change", refreshAll);
     gearLevel.addEventListener("change", refreshAll);
     storyStage.addEventListener("change", refreshAll);
     poeticsInput.addEventListener("input", () => {
       saveProfile();
+      updateProfileSummary();
       renderShoppingList();
     });
     document.addEventListener("change", (event) => {
@@ -4597,6 +4858,7 @@
     dutySelect.addEventListener("change", renderDutyGuide);
     saveCharacterButton.addEventListener("click", saveCharacter);
     activateFeature(normalizeFeature(pageParams.get("tab"), "") || featureFromHash(window.location.hash) || "gear");
+    updateProfileSummary();
     updateStoryVisual();
     renderCockpit();
     renderResources();
@@ -4639,6 +4901,7 @@
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") {
         closeQr();
+        closeSettings();
       }
     });
     copyQrUrl.addEventListener("click", async () => {

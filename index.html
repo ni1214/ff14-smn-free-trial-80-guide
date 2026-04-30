@@ -434,6 +434,359 @@
       color: var(--muted);
     }
 
+    .progress-panel {
+      border-color: rgba(186, 139, 47, 0.24);
+      background:
+        linear-gradient(180deg, rgba(255, 250, 243, 0.98), rgba(255, 247, 236, 0.96));
+    }
+
+    .sync-status {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      margin: 6px 0 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(32, 90, 97, 0.08);
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .sync-status.is-local {
+      background: rgba(186, 139, 47, 0.14);
+      color: #76531a;
+    }
+
+    .profile-switch {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .profile-button,
+    .progress-check,
+    .goal-save {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .profile-button {
+      min-height: 42px;
+      border-radius: 14px;
+      background: #fffdf8;
+      border: 1px solid rgba(32, 90, 97, 0.12);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .profile-button.active {
+      background: var(--teal);
+      color: #fffaf3;
+      border-color: var(--teal);
+    }
+
+    .progress-summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .progress-stat {
+      padding: 10px 8px;
+      border-radius: 14px;
+      background: var(--paper-2);
+      border: 1px solid rgba(32, 90, 97, 0.08);
+      text-align: center;
+    }
+
+    .progress-stat strong {
+      display: block;
+      font-size: 18px;
+      line-height: 1.1;
+      color: var(--teal);
+    }
+
+    .progress-stat span {
+      display: block;
+      margin-top: 4px;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--muted);
+    }
+
+    .goal-box {
+      display: grid;
+      gap: 8px;
+      padding: 10px;
+      border-radius: 14px;
+      background: var(--paper-2);
+      border: 1px solid rgba(32, 90, 97, 0.08);
+      margin-bottom: 10px;
+    }
+
+    .goal-box label {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--teal);
+    }
+
+    .goal-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+    }
+
+    .goal-row input {
+      width: 100%;
+      min-height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(32, 90, 97, 0.16);
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      padding: 8px 10px;
+    }
+
+    .goal-save {
+      min-width: 68px;
+      min-height: 42px;
+      border-radius: 12px;
+      background: var(--gold);
+      color: #fffaf3;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .progress-checklist {
+      display: grid;
+      gap: 8px;
+    }
+
+    .progress-item {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 10px;
+      border-radius: 14px;
+      background: var(--paper-2);
+      border: 1px solid rgba(32, 90, 97, 0.08);
+    }
+
+    .progress-actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+
+    .progress-check {
+      min-height: 36px;
+      border-radius: 12px;
+      background: #fffdf8;
+      border: 1px solid rgba(32, 90, 97, 0.12);
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .progress-check.done {
+      background: #eef7f6;
+      border-color: rgba(32, 90, 97, 0.28);
+      color: var(--teal);
+    }
+
+    .cockpit-panel {
+      background:
+        linear-gradient(180deg, rgba(255, 250, 243, 0.98), rgba(239, 247, 246, 0.96));
+    }
+
+    .tool-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .control-card,
+    .answer-card,
+    .motivation-card,
+    .resource-card,
+    .search-result {
+      padding: 12px;
+      border-radius: 15px;
+      background: var(--paper-2);
+      border: 1px solid rgba(32, 90, 97, 0.08);
+    }
+
+    .control-card label,
+    .resource-filter label,
+    .search-card label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .select-row {
+      display: grid;
+      grid-template-columns: 0.8fr 1fr;
+      gap: 8px;
+    }
+
+    .control-card select,
+    .search-card input {
+      width: 100%;
+      min-height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(32, 90, 97, 0.16);
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      padding: 8px 10px;
+    }
+
+    .answer-card h3,
+    .motivation-card h3,
+    .resource-card h3,
+    .search-result h3 {
+      margin: 0 0 6px;
+      font-size: 15px;
+      line-height: 1.3;
+    }
+
+    .answer-card p,
+    .motivation-card p,
+    .resource-card p,
+    .search-result p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .quick-solutions,
+    .resource-grid,
+    .search-results {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .quick-solution {
+      appearance: none;
+      border: 1px solid rgba(32, 90, 97, 0.1);
+      cursor: pointer;
+      display: block;
+      width: 100%;
+      min-height: 54px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: #fffdf8;
+      color: var(--ink);
+      font-family: inherit;
+      text-align: left;
+    }
+
+    .quick-solution strong {
+      display: block;
+      font-size: 13px;
+      color: var(--teal);
+    }
+
+    .quick-solution span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .motivation-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .badge-row,
+    .resource-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .badge-pill,
+    .resource-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(32, 90, 97, 0.08);
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .badge-pill.locked {
+      background: rgba(85, 101, 106, 0.09);
+      color: var(--muted);
+    }
+
+    .resource-filter {
+      margin-top: 8px;
+    }
+
+    .resource-tabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+
+    .resource-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .resource-tab {
+      appearance: none;
+      border: 1px solid rgba(32, 90, 97, 0.12);
+      cursor: pointer;
+      white-space: nowrap;
+      min-height: 34px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: #fffdf8;
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .resource-tab.active {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: #fffaf3;
+    }
+
+    .resource-card a,
+    .search-result a {
+      color: var(--teal);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .search-card {
+      margin-top: 10px;
+    }
+
     .qr-overlay {
       position: fixed;
       inset: 0;
@@ -586,6 +939,22 @@
       .qr-actions {
         flex-direction: column;
       }
+
+      .progress-summary {
+        grid-template-columns: 1fr;
+      }
+
+      .goal-row {
+        grid-template-columns: 1fr;
+      }
+
+      .progress-item {
+        grid-template-columns: 1fr;
+      }
+
+      .select-row {
+        grid-template-columns: 1fr;
+      }
     }
 
     .source-item a {
@@ -633,6 +1002,9 @@
     <nav class="jumpbar" aria-label="レベル移動">
       <div class="jumpbar-track">
         <a class="jump" href="#summary">まず結論</a>
+        <a class="jump" href="#partyProgress">進捗</a>
+        <a class="jump" href="#cockpit">攻略</a>
+        <a class="jump" href="#resourceHub">リンク集</a>
         <a class="jump" href="#lv10">Lv10</a>
         <a class="jump" href="#lv20">Lv20</a>
         <a class="jump" href="#lv30">Lv30</a>
@@ -644,6 +1016,75 @@
         <a class="jump" href="#sources">出典</a>
       </div>
     </nav>
+
+    <section class="panel progress-panel" id="partyProgress">
+      <h2>二人の進捗</h2>
+      <div class="sync-status" id="syncStatus">Firebaseへ接続中</div>
+      <div class="profile-switch" role="group" aria-label="表示する人">
+        <button class="profile-button active" type="button" data-profile="me">自分</button>
+        <button class="profile-button" type="button" data-profile="senpai">先輩</button>
+      </div>
+      <div class="progress-summary" aria-label="進捗まとめ">
+        <div class="progress-stat"><strong id="readCount">0/8</strong><span>読んだ</span></div>
+        <div class="progress-stat"><strong id="practiceCount">0/8</strong><span>練習した</span></div>
+        <div class="progress-stat"><strong id="readyCount">0/8</strong><span>自信あり</span></div>
+      </div>
+      <div class="goal-box">
+        <label for="dailyGoal">今日の目標</label>
+        <div class="goal-row">
+          <input id="dailyGoal" type="text" maxlength="60" placeholder="例: Lv50の3属性を迷わず回す">
+          <button class="goal-save" id="saveGoal" type="button">保存</button>
+        </div>
+      </div>
+      <div class="progress-checklist" id="progressChecklist"></div>
+    </section>
+
+    <section class="panel cockpit-panel" id="cockpit">
+      <h2>攻略コックピット</h2>
+      <p class="footer-note">レベルシンクやID前に、今見るべき部分だけ取り出します。</p>
+      <div class="tool-grid">
+        <div class="control-card">
+          <div class="select-row">
+            <div>
+              <label for="cockpitLevel">レベル</label>
+              <select id="cockpitLevel"></select>
+            </div>
+            <div>
+              <label for="cockpitMode">状況</label>
+              <select id="cockpitMode">
+                <option value="single">単体 / ボス</option>
+                <option value="aoe">3体以上 / まとめ</option>
+                <option value="mistakes">ミス確認</option>
+                <option value="mantra">ひとことで覚える</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="answer-card" id="cockpitAnswer"></div>
+        <div class="quick-solutions" id="quickSolutions"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="motivationBoard">
+      <h2>モチベボード</h2>
+      <p class="footer-note">攻略サイトを“読む場所”から、次に遊びたくなる場所へ寄せます。</p>
+      <div class="motivation-grid" id="motivationGrid"></div>
+    </section>
+
+    <section class="panel" id="resourceHub">
+      <h2>攻略リンク集</h2>
+      <p class="footer-note">大手サイトの強みを、迷わず使える入口としてまとめます。</p>
+      <div class="resource-filter">
+        <label>用途で絞り込み</label>
+        <div class="resource-tabs" id="resourceTabs"></div>
+      </div>
+      <div class="search-card">
+        <label for="siteSearch">このページ内を検索</label>
+        <input id="siteSearch" type="search" placeholder="例: フェニックス / 範囲 / リザレク / Lv70">
+        <div class="search-results" id="siteSearchResults"></div>
+      </div>
+      <div class="resource-grid" id="resourceGrid"></div>
+    </section>
 
     <section class="panel" id="summary">
       <h2>まず結論</h2>
@@ -1098,6 +1539,265 @@
       </div>
     `).join("");
 
+    const quickSolutions = [
+      {
+        title: "ID前30秒",
+        text: "今のLvに合わせて単体と範囲の切替だけ確認。",
+        level: "lv80",
+        mode: "aoe"
+      },
+      {
+        title: "レベルシンクで迷った",
+        text: "押せないボタンを探す前に、節目の回しへ戻す。",
+        level: "lv50",
+        mode: "mantra"
+      },
+      {
+        title: "まとめ狩りが不安",
+        text: "3体以上の範囲攻撃とペインフレアの使い分けを見る。",
+        level: "lv40",
+        mode: "aoe"
+      },
+      {
+        title: "Lv80らしさを出したい",
+        text: "バハムートとフェニックスの往復だけを頭に入れる。",
+        level: "lv80",
+        mode: "single"
+      },
+      {
+        title: "死なない召喚士になる",
+        text: "ありがちなミスと守りの光・リザレクを見直す。",
+        level: "lv70",
+        mode: "mistakes"
+      }
+    ];
+
+    const motivationCards = [
+      {
+        title: "今日の一歩",
+        text: "一度に全部覚えなくてOK。今日は“3体以上なら範囲”だけ持ち帰れば勝ちです。",
+        badges: ["軽く読む", "ID前に見る", "1つ試す"]
+      },
+      {
+        title: "先輩と遊ぶ日の流れ",
+        text: "集合前に今日の目標を書き、ID後に自信チェックを1つ増やすと、攻略が思い出になります。",
+        badges: ["目標", "実戦", "振り返り"]
+      },
+      {
+        title: "召喚士の気持ちよさ",
+        text: "Lv80はバハムート、3属性、フェニックス、3属性。大技の周期が見えると一気に楽しくなります。",
+        badges: ["バハムート", "フェニックス", "ループ完成"]
+      }
+    ];
+
+    const resourceCategories = [
+      { id: "all", label: "全部" },
+      { id: "job", label: "ジョブ" },
+      { id: "tools", label: "便利ツール" },
+      { id: "wiki", label: "調べ物" },
+      { id: "motivation", label: "ワクワク" }
+    ];
+
+    const resources = [
+      {
+        title: "The Balance / Summoner",
+        url: "https://www.thebalanceffxiv.com/jobs/casters/summoner/",
+        category: "job",
+        tags: ["回し", "高難度", "更新日"],
+        text: "召喚士の専門ガイド。細かい最適化を知りたい時の一次目的地。"
+      },
+      {
+        title: "公式ジョブガイド 召喚士",
+        url: "https://jp.finalfantasyxiv.com/jobguide/summoner/",
+        category: "job",
+        tags: ["公式", "スキル名", "修得Lv"],
+        text: "アクション名、修得レベル、アイコンを確認する公式情報。"
+      },
+      {
+        title: "Garland Tools",
+        url: "https://www.garlandtools.org/",
+        category: "tools",
+        tags: ["DB", "装備", "タイマー"],
+        text: "アイテム、クラフト、装備、採集タイマーまで広く探せる定番ツール。"
+      },
+      {
+        title: "FFXIV Teamcraft",
+        url: "https://ffxivteamcraft.com/",
+        category: "tools",
+        tags: ["クラフト", "共有", "リスト"],
+        text: "クラフター・ギャザラー向けのリスト管理、シミュレーター、共有機能が強い。"
+      },
+      {
+        title: "Universalis",
+        url: "https://universalis.app/",
+        category: "tools",
+        tags: ["マーケット", "相場", "金策"],
+        text: "マーケットボードの相場確認。買う前、売る前の迷いを減らせます。"
+      },
+      {
+        title: "XIVAnalysis",
+        url: "https://xivanalysis.com/",
+        category: "job",
+        tags: ["ログ", "改善", "分析"],
+        text: "戦闘ログを見て改善点を確認するサイト。慣れてきた後の伸びしろ探しに。"
+      },
+      {
+        title: "ConsoleGamesWiki",
+        url: "https://ffxiv.consolegameswiki.com/wiki/FF14_Wiki",
+        category: "wiki",
+        tags: ["Wiki", "クエスト", "ID"],
+        text: "クエスト、ID、解放条件など、攻略の周辺情報を調べやすいWiki。"
+      },
+      {
+        title: "Eorzea Collection",
+        url: "https://ffxiv.eorzeacollection.com/",
+        category: "motivation",
+        tags: ["ミラプリ", "見た目", "投稿"],
+        text: "ミラプリの着想を得られる場所。次に遊びたい気持ちを作るのに強い。"
+      },
+      {
+        title: "FFXIV Collect",
+        url: "https://ffxivcollect.com/",
+        category: "motivation",
+        tags: ["収集", "マウント", "ミニオン"],
+        text: "マウントやミニオンなどの収集進捗を眺めると、寄り道の目的が生まれます。"
+      }
+    ];
+
+    const cockpitLevel = document.getElementById("cockpitLevel");
+    const cockpitMode = document.getElementById("cockpitMode");
+    const cockpitAnswer = document.getElementById("cockpitAnswer");
+    const siteSearch = document.getElementById("siteSearch");
+    const siteSearchResults = document.getElementById("siteSearchResults");
+    let activeResourceCategory = "all";
+
+    cockpitLevel.innerHTML = sections.map((section) => `
+      <option value="${section.id}">${section.title}</option>
+    `).join("");
+    cockpitLevel.value = "lv80";
+
+    document.getElementById("quickSolutions").innerHTML = quickSolutions.map((item) => `
+      <button class="quick-solution" type="button" data-level="${item.level}" data-mode="${item.mode}">
+        <strong>${item.title}</strong>
+        <span>${item.text}</span>
+      </button>
+    `).join("");
+
+    document.getElementById("motivationGrid").innerHTML = motivationCards.map((card) => `
+      <div class="motivation-card">
+        <h3>${card.title}</h3>
+        <p>${card.text}</p>
+        <div class="badge-row">${card.badges.map((badge, index) => `
+          <span class="badge-pill ${index > 1 ? "locked" : ""}">${badge}</span>
+        `).join("")}</div>
+      </div>
+    `).join("");
+
+    document.getElementById("resourceTabs").innerHTML = resourceCategories.map((category) => `
+      <button class="resource-tab ${category.id === "all" ? "active" : ""}" type="button" data-category="${category.id}">
+        ${category.label}
+      </button>
+    `).join("");
+
+    function renderCockpit() {
+      const section = sections.find((item) => item.id === cockpitLevel.value) || sections[sections.length - 1];
+      const mode = cockpitMode.value;
+      let title = "単体 / ボス";
+      let body = comboLane(section.singleFlow) + `<ol>${section.single.map((line) => `<li>${line}</li>`).join("")}</ol>`;
+
+      if (mode === "aoe") {
+        title = "3体以上 / まとめ";
+        body = comboLane(section.aoeFlow) + `<ul>${section.aoe.map((line) => `<li>${line}</li>`).join("")}</ul>`;
+      }
+      if (mode === "mistakes") {
+        title = "ミス確認";
+        body = `<ul>${section.mistakes.map((line) => `<li>${line}</li>`).join("")}</ul>`;
+      }
+      if (mode === "mantra") {
+        title = "ひとことで覚える";
+        body = `<div class="mantra">${section.mantra}</div>`;
+      }
+
+      cockpitAnswer.innerHTML = `
+        <h3>${section.title} - ${title}</h3>
+        <p>${section.summary}</p>
+        ${body}
+        <p class="footer-note"><a href="#${section.id}">詳しい説明へ移動</a></p>
+      `;
+    }
+
+    function renderResources() {
+      document.querySelectorAll(".resource-tab").forEach((button) => {
+        button.classList.toggle("active", button.dataset.category === activeResourceCategory);
+      });
+      const filtered = activeResourceCategory === "all"
+        ? resources
+        : resources.filter((resource) => resource.category === activeResourceCategory);
+      document.getElementById("resourceGrid").innerHTML = filtered.map((resource) => `
+        <div class="resource-card">
+          <h3><a href="${resource.url}" target="_blank" rel="noreferrer noopener">${resource.title}</a></h3>
+          <p>${resource.text}</p>
+          <div class="resource-tags">${resource.tags.map((tag) => `<span class="resource-tag">${tag}</span>`).join("")}</div>
+        </div>
+      `).join("");
+    }
+
+    function renderSearchResults() {
+      const query = siteSearch.value.trim().toLowerCase();
+      if (!query) {
+        siteSearchResults.innerHTML = "";
+        return;
+      }
+      const results = sections
+        .map((section) => ({
+          title: section.title,
+          href: `#${section.id}`,
+          text: [
+            section.label,
+            section.summary,
+            section.single.join(" "),
+            section.aoe.join(" "),
+            section.mistakes.join(" "),
+            section.mantra,
+            section.actions.map((key) => actions[key].name).join(" ")
+          ].join(" ")
+        }))
+        .filter((result) => `${result.title} ${result.text}`.toLowerCase().includes(query))
+        .slice(0, 6);
+      siteSearchResults.innerHTML = results.length
+        ? results.map((result) => `
+          <div class="search-result">
+            <h3><a href="${result.href}">${result.title}</a></h3>
+            <p>${result.text.slice(0, 110)}...</p>
+          </div>
+        `).join("")
+        : `<div class="search-result"><h3>見つかりませんでした</h3><p>Lv、スキル名、単体、範囲、フェニックスなどで試してください。</p></div>`;
+    }
+
+    cockpitLevel.addEventListener("change", renderCockpit);
+    cockpitMode.addEventListener("change", renderCockpit);
+    document.getElementById("quickSolutions").addEventListener("click", (event) => {
+      const button = event.target.closest(".quick-solution");
+      if (!button) {
+        return;
+      }
+      cockpitLevel.value = button.dataset.level;
+      cockpitMode.value = button.dataset.mode;
+      renderCockpit();
+      document.getElementById("cockpit").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    document.getElementById("resourceTabs").addEventListener("click", (event) => {
+      const button = event.target.closest(".resource-tab");
+      if (!button) {
+        return;
+      }
+      activeResourceCategory = button.dataset.category;
+      renderResources();
+    });
+    siteSearch.addEventListener("input", renderSearchResults);
+    renderCockpit();
+    renderResources();
+
     const qrOverlay = document.getElementById("qrOverlay");
     const qrImage = document.getElementById("qrImage");
     const qrUrl = document.getElementById("qrUrl");
@@ -1143,6 +1843,214 @@
         qrHelp.textContent = "コピーできなかったので、下のURLをそのまま使ってください。";
       }
     });
+  </script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import { getAuth, signInAnonymously, browserLocalPersistence, setPersistence } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+    import { getFirestore, doc, onSnapshot, serverTimestamp, setDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyB40Nk8wU05_XMMQyje5IkU-JAJJZBrUlM",
+      authDomain: "sakuzu-dashboard.firebaseapp.com",
+      projectId: "sakuzu-dashboard",
+      storageBucket: "sakuzu-dashboard.firebasestorage.app",
+      messagingSenderId: "123708617079",
+      appId: "1:123708617079:web:00857dd2c915f67f17b172",
+      measurementId: "G-QKL1V99QSQ"
+    };
+
+    const progressLevels = [
+      { id: "lv10", label: "Lv10" },
+      { id: "lv20", label: "Lv20" },
+      { id: "lv30", label: "Lv30" },
+      { id: "lv40", label: "Lv40" },
+      { id: "lv50", label: "Lv50" },
+      { id: "lv60", label: "Lv60" },
+      { id: "lv70", label: "Lv70" },
+      { id: "lv80", label: "Lv80" }
+    ];
+    const progressKinds = [
+      { key: "read", label: "読んだ" },
+      { key: "practice", label: "練習" },
+      { key: "ready", label: "自信" }
+    ];
+    const storagePrefix = "ff14-summoner-progress-v1";
+    const status = document.getElementById("syncStatus");
+    const checklist = document.getElementById("progressChecklist");
+    const goalInput = document.getElementById("dailyGoal");
+    const saveGoal = document.getElementById("saveGoal");
+    const profileButtons = [...document.querySelectorAll(".profile-button")];
+    let activeProfile = localStorage.getItem(`${storagePrefix}:activeProfile`) || "me";
+    let activeData = defaultData();
+    let db = null;
+    let unsubscribe = null;
+    let firebaseReady = false;
+
+    function defaultData() {
+      return {
+        dailyGoal: "",
+        checks: Object.fromEntries(progressLevels.map((level) => [
+          level.id,
+          { read: false, practice: false, ready: false }
+        ]))
+      };
+    }
+
+    function localKey(profile) {
+      return `${storagePrefix}:${profile}`;
+    }
+
+    function setStatus(text, isLocal = false) {
+      status.textContent = text;
+      status.classList.toggle("is-local", isLocal);
+    }
+
+    function loadLocal(profile) {
+      try {
+        const saved = JSON.parse(localStorage.getItem(localKey(profile)) || "null");
+        return mergeData(saved);
+      } catch (error) {
+        return defaultData();
+      }
+    }
+
+    function saveLocal(profile, data) {
+      localStorage.setItem(localKey(profile), JSON.stringify(data));
+    }
+
+    function mergeData(data) {
+      const merged = defaultData();
+      if (!data || typeof data !== "object") {
+        return merged;
+      }
+      merged.dailyGoal = typeof data.dailyGoal === "string" ? data.dailyGoal : "";
+      progressLevels.forEach((level) => {
+        merged.checks[level.id] = {
+          ...merged.checks[level.id],
+          ...(data.checks && data.checks[level.id] ? data.checks[level.id] : {})
+        };
+      });
+      return merged;
+    }
+
+    function render() {
+      profileButtons.forEach((button) => {
+        button.classList.toggle("active", button.dataset.profile === activeProfile);
+      });
+      goalInput.value = activeData.dailyGoal;
+      document.getElementById("readCount").textContent = `${countDone("read")}/8`;
+      document.getElementById("practiceCount").textContent = `${countDone("practice")}/8`;
+      document.getElementById("readyCount").textContent = `${countDone("ready")}/8`;
+      checklist.innerHTML = progressLevels.map((level) => `
+        <div class="progress-item">
+          <div class="lv">${level.label}</div>
+          <div class="progress-actions">
+            ${progressKinds.map((kind) => `
+              <button
+                class="progress-check ${activeData.checks[level.id][kind.key] ? "done" : ""}"
+                type="button"
+                data-level="${level.id}"
+                data-kind="${kind.key}"
+                aria-pressed="${activeData.checks[level.id][kind.key] ? "true" : "false"}"
+              >${kind.label}</button>
+            `).join("")}
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function countDone(kind) {
+      return progressLevels.filter((level) => activeData.checks[level.id][kind]).length;
+    }
+
+    function profileDoc(profile) {
+      return doc(db, "ff14SummonerGuide", "v1", "profiles", profile);
+    }
+
+    async function persist() {
+      saveLocal(activeProfile, activeData);
+      if (!firebaseReady) {
+        setStatus("端末内に保存中", true);
+        return;
+      }
+      try {
+        await setDoc(profileDoc(activeProfile), {
+          ...activeData,
+          updatedAt: serverTimestamp()
+        }, { merge: true });
+        setStatus("Firebaseで同期中");
+      } catch (error) {
+        setStatus("Firebase未接続。端末内に保存中", true);
+      }
+    }
+
+    function watchProfile(profile) {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+      activeData = loadLocal(profile);
+      render();
+      if (!firebaseReady) {
+        setStatus("端末内に保存中", true);
+        return;
+      }
+      unsubscribe = onSnapshot(profileDoc(profile), (snapshot) => {
+        activeData = mergeData(snapshot.exists() ? snapshot.data() : activeData);
+        saveLocal(profile, activeData);
+        render();
+        setStatus("Firebaseで同期中");
+      }, () => {
+        setStatus("Firebase未接続。端末内に保存中", true);
+      });
+    }
+
+    profileButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        activeProfile = button.dataset.profile;
+        localStorage.setItem(`${storagePrefix}:activeProfile`, activeProfile);
+        watchProfile(activeProfile);
+      });
+    });
+
+    checklist.addEventListener("click", async (event) => {
+      const button = event.target.closest(".progress-check");
+      if (!button) {
+        return;
+      }
+      const { level, kind } = button.dataset;
+      activeData.checks[level][kind] = !activeData.checks[level][kind];
+      render();
+      await persist();
+    });
+
+    saveGoal.addEventListener("click", async () => {
+      activeData.dailyGoal = goalInput.value.trim();
+      render();
+      await persist();
+      saveGoal.textContent = "保存済";
+      setTimeout(() => {
+        saveGoal.textContent = "保存";
+      }, 1200);
+    });
+
+    goalInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        saveGoal.click();
+      }
+    });
+
+    try {
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      db = getFirestore(app);
+      await setPersistence(auth, browserLocalPersistence);
+      await signInAnonymously(auth);
+      firebaseReady = true;
+      watchProfile(activeProfile);
+    } catch (error) {
+      firebaseReady = false;
+      watchProfile(activeProfile);
+    }
   </script>
 </body>
 </html>

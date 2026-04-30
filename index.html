@@ -1434,7 +1434,7 @@
 
     <section class="panel profile-panel" id="adventureProfile">
       <h2>今の設定</h2>
-      <p class="footer-note">ここだけ変えれば、装備、スキル回し、成長マップ、楽しみナビが同じジョブ・レベル・進行で切り替わります。</p>
+      <p class="footer-note">ここだけ変えれば、装備、スキル/成長、楽しみナビ、買い物、迷子ナビ、ごほうびが同じジョブ・レベル・進行で切り替わります。初見ギミックは検索で選びます。</p>
       <div class="profile-controls">
         <div class="profile-input-row">
           <div>
@@ -1443,7 +1443,7 @@
           </div>
           <div>
             <label for="gearLevel">現在レベル</label>
-            <input id="gearLevel" type="number" min="1" max="80" value="80">
+            <input id="gearLevel" type="number" min="1" max="80" value="20">
           </div>
           <div>
             <label for="storyStage">メイン進行</label>
@@ -1522,11 +1522,11 @@
     </section>
 
     <section class="panel gear-panel feature-panel active" id="gearFinder" data-feature="gear">
-      <h2>最強装備チェッカー</h2>
-      <p class="footer-note">上の「今の設定」から、無料範囲でまず揃えたい最強候補装備と入手先を出します。</p>
+      <h2>装備更新ナビ</h2>
+      <p class="footer-note">上の「今の設定」から、無料範囲でまず揃えたいおすすめ装備と入手先を出します。メイン進行が足りない交換装備は条件も表示します。</p>
       <div class="gear-summary" id="gearSummary">
-        <h3>Lv80 召喚士のおすすめ</h3>
-        <p>ボタンを押すと、武器・防具・アクセの候補をゲーム内アイコン付きで表示します。</p>
+        <h3>今の設定で装備を表示</h3>
+        <p>武器・防具・アクセの候補をゲーム内アイコン付きで表示します。</p>
       </div>
       <div class="gear-list" id="gearList"></div>
     </section>
@@ -1539,10 +1539,10 @@
 
     <section class="panel shopping-panel feature-panel" id="shoppingPanel" data-feature="shopping">
       <h2>買い物リスト</h2>
-      <p class="footer-note">今のレベルで買う装備を優先順に並べます。所持詩学とチェック状況はこのスマホに保存されます。</p>
+      <p class="footer-note">Lv50未満は「買わずに済ませる準備」、Lv50以降は詩学装備の交換順を出します。所持詩学とチェック状況はこのスマホに保存されます。</p>
       <div class="shopping-head">
         <div>
-          <label for="poeticsInput">今持っている詩学</label>
+          <label for="poeticsInput">今持っている詩学（Lv50以降）</label>
           <input id="poeticsInput" type="number" min="0" max="2000" step="10" value="0">
         </div>
         <div class="shopping-summary" id="shoppingSummary">所持詩学を入れると今日買える目安を出します。</div>
@@ -1586,13 +1586,13 @@
 
     <section class="panel feature-panel" id="resourceHub" data-feature="links">
       <h2>攻略リンク集</h2>
-      <p class="footer-note">外部へ移動する場合も、日本語の公式ページだけに絞っています。</p>
+      <p class="footer-note">外部へ移動する場合も、日本語ページに絞っています。正確な名称は公式、詳しい予習はGame8を補助にします。</p>
       <div class="resource-filter">
         <label>用途で絞り込み</label>
         <div class="resource-tabs" id="resourceTabs"></div>
       </div>
       <div class="search-card">
-        <label for="siteSearch">このページ内を検索</label>
+        <label for="siteSearch">スキル回し内を検索</label>
         <input id="siteSearch" type="search" placeholder="例: フェニックス / 範囲 / リザレク / Lv70">
         <div class="search-results" id="siteSearchResults"></div>
       </div>
@@ -2910,6 +2910,7 @@
       { match: ["ラーヴァナ"], hints: ["外周落下に注意。防御バリアの向きや突進の順番を見て安全側へ。"], tags: ["外周", "突進"] },
       { match: ["ナイツ"], hints: ["連続でマーカーが来ます。頭割りは集まり、個人円は散開を徹底。"], tags: ["頭割り", "散開"] },
       { match: ["ニーズヘッグ"], hints: ["線、塔、頭割りが続きます。自分にマーカーが付いたらまず味方と重ねるか離れるか確認。"], tags: ["線", "塔", "頭割り"] },
+      { match: ["皇都イシュガルド防衛戦"], hints: ["防衛戦はボスだけを殴るより、味方NPCや砲台、増援の位置を見る。大きな範囲や突進の向きが出たら横へ退避。", "雑魚が出たら範囲攻撃で早めに処理。足元予兆と外周の動きを交互に見ると迷いにくいです。"], tags: ["防衛", "雑魚", "突進"] },
       { match: ["スサノオ"], hints: ["剣受け演出後は範囲回避。雷雲や岩戸は対象を見てすぐ処理。"], tags: ["演出", "範囲"] },
       { match: ["ラクシュミ"], hints: "エーテルを使う専用ボタンが重要。大技前にバフを忘れない。".split("|"), tags: ["専用ボタン"] },
       { match: ["神龍"], hints: ["落下と足場破壊に注意。距離減衰や尻尾など、攻撃ごとに安全地帯が大きく変わる。"], tags: ["落下注意", "距離減衰"] },
@@ -2925,6 +2926,7 @@
       { match: ["ワンダラーパレス"], hints: ["追いかけてくる敵やギミックを無視しすぎない。ボスより仕掛けを優先する場面があります。"], tags: ["追跡", "仕掛け"] },
       { match: ["カストルム", "プラエトリウム", "魔導城"], hints: ["大きな演出が多いID。初見は味方について行き、ボスの長い詠唱と外周を確認。"], tags: ["メイン", "演出"] },
       { match: ["アムダプール"], hints: ["雑魚処理と視線・範囲に注意。石像や扉など、殴る以外の処理が出たら優先。"], tags: ["雑魚", "仕掛け"] },
+      { match: ["ハルブレーカー"], hints: ["水場や外周からの攻撃を見て、ボス正面に立ち続けない。雑魚や仕掛けが出たら本体より先に処理。", "見慣れない線・設置物・足元範囲は一度離れて確認。宝箱目的で急がず、タンクの後ろを維持。"], tags: ["水場", "雑魚", "仕掛け"] },
       { match: ["シリウス"], hints: ["雑魚が増えやすいので放置しない。床範囲とボス周辺の爆発を見て動く。"], tags: ["雑魚", "範囲"] },
       { match: ["スノークローク"], hints: ["氷や雪玉などのギミックを使う場面があります。ボスだけを殴り続けない。"], tags: ["氷", "仕掛け"] },
       { match: ["黙約"], hints: ["ドラゴンの向きと広い範囲攻撃に注意。雑魚や装置が出たらすぐ処理。"], tags: ["ブレス", "装置"] },
@@ -3350,7 +3352,7 @@
           gearJob.value = data.job;
         }
         if (data.level) {
-          gearLevel.value = Math.min(80, Math.max(1, Number(data.level) || 80));
+          gearLevel.value = Math.min(80, Math.max(1, Number(data.level) || 20));
         }
         if (storyStages[data.story]) {
           storyStage.value = data.story;
@@ -3363,6 +3365,22 @@
       }
     }
 
+    function safeStorageSet(key, value) {
+      try {
+        localStorage.setItem(key, value);
+      } catch (error) {
+        console.warn("localStorageに保存できませんでした。", error);
+      }
+    }
+
+    function safeStorageRemove(key) {
+      try {
+        localStorage.removeItem(key);
+      } catch (error) {
+        console.warn("localStorageから削除できませんでした。", error);
+      }
+    }
+
     function saveProfile() {
       const data = {
         job: gearJob.value,
@@ -3370,19 +3388,22 @@
         story: storyStage.value,
         poetics: Math.min(2000, Math.max(0, Number(poeticsInput.value) || 0))
       };
-      localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(data));
+      safeStorageSet(PROFILE_STORAGE_KEY, JSON.stringify(data));
     }
 
     function loadGuideChecks() {
       try {
         savedChecks = JSON.parse(localStorage.getItem(CHECK_STORAGE_KEY) || "{}");
+        if (!savedChecks || typeof savedChecks !== "object" || Array.isArray(savedChecks)) {
+          savedChecks = {};
+        }
       } catch (error) {
         savedChecks = {};
       }
     }
 
     function saveGuideChecks() {
-      localStorage.setItem(CHECK_STORAGE_KEY, JSON.stringify(savedChecks));
+      safeStorageSet(CHECK_STORAGE_KEY, JSON.stringify(savedChecks));
     }
 
     function isChecked(key) {
@@ -3433,6 +3454,54 @@
       const level = selectedRotationLevel();
       const guide = rotationGuides[job.id];
       if (!guide) {
+        return;
+      }
+      if (level < job.min) {
+        const crystalIcon = await fetchItemIconByName("ソウルクリスタル");
+        jobSummaryGrid.innerHTML = `
+          <div class="quick-block">
+            <strong>${job.label}はLv${job.min}から解放</strong>
+            <div class="mantra">
+              今のレベルではまだこのジョブのスキル回しは表示しません。装備タブのジョブを今使えるものに戻すか、Lv${job.min}到達後に確認してください。
+            </div>
+          </div>
+          <div class="quick-block">
+            <strong>迷わないために</strong>
+            <ul>
+              <li>未解放ジョブのボタン順は、今押せるスキルと違うため非表示にしています。</li>
+              <li>Lv${job.min}になったら、この欄が${job.label}用に切り替わります。</li>
+            </ul>
+          </div>
+        `;
+        growthTitle.textContent = `${job.label} 解放前`;
+        growthNote.textContent = `現在Lv${level}です。${job.label}の成長マップはLv${job.min}から表示します。`;
+        document.getElementById("milestones").innerHTML = `
+          <div class="milestone">
+            <div class="lv">Lv${job.min}</div>
+            <div>
+              <p>${job.label}解放後に、基本コンボとジョブゲージから確認します。</p>
+              <div class="action-row">${iconBox(crystalIcon, `${job.label}解放`)}</div>
+            </div>
+          </div>
+        `;
+        document.getElementById("sections").innerHTML = `
+          <section class="section-card">
+            <div class="section-top">
+              <div>
+                <div class="level-tag">${job.label} / Lv${job.min}+</div>
+                <h2>まだ解放前です</h2>
+              </div>
+            </div>
+            <p class="section-summary">今のレベルで押せないボタンを見せると迷うため、解放後に詳細を表示します。</p>
+          </section>
+        `;
+        document.getElementById("utility").innerHTML = "";
+        currentGuideSections = [{
+          title: `${job.label}はLv${job.min}から解放`,
+          href: "#cockpit",
+          text: `${job.label} 解放前 Lv${job.min}`
+        }];
+        renderSearchResults();
         return;
       }
       const currentTier = getRotationTier(job.id, level);
@@ -3525,6 +3594,30 @@
 
     function storyLabel() {
       return storyStages[storyStage.value]?.label || "三都巡り後";
+    }
+
+    function tierStoryKey(tier) {
+      if (!tier) {
+        return "airship";
+      }
+      if (tier.min >= 80) {
+        return "shb";
+      }
+      if (tier.min >= 70) {
+        return "sb";
+      }
+      if (tier.min >= 60) {
+        return "hw";
+      }
+      return "arr";
+    }
+
+    function tierStoryLabel(tier) {
+      return storyStages[tierStoryKey(tier)]?.label || "メイン進行";
+    }
+
+    function tierStoryUnlocked(tier) {
+      return storyRank() >= (storyStages[tierStoryKey(tier)]?.rank || 1);
     }
 
     function updateStoryVisual() {
@@ -3776,25 +3869,38 @@
     function buildTodayTasks(job, level) {
       const tasks = [];
       const tier = getGearTier(level);
-      const nextTier = tier
-        ? gearTiers.filter((item) => item.min > tier.min).sort((a, b) => a.min - b.min)[0]
-        : gearTiers[gearTiers.length - 1];
       if (level < 15) {
         tasks.push({ level: 15, title: "まずLv15へ進める", category: "今日", iconName: "ビギナーリング", story: "airship", detail: "初心者の館と初IDが見える節目です。メインとクラスクエストを優先。", action: "今の街のメインクエストを1つ進める。" });
       } else if (level < 30) {
         tasks.push({ level: 15, title: "初心者の館を終わらせる", category: "今日", iconName: "ビギナーリング", story: "airship", detail: "ビギナー装備とビギナーリングでLv30まで快適になります。", action: "冒険者指導教官からロール訓練へ。" });
       } else if (level < 50) {
         tasks.push({ level: level, title: "ジョブクエスト確認", category: "今日", iconName: "ソウルクリスタル", story: "airship", detail: "Lv30以降はジョブクエストで重要アクションや装備が増えます。", action: "受注中/未受注のジョブクエストを確認。" });
+      } else if (tier && !tierStoryUnlocked(tier)) {
+        tasks.push({ level, title: `${tier.label}の交換条件を開く`, category: "今日", iconName: "アラガントームストーン:詩学", story: storyStage.value, detail: `${tier.label}は${tierStoryLabel(tier)}から交換しやすくなります。今は装備を買い急がず、メイン進行を優先。`, action: "迷子ナビで次の行き先を確認。" });
       } else {
         tasks.push({ level: tier?.min || 50, title: "詩学装備を1部位進める", category: "今日", iconName: "アラガントームストーン:詩学", story: storyStage.value, detail: "武器、胴、脚から更新すると強さを感じやすいです。", action: "所持詩学を見て買い物タブでチェック。" });
       }
-      tasks.push(nextJobGoal(job, level));
-      const unlock = nextUnlockGoal(level);
-      if (unlock) {
-        tasks.push(unlock);
-      } else if (nextTier) {
-        tasks.push({ level: nextTier.min, title: `${nextTier.label}の準備`, category: "装備", iconName: "アラガントームストーン:詩学", story: nextTier.min === 50 ? "arr" : nextTier.min === 60 ? "hw" : nextTier.min === 70 ? "sb" : "shb", detail: nextTier.vendor, action: `あと${Math.max(0, nextTier.min - level)}Lv。詩学を少し貯めておく。` });
+
+      if (level < job.min) {
+        tasks.push({ level, title: "今使えるジョブに戻す", category: "今日", iconName: "ソウルクリスタル", story: storyStage.value, detail: `${job.label}はLv${job.min}からです。今のレベルで使えるジョブに戻すと装備とスキルが矛盾しません。`, action: "上のジョブ欄を現在使えるジョブに変更。" });
+      } else {
+        const rotationTier = getRotationTier(job.id, level);
+        const firstAction = rotationTier?.single?.[0] || "";
+        tasks.push({ level, title: "今のスキル回しを1回確認", category: "今日", actionName: firstAction, iconName: "ソウルクリスタル", story: storyStage.value, detail: `${rotationTier.title}の単体/範囲を見て、ID前に押す順番を揃えます。`, action: "スキル/成長タブで単体か範囲を見る。" });
       }
+
+      const route = routeGuides
+        .filter((item) => item.level <= level && storyStages[item.story].rank <= storyRank())
+        .sort((a, b) => b.level - a.level || (storyStages[b.story].rank - storyStages[a.story].rank))[0];
+      tasks.push({
+        level: route?.level || level,
+        title: route ? `${route.title}を確認` : "次の行き先を確認",
+        category: "今日",
+        iconName: route?.iconName || "クリスタル",
+        story: storyStage.value,
+        detail: route?.detail || "次に進む場所を1つだけ決めると、スマホを見ながら迷いにくくなります。",
+        action: route?.steps?.[0] || "迷子ナビを開く。"
+      });
       return tasks.filter((task, index, array) => array.findIndex((item) => item.title === task.title) === index).slice(0, 3);
     }
 
@@ -3809,14 +3915,133 @@
     }
 
     async function renderCheckableGoal(goal, level, prefix) {
-      return (await renderGoalCard(goal, level, checkControl(`${prefix}:${goal.title}:${goal.level}`, "今日できた")));
+      const state = goalState(goal, level);
+      const extra = state.className === "hot"
+        ? checkControl(`${prefix}:${goal.title}:${goal.level}`, "今日できた")
+        : `<span class="footer-note">条件が揃ったらチェックできます。</span>`;
+      return (await renderGoalCard(goal, level, extra));
     }
 
     function shoppingTierForLevel(level) {
       return getGearTier(level) || gearTiers[gearTiers.length - 1];
     }
 
+    function lowLevelShoppingItems(job, level) {
+      if (level < 15) {
+        return [
+          {
+            title: "高い装備購入はまだ不要",
+            iconName: "ビギナーリング",
+            cost: 0,
+            costLabel: "ギル節約",
+            text: "メインクエストとクラスクエスト報酬で十分進めます。武器だけ5Lv以上古ければ街の武器屋で更新。",
+            href: "https://jp.finalfantasyxiv.com/lodestone/playguide/db/",
+            key: `${job.id}:prep:save-gil`
+          },
+          {
+            title: "Lv15で初心者の館へ",
+            iconName: "ビギナーリング",
+            cost: 0,
+            costLabel: "無料",
+            text: "Lv15になったら冒険者指導教官へ。ビギナー装備とビギナーリングがもらえます。",
+            href: "https://jp.finalfantasyxiv.com/uiguide/party/party-how/party_practice.html",
+            linkLabel: "公式ガイド",
+            key: `${job.id}:prep:hall`
+          }
+        ];
+      }
+      if (level < 30) {
+        const beginnerItems = beginnerGearByRole[job.role] || beginnerGearByRole.caster;
+        return [
+          {
+            title: "初心者の館を最後まで進める",
+            iconName: "ビギナーリング",
+            cost: 0,
+            costLabel: "無料",
+            text: "ビギナーリングはLv30までの経験値ボーナスがあり、序盤の一番大きな快適化です。",
+            href: "https://jp.finalfantasyxiv.com/uiguide/party/party-how/party_practice.html",
+            linkLabel: "公式ガイド",
+            key: `${job.id}:prep:beginner-ring`
+          },
+          ...beginnerItems.map((item) => ({
+            title: `${item.slot}: ${item.name}`,
+            iconName: item.name,
+            cost: 0,
+            costLabel: "無料",
+            text: `${item.source}で入手。Lv15-29はこれを軸にして、武器だけ古くしないようにします。`,
+            href: officialItemSearch(item.name),
+            key: `${job.id}:prep:${item.name}`
+          }))
+        ];
+      }
+      if (level < 45) {
+        return [
+          {
+            title: "ジョブクリスタルを装備",
+            iconName: "ソウルクリスタル",
+            cost: 0,
+            costLabel: "最優先",
+            text: "Lv30以降はジョブクリスタルが最優先。クラスのままだと強いアクションが使えません。",
+            href: officialItemSearch("ソウルクリスタル"),
+            key: `${job.id}:prep:soul-crystal`
+          },
+          {
+            title: "武器だけレベル差を小さくする",
+            iconName: "ビギナーリング",
+            cost: 0,
+            costLabel: "必要時だけ",
+            text: "ジョブ/クラスクエスト報酬、直近IDドロップ、街の武器屋の順で確認。防具は「さいきょう」でOK。",
+            href: "https://jp.finalfantasyxiv.com/uiguide/equipment/equipment-saikyo/equipment_best.html",
+            linkLabel: "さいきょう装備",
+            key: `${job.id}:prep:weapon`
+          },
+          {
+            title: "マイキャラクターの「さいきょう」",
+            iconName: "クリスタル",
+            cost: 0,
+            costLabel: "迷ったら押す",
+            text: "Lv30-44は細かく買い揃えるより、拾った装備をさいきょうで更新する方が迷いません。",
+            href: "https://jp.finalfantasyxiv.com/uiguide/equipment/equipment-saikyo/equipment_best.html",
+            linkLabel: "さいきょう装備",
+            key: `${job.id}:prep:best`
+          }
+        ];
+      }
+      return [
+        {
+          title: "Lv45ジョブクエスト防具",
+          iconName: "ソウルクリスタル",
+          cost: 0,
+          costLabel: "無料",
+          text: "Lv45ジョブクエストで専用防具を回収。Lv50直前なので高額な買い物は避けます。",
+          href: officialItemSearch(`${job.label} ジョブクエスト Lv45`),
+          key: `${job.id}:prep:lv45-job-gear`
+        },
+        {
+          title: "Lv50ガーロンドREの詩学を準備",
+          iconName: "アラガントームストーン:詩学",
+          cost: 0,
+          costLabel: "貯める",
+          text: "Lv50になったら武器、胴、脚から交換。今は詩学を無駄遣いしない準備だけでOK。",
+          href: officialItemSearch("ガーロンドRE"),
+          key: `${job.id}:prep:poetics`
+        },
+        {
+          title: "武器が古ければ1回だけ更新",
+          iconName: "ビギナーリング",
+          cost: 0,
+          costLabel: "必要時だけ",
+          text: "火力や回復量がつらい時だけ直近IDドロップか店売りで更新。Lv50で大きく乗り換えます。",
+          href: "https://jp.finalfantasyxiv.com/lodestone/playguide/db/",
+          key: `${job.id}:prep:last-weapon`
+        }
+      ];
+    }
+
     function shoppingItems(job, level) {
+      if (level < 50) {
+        return lowLevelShoppingItems(job, level);
+      }
       const tier = shoppingTierForLevel(level);
       const catalogItems = catalogGearItems(job, tier);
       const priorityFields = ["MainHand", "OffHand", "Body", "Legs", "Head", "Gloves", "Feet", "Ears", "Neck", "Wrists", "FingerL"];
@@ -3841,26 +4066,36 @@
       poeticsInput.value = poetics;
       const items = shoppingItems(job, level);
       const firstUnchecked = items.find((item) => !isChecked(`shopping:${item.key}`));
-      shoppingSummary.textContent = firstUnchecked
-        ? `次は「${firstUnchecked.title}」。目安${firstUnchecked.cost}詩学、今は${poetics}。${poetics >= firstUnchecked.cost ? "今日買えます。" : `あと${firstUnchecked.cost - poetics}詩学です。`}`
-        : `${tier.label}の主要部位はチェック済み。次は見た目や未解放コンテンツへ。`;
+      const canExchangeTier = level < 50 || tierStoryUnlocked(tier);
+      if (level < 50) {
+        shoppingSummary.textContent = firstUnchecked
+          ? `次は「${firstUnchecked.title}」。Lv50までは買いすぎず、無料報酬とさいきょう装備で進めます。`
+          : "Lv50前の準備はチェック済み。次はガーロンドRE交換に向けてメインを進めます。";
+      } else if (!canExchangeTier) {
+        shoppingSummary.textContent = `${tier.label}は${tierStoryLabel(tier)}から交換導線が安定します。今はメイン進行を優先し、詩学は温存でOKです。`;
+      } else {
+        shoppingSummary.textContent = firstUnchecked
+          ? `次は「${firstUnchecked.title}」。目安${firstUnchecked.cost}詩学、今は${poetics}。${poetics >= firstUnchecked.cost ? "今日買えます。" : `あと${firstUnchecked.cost - poetics}詩学です。`}`
+          : `${tier.label}の主要部位はチェック済み。次は見た目や未解放コンテンツへ。`;
+      }
       const cards = await Promise.all(items.map(async (item, index) => {
         const iconUrl = item.iconUrl || await fetchItemIconByName(item.iconName);
+        const costText = item.costLabel || `目安: ${item.cost}詩学`;
         return `
           <div class="next-card">
             ${iconBox(iconUrl, item.title)}
             <div>
               <h3>${index + 1}. ${item.title}</h3>
-              <p>${item.text}<br>目安: ${item.cost}詩学</p>
+              <p>${item.text}<br>${costText}</p>
               <div class="gear-links">
-                <a href="${item.href}" target="_blank" rel="noreferrer noopener">公式DB</a>
+                <a href="${item.href}" target="_blank" rel="noreferrer noopener">${item.linkLabel || "公式DB"}</a>
               </div>
-              ${checkControl(`shopping:${item.key}`, "交換した")}
+              ${canExchangeTier ? checkControl(`shopping:${item.key}`, level < 50 ? "済んだ" : "交換した") : `<div class="next-meta"><span class="next-pill locked">${tierStoryLabel(tier)}で交換</span></div>`}
             </div>
           </div>
         `;
       }));
-      shoppingBoard.innerHTML = `<div class="next-section-title">交換優先順</div>${cards.join("")}`;
+      shoppingBoard.innerHTML = `<div class="next-section-title">${level < 50 ? "Lv50までの準備順" : "交換優先順"}</div>${cards.join("")}`;
     }
 
     async function renderNavigationGuide() {
@@ -3981,6 +4216,7 @@
       )).slice(0, 8);
       const todayTasks = buildTodayTasks(job, level);
       const fun = jobFunMoment(job, level);
+      const introIcon = await fetchItemIconByName(level >= 50 ? "アラガントームストーン:詩学" : "ビギナーリング");
       const funGoal = {
         level: fun.level,
         title: fun.title,
@@ -3994,7 +4230,7 @@
 
       const intro = `
         <div class="next-card">
-          <div class="next-icon" aria-hidden="true"></div>
+          ${iconBox(introIcon, "今日メニュー")}
           <div>
             <h3>Lv${level} ${job.label} / ${storyLabel()} の今日メニュー</h3>
             <p>${level < 50 ? "まずはLv50装備更新まで、武器と解放コンテンツを取り逃がさないのが近道です。" : nextGearText(level, tier)}</p>
@@ -4105,15 +4341,17 @@
         lodestoneUrl: lodestoneUrl.value.trim(),
         portraitUrl: portraitUrl.value.trim()
       };
-      localStorage.setItem("ff14-guide-character", JSON.stringify(data));
+      safeStorageSet("ff14-guide-character", JSON.stringify(data));
       renderCharacter();
     }
 
     function loadCharacter() {
       try {
         const data = JSON.parse(localStorage.getItem("ff14-guide-character") || "{}");
-        lodestoneUrl.value = data.lodestoneUrl || "";
-        portraitUrl.value = data.portraitUrl || "";
+        if (data && typeof data === "object" && !Array.isArray(data)) {
+          lodestoneUrl.value = data.lodestoneUrl || "";
+          portraitUrl.value = data.portraitUrl || "";
+        }
       } catch (error) {
         lodestoneUrl.value = "";
         portraitUrl.value = "";
@@ -4137,7 +4375,7 @@
       const clearButton = document.getElementById("clearCharacterButton");
       if (clearButton) {
         clearButton.addEventListener("click", () => {
-          localStorage.removeItem("ff14-guide-character");
+          safeStorageRemove("ff14-guide-character");
           lodestoneUrl.value = "";
           portraitUrl.value = "";
           renderCharacter();
@@ -4162,6 +4400,26 @@
       const tier = getGearTier(level);
       if (!tier) {
         await renderLowLevelGear(job, level);
+        await renderNextPlanner(job, level);
+        return;
+      }
+
+      if (!tierStoryUnlocked(tier)) {
+        const poeticsIcon = await fetchItemIconByName("アラガントームストーン:詩学");
+        gearSummary.innerHTML = `
+          <h3>Lv${level} ${job.label}: ${tier.label}はまだ交換条件前</h3>
+          <p>${tierStoryLabel(tier)}まで進むと交換しやすくなります。今は高額な買い物を避け、メイン進行・ジョブクエスト・直近ID装備・さいきょう装備で十分です。</p>
+          <div class="life-meter" aria-hidden="true"><span style="--meter:${gearLife(level, tier)}%"></span></div>
+        `;
+        gearList.innerHTML = `
+          <div class="gear-card">
+            ${iconBox(poeticsIcon, `${tier.label}の交換条件`, "gear-icon")}
+            <div>
+              <h3>${tier.label} IL${tier.ilvl}への道</h3>
+              <p>${tier.unlock}<br>${tier.vendor}<br>条件が揃うまでは、買い物タブも「温存」と表示します。</p>
+            </div>
+          </div>
+        `;
         await renderNextPlanner(job, level);
         return;
       }
@@ -4220,8 +4478,13 @@
       await renderNextPlanner(job, level);
     }
 
-    function normalizeFeature(feature) {
-      return feature === "home" ? "rotation" : feature;
+    function isValidFeature(feature) {
+      return [...featureTabs].some((tab) => tab.dataset.tab === feature);
+    }
+
+    function normalizeFeature(feature, fallback = "gear") {
+      const normalized = feature === "home" ? "rotation" : feature;
+      return isValidFeature(normalized) ? normalized : fallback;
     }
 
     function activateFeature(feature) {
@@ -4234,16 +4497,39 @@
       });
     }
 
+    function safeDecodeHash(hash) {
+      try {
+        return decodeURIComponent(hash.replace(/^#/, ""));
+      } catch (error) {
+        return "";
+      }
+    }
+
     function featureFromHash(hash) {
       if (!hash) {
         return "";
       }
-      const id = decodeURIComponent(hash.replace(/^#/, ""));
-      if ([...featureTabs].some((tab) => tab.dataset.tab === id)) {
-        return normalizeFeature(id);
+      const id = safeDecodeHash(hash);
+      const normalizedId = normalizeFeature(id, "");
+      if (normalizedId) {
+        return normalizedId;
       }
       const target = document.getElementById(id);
-      return normalizeFeature(target?.closest("[data-feature]")?.dataset.feature || "");
+      const feature = target?.closest("[data-feature]")?.dataset.feature || "";
+      return feature ? normalizeFeature(feature, "") : "";
+    }
+
+    function scrollToFeature(feature) {
+      const activeFeature = normalizeFeature(feature);
+      const panel = [...document.querySelectorAll(".feature-panel")]
+        .find((item) => item.dataset.feature === activeFeature && item.classList.contains("active"));
+      if (!panel) {
+        return;
+      }
+      const jumpbar = document.querySelector(".jumpbar");
+      const offset = (jumpbar?.getBoundingClientRect().height || 0) + 16;
+      const top = Math.max(0, panel.getBoundingClientRect().top + window.scrollY - offset);
+      window.scrollTo({ top, behavior: "smooth" });
     }
 
     function refreshAll() {
@@ -4260,7 +4546,7 @@
       tab.addEventListener("click", () => {
         activateFeature(tab.dataset.tab);
         history.replaceState(null, "", `#${tab.dataset.tab}`);
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        requestAnimationFrame(() => scrollToFeature(tab.dataset.tab));
       });
     });
     document.addEventListener("click", (event) => {
@@ -4310,7 +4596,7 @@
     });
     dutySelect.addEventListener("change", renderDutyGuide);
     saveCharacterButton.addEventListener("click", saveCharacter);
-    activateFeature(normalizeFeature(pageParams.get("tab") || featureFromHash(window.location.hash) || "gear"));
+    activateFeature(normalizeFeature(pageParams.get("tab"), "") || featureFromHash(window.location.hash) || "gear");
     updateStoryVisual();
     renderCockpit();
     renderResources();

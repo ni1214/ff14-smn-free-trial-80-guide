@@ -1715,7 +1715,7 @@
     <div class="settings-overlay" id="settingsOverlay" aria-hidden="true">
       <div class="settings-card" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
         <h3 id="settingsTitle">今の設定を変える</h3>
-        <p>ここを変えると、装備/入手法、スキル/成長、楽しみナビ、迷子ナビ、ごほうびがまとめて切り替わります。</p>
+        <p>ここを変えると、装備/入手法、スキル/成長、楽しみナビ、ごほうびがまとめて切り替わります。</p>
         <div class="profile-controls">
         <div class="profile-input-row">
           <div>
@@ -1757,7 +1757,6 @@
         <button class="jump feature-tab active" type="button" data-tab="gear">装備/入手法</button>
         <button class="jump feature-tab" type="button" data-tab="rotation">スキル/成長</button>
         <button class="jump feature-tab" type="button" data-tab="goals">楽しみナビ</button>
-        <button class="jump feature-tab" type="button" data-tab="route">迷子ナビ</button>
         <button class="jump feature-tab" type="button" data-tab="rewards">ごほうび</button>
         <button class="jump feature-tab" type="button" data-tab="duty">初見ギミック</button>
         <button class="jump feature-tab" type="button" data-tab="character">キャラ確認</button>
@@ -1827,13 +1826,13 @@
 
     <section class="panel next-panel feature-panel" id="nextPlanner" data-feature="goals">
       <h2>次の楽しみナビ</h2>
-      <p class="footer-note">今日やる3つ、あと少しで解放される要素、ジョブが気持ちよくなる節目をまとめます。チェックはスマホごとに保存されます。</p>
+      <p class="footer-note">今日やる3つ、あと少しで解放される要素、ジョブが気持ちよくなる節目をまとめます。迷った時の行き先メモもこの下にまとめています。</p>
       <div class="next-board" id="nextBoard"></div>
     </section>
 
-    <section class="panel route-panel feature-panel" id="routePanel" data-feature="route">
-      <h2>迷子防止ナビ</h2>
-      <p class="footer-note">次に行く場所、NPC、座標だけをスマホで見やすくまとめます。解放済みと近い目標を優先表示します。</p>
+    <section class="panel route-panel feature-panel" id="routePanel" data-feature="goals">
+      <h2>楽しみナビ内の迷子防止メモ</h2>
+      <p class="footer-note">「次に何をすればいい？」となった時用に、行く場所、NPC、座標、終わった後に見るものを細かく書いています。上の楽しみ目標を見てから、ここで移動先だけ確認してください。</p>
       <div class="next-board" id="routeBoard"></div>
     </section>
 
@@ -4339,7 +4338,7 @@
       } else if (level < 50) {
         tasks.push({ level: level, title: "ジョブクエスト確認", category: "今日", iconName: "ソウルクリスタル", story: "airship", detail: "Lv30以降はジョブクエストで重要アクションや装備が増えます。", action: "受注中/未受注のジョブクエストを確認。" });
       } else if (tier && !tierStoryUnlocked(tier)) {
-        tasks.push({ level, title: `${tier.label}の交換条件を開く`, category: "今日", iconName: "アラガントームストーン:詩学", story: storyStage.value, detail: `${tier.label}は${tierStoryLabel(tier)}から交換しやすくなります。今は装備を買い急がず、メイン進行を優先。`, action: "迷子ナビで次の行き先を確認。" });
+        tasks.push({ level, title: `${tier.label}の交換条件を開く`, category: "今日", iconName: "アラガントームストーン:詩学", story: storyStage.value, detail: `${tier.label}は${tierStoryLabel(tier)}から交換しやすくなります。今は装備を買い急がず、メイン進行を優先。`, action: "楽しみナビ下段の迷子防止メモで次の行き先を確認。" });
       } else {
         tasks.push({ level: tier?.min || 50, title: "詩学装備を1部位進める", category: "今日", iconName: "アラガントームストーン:詩学", story: storyStage.value, detail: "武器、胴、脚から更新すると強さを感じやすいです。", action: "所持詩学を見て装備/入手法タブでチェック。" });
       }
@@ -4362,7 +4361,7 @@
         iconName: route?.iconName || "クリスタル",
         story: storyStage.value,
         detail: route?.detail || "次に進む場所を1つだけ決めると、スマホを見ながら迷いにくくなります。",
-        action: route?.steps?.[0] || "迷子ナビを開く。"
+        action: route?.steps?.[0] || "楽しみナビを開く。"
       });
       return tasks.filter((task, index, array) => array.findIndex((item) => item.title === task.title) === index).slice(0, 3);
     }
@@ -4931,7 +4930,7 @@
     }
 
     function normalizeFeature(feature, fallback = "gear") {
-      const normalized = feature === "home" ? "rotation" : feature;
+      const normalized = feature === "home" ? "rotation" : (feature === "route" ? "goals" : feature);
       return isValidFeature(normalized) ? normalized : fallback;
     }
 

@@ -1014,6 +1014,68 @@
       margin-top: 10px;
     }
 
+    .glamour-spotlight {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 18px;
+      background:
+        linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(239, 247, 246, 0.96));
+      border: 1px solid rgba(215, 180, 106, 0.24);
+    }
+
+    .glamour-spotlight h3 {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.25;
+    }
+
+    .glamour-spotlight p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .glamour-actions {
+      display: grid;
+      gap: 8px;
+    }
+
+    .glamour-actions a,
+    .glamour-random-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 239, 178, 0.36);
+      background:
+        linear-gradient(180deg, rgba(50, 69, 82, 0.96), rgba(19, 31, 43, 0.98));
+      color: #fffaf3;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 900;
+      text-decoration: none;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        0 8px 18px rgba(10, 17, 23, 0.16);
+    }
+
+    .glamour-actions a:first-child,
+    .glamour-random-button {
+      background:
+        linear-gradient(180deg, rgba(188, 148, 67, 0.98), rgba(128, 91, 31, 0.98));
+    }
+
+    .glamour-random-button {
+      width: 100%;
+      margin-top: 8px;
+      cursor: pointer;
+    }
+
     .rotation-flow {
       display: flex;
       flex-wrap: wrap;
@@ -1897,7 +1959,7 @@
         <button class="jump feature-tab" type="button" data-tab="rotation">スキル/成長</button>
         <button class="jump feature-tab" type="button" data-tab="goals">楽しみナビ</button>
         <button class="jump feature-tab" type="button" data-tab="duty">ギミック</button>
-        <button class="jump feature-tab" type="button" data-tab="links">リンク/出典</button>
+        <button class="jump feature-tab" type="button" data-tab="links">ミラプリ</button>
       </div>
     </nav>
 
@@ -1981,15 +2043,17 @@
     </section>
 
     <section class="panel feature-panel" id="resourceHub" data-feature="links">
-      <h2>攻略リンク集</h2>
-      <p class="footer-note">外部へ移動する場合も、日本語ページに絞っています。正確な名称は公式、詳しい予習はGame8を補助にします。</p>
+      <h2>ミラプリ</h2>
+      <p class="footer-note">公開投稿の画像は保存せず、SNSやミラプリ共有サイトの公開ページへ移動して見ます。ランダムで雰囲気を変えて、次に作りたい見た目を探します。</p>
+      <div class="glamour-spotlight" id="glamourSpotlight"></div>
+      <button class="glamour-random-button" id="glamourRandomButton" type="button">ランダムでミラプリを見る</button>
       <div class="resource-filter">
-        <label>用途で絞り込み</label>
+        <label>探す場所で絞り込み</label>
         <div class="resource-tabs" id="resourceTabs"></div>
       </div>
       <div class="search-card">
-        <label for="siteSearch">スキル回し内を検索</label>
-        <input id="siteSearch" type="search" placeholder="例: フェニックス / 範囲 / リザレク / Lv70">
+        <label for="siteSearch">テーマを検索</label>
+        <input id="siteSearch" type="search" placeholder="例: 和風 / 白 / 黒 / 侍 / ヒーラー">
         <div class="search-results" id="siteSearchResults"></div>
       </div>
       <div class="resource-grid" id="resourceGrid"></div>
@@ -2041,7 +2105,7 @@
       <div class="utility" id="utility"></div>
     </section>
 
-    <section class="panel feature-panel" id="sources" data-feature="links">
+    <section class="panel feature-panel" id="sources" data-feature="sources">
       <h2>出典</h2>
       <p class="footer-note">
         アクション名・修得レベル・アイコンは公式ジョブガイド、アイテム名・装備アイコンはエオルゼアデータベース、フリートライアルLv80拡張は日本語版Patch 7.5パッチノートを参照しています。<br>
@@ -2413,84 +2477,163 @@
 
     let currentGuideSections = [];
 
+    function xSearchUrl(query) {
+      return `https://x.com/search?q=${encodeURIComponent(query)}&src=typed_query&f=live`;
+    }
+
+    function instagramTagUrl(tag) {
+      return `https://www.instagram.com/explore/tags/${encodeURIComponent(tag.replace(/^#/, ""))}/`;
+    }
+
+    function eorzeaCollectionSearchUrl(query) {
+      return `https://ffxiv.eorzeacollection.com/glamours?search=${encodeURIComponent(query)}`;
+    }
+
     const resourceCategories = [
       { id: "all", label: "全部" },
-      { id: "job", label: "ジョブ" },
-      { id: "guide", label: "公式ガイド" },
-      { id: "db", label: "公式DB" },
-      { id: "motivation", label: "ワクワク" }
+      { id: "jp", label: "日本" },
+      { id: "world", label: "世界" },
+      { id: "gear", label: "装備入手" },
+      { id: "howto", label: "やり方" }
     ];
 
     const resources = [
       {
-        title: "公式ジョブガイド",
-        url: "https://jp.finalfantasyxiv.com/jobguide/",
-        category: "job",
-        tags: ["公式", "スキル名", "修得Lv"],
-        text: "アクション名、修得レベル、アイコンを確認する公式情報。"
+        title: "MIRAPRI SNAP",
+        url: "https://mirapri.com/?r=3",
+        category: "jp",
+        tags: ["日本", "投稿", "ミラプリSS"],
+        text: "日本語のミラプリ投稿サイト。投稿画像は外部サイトで閲覧し、このアプリには保存しません。"
       },
       {
-        title: "エオルゼアデータベース",
+        title: "Xで #FF14ミラプリ を見る",
+        url: xSearchUrl("#FF14ミラプリ"),
+        category: "jp",
+        tags: ["日本", "X", "リアルタイム"],
+        text: "日本のミラプリ投稿を新着順で探します。気に入った投稿は元投稿側で確認します。"
+      },
+      {
+        title: "Instagramで FF14ミラプリ を見る",
+        url: instagramTagUrl("ff14ミラプリ"),
+        category: "jp",
+        tags: ["日本", "Instagram", "画像"],
+        text: "ハッシュタグ経由で公開画像を見ます。画像はInstagram上で閲覧します。"
+      },
+      {
+        title: "Eorzea Collection",
+        url: "https://ffxiv.eorzeacollection.com/glamours",
+        category: "world",
+        tags: ["世界", "投稿", "装備名"],
+        text: "世界中のFF14ユーザーのミラプリ投稿を探せる外部サイト。装備名が載っている投稿は入手調査にもつなげやすいです。"
+      },
+      {
+        title: "Xで #ffxivglamour を見る",
+        url: xSearchUrl("#ffxivglamour OR #ffxivglam"),
+        category: "world",
+        tags: ["世界", "X", "英語圏"],
+        text: "海外ユーザーのミラプリ投稿を探します。日本語以外の装備名でも雰囲気の参考にできます。"
+      },
+      {
+        title: "Instagramで ffxivglamour を見る",
+        url: instagramTagUrl("ffxivglamour"),
+        category: "world",
+        tags: ["世界", "Instagram", "画像"],
+        text: "世界の公開ミラプリ画像を眺める入口。元投稿側で作者やタグを確認します。"
+      },
+      {
+        title: "ミラプリライフ 装備検索",
+        url: "https://ff14-fc.com/equipment_series_search/",
+        category: "gear",
+        tags: ["日本", "装備見た目", "入手方法"],
+        text: "装備の見た目と入手方法を調べる日本語サイト。欲しい雰囲気から装備候補を探す時に便利です。"
+      },
+      {
+        title: "公式エオルゼアデータベース",
         url: "https://jp.finalfantasyxiv.com/lodestone/playguide/db/",
-        category: "db",
-        tags: ["公式", "アイテム", "クエスト"],
-        text: "公式の日本語データベース。装備名やクエスト名を正確に確認できます。"
+        category: "gear",
+        tags: ["公式", "アイテム", "入手先"],
+        text: "装備名がわかったら公式DBで検索。取引可否、入手先、装備可能ジョブの確認に使います。"
       },
       {
-        title: "Game8 討滅戦攻略一覧",
-        url: "https://game8.jp/ff14/283755",
-        category: "guide",
-        tags: ["日本語攻略", "討滅戦", "予習"],
-        text: "討滅戦や極討滅戦の詳細確認用。アプリ内では要点だけ短く見られるように整理しています。"
+        title: "Game8 ミラプリのやり方",
+        url: "https://game8.jp/ff14/301040",
+        category: "howto",
+        tags: ["日本語攻略", "解放", "やり方"],
+        text: "ミラプリ解放、ミラージュドレッサー、プレートの使い方を確認する入口です。"
       },
       {
-        title: "Game8 ダンジョン攻略一覧",
-        url: "https://game8.jp/ff14/275813",
-        category: "guide",
-        tags: ["日本語攻略", "ID", "予習"],
-        text: "IDの詳細確認用。新生から漆黒までの一覧確認に使用しています。"
-      },
-      {
-        title: "マンダヴィル・ゴールドソーサー",
-        url: "https://jp.finalfantasyxiv.com/lodestone/playguide/contentsguide/goldsaucer/",
-        category: "motivation",
-        tags: ["MGP", "ミニゲーム", "景品"],
-        text: "Lv15からの大きな寄り道。景品、MGP、遊びの入口を公式ページで確認できます。"
-      },
-      {
-        title: "初心者の館／メンターシステム",
-        url: "https://jp.finalfantasyxiv.com/lodestone/topics/detail/202607a056ee79716a0c0c362647a4e52bfc218d",
-        category: "guide",
-        tags: ["Lv15", "ビギナー装備", "練習"],
-        text: "Lv15からのロール練習とビギナー装備。序盤の装備更新で特に大事です。"
-      },
-      {
-        title: "マイチョコボと一緒に戦いたい",
-        url: "https://jp.finalfantasyxiv.com/uiguide/faq/faq-chocobo/chocobo_buddy.html",
-        category: "guide",
-        tags: ["Lv30", "バディ", "ソロ"],
-        text: "バディチョコボの解放と使い方。ソロ戦闘がかなり楽になります。"
-      },
-      {
-        title: "コンテンツサポーター",
-        url: "https://jp.finalfantasyxiv.com/game_manual/dutysupport/",
-        category: "guide",
-        tags: ["ソロ", "ID", "NPC"],
-        text: "対象IDをNPCと進められる公式機能。初見で落ち着いて練習したい時に便利。"
-      },
-      {
-        title: "ファッションチェック",
-        url: "https://jp.finalfantasyxiv.com/lodestone/playguide/contentsguide/goldsaucer/fashionreport/",
-        category: "motivation",
-        tags: ["MGP", "見た目", "毎週"],
-        text: "ゴールドソーサーの毎週コンテンツ。ミラプリを考える理由にもなります。"
-      },
-      {
-        title: "UIガイド: 装備品を武具投影したい",
+        title: "公式UIガイド: 武具投影",
         url: "https://jp.finalfantasyxiv.com/uiguide/fashion/equipment-glamours/glamours_about.html",
-        category: "motivation",
-        tags: ["ミラプリ", "見た目", "装備"],
-        text: "見た目を変える導線。お気に入り装備を集めるモチベーションになります。"
+        category: "howto",
+        tags: ["公式", "ミラプリ", "見た目"],
+        text: "公式の武具投影ガイド。ゲーム内でどう操作するか迷った時に確認します。"
+      }
+    ];
+
+    const glamourPrompts = [
+      {
+        title: "和風・侍・クガネ",
+        text: "刀、羽織、袴、赤黒、夜景で探す日。侍や忍者だけでなく、キャスターの和装にも応用しやすいです。",
+        query: "#FF14ミラプリ 和風 OR 侍",
+        instagramTag: "ff14ミラプリ",
+        eorzea: "samurai japanese",
+        items: ["侍", "和風", "着物"]
+      },
+      {
+        title: "白系ヒーラー・聖職者",
+        text: "白、金、ローブ、杖、羽根の雰囲気。白魔道士や占星術師の清潔感ある見た目を探します。",
+        query: "#FF14ミラプリ 白魔道士 OR ヒーラー",
+        instagramTag: "ffxivglamour",
+        eorzea: "white healer",
+        items: ["ヒーラー ローブ", "白魔道士", "ドレス"]
+      },
+      {
+        title: "黒×金・暗黒ファンタジー",
+        text: "暗黒騎士、黒魔道士、召喚士に合う重めの配色。鎧、コート、角、金属感で探します。",
+        query: "#FF14ミラプリ 黒 金 OR 暗黒騎士",
+        instagramTag: "ffxivglam",
+        eorzea: "black gold dark",
+        items: ["黒 コート", "暗黒騎士", "キャスター"]
+      },
+      {
+        title: "ストリート・カジュアル",
+        text: "ジャケット、ブーツ、帽子、メガネ。普段着っぽいミラプリで街歩きのモチベを上げます。",
+        query: "#FF14ミラプリ カジュアル OR ストリート",
+        instagramTag: "ffxivglamour",
+        eorzea: "casual street",
+        items: ["ジャケット", "ブーツ", "眼鏡"]
+      },
+      {
+        title: "かわいい・パステル",
+        text: "淡色、リボン、スカート、花、ミニオン映え。SS撮影したくなる方向で探します。",
+        query: "#FF14ミラプリ パステル OR かわいい",
+        instagramTag: "ff14ミラプリ",
+        eorzea: "pastel cute",
+        items: ["リボン", "スカート", "花"]
+      },
+      {
+        title: "騎士・タンク鎧",
+        text: "ナイト、戦士、ガンブレ向け。鎧のシルエット、マント、剣盾、重厚感を見ます。",
+        query: "#FF14ミラプリ ナイト OR 鎧",
+        instagramTag: "ffxivglamour",
+        eorzea: "knight tank armor",
+        items: ["ナイト 鎧", "盾", "ガンブレイカー"]
+      },
+      {
+        title: "機工士・レンジ旅装",
+        text: "銃、コート、ゴーグル、革装備。旅人感や蒸気機械っぽさを探します。",
+        query: "#FF14ミラプリ 機工士 OR レンジ",
+        instagramTag: "ffxivglam",
+        eorzea: "machinist ranged coat",
+        items: ["機工士", "コート", "ゴーグル"]
+      },
+      {
+        title: "ニーア・黒白モード",
+        text: "黒白、軍装、ゴシック、目隠し系。ヨルハ装備を起点に組み替え案を見ます。",
+        query: "#FF14ミラプリ ニーア OR ヨルハ",
+        instagramTag: "ffxivglamour",
+        eorzea: "yorha nier",
+        items: ["ヨルハ", "黒", "白"]
       }
     ];
 
@@ -3633,6 +3776,8 @@
     const storyImageCaption = document.getElementById("storyImageCaption");
     const siteSearch = document.getElementById("siteSearch");
     const siteSearchResults = document.getElementById("siteSearchResults");
+    const glamourSpotlight = document.getElementById("glamourSpotlight");
+    const glamourRandomButton = document.getElementById("glamourRandomButton");
     const gearJob = document.getElementById("gearJob");
     const gearLevel = document.getElementById("gearLevel");
     const storyStage = document.getElementById("storyStage");
@@ -3771,23 +3916,46 @@
       foldContainer(document.getElementById("resourceGrid"), 3, "リンクをすべて見る");
     }
 
+    function renderGlamourSpotlight(prompt = null) {
+      const theme = prompt || glamourPrompts[Math.floor(Math.random() * glamourPrompts.length)];
+      const itemLinks = theme.items.map((item) => `
+        <a href="${officialItemSearch(item)}" target="_blank" rel="noreferrer noopener">${escapeHtml(item)}の入手を公式DBで探す</a>
+      `).join("");
+      glamourSpotlight.innerHTML = `
+        <h3>${escapeHtml(theme.title)}</h3>
+        <p>${escapeHtml(theme.text)}</p>
+        <div class="resource-tags">
+          ${theme.items.map((item) => `<span class="resource-tag">${escapeHtml(item)}</span>`).join("")}
+        </div>
+        <div class="glamour-actions">
+          <a href="${xSearchUrl(theme.query)}" target="_blank" rel="noreferrer noopener">Xで公開ミラプリを見る</a>
+          <a href="${instagramTagUrl(theme.instagramTag)}" target="_blank" rel="noreferrer noopener">Instagramのタグを見る</a>
+          <a href="${eorzeaCollectionSearchUrl(theme.eorzea)}" target="_blank" rel="noreferrer noopener">Eorzea Collectionで世界の投稿を見る</a>
+          ${itemLinks}
+        </div>
+      `;
+    }
+
     function renderSearchResults() {
       const query = siteSearch.value.trim().toLowerCase();
       if (!query) {
         siteSearchResults.innerHTML = "";
         return;
       }
-      const results = currentGuideSections
-        .filter((result) => `${result.title} ${result.text}`.toLowerCase().includes(query))
+      const results = glamourPrompts
+        .filter((result) => `${result.title} ${result.text} ${result.items.join(" ")}`.toLowerCase().includes(query))
         .slice(0, 6);
       siteSearchResults.innerHTML = results.length
-        ? results.map((result) => `
+        ? results.map((result, index) => `
           <div class="search-result">
-            <h3><a href="${result.href}">${result.title}</a></h3>
-            <p>${result.text.slice(0, 110)}...</p>
+            <h3><a href="${xSearchUrl(result.query)}" target="_blank" rel="noreferrer noopener">${result.title}</a></h3>
+            <p>${result.text}</p>
+            <div class="resource-tags">
+              ${result.items.map((item) => `<span class="resource-tag">${item}</span>`).join("")}
+            </div>
           </div>
         `).join("")
-        : `<div class="search-result"><h3>見つかりませんでした</h3><p>Lv、スキル名、単体、範囲、フェニックスなどで試してください。</p></div>`;
+        : `<div class="search-result"><h3>見つかりませんでした</h3><p>和風、白、黒、侍、ヒーラー、カジュアルなどで試してください。</p></div>`;
     }
 
     function getGearTier(level) {
@@ -5264,6 +5432,9 @@
       renderResources();
     });
     siteSearch.addEventListener("input", renderSearchResults);
+    glamourRandomButton.addEventListener("click", () => {
+      renderGlamourSpotlight();
+    });
     openSettingsButton.addEventListener("click", openSettings);
     closeSettingsButton.addEventListener("click", closeSettings);
     settingsOverlay.addEventListener("click", (event) => {
@@ -5308,6 +5479,7 @@
     updateProfileSummary();
     updateStoryVisual();
     renderCockpit();
+    renderGlamourSpotlight(glamourPrompts[0]);
     renderResources();
     renderGearFinder();
     renderShoppingList();

@@ -1620,7 +1620,7 @@
     <div class="settings-overlay" id="settingsOverlay" aria-hidden="true">
       <div class="settings-card" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
         <h3 id="settingsTitle">今の設定を変える</h3>
-        <p>ここを変えると、装備、スキル/成長、楽しみナビ、買い物、迷子ナビ、ごほうびがまとめて切り替わります。</p>
+        <p>ここを変えると、装備/入手法、スキル/成長、楽しみナビ、迷子ナビ、ごほうびがまとめて切り替わります。</p>
         <div class="profile-controls">
         <div class="profile-input-row">
           <div>
@@ -1659,10 +1659,9 @@
 
     <nav class="jumpbar" aria-label="機能切り替え">
       <div class="jumpbar-track">
-        <button class="jump feature-tab active" type="button" data-tab="gear">装備</button>
+        <button class="jump feature-tab active" type="button" data-tab="gear">装備/入手法</button>
         <button class="jump feature-tab" type="button" data-tab="rotation">スキル/成長</button>
         <button class="jump feature-tab" type="button" data-tab="goals">楽しみナビ</button>
-        <button class="jump feature-tab" type="button" data-tab="shopping">買い物</button>
         <button class="jump feature-tab" type="button" data-tab="route">迷子ナビ</button>
         <button class="jump feature-tab" type="button" data-tab="rewards">ごほうび</button>
         <button class="jump feature-tab" type="button" data-tab="duty">初見ギミック</button>
@@ -1718,28 +1717,23 @@
     </section>
 
     <section class="panel gear-panel feature-panel active" id="gearFinder" data-feature="gear">
-      <h2>装備更新ナビ</h2>
-      <p class="footer-note">上の「今の設定」から、無料範囲でまず揃えたいおすすめ装備と入手先を出します。メイン進行が足りない交換装備は条件も表示します。</p>
+      <h2>装備/入手法</h2>
+      <p class="footer-note">上の「今の設定」から、無料範囲でまず揃えたい装備、入手先、交換順、詩学目安をまとめて出します。武器からアクセサリーまで最初から表示します。</p>
       <div class="gear-summary" id="gearSummary">
         <h3>今の設定で装備を表示</h3>
         <p>武器・防具・アクセの候補をゲーム内アイコン付きで表示します。</p>
       </div>
       <div class="gear-list" id="gearList"></div>
+      <div class="shopping-head">
+        <div class="shopping-summary" id="shoppingSummary">所持詩学を入れると今日買える目安を出します。</div>
+      </div>
+      <div class="next-board" id="shoppingBoard"></div>
     </section>
 
     <section class="panel next-panel feature-panel" id="nextPlanner" data-feature="goals">
       <h2>次の楽しみナビ</h2>
       <p class="footer-note">今日やる3つ、あと少しで解放される要素、ジョブが気持ちよくなる節目をまとめます。チェックはスマホごとに保存されます。</p>
       <div class="next-board" id="nextBoard"></div>
-    </section>
-
-    <section class="panel shopping-panel feature-panel" id="shoppingPanel" data-feature="shopping">
-      <h2>買い物リスト</h2>
-      <p class="footer-note">Lv50未満は「買わずに済ませる準備」、Lv50以降は詩学装備の交換順を出します。所持詩学とチェック状況はこのスマホに保存されます。</p>
-      <div class="shopping-head">
-        <div class="shopping-summary" id="shoppingSummary">所持詩学を入れると今日買える目安を出します。</div>
-      </div>
-      <div class="next-board" id="shoppingBoard"></div>
     </section>
 
     <section class="panel route-panel feature-panel" id="routePanel" data-feature="route">
@@ -3896,20 +3890,7 @@
           text: `Lv50到達後、新生クリアで${nextTier.label} IL${nextTier.ilvl}へ。武器、胴、脚から交換すると一気に楽になります。`
         }
       ];
-      const cards = await Promise.all(concreteItems.map(async (item) => ({
-        ...item,
-        iconUrl: await fetchItemIconByName(item.name)
-      })));
-      gearList.innerHTML = cards.map((item) => `
-        <div class="gear-card">
-          ${iconBox(item.iconUrl, item.title, "gear-icon")}
-          <div>
-            <h3>${item.title}</h3>
-            <p>${item.text}</p>
-          </div>
-        </div>
-      `).join("");
-      foldContainer(gearList, 3, "低レベル装備の詳細を開く");
+      gearList.innerHTML = "";
     }
 
     function gearRoleLabel(job) {
@@ -4118,7 +4099,7 @@
       } else if (tier && !tierStoryUnlocked(tier)) {
         tasks.push({ level, title: `${tier.label}の交換条件を開く`, category: "今日", iconName: "アラガントームストーン:詩学", story: storyStage.value, detail: `${tier.label}は${tierStoryLabel(tier)}から交換しやすくなります。今は装備を買い急がず、メイン進行を優先。`, action: "迷子ナビで次の行き先を確認。" });
       } else {
-        tasks.push({ level: tier?.min || 50, title: "詩学装備を1部位進める", category: "今日", iconName: "アラガントームストーン:詩学", story: storyStage.value, detail: "武器、胴、脚から更新すると強さを感じやすいです。", action: "所持詩学を見て買い物タブでチェック。" });
+        tasks.push({ level: tier?.min || 50, title: "詩学装備を1部位進める", category: "今日", iconName: "アラガントームストーン:詩学", story: storyStage.value, detail: "武器、胴、脚から更新すると強さを感じやすいです。", action: "所持詩学を見て装備/入手法タブでチェック。" });
       }
 
       if (level < job.min) {
@@ -4335,8 +4316,25 @@
           </div>
         `;
       }));
-      shoppingBoard.innerHTML = `<div class="next-section-title">${level < 50 ? "Lv50までの準備順" : "交換優先順"}</div>${cards.join("")}`;
-      foldContainer(shoppingBoard, 3, "買い物候補をすべて見る");
+      const routeCards = level >= 50
+        ? await Promise.all(poeticsRoutes.map(async (route) => {
+          const iconUrl = await fetchItemIconByName("アラガントームストーン:詩学");
+          return `
+            <div class="next-card">
+              ${iconBox(iconUrl, route.title)}
+              <div>
+                <h3>${route.title}</h3>
+                <p>${route.text}</p>
+              </div>
+            </div>
+          `;
+        }))
+        : [];
+      shoppingBoard.innerHTML = `
+        <div class="next-section-title">${level < 50 ? "Lv50までの準備順" : "交換優先順"}</div>
+        ${cards.join("")}
+        ${routeCards.length ? `<div class="next-section-title">詩学の集め方</div>${routeCards.join("")}` : ""}
+      `;
     }
 
     async function renderNavigationGuide() {
@@ -4665,7 +4663,7 @@
             ${iconBox(poeticsIcon, `${tier.label}の交換条件`, "gear-icon")}
             <div>
               <h3>${tier.label} IL${tier.ilvl}への道</h3>
-              <p>${tier.unlock}<br>${tier.vendor}<br>条件が揃うまでは、買い物タブも「温存」と表示します。</p>
+              <p>${tier.unlock}<br>${tier.vendor}<br>条件が揃うまでは、下の入手順も「温存」と表示します。</p>
             </div>
           </div>
         `;
@@ -4680,49 +4678,7 @@
         <p>${tier.vendor}<br>${tier.unlock}<br>${nextGearText(level, tier)}</p>
         <div class="life-meter" aria-hidden="true"><span style="--meter:${gearLife(level, tier)}%"></span></div>
       `;
-      const poeticsIcon = await fetchItemIconByName("アラガントームストーン:詩学");
-      await iconDataReady;
-      const catalogItems = catalogGearItems(job, tier);
-      const itemCards = catalogItems
-        ? catalogItems.map((item) => `
-          <div class="gear-card">
-            ${iconBox(item.icon, item.name, "gear-icon")}
-            <div>
-              <h3>${slotLabelByField(item.slot)}: ${item.name}</h3>
-              <p>装備Lv${item.equipLevel} / IL${item.itemLevel}。${tier.vendor} ${gearPriorityText(item.slot)}</p>
-              <div class="gear-links">
-                <a href="${item.href}" target="_blank" rel="noreferrer noopener">公式DB</a>
-              </div>
-            </div>
-          </div>
-        `).join("")
-        : gearSlots.filter((slot) => !slot.jobs || slot.jobs.includes(job.id)).map((slot) => {
-          const title = staticGearTitle(tier, job, slot);
-          const query = `${tier.label} ${job.label} ${slot.label}`;
-          return `
-            <div class="gear-card">
-              ${iconBox(poeticsIcon, title, "gear-icon")}
-              <div>
-                <h3>${title}</h3>
-                <p>装備Lv${tier.min} / IL${tier.ilvl}。交換画面で「${gearRoleLabel(job)}」または「${job.label}武器」を選びます。${gearPriorityText(slot.field)}</p>
-                <div class="gear-links">
-                  <a href="${officialItemSearch(query)}" target="_blank" rel="noreferrer noopener">公式DB</a>
-                </div>
-              </div>
-            </div>
-          `;
-        }).join("");
-      const poeticsCards = poeticsRoutes.map((route) => `
-        <div class="gear-card">
-          ${iconBox(poeticsIcon, route.title, "gear-icon")}
-          <div>
-            <h3>${route.title}</h3>
-            <p>${route.text}</p>
-          </div>
-        </div>
-      `).join("");
-      gearList.innerHTML = itemCards + poeticsCards;
-      foldContainer(gearList, 3, "装備候補と詩学集めをすべて見る");
+      gearList.innerHTML = "";
       findGearButton.disabled = false;
       findGearButton.textContent = "この設定で更新";
       await renderNextPlanner(job, level);

@@ -1018,11 +1018,41 @@
       display: grid;
       gap: 10px;
       margin-top: 10px;
-      padding: 12px;
+      padding: 0;
       border-radius: 18px;
       background:
-        linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(239, 247, 246, 0.96));
+        linear-gradient(180deg, rgba(23, 34, 44, 0.98), rgba(11, 18, 25, 0.98));
       border: 1px solid rgba(215, 180, 106, 0.24);
+      overflow: hidden;
+      min-height: 430px;
+    }
+
+    .glamour-photo-wrap {
+      position: relative;
+      min-height: 430px;
+      background: #111b24;
+    }
+
+    .glamour-photo-wrap img {
+      display: block;
+      width: 100%;
+      height: min(70vh, 560px);
+      min-height: 430px;
+      object-fit: cover;
+      background: #111b24;
+    }
+
+    .glamour-photo-info {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: grid;
+      gap: 4px;
+      padding: 14px;
+      background:
+        linear-gradient(180deg, rgba(11, 18, 25, 0), rgba(11, 18, 25, 0.86) 42%, rgba(11, 18, 25, 0.96));
+      color: #fffaf3;
     }
 
     .glamour-spotlight h3 {
@@ -1033,7 +1063,7 @@
 
     .glamour-spotlight p {
       margin: 0;
-      color: var(--muted);
+      color: rgba(255, 250, 243, 0.78);
       font-size: 13px;
       line-height: 1.6;
     }
@@ -1041,6 +1071,8 @@
     .glamour-actions {
       display: grid;
       gap: 8px;
+      padding: 12px;
+      background: rgba(255, 250, 243, 0.96);
     }
 
     .glamour-actions a,
@@ -1074,6 +1106,10 @@
       width: 100%;
       margin-top: 8px;
       cursor: pointer;
+    }
+
+    .glamour-details {
+      margin-top: 10px;
     }
 
     .rotation-flow {
@@ -2044,19 +2080,22 @@
 
     <section class="panel feature-panel" id="resourceHub" data-feature="links">
       <h2>ミラプリ</h2>
-      <p class="footer-note">公開投稿の画像は保存せず、SNSやミラプリ共有サイトの公開ページへ移動して見ます。ランダムで雰囲気を変えて、次に作りたい見た目を探します。</p>
+      <p class="footer-note">画像は保存せず、公開元の画像をそのまま表示します。気になったら元投稿で装備を確認します。</p>
       <div class="glamour-spotlight" id="glamourSpotlight"></div>
       <button class="glamour-random-button" id="glamourRandomButton" type="button">ランダムでミラプリを見る</button>
-      <div class="resource-filter">
-        <label>探す場所で絞り込み</label>
-        <div class="resource-tabs" id="resourceTabs"></div>
-      </div>
-      <div class="search-card">
-        <label for="siteSearch">テーマを検索</label>
-        <input id="siteSearch" type="search" placeholder="例: 和風 / 白 / 黒 / 侍 / ヒーラー">
-        <div class="search-results" id="siteSearchResults"></div>
-      </div>
-      <div class="resource-grid" id="resourceGrid"></div>
+      <details class="more-details glamour-details">
+        <summary>装備検索や他のミラプリサイトを開く</summary>
+        <div class="resource-filter">
+          <label>探す場所で絞り込み</label>
+          <div class="resource-tabs" id="resourceTabs"></div>
+        </div>
+        <div class="search-card">
+          <label for="siteSearch">テーマを検索</label>
+          <input id="siteSearch" type="search" placeholder="例: 和風 / 白 / 黒 / 侍 / ヒーラー">
+          <div class="search-results" id="siteSearchResults"></div>
+        </div>
+        <div class="resource-grid" id="resourceGrid"></div>
+      </details>
     </section>
 
     <section class="panel feature-panel" id="summary" data-feature="rotation">
@@ -2636,6 +2675,66 @@
         items: ["ヨルハ", "黒", "白"]
       }
     ];
+
+    const glamourFeedFallback = [
+      {
+        title: "Expedition Lead Paladin",
+        source: "https://ffxiv.eorzeacollection.com/glamour/335817/expedition-lead-paladin",
+        image: "https://glamours.eorzeacollection.com/335817/cover-0-1777186670.png",
+        search: "Paladin armor"
+      },
+      {
+        title: "Terror Weapon Warrior",
+        source: "https://ffxiv.eorzeacollection.com/glamour/335815/terror-weapon-warrior",
+        image: "https://glamours.eorzeacollection.com/335815/cover-0-1777185756.png",
+        search: "Warrior weapon armor"
+      },
+      {
+        title: "Earl Grey & Biscuit",
+        source: "https://ffxiv.eorzeacollection.com/glamour/336396/earl-grey--biscuit",
+        image: "https://glamours.eorzeacollection.com/336396/cover-0-1777617932.png",
+        search: "casual caster"
+      },
+      {
+        title: "Otherworld Explorer",
+        source: "https://ffxiv.eorzeacollection.com/glamour/336302/otherworld-explorer",
+        image: "https://glamours.eorzeacollection.com/336302/cover-0-1777564113.png",
+        search: "explorer coat"
+      },
+      {
+        title: "Experimental No. 24",
+        source: "https://ffxiv.eorzeacollection.com/glamour/336395/experimental-no-24",
+        image: "https://glamours.eorzeacollection.com/336395/cover-0-1777615082.png",
+        search: "experimental glamour"
+      },
+      {
+        title: "Red and White",
+        source: "https://ffxiv.eorzeacollection.com/glamour/336394/red-and-white",
+        image: "https://glamours.eorzeacollection.com/336394/cover-0-1777614897.png",
+        search: "red white outfit"
+      },
+      {
+        title: "Experimental No. 23",
+        source: "https://ffxiv.eorzeacollection.com/glamour/336393/experimental-no-23",
+        image: "https://glamours.eorzeacollection.com/336393/cover-0-1777614652.png",
+        search: "experimental glamour"
+      },
+      {
+        title: "Knight of the Forest",
+        source: "https://ffxiv.eorzeacollection.com/glamour/336389/knight-of-the-forest",
+        image: "https://glamours.eorzeacollection.com/336389/cover-0-1777613019.png",
+        search: "forest knight armor"
+      },
+      {
+        title: "Lunara's Lv80 Glam",
+        source: "https://ffxiv.eorzeacollection.com/glamour/336388/lunaras-80-glam-for-evercold",
+        image: "https://glamours.eorzeacollection.com/336388/cover-0-1777612913.png",
+        search: "level 80 glamour"
+      }
+    ];
+
+    let glamourFeed = [...glamourFeedFallback];
+    let currentGlamourIndex = -1;
 
     const gearJobs = [
       { id: "PLD", label: "ナイト", min: 1, role: "tank", className: "剣術士" },
@@ -3916,22 +4015,69 @@
       foldContainer(document.getElementById("resourceGrid"), 3, "リンクをすべて見る");
     }
 
-    function renderGlamourSpotlight(prompt = null) {
-      const theme = prompt || glamourPrompts[Math.floor(Math.random() * glamourPrompts.length)];
-      const itemLinks = theme.items.map((item) => `
-        <a href="${officialItemSearch(item)}" target="_blank" rel="noreferrer noopener">${escapeHtml(item)}の入手を公式DBで探す</a>
-      `).join("");
+    function glamourTitleFromSlug(slug) {
+      return slug
+        .replace(/-/g, " ")
+        .replace(/\s+/g, " ")
+        .trim()
+        .replace(/\b\w/g, (letter) => letter.toUpperCase());
+    }
+
+    function parseEorzeaGlamours(markdown) {
+      const matches = [...markdown.matchAll(/\[!\[Image \d+\]\((https:\/\/glamours\.eorzeacollection\.com\/[^)\s]+)\)\]\((https:\/\/ffxiv\.eorzeacollection\.com\/glamour\/\d+\/([^)]+))\)/g)];
+      return matches.map((match) => ({
+        image: match[1],
+        source: match[2],
+        title: glamourTitleFromSlug(match[3]),
+        search: glamourTitleFromSlug(match[3])
+      }));
+    }
+
+    async function loadExternalGlamours() {
+      try {
+        const response = await fetch("https://r.jina.ai/http://r.jina.ai/http://https://ffxiv.eorzeacollection.com/glamours", { cache: "no-store" });
+        if (!response.ok) {
+          return;
+        }
+        const parsed = parseEorzeaGlamours(await response.text());
+        if (parsed.length) {
+          glamourFeed = parsed.slice(0, 36);
+        }
+      } catch (error) {
+        glamourFeed = [...glamourFeedFallback];
+      }
+    }
+
+    function randomGlamourEntry() {
+      if (!glamourFeed.length) {
+        glamourFeed = [...glamourFeedFallback];
+      }
+      if (glamourFeed.length === 1) {
+        currentGlamourIndex = 0;
+        return glamourFeed[0];
+      }
+      let nextIndex = Math.floor(Math.random() * glamourFeed.length);
+      if (nextIndex === currentGlamourIndex) {
+        nextIndex = (nextIndex + 1) % glamourFeed.length;
+      }
+      currentGlamourIndex = nextIndex;
+      return glamourFeed[nextIndex];
+    }
+
+    function renderGlamourSpotlight(entry = null) {
+      const glamour = entry || randomGlamourEntry();
       glamourSpotlight.innerHTML = `
-        <h3>${escapeHtml(theme.title)}</h3>
-        <p>${escapeHtml(theme.text)}</p>
-        <div class="resource-tags">
-          ${theme.items.map((item) => `<span class="resource-tag">${escapeHtml(item)}</span>`).join("")}
+        <div class="glamour-photo-wrap">
+          <img src="${glamour.image}" alt="${escapeHtml(glamour.title)}" loading="lazy">
+          <div class="glamour-photo-info">
+            <h3>${escapeHtml(glamour.title)}</h3>
+            <p>Eorzea Collectionの公開投稿を表示中。画像はこのサイトに保存していません。</p>
+          </div>
         </div>
         <div class="glamour-actions">
-          <a href="${xSearchUrl(theme.query)}" target="_blank" rel="noreferrer noopener">Xで公開ミラプリを見る</a>
-          <a href="${instagramTagUrl(theme.instagramTag)}" target="_blank" rel="noreferrer noopener">Instagramのタグを見る</a>
-          <a href="${eorzeaCollectionSearchUrl(theme.eorzea)}" target="_blank" rel="noreferrer noopener">Eorzea Collectionで世界の投稿を見る</a>
-          ${itemLinks}
+          <a href="${glamour.source}" target="_blank" rel="noreferrer noopener">この投稿の装備を見る</a>
+          <a href="${officialItemSearch(glamour.search || glamour.title)}" target="_blank" rel="noreferrer noopener">似た装備を公式DBで探す</a>
+          <a href="https://ffxiv.eorzeacollection.com/glamours" target="_blank" rel="noreferrer noopener">もっと世界のミラプリを見る</a>
         </div>
       `;
     }
@@ -5479,7 +5625,8 @@
     updateProfileSummary();
     updateStoryVisual();
     renderCockpit();
-    renderGlamourSpotlight(glamourPrompts[0]);
+    renderGlamourSpotlight(glamourFeedFallback[0]);
+    loadExternalGlamours();
     renderResources();
     renderGearFinder();
     renderShoppingList();

@@ -1492,6 +1492,43 @@
       font-size: 12px;
     }
 
+    .duty-link-actions {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .duty-open-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 239, 178, 0.38);
+      background:
+        linear-gradient(180deg, rgba(188, 148, 67, 0.98), rgba(128, 91, 31, 0.98));
+      color: #fffaf3;
+      font-size: 14px;
+      font-weight: 900;
+      text-decoration: none;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.36),
+        0 8px 18px rgba(42, 29, 10, 0.18);
+    }
+
+    .duty-open-button.secondary {
+      background:
+        linear-gradient(180deg, rgba(50, 69, 82, 0.96), rgba(19, 31, 43, 0.98));
+    }
+
+    .duty-count {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
     .character-panel {
       border-color: rgba(186, 139, 47, 0.2);
       background:
@@ -1762,7 +1799,7 @@
     <header class="hero">
       <div class="eyebrow">FFXIV Free Trial Lv80 2026-04-28</div>
       <h1>FF14 フリートライアルLv80<br>二人用攻略アプリ</h1>
-      <p>今のジョブとレベルから、今日見るべき装備・次の目標・初見ギミックだけを先に出します。</p>
+      <p>今のジョブとレベルから、今日見るべき装備・次の目標・ギミックだけを先に出します。</p>
       <details class="hero-details">
         <summary>調査メモと進行画像</summary>
         <div class="meta-note">
@@ -1859,7 +1896,7 @@
         <button class="jump feature-tab active" type="button" data-tab="gear">装備/入手法</button>
         <button class="jump feature-tab" type="button" data-tab="rotation">スキル/成長</button>
         <button class="jump feature-tab" type="button" data-tab="goals">楽しみナビ</button>
-        <button class="jump feature-tab" type="button" data-tab="duty">初見ギミック</button>
+        <button class="jump feature-tab" type="button" data-tab="duty">ギミック</button>
         <button class="jump feature-tab" type="button" data-tab="links">リンク/出典</button>
       </div>
     </nav>
@@ -1883,21 +1920,22 @@
     </section>
 
     <section class="panel duty-panel feature-panel" id="dutyGuide" data-feature="duty">
-      <h2>初見ギミック即答ナビ</h2>
-      <p class="footer-note">IDや討滅戦で「これ、どう避けるの？」となった時に、攻撃の見た目から判断できる避け方を出します。</p>
+      <h2>ギミック攻略リンク</h2>
+      <p class="footer-note">ID、討滅戦、クリスタルタワーなどの大人数レイドを検索して、Game8の日本語攻略へすぐ移動します。</p>
       <div class="duty-controls">
         <div class="duty-control-row">
           <div>
             <label for="dutyType">種類</label>
             <select id="dutyType">
-              <option value="all">ID + 討滅戦</option>
+              <option value="all">全部</option>
               <option value="ダンジョン">ID</option>
               <option value="討伐・討滅戦">討滅戦</option>
+              <option value="アライアンスレイド">大人数レイド</option>
             </select>
           </div>
           <div>
             <label for="dutySearch">コンテンツ名</label>
-            <input id="dutySearch" type="search" placeholder="例: タイタン / サスタシャ / ハーデス">
+            <input id="dutySearch" type="search" placeholder="例: タイタン / サスタシャ / クリスタルタワー">
           </div>
         </div>
         <label for="dutySelect">選択</label>
@@ -1905,7 +1943,7 @@
       </div>
       <div class="duty-summary" id="dutySummary">
         <h3>データ読み込み中</h3>
-        <p>日本語データからLv80までのIDと討滅戦を読み込んでいます。</p>
+        <p>Lv80までのID、討滅戦、大人数レイドを読み込んでいます。</p>
       </div>
       <div class="mechanic-grid" id="mechanicGrid"></div>
     </section>
@@ -3347,6 +3385,80 @@
       { match: ["ダイヤウェポン"], hints: ["足場移動が重要。移動できるタイミングで反対側へ渡る準備。"], tags: ["足場", "移動"] }
     ];
 
+    const game8DutyIndexUrls = {
+      "ダンジョン": "https://game8.jp/ff14/275813",
+      "討伐・討滅戦": "https://game8.jp/ff14/283755",
+      "アライアンスレイド": "https://game8.jp/ff14/297378"
+    };
+
+    const game8DutyLinks = {
+      "天然要害 サスタシャ浸食洞": "https://game8.jp/ff14/296083",
+      "流砂迷宮 カッターズクライ": "https://game8.jp/ff14/307005",
+      "城塞攻略 ストーンヴィジル": "https://game8.jp/ff14/326545",
+      "外郭攻略 カストルム・メリディアヌム": "https://game8.jp/ff14/326712",
+      "怪鳥巨塔 シリウス大灯台": "https://game8.jp/ff14/327609",
+      "制圧巨塔 シリウス大灯台": "https://game8.jp/ff14/328132",
+      "星海観測 逆さの塔": "https://game8.jp/ff14/320125",
+      "逆襲要害 サスタシャ浸食洞": "https://game8.jp/ff14/322831",
+      "氷結潜窟 スノークローク大氷壁": "https://game8.jp/ff14/318514",
+      "幻龍残骸 黙約の塔": "https://game8.jp/ff14/318534",
+      "異界遺構 シルクス・ツイニング": "https://game8.jp/ff14/277729",
+      "終末幻想 アーモロート": "https://game8.jp/ff14/277546",
+      "イフリート討伐戦": "https://game8.jp/ff14/329867",
+      "タイタン討伐戦": "https://game8.jp/ff14/329891",
+      "ガルーダ討伐戦": "https://game8.jp/ff14/329925",
+      "アシエン・ナプリアレス討伐戦": "https://game8.jp/ff14/329753",
+      "ギルガメッシュ討伐戦": "https://game8.jp/ff14/688594",
+      "アマジナ杯闘技会決勝戦": "https://game8.jp/ff14/688593",
+      "真ギルガメッシュ討滅戦": "https://game8.jp/ff14/688591",
+      "真イフリート討滅戦": "https://game8.jp/ff14/347357",
+      "真ガルーダ討滅戦": "https://game8.jp/ff14/288140",
+      "真タイタン討滅戦": "https://game8.jp/ff14/347387",
+      "善王モグル・モグXII世討滅戦": "https://game8.jp/ff14/288139",
+      "善王モグル・モグⅫ世討滅戦": "https://game8.jp/ff14/288139",
+      "真リヴァイアサン討滅戦": "https://game8.jp/ff14/288017",
+      "真ラムウ討滅戦": "https://game8.jp/ff14/347383",
+      "真シヴァ討滅戦": "https://game8.jp/ff14/347316",
+      "闘神オーディン討滅戦": "https://game8.jp/ff14/688667",
+      "極タイタン討滅戦": "https://game8.jp/ff14/362672",
+      "極リヴァイアサン討滅戦": "https://game8.jp/ff14/381092",
+      "極シヴァ討滅戦": "https://game8.jp/ff14/310395",
+      "真ラーヴァナ討滅戦": "https://game8.jp/ff14/358138",
+      "真ビスマルク討滅戦": "https://game8.jp/ff14/358771",
+      "ナイツ・オブ・ラウンド討滅戦": "https://game8.jp/ff14/690319",
+      "極魔神セフィロト討滅戦": "https://game8.jp/ff14/528616",
+      "極女神ソフィア討滅戦": "https://game8.jp/ff14/506738",
+      "極鬼神ズルワーン討滅戦": "https://game8.jp/ff14/528616",
+      "スサノオ討滅戦": "https://game8.jp/ff14/688214",
+      "ラクシュミ討滅戦": "https://game8.jp/ff14/329048",
+      "神龍討滅戦": "https://game8.jp/ff14/688498",
+      "ツクヨミ討滅戦": "https://game8.jp/ff14/688473",
+      "真ヨウジンボウ討滅戦": "https://game8.jp/ff14/688587",
+      "ティターニア討滅戦": "https://game8.jp/ff14/277648",
+      "イノセンス討滅戦": "https://game8.jp/ff14/278473",
+      "ハーデス討滅戦": "https://game8.jp/ff14/278481",
+      "ウォーリア・オブ・ライト討滅戦": "https://game8.jp/ff14/346769",
+      "ウォーリアオブライト討滅戦": "https://game8.jp/ff14/346769",
+      "エメラルドウェポン破壊作戦": "https://game8.jp/ff14/364269",
+      "極ティターニア討滅戦": "https://game8.jp/ff14/279396",
+      "極イノセンス討滅戦": "https://game8.jp/ff14/279383",
+      "極ハーデス討滅戦": "https://game8.jp/ff14/280082",
+      "極ウォーリア・オブ・ライト討滅戦": "https://game8.jp/ff14/346577",
+      "極エメラルドウェポン破壊作戦": "https://game8.jp/ff14/355036",
+      "古代の民の迷宮": "https://game8.jp/ff14/305542",
+      "シルクスの塔": "https://game8.jp/ff14/287738",
+      "闇の世界": "https://game8.jp/ff14/305303",
+      "魔航船ヴォイドアーク": "https://game8.jp/ff14/298089",
+      "禁忌都市マハ": "https://game8.jp/ff14/287988",
+      "影の国ダン・スカー": "https://game8.jp/ff14/298623",
+      "失われた都 ラバナスタ": "https://game8.jp/ff14/297883",
+      "封じられた聖塔 リドルアナ": "https://game8.jp/ff14/297898",
+      "楽欲の僧院 オーボンヌ": "https://game8.jp/ff14/297764",
+      "複製サレタ工場廃墟": "https://game8.jp/ff14/297799",
+      "人形タチノ軍事基地": "https://game8.jp/ff14/332337",
+      "希望ノ砲台：「塔」": "https://game8.jp/ff14/381004"
+    };
+
     const fallbackDuties = [
       { id: -101, name: "天然要害 サスタシャ浸食洞", level: 15, type: "ダンジョン", image: null, sort: 101 },
       { id: -102, name: "地下霊殿 タムタラの墓所", level: 16, type: "ダンジョン", image: null, sort: 102 },
@@ -3438,13 +3550,17 @@
       { id: -512, name: "真シヴァ討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 512 },
       { id: -513, name: "アシエン・ナプリアレス討伐戦", level: 50, type: "討伐・討滅戦", image: null, sort: 513 },
       { id: -514, name: "皇都イシュガルド防衛戦", level: 50, type: "討伐・討滅戦", image: null, sort: 514 },
-      { id: -515, name: "極イフリート討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 515 },
-      { id: -516, name: "極ガルーダ討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 516 },
-      { id: -517, name: "極タイタン討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 517 },
-      { id: -518, name: "極王モグル・モグXII世討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 518 },
-      { id: -519, name: "極リヴァイアサン討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 519 },
-      { id: -520, name: "極ラムウ討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 520 },
-      { id: -521, name: "極シヴァ討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 521 },
+      { id: -515, name: "ギルガメッシュ討伐戦", level: 50, type: "討伐・討滅戦", image: null, sort: 515 },
+      { id: -516, name: "アマジナ杯闘技会決勝戦", level: 50, type: "討伐・討滅戦", image: null, sort: 516 },
+      { id: -517, name: "真ギルガメッシュ討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 517 },
+      { id: -518, name: "闘神オーディン討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 518 },
+      { id: -519, name: "極イフリート討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 519 },
+      { id: -520, name: "極ガルーダ討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 520 },
+      { id: -521, name: "極タイタン討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 521 },
+      { id: -522, name: "極王モグル・モグXII世討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 522 },
+      { id: -523, name: "極リヴァイアサン討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 523 },
+      { id: -524, name: "極ラムウ討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 524 },
+      { id: -525, name: "極シヴァ討滅戦", level: 50, type: "討伐・討滅戦", image: null, sort: 525 },
       { id: -601, name: "真ラーヴァナ討滅戦", level: 53, type: "討伐・討滅戦", image: null, sort: 601 },
       { id: -602, name: "真ビスマルク討滅戦", level: 57, type: "討伐・討滅戦", image: null, sort: 602 },
       { id: -603, name: "ナイツ・オブ・ラウンド討滅戦", level: 60, type: "討伐・討滅戦", image: null, sort: 603 },
@@ -3467,14 +3583,15 @@
       { id: -706, name: "朱雀征魂戦", level: 70, type: "討伐・討滅戦", image: null, sort: 706 },
       { id: -707, name: "青龍征魂戦", level: 70, type: "討伐・討滅戦", image: null, sort: 707 },
       { id: -708, name: "リオレウス狩猟戦", level: 70, type: "討伐・討滅戦", image: null, sort: 708 },
-      { id: -709, name: "極スサノオ討滅戦", level: 70, type: "討伐・討滅戦", image: null, sort: 709 },
-      { id: -710, name: "極ラクシュミ討滅戦", level: 70, type: "討伐・討滅戦", image: null, sort: 710 },
-      { id: -711, name: "極神龍討滅戦", level: 70, type: "討伐・討滅戦", image: null, sort: 711 },
-      { id: -712, name: "極白虎征魂戦", level: 70, type: "討伐・討滅戦", image: null, sort: 712 },
-      { id: -713, name: "極ツクヨミ討滅戦", level: 70, type: "討伐・討滅戦", image: null, sort: 713 },
-      { id: -714, name: "極朱雀征魂戦", level: 70, type: "討伐・討滅戦", image: null, sort: 714 },
-      { id: -715, name: "極青龍征魂戦", level: 70, type: "討伐・討滅戦", image: null, sort: 715 },
-      { id: -716, name: "極リオレウス狩猟戦", level: 70, type: "討伐・討滅戦", image: null, sort: 716 },
+      { id: -709, name: "真ヨウジンボウ討滅戦", level: 70, type: "討伐・討滅戦", image: null, sort: 709 },
+      { id: -710, name: "極スサノオ討滅戦", level: 70, type: "討伐・討滅戦", image: null, sort: 710 },
+      { id: -711, name: "極ラクシュミ討滅戦", level: 70, type: "討伐・討滅戦", image: null, sort: 711 },
+      { id: -712, name: "極神龍討滅戦", level: 70, type: "討伐・討滅戦", image: null, sort: 712 },
+      { id: -713, name: "極白虎征魂戦", level: 70, type: "討伐・討滅戦", image: null, sort: 713 },
+      { id: -714, name: "極ツクヨミ討滅戦", level: 70, type: "討伐・討滅戦", image: null, sort: 714 },
+      { id: -715, name: "極朱雀征魂戦", level: 70, type: "討伐・討滅戦", image: null, sort: 715 },
+      { id: -716, name: "極青龍征魂戦", level: 70, type: "討伐・討滅戦", image: null, sort: 716 },
+      { id: -717, name: "極リオレウス狩猟戦", level: 70, type: "討伐・討滅戦", image: null, sort: 717 },
       { id: -801, name: "ティターニア討滅戦", level: 73, type: "討伐・討滅戦", image: null, sort: 801 },
       { id: -802, name: "イノセンス討滅戦", level: 79, type: "討伐・討滅戦", image: null, sort: 802 },
       { id: -803, name: "ハーデス討滅戦", level: 80, type: "討伐・討滅戦", image: null, sort: 803 },
@@ -3488,7 +3605,19 @@
       { id: -811, name: "極ルビーウェポン破壊作戦", level: 80, type: "討伐・討滅戦", image: null, sort: 811 },
       { id: -812, name: "極ウォーリア・オブ・ライト討滅戦", level: 80, type: "討伐・討滅戦", image: null, sort: 812 },
       { id: -813, name: "極エメラルドウェポン破壊作戦", level: 80, type: "討伐・討滅戦", image: null, sort: 813 },
-      { id: -814, name: "極ダイヤウェポン捕獲作戦", level: 80, type: "討伐・討滅戦", image: null, sort: 814 }
+      { id: -814, name: "極ダイヤウェポン捕獲作戦", level: 80, type: "討伐・討滅戦", image: null, sort: 814 },
+      { id: -901, name: "古代の民の迷宮", level: 50, type: "アライアンスレイド", image: null, sort: 901, aliases: ["クリスタルタワー", "古代"] },
+      { id: -902, name: "シルクスの塔", level: 50, type: "アライアンスレイド", image: null, sort: 902, aliases: ["クリスタルタワー", "シルクス"] },
+      { id: -903, name: "闇の世界", level: 50, type: "アライアンスレイド", image: null, sort: 903, aliases: ["クリスタルタワー", "闇"] },
+      { id: -904, name: "魔航船ヴォイドアーク", level: 60, type: "アライアンスレイド", image: null, sort: 904, aliases: ["シャドウ・オブ・マハ", "ヴォイドアーク"] },
+      { id: -905, name: "禁忌都市マハ", level: 60, type: "アライアンスレイド", image: null, sort: 905, aliases: ["シャドウ・オブ・マハ", "マハ"] },
+      { id: -906, name: "影の国ダン・スカー", level: 60, type: "アライアンスレイド", image: null, sort: 906, aliases: ["シャドウ・オブ・マハ", "ダンスカー"] },
+      { id: -907, name: "失われた都 ラバナスタ", level: 70, type: "アライアンスレイド", image: null, sort: 907, aliases: ["リターン・トゥ・イヴァリース", "ラバナスタ"] },
+      { id: -908, name: "封じられた聖塔 リドルアナ", level: 70, type: "アライアンスレイド", image: null, sort: 908, aliases: ["リターン・トゥ・イヴァリース", "リドルアナ"] },
+      { id: -909, name: "楽欲の僧院 オーボンヌ", level: 70, type: "アライアンスレイド", image: null, sort: 909, aliases: ["リターン・トゥ・イヴァリース", "オーボンヌ"] },
+      { id: -910, name: "複製サレタ工場廃墟", level: 80, type: "アライアンスレイド", image: null, sort: 910, aliases: ["ヨルハ", "ニーア", "工場"] },
+      { id: -911, name: "人形タチノ軍事基地", level: 80, type: "アライアンスレイド", image: null, sort: 911, aliases: ["ヨルハ", "ニーア", "タチノ"] },
+      { id: -912, name: "希望ノ砲台：「塔」", level: 80, type: "アライアンスレイド", image: null, sort: 912, aliases: ["ヨルハ", "ニーア", "塔"] }
     ];
 
     const featureTabs = document.querySelectorAll(".feature-tab");
@@ -4829,18 +4958,48 @@
 
     function filteredDuties() {
       const type = dutyType.value;
-      const query = dutySearch.value.trim();
+      const query = dutySearch.value.trim().toLowerCase();
       return duties.filter((duty) => {
         const matchType = type === "all" || duty.type === type;
-        const matchQuery = !query || duty.name.includes(query) || String(duty.level) === query;
+        const searchText = [
+          duty.name,
+          duty.type,
+          String(duty.level),
+          ...(duty.aliases || [])
+        ].join(" ").toLowerCase();
+        const matchQuery = !query || searchText.includes(query) || String(duty.level) === query;
         return matchType && matchQuery;
       }).sort((a, b) => (a.sort || a.level) - (b.sort || b.level) || a.name.localeCompare(b.name, "ja"));
+    }
+
+    function dutyTypeShortLabel(type) {
+      if (type === "ダンジョン") {
+        return "ID";
+      }
+      if (type === "アライアンスレイド") {
+        return "大人数";
+      }
+      return "討滅";
+    }
+
+    function game8SearchUrl(duty) {
+      return `https://game8.jp/ff14/search?q=${encodeURIComponent(`${duty.name} 攻略`)}`;
+    }
+
+    function game8DutyUrl(duty) {
+      return duty.game8Url || game8DutyLinks[duty.name] || game8SearchUrl(duty);
+    }
+
+    function game8LinkLabel(duty) {
+      return game8DutyLinks[duty.name] || duty.game8Url
+        ? "Game8攻略ページを開く"
+        : "Game8で攻略を検索";
     }
 
     function renderDutyOptions() {
       const list = filteredDuties();
       dutySelect.innerHTML = list.length
-        ? list.map((duty) => `<option value="${duty.id}">Lv${duty.level} ${duty.type === "ダンジョン" ? "ID" : "討滅"}: ${duty.name}</option>`).join("")
+        ? list.map((duty) => `<option value="${duty.id}">Lv${duty.level} ${dutyTypeShortLabel(duty.type)}: ${duty.name}</option>`).join("")
         : `<option value="">該当なし</option>`;
     }
 
@@ -4857,6 +5016,12 @@
         return [
           { mark: "見", title: "初見の見方", detail: "ボスの詠唱名、外周、味方の集合位置を優先して見る。頭割りと散開のマーカーを間違えなければ立て直しやすいです。" },
           { mark: "転", title: "落下とノックバック", detail: "討滅戦は外周落下が多め。吹き飛ばしそうな詠唱では中央寄りに立つと安全です。" }
+        ];
+      }
+      if (duty.type === "アライアンスレイド") {
+        return [
+          { mark: "A", title: "A/B/Cアライアンスを確認", detail: "開始前に自分がA、B、Cのどれかを見る。同じアライアンスの味方とまとまると迷いにくいです。" },
+          { mark: "場", title: "担当レーンと塔を優先", detail: "大人数レイドは左右担当、塔踏み、雑魚分担が出やすいです。迷ったら自分のPTが集まっている場所へ。" }
         ];
       }
       return [
@@ -4882,7 +5047,7 @@
       const selectedId = Number(dutySelect.value);
       const duty = duties.find((item) => item.id === selectedId) || filteredDuties()[0];
       if (!duty) {
-        dutySummary.innerHTML = `<h3>該当コンテンツなし</h3><p>検索語を短くするか、種類を「ID + 討滅戦」に戻してください。</p>`;
+        dutySummary.innerHTML = `<h3>該当コンテンツなし</h3><p>検索語を短くするか、種類を「全部」に戻してください。</p>`;
         renderMechanicCards(universalMechanics.slice(0, 6));
         return;
       }
@@ -4892,11 +5057,18 @@
       const imageUrl = "";
       const specificHints = dutySpecificHints(duty);
       const preview = [...specificHints, ...universalMechanics].slice(0, 3);
+      const guideUrl = game8DutyUrl(duty);
+      const indexUrl = game8DutyIndexUrls[duty.type] || "https://game8.jp/ff14";
+      const linkKind = game8DutyLinks[duty.name] || duty.game8Url ? "個別記事" : "Game8内検索";
       dutySummary.innerHTML = `
         <h3>Lv${duty.level} ${duty.name}</h3>
-        <p>${duty.type} / 必要IL ${duty.itemLevel || "なし"}。初見30秒予習は下の3つだけ先に見ればOKです。</p>
+        <p>${duty.type} / ${linkKind}。選んだコンテンツの詳しいギミックはGame8の日本語攻略で確認します。</p>
         <div class="next-meta">
           ${preview.map((hint) => `<span class="next-pill hot">${hint.title}</span>`).join("")}
+        </div>
+        <div class="duty-link-actions">
+          <a class="duty-open-button" href="${guideUrl}" target="_blank" rel="noreferrer noopener">${game8LinkLabel(duty)}</a>
+          <a class="duty-open-button secondary" href="${indexUrl}" target="_blank" rel="noreferrer noopener">${duty.type}の一覧をGame8で開く</a>
         </div>
         ${imageUrl ? `<div class="character-preview"><img src="${imageUrl}" alt="${duty.name}"><p>下のカードは、このコンテンツで特に見たい動きと、全ID/討滅戦で使う避け方辞書です。</p></div>` : ""}
       `;

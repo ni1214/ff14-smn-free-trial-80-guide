@@ -598,6 +598,24 @@
       flex: none;
     }
 
+    .action-chip.locked {
+      opacity: 0.62;
+      background: #f2eee6;
+    }
+
+    .action-chip-body {
+      display: grid;
+      gap: 1px;
+      min-width: 0;
+    }
+
+    .action-chip-level {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
     .combo-lane {
       display: flex;
       align-items: center;
@@ -614,6 +632,83 @@
       font-weight: 800;
       font-size: 12px;
       line-height: 1;
+    }
+
+    .combo-loop {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(32, 90, 97, 0.09);
+      color: var(--teal);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .skill-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .skill-row {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 9px;
+      border-radius: 14px;
+      background: var(--paper-2);
+      border: 1px solid rgba(32, 90, 97, 0.08);
+    }
+
+    .skill-row.locked {
+      background: #f2eee6;
+    }
+
+    .skill-row img {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+    }
+
+    .skill-row-main {
+      display: grid;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .skill-row-title {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .skill-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 20px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(32, 90, 97, 0.1);
+      color: var(--teal);
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .skill-badge.locked {
+      background: rgba(85, 101, 106, 0.12);
+      color: var(--muted);
+    }
+
+    .skill-row-meta {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.45;
     }
 
     .section-card {
@@ -1794,6 +1889,12 @@
       <h2 id="growthTitle">成長マップ</h2>
       <p class="footer-note" id="growthNote">レベルシンクで急に押すボタンが減っても、この節目だけ覚えておけば戻しやすいです。</p>
       <div class="milestones" id="milestones"></div>
+    </section>
+
+    <section class="panel feature-panel" data-feature="rotation">
+      <h2>全スキル一覧</h2>
+      <p class="footer-note" id="skillListNote">選んだジョブのLv80までのアクションを、習得Lvと必要条件つきで表示します。</p>
+      <div class="skill-list" id="skillList"></div>
     </section>
 
     <section class="panel feature-panel" data-feature="rotation">
@@ -3319,6 +3420,8 @@
     const jobSummaryGrid = document.getElementById("jobSummaryGrid");
     const growthTitle = document.getElementById("growthTitle");
     const growthNote = document.getElementById("growthNote");
+    const skillList = document.getElementById("skillList");
+    const skillListNote = document.getElementById("skillListNote");
     const storyImage = document.getElementById("storyImage");
     const storyImageTitle = document.getElementById("storyImageTitle");
     const storyImageCaption = document.getElementById("storyImageCaption");
@@ -3358,6 +3461,7 @@
     let actionIconOverrides = {};
     let itemIconOverrides = {};
     let gearCatalog = {};
+    let jobActionCatalog = {};
     const iconDataReady = Promise.all([
       fetch("action-icons.json").then((response) => response.ok ? response.json() : {}).catch(() => ({})),
       fetch("item-icons.json").then((response) => response.ok ? response.json() : {}).catch(() => ({})),
@@ -3367,6 +3471,14 @@
       itemIconOverrides = itemIcons;
       gearCatalog = catalog;
     });
+    const actionCatalogReady = fetch("job-actions.json")
+      .then((response) => response.ok ? response.json() : {})
+      .then((catalog) => {
+        jobActionCatalog = catalog;
+      })
+      .catch(() => {
+        jobActionCatalog = {};
+      });
     if (pageParams.get("duty")) {
       dutySearch.value = pageParams.get("duty");
     }
@@ -3403,6 +3515,7 @@
       }[mode] || "単体 / ボス";
 
       if (!guide || level < job.min) {
+        await renderSkillList(job, level);
         cockpitAnswer.innerHTML = `
           <h3>${job.label}はLv${job.min}から使えます</h3>
           <p>今のレベルではまだ選択したジョブになれません。解放レベルに到達したら、このタブがそのジョブ用に切り替わります。</p>
@@ -3412,17 +3525,21 @@
       }
 
       const tier = getRotationTier(job.id, level);
+      await actionCatalogReady;
       const names = tier[mode]?.length ? tier[mode] : tier.single;
+      const visibleNames = availableActionNames(names, job.id, level);
+      const tierTitle = displayTierTitle(tier, level);
+      const tips = visibleTierTips(tier, level);
       cockpitAnswer.innerHTML = `
-        <h3>Lv${level} ${guide.name}: ${tier.title} - ${modeTitle}</h3>
+        <h3>Lv${level} ${guide.name}: ${tierTitle} - ${modeTitle}</h3>
         <p>アイコンを読み込んでいます。</p>
       `;
       cockpitAnswer.innerHTML = `
-        <h3>Lv${level} ${guide.name}: ${tier.title} - ${modeTitle}</h3>
-        <p>${tier.tips.join(" ")}</p>
-        ${await rotationLane(names)}
+        <h3>Lv${level} ${guide.name}: ${tierTitle} - ${modeTitle}</h3>
+        <p>${modeTitle}で押す順番です。最後まで押したら先頭へ戻り、Lv${level}で未習得のボタンはここには出しません。</p>
+        ${await rotationLane(visibleNames, { jobId: job.id, level })}
         <div class="rotation-note-list">
-          ${tier.tips.map((tip) => `<div class="rotation-note">${tip}</div>`).join("")}
+          ${tips.map((tip) => `<div class="rotation-note">${tip}</div>`).join("")}
           <div class="rotation-note">3体以上は範囲、ボスや1〜2体は単体。迷ったら今のタブの並びを上から押します。</div>
         </div>
         <p class="footer-note"><a href="#job-${job.id.toLowerCase()}-${tier.min}">このレベル帯の詳しいカードへ移動</a></p>
@@ -3489,9 +3606,61 @@
       return "";
     }
 
-    async function fetchActionIconByName(name) {
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function normalizeActionName(name) {
+      return String(name || "")
+        .replace(/\s+/g, "")
+        .replace(/･/g, "・")
+        .trim();
+    }
+
+    const actionNameAliases = {
+      "桜華繚乱": "桜華狂咲",
+      "扇の舞い": "扇の舞い【序】",
+      "プレシャスブリリアンス": "ジェムブリリアンス"
+    };
+
+    function actionsForJob(jobId) {
+      return jobActionCatalog[jobId] || [];
+    }
+
+    function actionMetaByName(jobId, name) {
+      const officialName = actionNameAliases[name] || name;
+      const normalized = normalizeActionName(officialName);
+      const local = actionsForJob(jobId);
+      return local.find((action) => action.name === officialName)
+        || local.find((action) => normalizeActionName(action.name) === normalized)
+        || Object.values(jobActionCatalog)
+          .flat()
+          .find((action) => normalizeActionName(action.name) === normalized)
+        || null;
+    }
+
+    function isActionAvailableForLevel(name, jobId, level) {
+      const meta = actionMetaByName(jobId, name);
+      return !meta || !level || meta.level <= level;
+    }
+
+    function availableActionNames(names, jobId, level) {
+      return (names || []).filter((name) => isActionAvailableForLevel(name, jobId, level));
+    }
+
+    async function fetchActionIconByName(name, jobId = "") {
       if (!name) {
         return "";
+      }
+      await actionCatalogReady;
+      const meta = actionMetaByName(jobId, name);
+      if (meta?.icon) {
+        return meta.icon;
       }
       const known = Object.values(actions).find((action) => action.name === name);
       if (known) {
@@ -3508,24 +3677,39 @@
       return "";
     }
 
-    async function actionChipByName(name) {
-      const iconUrl = await fetchActionIconByName(name);
+    async function actionChipByName(name, options = {}) {
+      const { jobId = "", level = 0, showLevel = true, forceLocked = false } = options;
+      await actionCatalogReady;
+      const displayName = actionNameAliases[name] || name;
+      const meta = actionMetaByName(jobId, name);
+      const iconUrl = meta?.icon || await fetchActionIconByName(name, jobId);
+      const locked = forceLocked || Boolean(meta && level && meta.level > level);
+      const levelLabel = meta ? `Lv${meta.level}` : "";
       return `
-        <span class="action-chip">
-          ${iconUrl ? `<img src="${iconUrl}" alt="${name}" loading="lazy">` : ""}
-          <span>${name}</span>
+        <span class="action-chip ${locked ? "locked" : ""}">
+          ${iconUrl ? `<img src="${iconUrl}" alt="${escapeHtml(displayName)}" loading="lazy">` : ""}
+          <span class="action-chip-body">
+            <span>${escapeHtml(displayName)}</span>
+            ${showLevel && levelLabel ? `<span class="action-chip-level">${levelLabel}${locked ? " 未習得" : ""}</span>` : ""}
+          </span>
         </span>
       `;
     }
 
-    async function rotationLane(names) {
-      const chips = await Promise.all((names || []).map(actionChipByName));
+    async function rotationLane(names, options = {}) {
+      const { jobId = "", level = 0, loop = true } = options;
+      const visibleNames = jobId && level ? availableActionNames(names, jobId, level) : (names || []);
+      if (!visibleNames.length) {
+        return `<p class="footer-note">このレベルで押せるボタンがまだありません。</p>`;
+      }
+      const chips = await Promise.all(visibleNames.map((name) => actionChipByName(name, { jobId, level })));
       return `
         <div class="combo-lane">
           ${chips.map((html, index) => `
             ${index === 0 ? "" : '<span class="combo-arrow">→</span>'}
             ${html}
           `).join("")}
+          ${loop ? '<span class="combo-arrow">→</span><span class="combo-loop">先頭へ戻る</span>' : ""}
         </div>
       `;
     }
@@ -3625,6 +3809,55 @@
         .sort((a, b) => b.min - a.min)[0] || tiers[0];
     }
 
+    function displayTierTitle(tier, level) {
+      return String(tier?.title || "")
+        .replace(/Lv(\d+)-(\d+)帯/g, (_, min, max) => {
+          const maxLevel = Number(max);
+          return level < maxLevel ? `Lv${level}帯` : `Lv${maxLevel}帯`;
+        });
+    }
+
+    function visibleTierTips(tier, level) {
+      const tips = (tier?.tips || []).filter((tip) => {
+        const levels = [...String(tip).matchAll(/Lv(\d+)/g)].map((match) => Number(match[1]));
+        return !levels.some((tipLevel) => tipLevel > level);
+      });
+      return tips.length ? tips : ["現在Lvで使えるボタンだけを上から順に押します。未習得アクションは全スキル一覧で先の楽しみとして確認できます。"];
+    }
+
+    async function renderSkillList(job, level) {
+      await actionCatalogReady;
+      const actions = actionsForJob(job.id);
+      if (!skillList || !skillListNote) {
+        return;
+      }
+      if (!actions.length) {
+        skillListNote.textContent = `${job.label}の公式アクション情報を読み込めませんでした。`;
+        skillList.innerHTML = "";
+        return;
+      }
+      const learnedCount = actions.filter((action) => action.level <= level).length;
+      skillListNote.textContent = `公式ジョブガイド準拠。Lv${level}で使用済み ${learnedCount}件 / Lv80まで ${actions.length}件。未習得は薄く表示します。`;
+      skillList.innerHTML = actions.map((action) => {
+        const locked = action.level > level;
+        const questText = action.questRequired
+          ? `${action.quest} / Lv${action.level}`
+          : `${action.quest} / Lv${action.level}`;
+        return `
+          <div class="skill-row ${locked ? "locked" : ""}">
+            ${action.icon ? `<img src="${action.icon}" alt="${escapeHtml(action.name)}" loading="lazy">` : `<div class="next-icon" aria-hidden="true"></div>`}
+            <div class="skill-row-main">
+              <div class="skill-row-title">
+                <span>${escapeHtml(action.name)}</span>
+                <span class="skill-badge ${locked ? "locked" : ""}">Lv${action.level}${locked ? " 未習得" : ""}</span>
+              </div>
+              <div class="skill-row-meta">${escapeHtml(action.kind)} / ${escapeHtml(questText)}</div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
     function flowClass(index) {
       return ["ruby", "gold", "emerald", "bahamut", "phoenix"][index % 5];
     }
@@ -3649,6 +3882,7 @@
         return;
       }
       if (level < job.min) {
+        await renderSkillList(job, level);
         const crystalIcon = await fetchItemIconByName("ソウルクリスタル");
         jobSummaryGrid.innerHTML = `
           <div class="quick-block">
@@ -3697,21 +3931,25 @@
         return;
       }
       const currentTier = getRotationTier(job.id, level);
-      const steps = guide.tiers.map((tier, index) => `
-        <span class="flow-step ${flowClass(index)}">Lv${tier.min}+ ${tier.title}</span>
+      await renderSkillList(job, level);
+      const visibleTiers = guide.tiers.filter((tier) => tier.min <= level);
+      const currentOnly = currentTier ? [currentTier] : [];
+      const steps = visibleTiers.map((tier, index) => `
+        <span class="flow-step ${flowClass(index)}">Lv${tier.min}+ ${displayTierTitle(tier, level)}</span>
       `).join("");
+      const currentTips = visibleTierTips(currentTier, level);
       jobSummaryGrid.innerHTML = `
         <div class="quick-block">
           <strong>${guide.name}の覚え方</strong>
           <div class="flow">${steps}</div>
           <div class="mantra">
-            今は「${currentTier.title}」。単体、範囲、開幕の3つだけをタブで確認すれば、レベルシンクしても戻しやすいです。
+            今は「${displayTierTitle(currentTier, level)}」。単体、範囲、開幕の3つだけをタブで確認すれば、レベルシンクしても戻しやすいです。
           </div>
         </div>
         <div class="quick-block">
           <strong>まず覚える3つ</strong>
           <ul>
-            <li>${currentTier.tips[0] || "強いボタンを腐らせない。"}</li>
+            <li>${currentTips[0] || "強いボタンを腐らせない。"}</li>
             <li>3体以上なら範囲、ボスや1〜2体なら単体へ切り替える。</li>
             <li>解放されたばかりのジョブは、最初に基本コンボとジョブゲージだけ見ればOK。</li>
           </ul>
@@ -3720,63 +3958,67 @@
       growthTitle.textContent = `${guide.name} 成長マップ`;
       growthNote.textContent = `選んだジョブとレベルに合わせて節目を表示しています。装備タブのジョブを変えるとここも同じジョブへ切り替わります。`;
 
-      const milestoneHtml = await Promise.all(guide.tiers.map(async (tier) => `
+      const milestoneHtml = await Promise.all(visibleTiers.map(async (tier) => `
         <div class="milestone">
           <div class="lv">Lv${tier.min}</div>
           <div>
-            <p>${tier.title}: ${tier.tips[0] || "このレベル帯の基本を確認。"}</p>
-            <div class="action-row">${(await Promise.all((tier.single || []).slice(0, 4).map(actionChipByName))).join("")}</div>
+            <p>${displayTierTitle(tier, level)}: ${visibleTierTips(tier, level)[0] || "このレベル帯の基本を確認。"}</p>
+            <div class="action-row">${(await Promise.all(availableActionNames((tier.single || []).slice(0, 4), job.id, level).map((name) => actionChipByName(name, { jobId: job.id, level })))).join("")}</div>
           </div>
         </div>
       `));
       document.getElementById("milestones").innerHTML = milestoneHtml.join("");
 
-      currentGuideSections = guide.tiers.map((tier) => ({
-        title: `Lv${tier.min}+ ${guide.name}: ${tier.title}`,
+      currentGuideSections = currentOnly.map((tier) => ({
+        title: `Lv${tier.min}+ ${guide.name}: ${displayTierTitle(tier, level)}`,
         href: `#job-${job.id.toLowerCase()}-${tier.min}`,
         text: [
           guide.name,
-          tier.title,
+          displayTierTitle(tier, level),
           (tier.single || []).join(" "),
           (tier.aoe || []).join(" "),
           (tier.opener || []).join(" "),
-          (tier.tips || []).join(" ")
+          visibleTierTips(tier, level).join(" ")
         ].join(" ")
-      }));
+      })).concat(actionsForJob(job.id).map((action) => ({
+        title: `${action.name} Lv${action.level}`,
+        href: "#skillList",
+        text: `${guide.name} ${action.name} Lv${action.level} ${action.kind} ${action.quest}`
+      })));
 
-      const cards = await Promise.all(guide.tiers.map(async (tier) => `
+      const cards = await Promise.all(currentOnly.map(async (tier) => `
         <section class="section-card" id="job-${job.id.toLowerCase()}-${tier.min}">
           <div class="section-top">
             <div>
-              <div class="level-tag">${guide.name} / Lv${tier.min}+</div>
-              <h2>${tier.title}</h2>
+              <div class="level-tag">${guide.name} / Lv${level}</div>
+              <h2>${displayTierTitle(tier, level)}</h2>
             </div>
           </div>
-          <p class="section-summary">${tier.tips.join(" ")}</p>
-          <div class="action-row">${(await Promise.all((tier.single || []).slice(0, 6).map(actionChipByName))).join("")}</div>
+          <p class="section-summary">${visibleTierTips(tier, level).join(" ")}</p>
+          <div class="action-row">${(await Promise.all(availableActionNames((tier.single || []).slice(0, 6), job.id, level).map((name) => actionChipByName(name, { jobId: job.id, level })))).join("")}</div>
           <div class="section-grid">
             <div class="subcard">
               <h3>単体 / ボス</h3>
-              ${await rotationLane(tier.single)}
+              ${await rotationLane(tier.single, { jobId: job.id, level })}
             </div>
             <div class="subcard">
               <h3>3体以上の範囲攻撃</h3>
-              ${await rotationLane(tier.aoe)}
+              ${await rotationLane(tier.aoe, { jobId: job.id, level })}
             </div>
             <div class="subcard">
               <h3>開幕 / バースト</h3>
-              ${await rotationLane(tier.opener)}
+              ${await rotationLane(tier.opener, { jobId: job.id, level })}
             </div>
             <div class="subcard">
               <h3>見落とし防止</h3>
-              <ul>${tier.tips.map((tip) => `<li>${tip}</li>`).join("")}</ul>
+              <ul>${visibleTierTips(tier, level).map((tip) => `<li>${tip}</li>`).join("")}</ul>
             </div>
           </div>
         </section>
       `));
       document.getElementById("sections").innerHTML = `
         <details class="more-details">
-          <summary>レベル帯の詳細カードを開く（${cards.length}件）</summary>
+          <summary>今のレベル帯の詳細カードを開く</summary>
           <div class="folded-grid">${cards.join("")}</div>
         </details>
       `;

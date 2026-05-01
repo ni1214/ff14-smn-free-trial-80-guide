@@ -1,0 +1,6466 @@
+{
+  "PLD": [
+    {
+      "id": "pve_action__01",
+      "name": "ファストブレード",
+      "level": 1,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8325a7bb54f039c5bd3cd2af4430dccfd525e0b9.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__02",
+      "name": "ファイト・オア・フライト",
+      "level": 2,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/87405b9b9f00d9957df252ea0116e4137bc4dbd1.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__03",
+      "name": "ライオットソード",
+      "level": 4,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/bdda04f3b284e3cbf7d07e50d9bffb21b74ce869.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__04",
+      "name": "トータルエクリプス",
+      "level": 6,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/07c42572697cdcf5381955b09ed7c3028be8a0bb.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "tank_action__01",
+      "name": "ランパート",
+      "level": 8,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/37546679ae5e431c0903b20fa2c91a88c5a8e001.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__06",
+      "name": "アイアンウィル",
+      "level": 10,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/1e60c8b0c72bbc52497a163755dc855f5cdf7091.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__07",
+      "name": "アイアンウィル解除",
+      "level": 10,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d0f7e831c1ea14fb804be476f4f767cdaba36e8c.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__05",
+      "name": "シールドバッシュ",
+      "level": 10,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/49cbc217420d69d69bb1bfcf6fba10358dcd2521.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "tank_action__02",
+      "name": "ロウブロウ",
+      "level": 12,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/af837b3dd467ee9cdf865a06eb2b1633dd2b492a.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__08",
+      "name": "シールドロブ",
+      "level": 15,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d95d796eae4df45f2419a8c6df1cdf4afc7b0523.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "tank_action__03",
+      "name": "挑発",
+      "level": 15,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2b45fea903bcf1edd9e08110cf95e8bba9a73c0d.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "tank_action__04",
+      "name": "インタージェクト",
+      "level": 18,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8442bcce1ec21a449546af9afb79ae9ea8c226cb.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "tank_action__05",
+      "name": "リプライザル",
+      "level": 22,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/6b83d9368623d5cd20a426d26916021b59a14963.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__09",
+      "name": "レイジ・オブ・ハルオーネ",
+      "level": 26,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b35b9fa5ce7169d660177032734661f18a79ee5b.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__10",
+      "name": "スピリッツウィズイン",
+      "level": 30,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d7e7cf097286ae99e6637242596a14832a9edf8f.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "tank_action__06",
+      "name": "アームズレングス",
+      "level": 32,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/00ff21ad3e1fb26d7b292a9d912931e7ea64daa4.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__11",
+      "name": "シェルトロン",
+      "level": 35,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e622516a93fd2298b9fd40e0d2d60c3fc8485c5a.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__12",
+      "name": "センチネル",
+      "level": 38,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/913eb4344bb6c8710f250115fa22484b026f08bd.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__13",
+      "name": "プロミネンス",
+      "level": 40,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c0f8a1aa0ba0a20c0d8580e63932678c5c4a8b9b.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__14",
+      "name": "かばう",
+      "level": 45,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/81b581992c0df5ad867ed18ad229f6d6f7fd3eea.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "tank_action__07",
+      "name": "シャーク",
+      "level": 48,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/4abd24800cb0999fff8ea79ed1085a7b5f8b14cb.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__16",
+      "name": "インビンシブル",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/249bf48c39ec44b9b32f0681ea256850ed6aa8f8.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__15",
+      "name": "サークル・オブ・ドゥーム",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/af5ddb89ddd5ade6706afe571f45aa6028e1925b.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__17",
+      "name": "ブルワーク",
+      "level": 52,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b0a3dcb47763055bc61ee9f90ba0ee3b46050197.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__18",
+      "name": "ゴアブレード",
+      "level": 54,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/eb067afbfb5a4198760b2e28e9c3cf669d9866b8.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__19",
+      "name": "ディヴァインヴェール",
+      "level": 56,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/495faab61344751872ca0867e2d5e59b04c6940c.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__20",
+      "name": "クレメンシー",
+      "level": 58,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3c20e8bf8f5f130db398ac4ba5df14e403b7666a.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__21",
+      "name": "ロイヤルアソリティ",
+      "level": 60,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3fe523f08ebd0b93125ae42d5bcf8e18dce08a02.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__22",
+      "name": "インターベンション",
+      "level": 62,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/fdb9b8347b33dae63e25debeab15aa75c270f39a.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__23",
+      "name": "ホーリースピリット",
+      "level": 64,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b8ad098c5afaad79a847f3fb79298456c1e9d689.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__24",
+      "name": "インターヴィーン",
+      "level": 66,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c841f5c954aa4e31bd1d82ffd00f863eb944a386.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__25",
+      "name": "レクイエスカット",
+      "level": 68,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/acbcd4de5a1839e4fd8c96ae05eb4109caed9ca1.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__26",
+      "name": "パッセージ・オブ・アームズ",
+      "level": 70,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b570dfda793945b3bb8fddef02b1a865b8a04b32.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__27",
+      "name": "ホーリーサークル",
+      "level": 72,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/afd455f208e2720a10a1b26e9a231fefac4d5be7.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__30",
+      "name": "グラブカッマー",
+      "level": 76,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/faebd31e958e3a880bfd0d4df08370419881fb0a.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__29",
+      "name": "ゲベート",
+      "level": 76,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/84b8b0edf9224089778fee101194efff21d040de.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__28",
+      "name": "ロイエ",
+      "level": 76,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f59cb1517f2f26c490a87d58366b5bccff372f19.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__31",
+      "name": "コンフィテオル",
+      "level": 80,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/362579dcb6dc2b7c9ea6eac6917c7b9c61f7ce1b.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    }
+  ],
+  "WAR": [
+    {
+      "id": "pve_action__01",
+      "name": "ヘヴィスウィング",
+      "level": 1,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/7a622f61949998a4bca402f5be90c0417bb02ac1.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__02",
+      "name": "メイム",
+      "level": 4,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/39dae45d3a3309357462861dac9bb9b159030ea8.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__03",
+      "name": "バーサク",
+      "level": 6,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/56790feb3c64d9c129e2ab42aca7bb9e26a34a58.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "tank_action__01",
+      "name": "ランパート",
+      "level": 8,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/37546679ae5e431c0903b20fa2c91a88c5a8e001.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__04",
+      "name": "オーバーパワー",
+      "level": 10,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/335c367406c5d952f11b8fd2dadaabb89e1cecbc.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__05",
+      "name": "ディフェンダー",
+      "level": 10,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e6cc16e225417ce3c68cde5eb28df034f349d25d.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__06",
+      "name": "ディフェンダー解除",
+      "level": 10,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/1965311bb3fb720ba65258cb8f427bb986fa36c4.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "tank_action__02",
+      "name": "ロウブロウ",
+      "level": 12,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/af837b3dd467ee9cdf865a06eb2b1633dd2b492a.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__07",
+      "name": "トマホーク",
+      "level": 15,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/de42e4febcf54cf4af3189f9d2adfa4ca5975c25.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "tank_action__03",
+      "name": "挑発",
+      "level": 15,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2b45fea903bcf1edd9e08110cf95e8bba9a73c0d.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "tank_action__04",
+      "name": "インタージェクト",
+      "level": 18,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8442bcce1ec21a449546af9afb79ae9ea8c226cb.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "tank_action__05",
+      "name": "リプライザル",
+      "level": 22,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/6b83d9368623d5cd20a426d26916021b59a14963.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__08",
+      "name": "シュトルムヴィント",
+      "level": 26,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/14d9c5aa40a8f86aa13890aa9bedc9f6579ed289.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__09",
+      "name": "スリル・オブ・バトル",
+      "level": 30,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/9412945d8b5a61fbb118907bd33046110ff83434.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "tank_action__06",
+      "name": "アームズレングス",
+      "level": 32,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/00ff21ad3e1fb26d7b292a9d912931e7ea64daa4.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__10",
+      "name": "原初の魂",
+      "level": 35,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c72ea7de2c06ad8a03bc55598297aba5bf00b0b6.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__11",
+      "name": "ヴェンジェンス",
+      "level": 38,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/72a939d0010304553c5b88fae576f5a25f453e10.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__12",
+      "name": "ミスリルテンペスト",
+      "level": 40,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b9efeaf988763dc594fc2497b603cfda4253064f.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__13",
+      "name": "ホルムギャング",
+      "level": 42,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/91b5673b1dfb08c80d7b8fc2bdc936f46906317f.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__14",
+      "name": "スチールサイクロン",
+      "level": 45,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/caee561eee94d7ecc27ac396982ebe39df5c6893.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "tank_action__07",
+      "name": "シャーク",
+      "level": 48,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/4abd24800cb0999fff8ea79ed1085a7b5f8b14cb.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__16",
+      "name": "ウォークライ",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/ecd32b95358ef9b2756b005daef73afdde9fab80.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__15",
+      "name": "シュトルムブレハ",
+      "level": 50,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/05faebea82787675c2331bb4ddb7778b70ab53f0.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__17",
+      "name": "フェルクリーヴ",
+      "level": 54,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/5d146522a8fc94788d96043b93034176eab59a10.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__18",
+      "name": "原初の直感",
+      "level": 56,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/1d9a63cc19bbec0e2f99d192040c26e306e2e675.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__19",
+      "name": "エクリブリウム",
+      "level": 58,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b549a16dfa8cbde55ec19b81bad325c5480d98e2.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__20",
+      "name": "デシメート",
+      "level": 60,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f4fdd09a56a0b83a0cbe11a83f706dc0fb6781f5.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__21",
+      "name": "オンスロート",
+      "level": 62,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d0a1dad0fa6c8294ceb31b6879c765a02498e3fb.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__22",
+      "name": "アップヒーバル",
+      "level": 64,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/ba0b3b08d9b2ef02636e06148bc739680390fdd3.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__23",
+      "name": "シェイクオフ",
+      "level": 68,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f71e2c46512c1e937c0ff316be668d853869c637.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__24",
+      "name": "原初の解放",
+      "level": 70,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/809168ffb23f67e3d4b720b3caa4a0a1773fea4c.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__25",
+      "name": "カオティックサイクロン",
+      "level": 72,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/a5ea711252d08de0f9fd2e65313690c19b9f8773.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__26",
+      "name": "原初の猛り",
+      "level": 76,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/0a4356e3696cea8f2c8cea9be200e773da6c7caa.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__27",
+      "name": "インナーカオス",
+      "level": 80,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/70a629706b7fa0dc566d988dbf32da064d0c3458.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    }
+  ],
+  "DRK": [
+    {
+      "id": "pve_action__01",
+      "name": "ハードスラッシュ",
+      "level": 1,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/5c0fef99ef9100285ede6dbc62a5c35cea188d7c.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__02",
+      "name": "サイフォンストライク",
+      "level": 2,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e2a305d72e05ef339e0692bd5f7ed9626b6eb9ea.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__03",
+      "name": "アンリーシュ",
+      "level": 6,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/600c6a17bd8c4e08c783d1fb8891f12eea132a9a.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "tank_action__01",
+      "name": "ランパート",
+      "level": 8,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/37546679ae5e431c0903b20fa2c91a88c5a8e001.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__04",
+      "name": "グリットスタンス",
+      "level": 10,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b6d1592d4fcbcafe1e3b0958d688c50346fe2bd4.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__05",
+      "name": "グリットスタンス解除",
+      "level": 10,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/13a97691011df3c616e3181fd21b5f6805ce5799.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "tank_action__02",
+      "name": "ロウブロウ",
+      "level": 12,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/af837b3dd467ee9cdf865a06eb2b1633dd2b492a.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__06",
+      "name": "アンメンド",
+      "level": 15,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/6203d55695d1cdde37d875f7b4b4253606266ad0.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "tank_action__03",
+      "name": "挑発",
+      "level": 15,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2b45fea903bcf1edd9e08110cf95e8bba9a73c0d.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "tank_action__04",
+      "name": "インタージェクト",
+      "level": 18,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8442bcce1ec21a449546af9afb79ae9ea8c226cb.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "tank_action__05",
+      "name": "リプライザル",
+      "level": 22,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/6b83d9368623d5cd20a426d26916021b59a14963.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__07",
+      "name": "ソウルイーター",
+      "level": 26,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8c6a197869a69116f52b41b3fef2ce03c29b5212.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__08",
+      "name": "暗黒の波動",
+      "level": 30,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/438927fdaa593ec9d1bd020e1c60fad9ca495f3f.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "tank_action__06",
+      "name": "アームズレングス",
+      "level": 32,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/00ff21ad3e1fb26d7b292a9d912931e7ea64daa4.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__09",
+      "name": "ブラッドウェポン",
+      "level": 35,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c0c4dd65cec09b11aa7ecfecf6526aff4c59b83f.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__10",
+      "name": "シャドウウォール",
+      "level": 38,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/7ea7904a9e066bb33d542755b5984ad78c711a45.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__11",
+      "name": "ストルワートソウル",
+      "level": 40,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/cc2fff4dcbf82d405c36a0d153fb28af5fcb9068.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__12",
+      "name": "暗黒の剣",
+      "level": 40,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e62374eb5036fcaa1201fec390bc266620501abe.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__13",
+      "name": "ダークマインド",
+      "level": 45,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/adb1f756a8cfa746f5ec2f97e487e41c06026a61.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "tank_action__07",
+      "name": "シャーク",
+      "level": 48,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/4abd24800cb0999fff8ea79ed1085a7b5f8b14cb.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__14",
+      "name": "リビングデッド",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/968fc4ccd880ca468fff7b34680e793a80ffdab1.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__15",
+      "name": "ソルトアース",
+      "level": 52,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8c3e2f641cea5b3c0693034e6feafeff359341c5.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__16",
+      "name": "シャドウストライド",
+      "level": 54,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/52870f24b14efd37172003e974b8c45ca3d38010.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__17",
+      "name": "アビサルドレイン",
+      "level": 56,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/17543c65847814b073fe6481402a347c7efc9225.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__18",
+      "name": "カーヴ・アンド・スピット",
+      "level": 60,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/6bbe53b6e1f87598b98967ae9d29e4337a7afadd.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__19",
+      "name": "ブラッドスピラー",
+      "level": 62,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/4e5cbcae7dcf48cf8e3522d308f0c86df9114f0d.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__20",
+      "name": "クワイタス",
+      "level": 64,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/ea30bbaacc0da577820f8b027cec26738c1be840.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__21",
+      "name": "ダークミッショナリー",
+      "level": 66,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/1dc1a1d830e5355e2cd251531e85932c24ba1b8d.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__22",
+      "name": "ブラッドデリリアム",
+      "level": 68,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/fbf4ae3878ecc04c6201114ce6b0aadf26bef857.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__23",
+      "name": "ブラックナイト",
+      "level": 70,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f82c8fbcd6549c8cd72108a937aade172f8b98a8.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__25",
+      "name": "漆黒の剣",
+      "level": 74,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e4536e75673663bf1b91d1a78a565dabc2f041f6.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__24",
+      "name": "漆黒の波動",
+      "level": 74,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/de4960def285cc69e33455acae0f50808a6cd623.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__26",
+      "name": "影身具現",
+      "level": 80,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/5150a7bff7be43d689f896e7be140f4720a23f6e.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    }
+  ],
+  "GNB": [
+    {
+      "id": "pve_action__01",
+      "name": "キーンエッジ",
+      "level": 1,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/7cd4d1186b81029de28854eec532029ef245779c.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__02",
+      "name": "ノー・マーシー",
+      "level": 2,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/ab1c97d8f6007446d9f7c324adc29299e6be8e10.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__03",
+      "name": "ブルータルシェル",
+      "level": 4,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/729d76d5161a59cbed8b5f369e8476acf5ea24b2.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__04",
+      "name": "カモフラージュ",
+      "level": 6,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/62855107ef85d3d74b0eb9d14f030368ddb6ff5a.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "tank_action__01",
+      "name": "ランパート",
+      "level": 8,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/37546679ae5e431c0903b20fa2c91a88c5a8e001.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__05",
+      "name": "デーモンスライス",
+      "level": 10,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/a38cbdd5b185413becb8c56388d1043259dd25b1.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__06",
+      "name": "ロイヤルガード",
+      "level": 10,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b44946a0b3966b9638d4bc04d4b8c5858bfc3ad0.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__07",
+      "name": "ロイヤルガード解除",
+      "level": 10,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/bf2a6455e06637fe409340c4dba7530e55d8bfee.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "tank_action__02",
+      "name": "ロウブロウ",
+      "level": 12,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/af837b3dd467ee9cdf865a06eb2b1633dd2b492a.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__08",
+      "name": "サンダーバレット",
+      "level": 15,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/da2f213272cf4d4c2c5df5ccf597dd8e01ddb58b.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "tank_action__03",
+      "name": "挑発",
+      "level": 15,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2b45fea903bcf1edd9e08110cf95e8bba9a73c0d.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "tank_action__04",
+      "name": "インタージェクト",
+      "level": 18,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8442bcce1ec21a449546af9afb79ae9ea8c226cb.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__09",
+      "name": "デンジャーゾーン",
+      "level": 18,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/fdc5cd0d9017c98bc96d4e0f20122e2f83667128.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "tank_action__05",
+      "name": "リプライザル",
+      "level": 22,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/6b83d9368623d5cd20a426d26916021b59a14963.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__10",
+      "name": "ソリッドバレル",
+      "level": 26,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/57a492f3dd90592bb2b3255f3e2f342dd6b800f9.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__11",
+      "name": "バーストストライク",
+      "level": 30,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/43828414469ebc6fd88ef500ab2e941177b833ec.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "tank_action__06",
+      "name": "アームズレングス",
+      "level": 32,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/00ff21ad3e1fb26d7b292a9d912931e7ea64daa4.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__12",
+      "name": "ネビュラ",
+      "level": 38,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d16438334b399cb5524acb6d77485b6c56a2be4a.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__13",
+      "name": "デーモンスローター",
+      "level": 40,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/46bce3e1c9f5ca00fbc00c7f52fc765c47aba80a.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__14",
+      "name": "オーロラ",
+      "level": 45,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e220754db76f98256dd7258171a61a9de8dd898c.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "tank_action__07",
+      "name": "シャーク",
+      "level": 48,
+      "kind": "アビリティ",
+      "group": "タンクロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/4abd24800cb0999fff8ea79ed1085a7b5f8b14cb.png",
+      "quest": "タンクロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__15",
+      "name": "ボーライド",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/58257f726f8a2f793622a654e5b0b2df36b372ad.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__16",
+      "name": "ソニックブレイク",
+      "level": 54,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/7edeee63ceea914fd74fc091aa99a84b290a57b1.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__17",
+      "name": "トラジェクトリー",
+      "level": 56,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/905366f09c4875cbe0ba664aa043c8bd22aefc1c.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__20",
+      "name": "ウィケッドタロン",
+      "level": 60,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/137262f0ad98e13fd0ace2dc4f7f786d0bcec9a5.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__19",
+      "name": "サベッジクロウ",
+      "level": 60,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/fe183577affbcd066b131c997ca32283dba5c768.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__18",
+      "name": "ビートファング",
+      "level": 60,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/31a707fb47363e30af254750784a60ff55f60ec9.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__21",
+      "name": "バウショック",
+      "level": 62,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b3fa2bb1c9e838fc01439b7d39a495b444c73c6a.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__22",
+      "name": "ハート・オブ・ライト",
+      "level": 64,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/04bbce4afc048a15cdccdd0495e679f90b115963.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__23",
+      "name": "ハート・オブ・ストーン",
+      "level": 68,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/059baae88deccf4ffdc31f8afd0074ec4589f81f.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__27",
+      "name": "アイガウジ",
+      "level": 70,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/0c7e1462abaa7984e64644f3cb9e4a066ec16c59.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__26",
+      "name": "アブドメンテアー",
+      "level": 70,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e8472939441b3136fb9b2bfa52851e500e001279.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__24",
+      "name": "コンティニュエーション",
+      "level": 70,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8e38ca32b4021206901a4761dbef4d0c783b8620.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__25",
+      "name": "ジャギュラーリップ",
+      "level": 70,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/75e8b1b0530a1eb26a7d87aa7a3a50cfb8d3bff7.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__28",
+      "name": "フェイテッドサークル",
+      "level": 72,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/72b126aa8a17d9d94ee177b98af27d512aa6e01f.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__29",
+      "name": "ブラッドソイル",
+      "level": 76,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/90de52fbbbc0de9309a2b2aceb1b0146e3b7283a.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__30",
+      "name": "ブラスティングゾーン",
+      "level": 80,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d35fea54a4ec47a5d8227e13b5dba247a5c8a5a6.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    }
+  ],
+  "WHM": [
+    {
+      "id": "pve_action__01",
+      "name": "ストーン",
+      "level": 1,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/002aa233f5d570b0e27d55ce38b57a6b06b7cc69.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__02",
+      "name": "ケアル",
+      "level": 2,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/a2d0e0ed56915f523e8a7326bbdd09eff0534eda.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__03",
+      "name": "エアロ",
+      "level": 4,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/78107cd063a81b78b99eb7cb5da15f2bec403c70.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "healer_action__01",
+      "name": "リポーズ",
+      "level": 8,
+      "kind": "魔法",
+      "group": "ヒーラーロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/9bd731d47094c2c11b5cd9fb0d1d277bf9c6c89d.png",
+      "quest": "ヒーラーロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "healer_action__02",
+      "name": "エスナ",
+      "level": 10,
+      "kind": "魔法",
+      "group": "ヒーラーロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2a6603bc786d73eb3829141482b3d5be5d484199.png",
+      "quest": "ヒーラーロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__04",
+      "name": "メディカ",
+      "level": 10,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/6c5fd075bab7c063aef743a1de5e36958354b42b.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__05",
+      "name": "レイズ",
+      "level": 12,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/34bdc3ad370b701a106f32daa68e73055ab72331.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "healer_action__03",
+      "name": "ルーシッドドリーム",
+      "level": 14,
+      "kind": "アビリティ",
+      "group": "ヒーラーロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3629c6854aa559656623925e2489b60c2fa91e18.png",
+      "quest": "ヒーラーロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__06",
+      "name": "ストンラ",
+      "level": 18,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/ce8e52e199a7d9e548537bc77197f4d7965dea58.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "healer_action__04",
+      "name": "迅速魔",
+      "level": 18,
+      "kind": "アビリティ",
+      "group": "ヒーラーロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/27d401b3cfbf90c846ffeaa9f661afb4bd77ce98.png",
+      "quest": "ヒーラーロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__07",
+      "name": "ケアルラ",
+      "level": 30,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/a70a8e3dcb347c11047f00945f9435687f21f06d.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__08",
+      "name": "神速魔",
+      "level": 30,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/7be14bf07b21fa5c78cd7f7891279704da6cadb9.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__09",
+      "name": "リジェネ",
+      "level": 35,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/53bb0b4fc881c4c06d64c915864968cced6c6201.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__11",
+      "name": "エーテリアルシフト",
+      "level": 40,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d69b1e0884f3f4edac543210cd9b42d74c2b3f25.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__10",
+      "name": "ケアルガ",
+      "level": 40,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/33c3597ee1004e364a6331f732f077666e798acd.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "healer_action__05",
+      "name": "堅実魔",
+      "level": 44,
+      "kind": "アビリティ",
+      "group": "ヒーラーロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/477d1e7f7115db19c344c0f5cadfcfa2ac0cdcc0.png",
+      "quest": "ヒーラーロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__12",
+      "name": "ホーリー",
+      "level": 45,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/bb161bfc68766590d81cb1f7d6049711c949039b.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__13",
+      "name": "エアロラ",
+      "level": 46,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/7e4202353c63451702e9944dc93551a18951efcf.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "healer_action__06",
+      "name": "救出",
+      "level": 48,
+      "kind": "アビリティ",
+      "group": "ヒーラーロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/23f8a26b9a0107b6076f5f2e715e14d9be0edc25.png",
+      "quest": "ヒーラーロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__15",
+      "name": "ベネディクション",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/44e09756739b6b8924b82471572e7103ac5ca1fb.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__14",
+      "name": "メディカラ",
+      "level": 50,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/530234ed64e2b5b5aaacf978a90d87932734272f.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__17",
+      "name": "アサイラム",
+      "level": 52,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/cf3242dc922e88211cb5b2c4aa67f9ae79fb88fb.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__16",
+      "name": "ハート・オブ・ソラス",
+      "level": 52,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/a9c7b172b8c82aaa311a578fe3b42f5f30266e93.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__18",
+      "name": "ストンガ",
+      "level": 54,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f38006e73efc8e122777b9c23097a4c40bc9c9c4.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__19",
+      "name": "アサイズ",
+      "level": 56,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/4c9f83b599b37adfa6597ea7e884331cac170a12.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__20",
+      "name": "シンエアー",
+      "level": 58,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/539a73220a23fd185c17bed962b140bf7b4673d2.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__21",
+      "name": "テトラグラマトン",
+      "level": 60,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/6e00b907b75a6906045955d68cf68af66ba6aa9e.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__22",
+      "name": "ストンジャ",
+      "level": 64,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/33eacc1401b5fe03a2dd54e317cd60ccbb912c44.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__23",
+      "name": "ディヴァインベニゾン",
+      "level": 66,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/065d9df35159a3bc53d59984a18b35581b442a73.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__24",
+      "name": "インドゥルゲンティア",
+      "level": 70,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2144617daa9bac9ea7bc1f063a9e0cd033fcd363.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__26",
+      "name": "グレア",
+      "level": 72,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c1f9bdbca11c2c7944e3e95cf7599a6a3849e5a2.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__25",
+      "name": "ディア",
+      "level": 72,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/de737874f0025d808d0bddac1d4156fec9464d00.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__27",
+      "name": "ハート・オブ・ミゼリ",
+      "level": 74,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e01507664cb997891de06ec522b71619279969bc.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__28",
+      "name": "ハート・オブ・ラプチャー",
+      "level": 76,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/9582c5aa6ffa9abf82db6140916020235a003a20.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__29",
+      "name": "テンパランス",
+      "level": 80,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/78e099cba536b64fe978d05487c51b28a66f29df.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    }
+  ],
+  "SCH": [
+    {
+      "id": "pve_action__01",
+      "name": "ルイン",
+      "level": 1,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/1c74fa1688f3d89d6f5b972ce384df15f62e35d1.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_pet_action__01",
+      "name": "光の癒し",
+      "level": 1,
+      "kind": "魔法",
+      "group": "ペットアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d674990026a72270d2b697fb082a11876075d580.png",
+      "quest": "ペットアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__02",
+      "name": "バイオ",
+      "level": 2,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/93f61adcffc6644730a017347d91805359b52bdb.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__04",
+      "name": "サモン・エオス",
+      "level": 4,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/7e5c03b72c4e181034da8121d6f2bdf2f1aa2a60.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__03",
+      "name": "フィジク",
+      "level": 4,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e51f309947cde0c36f3a0cd815ca01e268928eb6.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "healer_action__01",
+      "name": "リポーズ",
+      "level": 8,
+      "kind": "魔法",
+      "group": "ヒーラーロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/9bd731d47094c2c11b5cd9fb0d1d277bf9c6c89d.png",
+      "quest": "ヒーラーロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "healer_action__02",
+      "name": "エスナ",
+      "level": 10,
+      "kind": "魔法",
+      "group": "ヒーラーロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2a6603bc786d73eb3829141482b3d5be5d484199.png",
+      "quest": "ヒーラーロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__05",
+      "name": "リザレク",
+      "level": 12,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/9e61ea15caf1f7c0e4b44943dcbee0178e61a9fd.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "healer_action__03",
+      "name": "ルーシッドドリーム",
+      "level": 14,
+      "kind": "アビリティ",
+      "group": "ヒーラーロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3629c6854aa559656623925e2489b60c2fa91e18.png",
+      "quest": "ヒーラーロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "healer_action__04",
+      "name": "迅速魔",
+      "level": 18,
+      "kind": "アビリティ",
+      "group": "ヒーラーロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/27d401b3cfbf90c846ffeaa9f661afb4bd77ce98.png",
+      "quest": "ヒーラーロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__06",
+      "name": "光の囁き",
+      "level": 20,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/161dc95f27e69fb5bd4caecfdeab022e3560193d.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__07",
+      "name": "バイオラ",
+      "level": 26,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/ea0a5e685172203ac73332f7e1690a5a89b25590.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__08",
+      "name": "鼓舞激励の策",
+      "level": 30,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/07beea4eb1cc3f24533d045db5b694c939f3a3ac.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__09",
+      "name": "士気高揚の策",
+      "level": 35,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/59ca7d9f2002ba3176f070a023bcfd8fa2129fb9.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__10",
+      "name": "ルインラ",
+      "level": 38,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d6875ae1008a9e4b2d04562cff42646752e919c5.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__11",
+      "name": "フェイイルミネーション",
+      "level": 40,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/6ed1ace8e31760fa3b042e6d27dac669668196b0.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "healer_action__05",
+      "name": "堅実魔",
+      "level": 44,
+      "kind": "アビリティ",
+      "group": "ヒーラーロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/477d1e7f7115db19c344c0f5cadfcfa2ac0cdcc0.png",
+      "quest": "ヒーラーロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__12",
+      "name": "エーテルフロー",
+      "level": 45,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/175631d8db5550a7b74a9bc811c3781e083e393e.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__13",
+      "name": "エナジードレイン",
+      "level": 45,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/92ea9227a8a09c62eb53852e2c26c0d6763a35c2.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__14",
+      "name": "生命活性法",
+      "level": 45,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/a9adc8943d1d8402366c869416b7a9d5ef7fcf07.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__15",
+      "name": "破陣法",
+      "level": 46,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/a414b67652d67ff6707276156d1ce275f188ef07.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "healer_action__06",
+      "name": "救出",
+      "level": 48,
+      "kind": "アビリティ",
+      "group": "ヒーラーロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/23f8a26b9a0107b6076f5f2e715e14d9be0edc25.png",
+      "quest": "ヒーラーロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__16",
+      "name": "野戦治療の陣",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/4c47bdf94dc6c3dcd9b303cfa42a08a5cfd13629.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__17",
+      "name": "不撓不屈の策",
+      "level": 52,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/7f80a5bd016eab7200c55dd8d1d6afb07361a0ca.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__18",
+      "name": "気炎法",
+      "level": 54,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/7203f797d2c3dd4148a8cb5fe510c1cfd1ac46a8.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__19",
+      "name": "展開戦術",
+      "level": 56,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/307e3a65fff1e38b28235509dd392323642d6965.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__20",
+      "name": "応急戦術",
+      "level": 58,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/fbfaa6c46fac537aec9d2903ec64d4f64fc54557.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__21",
+      "name": "転化",
+      "level": 60,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/fffbdbce557a09ee3a50f541fac07d432bfc7c89.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__22",
+      "name": "深謀遠慮の策",
+      "level": 62,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b46ada85c48a81940953f46eaaba05f1c2f5cfdd.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__23",
+      "name": "魔炎法",
+      "level": 64,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d8d8172feffed42f80d335bb7bedb14cc90fbd56.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__24",
+      "name": "連環計",
+      "level": 66,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2f5f538d79932e3bfb3bd5c72af6f13987aa3e6d.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__25",
+      "name": "エーテルパクト",
+      "level": 70,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/eb866b142bd93d46ffa7809e1092aefc48f48f3c.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_pet_action__04",
+      "name": "フェイユニオン",
+      "level": 70,
+      "kind": "アビリティ",
+      "group": "ペットアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2289de5779836f1b6905349f5031b2421bc9fd01.png",
+      "quest": "ペットアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__26",
+      "name": "フェイユニオン解除",
+      "level": 70,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/10602136009d5a92a005f0bd127a1a9ec8c1691a.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__28",
+      "name": "死炎法",
+      "level": 72,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/1f85b58d71471a33c2d35db849b20a681bfd5b56.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__27",
+      "name": "蠱毒法",
+      "level": 72,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e77ebe8644e35de5bc2d67a4c8365d6d726c9ca4.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__29",
+      "name": "秘策",
+      "level": 74,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b1be794db381c20399faf7dec80b7f64eaba2e61.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__30",
+      "name": "フェイブレッシング",
+      "level": 76,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e37b65935298898f61fd4b12a293998ba1258be5.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__32",
+      "name": "コンソレイション",
+      "level": 80,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/86ce58393104f45f36ef15d9d358a684c4013df4.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__31",
+      "name": "サモン・セラフィム",
+      "level": 80,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/ff070d67e4c75ed8bb06de1f577979e8c69c8ad1.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_pet_action__08",
+      "name": "セラフィックイルミネーション",
+      "level": 80,
+      "kind": "アビリティ",
+      "group": "ペットアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f52540afc77b83926b4b31d0c3caacd9147e7af6.png",
+      "quest": "ペットアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_pet_action__06",
+      "name": "セラフィックヴェール",
+      "level": 80,
+      "kind": "魔法",
+      "group": "ペットアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/07f1ba0fbda8b1b69078795da3932089e055e10d.png",
+      "quest": "ペットアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_pet_action__07",
+      "name": "光輝の囁き",
+      "level": 80,
+      "kind": "アビリティ",
+      "group": "ペットアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c6732641fcefad97152fbf3fbefa0a4a1d3a5114.png",
+      "quest": "ペットアクション",
+      "questRequired": false
+    }
+  ],
+  "AST": [
+    {
+      "id": "pve_action__01",
+      "name": "マレフィク",
+      "level": 1,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/183ab49e5ed43f37889be8427bf9a4c308cfa748.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__02",
+      "name": "ベネフィク",
+      "level": 2,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/23d16903c44b621e2e0d68f608a813fc2a5b1055.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__03",
+      "name": "コンバス",
+      "level": 4,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b5a34001aef4b3dad1eaf5864146d890464e3163.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__04",
+      "name": "ライトスピード",
+      "level": 6,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8a41b60865844ff8a5eeb76aaf885b8e8b0ad5b6.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "healer_action__01",
+      "name": "リポーズ",
+      "level": 8,
+      "kind": "魔法",
+      "group": "ヒーラーロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/9bd731d47094c2c11b5cd9fb0d1d277bf9c6c89d.png",
+      "quest": "ヒーラーロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "healer_action__02",
+      "name": "エスナ",
+      "level": 10,
+      "kind": "魔法",
+      "group": "ヒーラーロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2a6603bc786d73eb3829141482b3d5be5d484199.png",
+      "quest": "ヒーラーロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__05",
+      "name": "ヘリオス",
+      "level": 10,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/4de44df1a7ba71fdd94b5e4d26b378c8895c594a.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__06",
+      "name": "アセンド",
+      "level": 12,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d7284036ab2b7f0eb020ef471eb9b1de1ccbb02d.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "healer_action__03",
+      "name": "ルーシッドドリーム",
+      "level": 14,
+      "kind": "アビリティ",
+      "group": "ヒーラーロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3629c6854aa559656623925e2489b60c2fa91e18.png",
+      "quest": "ヒーラーロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__07",
+      "name": "ディグニティ",
+      "level": 15,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/6900c041afabd698273f5ca3c99d64574bdfacf6.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "healer_action__04",
+      "name": "迅速魔",
+      "level": 18,
+      "kind": "アビリティ",
+      "group": "ヒーラーロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/27d401b3cfbf90c846ffeaa9f661afb4bd77ce98.png",
+      "quest": "ヒーラーロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__08",
+      "name": "ベネフィラ",
+      "level": 26,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f77f8fb51548637c94db4f1b8e90fc7b1a4ee55f.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__09",
+      "name": "アストラルドロー",
+      "level": 30,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/ca9495b5dd2708d088f8180b433b812580622dcb.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__10",
+      "name": "アンブラルドロー",
+      "level": 30,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3a5badd54650309c03a120ea6906ad51276e8c6e.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__11",
+      "name": "プレイI",
+      "level": 30,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/aa32f90984104b56be403963081f119244df50a8.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__12",
+      "name": "プレイII",
+      "level": 30,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/1d7b124a1b665b5be6db3759a2f5060eef40b89d.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__13",
+      "name": "プレイIII",
+      "level": 30,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/59c09c6f090fb75d16bb4f906793b951fd58b4cf.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__14",
+      "name": "アスペクト・ベネフィク",
+      "level": 34,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/9bef02f2854edbe020ce99626c711e66d18e5f85.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__15",
+      "name": "アスペクト・ヘリオス",
+      "level": 40,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c4b31e905fbbbd9b79d5afc5c5aed9a89d46f788.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "healer_action__05",
+      "name": "堅実魔",
+      "level": 44,
+      "kind": "アビリティ",
+      "group": "ヒーラーロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/477d1e7f7115db19c344c0f5cadfcfa2ac0cdcc0.png",
+      "quest": "ヒーラーロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__16",
+      "name": "グラビデ",
+      "level": 45,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c5048acc0cf1b937307241ff27f77ad032505872.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__17",
+      "name": "コンバラ",
+      "level": 46,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3f1ca32d6772490ce1a8cbf36fc80c4596dec7ee.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "healer_action__06",
+      "name": "救出",
+      "level": 48,
+      "kind": "アビリティ",
+      "group": "ヒーラーロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/23f8a26b9a0107b6076f5f2e715e14d9be0edc25.png",
+      "quest": "ヒーラーロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__18",
+      "name": "シナストリー",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/556bdf27e11b05ed3d2c48c9ab895af933d07ab9.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__19",
+      "name": "ディヴィネーション",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/4df3bcac0369619901583d1b18c13e1cf160e8b5.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__20",
+      "name": "マレフィラ",
+      "level": 54,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b3b405ffabff79b88db294cae3aff6296d9f743a.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__21",
+      "name": "運命の輪",
+      "level": 58,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8c6c1d8dd2025d1019e16133be9b5c8bc9871201.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__22",
+      "name": "星天対抗",
+      "level": 60,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b0fa77347891a32179c547797e6deed79e9ef47a.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__23",
+      "name": "アーサリースター",
+      "level": 62,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/7012ee74c18fa7f0e6a087d778701560a5553322.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__24",
+      "name": "ステラデトネーション",
+      "level": 62,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/5d3bd4b689787c566897a86b425e9e5149123df2.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__25",
+      "name": "マレフィガ",
+      "level": 64,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b1a9eac4e36df41bc621c096cfb001e32a970fd7.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__26",
+      "name": "マイナーアルカナ",
+      "level": 70,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c853db515158ad161d5ef8b9a84cdc5af02b6850.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__27",
+      "name": "コンバガ",
+      "level": 72,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e349d6ef0e8f566a09bc7c1220876e25707ae721.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__28",
+      "name": "マレフィジャ",
+      "level": 72,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/ff7d87f8fcd5c702dc0723ba9fb286b2050e968c.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__29",
+      "name": "星天交差",
+      "level": 74,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/5ee8bc24d9a8ee766b7dda50cbcb29be15727990.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__30",
+      "name": "ホロスコープ",
+      "level": 76,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/4c87d9b89ed28f32863f8c094717d53ceeba741a.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__32",
+      "name": "ニュートラルセクト",
+      "level": 80,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/5a81be793ffaa939b52917ef026f6652a2227498.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    }
+  ],
+  "MNK": [
+    {
+      "id": "pve_action__01",
+      "name": "連撃",
+      "level": 1,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/7079a2bf92e2473c4a28b582850a44b5b8d2d9aa.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__02",
+      "name": "正拳突き",
+      "level": 4,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f0ebdb32af553d84dfd59abb4d868c6be17bf334.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__03",
+      "name": "崩拳",
+      "level": 6,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/eea79a3861a427c42750d650af3b17c611ac1f73.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "melee_action__01",
+      "name": "内丹",
+      "level": 8,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2b79d78f1ed471ace5708898e3388062fbd555fb.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "melee_action__02",
+      "name": "レッグスウィープ",
+      "level": 10,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8c9674aba5fe48e73cc80ceb4a49782c1539b942.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "melee_action__03",
+      "name": "ブラッドバス",
+      "level": 12,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f76d6999b80178e51cfedf68f3af69ce6ed5016f.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__04",
+      "name": "鉄山闘気",
+      "level": 15,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3f5525f96d26fa3bb52df3cd390fbabd126be062.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__05",
+      "name": "鉄山靠",
+      "level": 15,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c5bf98a4d13a858dc2c4932408eefe77c4f173c1.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__06",
+      "name": "双掌打",
+      "level": 18,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d649439b0004da7643cbeaafe73e4e93f2572e61.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "melee_action__04",
+      "name": "牽制",
+      "level": 22,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/84c26a86cbbb8a599e5a2441cebcd33b0064bf07.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__07",
+      "name": "壊神衝",
+      "level": 26,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/92b45621e9e88401316dc9bede7253b10d4facd8.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__09",
+      "name": "地烈斬",
+      "level": 30,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/5a0f246b748bb726d3626d3713bc71138f6bb86f.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__08",
+      "name": "破砕拳",
+      "level": 30,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/883edfbb5dec0daed23aa0447d6e7b28cf16b8d3.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "melee_action__05",
+      "name": "アームズレングス",
+      "level": 32,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/00ff21ad3e1fb26d7b292a9d912931e7ea64daa4.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__10",
+      "name": "抜重歩法",
+      "level": 35,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/9a4a20e6ff8843d06e066fd0ffb6f8f6944acac4.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__12",
+      "name": "空鳴拳",
+      "level": 40,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d5392c32b9d05bda3c0a4ee45c1d13cce2dee9e1.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__11",
+      "name": "空鳴闘気",
+      "level": 40,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e496f61cb81a7d95c751a64c3c416faa851216f0.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__13",
+      "name": "マントラ",
+      "level": 42,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/576fee56715e5d7a353c36daab4c4e3a5546738e.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__14",
+      "name": "四面脚",
+      "level": 45,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/fe6108fe3ff3591e8a6d3155c5764e53baf41397.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "melee_action__06",
+      "name": "トゥルーノース",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2d62e72f5da6d52e189c1ed10dfbd602625fc536.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__15",
+      "name": "双竜脚",
+      "level": 50,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/a6e218fec5415ba80ebdf6364458022bbd5b32d2.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__16",
+      "name": "踏鳴",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/a66c7c878615dad8345d7dce2aced30714572312.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__17",
+      "name": "演武",
+      "level": 52,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/da141fe139c2b20081a175704336a0af21f0f801.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__18",
+      "name": "陰陽闘気",
+      "level": 54,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3f5525f96d26fa3bb52df3cd390fbabd126be062.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__19",
+      "name": "陰陽闘気斬",
+      "level": 54,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/20a6e6104d8cad0e109bd0f56e1d26689017b871.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__22",
+      "name": "蒼気砲",
+      "level": 60,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/86593521c943c9be34dd6bcf4bbcaf805b38ab3b.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__23",
+      "name": "天宙脚",
+      "level": 60,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/5d44a1b394d5fe9d8ace8edcc742233d93127baa.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__21",
+      "name": "闘魂旋風脚",
+      "level": 60,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c048e791bb8e3acbc39aed1eaf2e413c79367d23.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__24",
+      "name": "爆裂脚",
+      "level": 60,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/56b3a643f6f021d073e372428af662f204d82eb5.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__20",
+      "name": "必殺技",
+      "level": 60,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e42e291b8a444b9daf5c4bed5170e92d5c11872e.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__25",
+      "name": "金剛の極意",
+      "level": 64,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/9297680db2fae6085ff7c4607b7f593f1445d0ee.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__26",
+      "name": "金剛周天",
+      "level": 64,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f43b6c836fff7fa639c967aac3d6ef768fc1d16c.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__27",
+      "name": "紅蓮の極意",
+      "level": 68,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/615580fd49ed973d96fa084493f79bc87a2199a6.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__28",
+      "name": "桃園結義",
+      "level": 70,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/ab70fce75ed41f0bbaa02e4bc4b5c4a2ff39d07d.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__29",
+      "name": "疾風の極意",
+      "level": 72,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/5cfa2c17de4b6ddd285e621423f92b68d61cdf65.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__30",
+      "name": "万象闘気",
+      "level": 74,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e496f61cb81a7d95c751a64c3c416faa851216f0.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__31",
+      "name": "万象闘気圏",
+      "level": 74,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/4609c042377d4e8c7cfd87920d95f2d48993dd3d.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__32",
+      "name": "六合星導脚",
+      "level": 80,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2e88997084591670e9454c1f089c14ccdb98a285.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    }
+  ],
+  "DRG": [
+    {
+      "id": "pve_action__01",
+      "name": "トゥルースラスト",
+      "level": 1,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/a456526b20c613a31c9ff03a7cd8d69ab328a4c8.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__02",
+      "name": "ボーパルスラスト",
+      "level": 4,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/85a78cf7b49d80ab94aa206b385563ffa0222346.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__03",
+      "name": "ライフサージ",
+      "level": 6,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/eb7e59cbec93afbdf7a3cecd0e164c545ea8dec2.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "melee_action__01",
+      "name": "内丹",
+      "level": 8,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2b79d78f1ed471ace5708898e3388062fbd555fb.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "melee_action__02",
+      "name": "レッグスウィープ",
+      "level": 10,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8c9674aba5fe48e73cc80ceb4a49782c1539b942.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "melee_action__03",
+      "name": "ブラッドバス",
+      "level": 12,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f76d6999b80178e51cfedf68f3af69ce6ed5016f.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__04",
+      "name": "ピアシングタロン",
+      "level": 15,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b34933ec0ea122c75fd1deeb69f3b9df942dbdc1.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__05",
+      "name": "ディセムボウル",
+      "level": 18,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d5052c9c0d1bf846c9a4fb70497dd1cea97ceca6.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "melee_action__04",
+      "name": "牽制",
+      "level": 22,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/84c26a86cbbb8a599e5a2441cebcd33b0064bf07.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__06",
+      "name": "フルスラスト",
+      "level": 26,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/34a78b866a4906267ee8f0e93457cb22b5550b9d.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__08",
+      "name": "ジャンプ",
+      "level": 30,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/15919e7dd2c5589a71f3c5115c3cb1e5b02f7572.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__07",
+      "name": "ランスチャージ",
+      "level": 30,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/cb90fa2f691cd58f5b068f6088550b3d56c2bd73.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "melee_action__05",
+      "name": "アームズレングス",
+      "level": 32,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/00ff21ad3e1fb26d7b292a9d912931e7ea64daa4.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__09",
+      "name": "イルーシブジャンプ",
+      "level": 35,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/a13b9738eba1cfa6331a577992a05fbf8e29b12e.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__10",
+      "name": "ドゥームスパイク",
+      "level": 40,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/1e6e09c76f8847d3caf2ee330400848219460dfa.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__11",
+      "name": "ウィンググライド",
+      "level": 45,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/970713e35721fcecc8fce83a6064c984bdeb22c3.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "melee_action__06",
+      "name": "トゥルーノース",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2d62e72f5da6d52e189c1ed10dfbd602625fc536.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__13",
+      "name": "ドラゴンダイブ",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b2d62c093eb2ccde88c41512eba79a759d3b1731.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__12",
+      "name": "桜華狂咲",
+      "level": 50,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b77850f0a67953c4b4a13228788bdc1ec41c20fc.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__14",
+      "name": "バトルリタニー",
+      "level": 52,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/705282791cafca1896aafcb629217ccf272fa317.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__15",
+      "name": "竜牙竜爪",
+      "level": 56,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/bcf8b96ea7064ae0c532cb80fa44d59ec5fa9208.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__16",
+      "name": "竜尾大車輪",
+      "level": 58,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/85d31ee98aca28156e6dbfcfc17473bb90d1c044.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__17",
+      "name": "ゲイルスコグル",
+      "level": 60,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/9fd17ed870b46d4f1cb7dfbbfe36232a69ffab25.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__18",
+      "name": "ソニックスラスト",
+      "level": 62,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/86993377c3b82442fd98d9ccaf2c8e007b110d3e.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__19",
+      "name": "雲蒸竜変",
+      "level": 64,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/1bc31e46fb90bda5697cf272e0df8b9ac8086b13.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__20",
+      "name": "ミラージュダイブ",
+      "level": 68,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/838933d8bbe091490defd8b0c455c1b6cd553f21.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__21",
+      "name": "ナーストレンド",
+      "level": 70,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8e8ee9ce030d0945ab1983fa282569bf9359e77b.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__22",
+      "name": "クルザントーメント",
+      "level": 72,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/27c2b3ef23b6bbe6b322b8a0bade3e00e04727b1.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__23",
+      "name": "ハイジャンプ",
+      "level": 74,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/43bde23e743d27c8dd8c0a29020671f33fbb1ac6.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__24",
+      "name": "竜眼雷電",
+      "level": 76,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e6c9b8537cca3034858fb078bb6100232c6e23c7.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__25",
+      "name": "スターダイバー",
+      "level": 80,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/65fe43d4e61e67defd885819e6f7d1c8fb1c9ea8.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    }
+  ],
+  "NIN": [
+    {
+      "id": "pve_action__01",
+      "name": "双刃旋",
+      "level": 1,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/150bf30be1a1ae0bcb2716d0ee4db448b71609c6.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__02",
+      "name": "残影",
+      "level": 2,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/cad6fe9181335338ed411e0d9a2357a6e8496efc.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__03",
+      "name": "風断ち",
+      "level": 4,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/7891f6fad42ffdcf2a4f2b1fa37570c9a1f3a1a9.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "melee_action__01",
+      "name": "内丹",
+      "level": 8,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2b79d78f1ed471ace5708898e3388062fbd555fb.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__04",
+      "name": "かくれる",
+      "level": 10,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/5b5c3b6be21935b60b3e60b8b2b473fd3c0a7530.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "melee_action__02",
+      "name": "レッグスウィープ",
+      "level": 10,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8c9674aba5fe48e73cc80ceb4a49782c1539b942.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "melee_action__03",
+      "name": "ブラッドバス",
+      "level": 12,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f76d6999b80178e51cfedf68f3af69ce6ed5016f.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__06",
+      "name": "ぶんどる",
+      "level": 15,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b36d71590151a6f7f3d5fd616933f452bc9eeb68.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__05",
+      "name": "投刃",
+      "level": 15,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e3d6094d93d1e6f8cb9034229a9f4bed0571471b.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__07",
+      "name": "だまし討ち",
+      "level": 18,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/820c1eb36bd9488505973d7141d73e7fa1c3d1db.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "melee_action__04",
+      "name": "牽制",
+      "level": 22,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/84c26a86cbbb8a599e5a2441cebcd33b0064bf07.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__08",
+      "name": "旋風刃",
+      "level": 26,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c2741e8be4448134b1497cf59fa8a32d096cb91e.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__09",
+      "name": "天の印",
+      "level": 30,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/55c66e798d7404567ec69a023335542cef7cd916.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__10",
+      "name": "忍術",
+      "level": 30,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b1362c998dbfc19dfd13223d2ae275be7f4db7cc.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_jyutsu_action__01",
+      "name": "風魔手裏剣",
+      "level": 30,
+      "kind": "アビリティ",
+      "group": "派生アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/be6fdb084ef5ffd556f82bf0f3e0bb0085adf53f.png",
+      "quest": "派生アクション",
+      "questRequired": false
+    },
+    {
+      "id": "melee_action__05",
+      "name": "アームズレングス",
+      "level": 32,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/00ff21ad3e1fb26d7b292a9d912931e7ea64daa4.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_jyutsu_action__02",
+      "name": "火遁の術",
+      "level": 35,
+      "kind": "アビリティ",
+      "group": "派生アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c13292e99775bf7b834e9bf44eae59cdf977dc8c.png",
+      "quest": "派生アクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__11",
+      "name": "地の印",
+      "level": 35,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/1836df5cdf1d1f78ae7b2f65462661f2fa6a79d8.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_jyutsu_action__03",
+      "name": "雷遁の術",
+      "level": 35,
+      "kind": "アビリティ",
+      "group": "派生アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/1c5d9c8d2301016f0d1d7412cc5100a7e41de735.png",
+      "quest": "派生アクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__12",
+      "name": "血花五月雨",
+      "level": 38,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/08a91ba599c83a9fdbe791137d57f411f130bcc3.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__13",
+      "name": "終撃",
+      "level": 40,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c8f030128bce9d193521eb5cfcd9ff4636bbea61.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__14",
+      "name": "縮地",
+      "level": 40,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/ea2717bad5b805b35bb32731d78113692104a30d.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__15",
+      "name": "人の印",
+      "level": 45,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2183f2672edde169e6276764503ec11ae06b4c1e.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_jyutsu_action__07",
+      "name": "水遁の術",
+      "level": 45,
+      "kind": "アビリティ",
+      "group": "派生アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/fd706ad1980d3382fd9c64ffec7a0374d549d5cc.png",
+      "quest": "派生アクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_jyutsu_action__06",
+      "name": "土遁の術",
+      "level": 45,
+      "kind": "アビリティ",
+      "group": "派生アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c4807f81a654f2b25cca49c1f61e9b3bc7df62d6.png",
+      "quest": "派生アクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_jyutsu_action__04",
+      "name": "氷遁の術",
+      "level": 45,
+      "kind": "アビリティ",
+      "group": "派生アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c1f09309f06281706fd1a6f37051a97dc8fdfd4f.png",
+      "quest": "派生アクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_jyutsu_action__05",
+      "name": "風遁の術",
+      "level": 45,
+      "kind": "アビリティ",
+      "group": "派生アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/52e16f75932d2dc542606dccf6b9a8ffdef35b5d.png",
+      "quest": "派生アクション",
+      "questRequired": false
+    },
+    {
+      "id": "melee_action__06",
+      "name": "トゥルーノース",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2d62e72f5da6d52e189c1ed10dfbd602625fc536.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__16",
+      "name": "活殺自在",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/a12553440d7385aaafc940cac8f14682e3012392.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__17",
+      "name": "八卦無刃殺",
+      "level": 52,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/86e59c1bd3dedee2a6b68d3321da04c68a3acb52.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__18",
+      "name": "強甲破点突",
+      "level": 54,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f8e49f627d8f6e16b91b2192b322812f09c40475.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__19",
+      "name": "夢幻三段",
+      "level": 56,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f2e750bda00af60c3a06480f512753c8b6d5951b.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__20",
+      "name": "口寄せの術・大蝦蟇",
+      "level": 62,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c802df3d7abd5e50889d1cc5e97cf64eb1610afa.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__21",
+      "name": "毒盛の術",
+      "level": 66,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/751e11fc60c05f5ac427b522211ae510ef845f6c.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__22",
+      "name": "六道輪廻",
+      "level": 68,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/7fa8283b30b9ac35aada60984cbfaf01d3268c95.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__23",
+      "name": "天地人",
+      "level": 70,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/9c0c72efe9ba9c13d3765b1b7dd863c68eeaf4ba.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__24",
+      "name": "命水",
+      "level": 72,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/9c7d1c58eb10c5d105f1ee98a21f84a031d26518.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_jyutsu_action__08",
+      "name": "劫火滅却の術",
+      "level": 76,
+      "kind": "アビリティ",
+      "group": "派生アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/42f7335959286b3409ae67dc35b603f5225fc488.png",
+      "quest": "派生アクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_jyutsu_action__09",
+      "name": "氷晶乱流の術",
+      "level": 76,
+      "kind": "アビリティ",
+      "group": "派生アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/226d8c495bf3b742618ba71f4cb9ff80b63b4752.png",
+      "quest": "派生アクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__25",
+      "name": "分身の術",
+      "level": 80,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d74531599ce1fc1886de7c5302265b73dd45accb.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    }
+  ],
+  "SAM": [
+    {
+      "id": "pve_action__01",
+      "name": "刃風",
+      "level": 1,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/55c0a798d2db426ad407ab0d506fae3afe14cd1d.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__02",
+      "name": "陣風",
+      "level": 4,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2cdd1c3fa2b166f8da269d9e3241399d3a37f959.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__03",
+      "name": "心眼",
+      "level": 6,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3c97e963e92ae242000e51159d9eb749897d8a68.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "melee_action__01",
+      "name": "内丹",
+      "level": 8,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2b79d78f1ed471ace5708898e3388062fbd555fb.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "melee_action__02",
+      "name": "レッグスウィープ",
+      "level": 10,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8c9674aba5fe48e73cc80ceb4a49782c1539b942.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "melee_action__03",
+      "name": "ブラッドバス",
+      "level": 12,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f76d6999b80178e51cfedf68f3af69ce6ed5016f.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__04",
+      "name": "燕飛",
+      "level": 15,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b2b75c383779cbd254a8bca3dbd30f2490c1d270.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__05",
+      "name": "士風",
+      "level": 18,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/64dcd53611773e2f2c981bc01877937b5331df8c.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "melee_action__04",
+      "name": "牽制",
+      "level": 22,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/84c26a86cbbb8a599e5a2441cebcd33b0064bf07.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__06",
+      "name": "風雅",
+      "level": 26,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/5f181040a9d1ef66c6310a307036639fd78ef6c8.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__08",
+      "name": "居合術",
+      "level": 30,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/64757011257ac3561af53f09ffb47bd76744803d.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__07",
+      "name": "月光",
+      "level": 30,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/69a82466c03f3531657ce703afb8a399fdd89812.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_jyutsu_action__01",
+      "name": "彼岸花",
+      "level": 30,
+      "kind": "ウェポン スキル",
+      "group": "派生アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3db719d146f5af6ef728a9d8d093aa26553ce690.png",
+      "quest": "派生アクション",
+      "questRequired": false
+    },
+    {
+      "id": "melee_action__05",
+      "name": "アームズレングス",
+      "level": 32,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/00ff21ad3e1fb26d7b292a9d912931e7ea64daa4.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__09",
+      "name": "満月",
+      "level": 35,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/81e6e44a8a26f2355226894a36dea570ce1d6962.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__10",
+      "name": "花車",
+      "level": 40,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8330058e7e147dc2093e838239c2865aea6d6166.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_jyutsu_action__02",
+      "name": "天下五剣",
+      "level": 40,
+      "kind": "ウェポン スキル",
+      "group": "派生アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/a1e9553412c34a1614a4f9a1ece32becc2463e15.png",
+      "quest": "派生アクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__11",
+      "name": "桜花",
+      "level": 45,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/83caa2b18aa8a589ccdd81b8367452ef73d1e2b2.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "melee_action__06",
+      "name": "トゥルーノース",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "近接DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2d62e72f5da6d52e189c1ed10dfbd602625fc536.png",
+      "quest": "近接DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__12",
+      "name": "雪風",
+      "level": 50,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/353a35cad8a1e089d162451dbe5de1fb78f4b0a9.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__13",
+      "name": "明鏡止水",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/13e7fc6c10bb476259ec8d29d086bef49bea509c.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_jyutsu_action__03",
+      "name": "乱れ雪月花",
+      "level": 50,
+      "kind": "ウェポン スキル",
+      "group": "派生アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2df83ffd6e49570528cb44af4ad17d777722ab1f.png",
+      "quest": "派生アクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__14",
+      "name": "必殺剣・震天",
+      "level": 52,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c57812e667388d676fd1267d87583aa29c2da2ef.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__15",
+      "name": "必殺剣・暁天",
+      "level": 54,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/98f63e44032f5b66bbe9f77ad2882e38b42854b3.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__16",
+      "name": "必殺剣・夜天",
+      "level": 56,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f939f0b2b36012cbc5096f6b64a787a8d5f5ed6a.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__17",
+      "name": "黙想",
+      "level": 60,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/4b642f7d616d6ca25a2ac0dfb230cb5f953eebd1.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__18",
+      "name": "必殺剣・九天",
+      "level": 62,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b0d5ff90bd65e254949741965c77d50b100b8241.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__20",
+      "name": "意気衝天",
+      "level": 68,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/9165fbf83411057b22d8d9c2a5e29dd6fd6fce5c.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__19",
+      "name": "葉隠",
+      "level": 68,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/afaf9f6273e5d6a275a84ad286c390d7337cd11d.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__21",
+      "name": "必殺剣・紅蓮",
+      "level": 70,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/a6e4fbc47fbb90b64d6a58495cf991f9aad2548b.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__22",
+      "name": "必殺剣・閃影",
+      "level": 72,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/1812ee8f2135ed92057b767eacbf2469ef0b25ee.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__23",
+      "name": "燕返し",
+      "level": 74,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2aeabf974ab57ac123bc19cacfcd94c3ad86373a.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_jyutsu_action__04",
+      "name": "返し五剣",
+      "level": 74,
+      "kind": "ウェポン スキル",
+      "group": "派生アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/4609d44fb480c238ed73e42eed5cd0b722020341.png",
+      "quest": "派生アクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_jyutsu_action__05",
+      "name": "返し雪月花",
+      "level": 74,
+      "kind": "ウェポン スキル",
+      "group": "派生アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3a733f5ba1130d94fdef4b1e58f7cab9188ded4b.png",
+      "quest": "派生アクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__24",
+      "name": "照破",
+      "level": 80,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/1f8f320806d886a35983a5c411ba95ede40072ce.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    }
+  ],
+  "BRD": [
+    {
+      "id": "pve_action__01",
+      "name": "ヘヴィショット",
+      "level": 1,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c2be827c9e88459a397d2d02851c435d27a7bfd8.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__02",
+      "name": "ストレートショット",
+      "level": 2,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/58345465e1b0bb46bac9920464892ef4e51be34f.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__03",
+      "name": "猛者の撃",
+      "level": 4,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/444bd0d452881277e79be184fdb8ca6d21906014.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__04",
+      "name": "ベノムバイト",
+      "level": 6,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/5628b34f3942ef93659f9f03dd2c0556b66f83ea.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "prange_action__01",
+      "name": "レッググレイズ",
+      "level": 6,
+      "kind": "アビリティ",
+      "group": "遠隔物理DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2a6b7be8517f51d8cbcc60be2ae5970668f515eb.png",
+      "quest": "遠隔物理DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "prange_action__02",
+      "name": "内丹",
+      "level": 8,
+      "kind": "アビリティ",
+      "group": "遠隔物理DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2b79d78f1ed471ace5708898e3388062fbd555fb.png",
+      "quest": "遠隔物理DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "prange_action__03",
+      "name": "フットグレイズ",
+      "level": 10,
+      "kind": "アビリティ",
+      "group": "遠隔物理DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8b1f979d2b1428f9791f54ad0e429ea94a8d95d6.png",
+      "quest": "遠隔物理DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__05",
+      "name": "ブラッドレッター",
+      "level": 12,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/fd9763578c2d9e6fca1cc0637d953ba405aa5b2b.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__06",
+      "name": "リペリングショット",
+      "level": 15,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/33e4423b5606c916b4c92db7a6cfb7d22d8f89ac.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__07",
+      "name": "クイックノック",
+      "level": 18,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/674767e2dcc3f57156cd13273601bd4ed337657b.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "prange_action__04",
+      "name": "プロトン",
+      "level": 20,
+      "kind": "アビリティ",
+      "group": "遠隔物理DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/fb8b0f0ca18af4362d27f6699579bd5a18b40137.png",
+      "quest": "遠隔物理DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "prange_action__05",
+      "name": "ヘッドグレイズ",
+      "level": 24,
+      "kind": "アビリティ",
+      "group": "遠隔物理DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/748fe5fc8262b58e9a35aa9e4d40e67a0dd006a5.png",
+      "quest": "遠隔物理DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__08",
+      "name": "ワイドボレー",
+      "level": 25,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f935382d44889e5e74a995ed49bb6db78532edd4.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__09",
+      "name": "ウィンドバイト",
+      "level": 30,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/798e2b8207ce793087365990d0996232238b9225.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__10",
+      "name": "賢人のバラード",
+      "level": 30,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/7744e7d846192e0c01c11c8854e6701d3a1000e1.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "prange_action__06",
+      "name": "アームズレングス",
+      "level": 32,
+      "kind": "アビリティ",
+      "group": "遠隔物理DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/00ff21ad3e1fb26d7b292a9d912931e7ea64daa4.png",
+      "quest": "遠隔物理DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__11",
+      "name": "時神のピーアン",
+      "level": 35,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e2358f71a46fe53449fdff7c7e42bb99c51987ca.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__12",
+      "name": "乱れ撃ち",
+      "level": 38,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/28e7d01b94a703869a9bfae6f06864154f1bd2f3.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__13",
+      "name": "軍神のパイオン",
+      "level": 40,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d8e2b6d980867d94b2c2f3b5067e50dede5b9064.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__14",
+      "name": "レイン・オブ・デス",
+      "level": 45,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/86a4368f7c70f8ff48ac30768d6ee6253c73b3f5.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__15",
+      "name": "バトルボイス",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/0b50ad3e2e20b0d9a5478c296c861592f0eccd41.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__17",
+      "name": "ピッチパーフェクト",
+      "level": 52,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/4b5cb786bc03d337b39054027f6087b4f7cb6882.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__16",
+      "name": "旅神のメヌエット",
+      "level": 52,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3f0462d7211269eb0dc49978c35f58e4e1077aae.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__18",
+      "name": "エンピリアルアロー",
+      "level": 54,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/df058855e5500505c31eda4041f74e8fe4dbdb76.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__19",
+      "name": "アイアンジョー",
+      "level": 56,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3224b272a8cb080df1f93bfaf11d1cfec05533d8.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__20",
+      "name": "サイドワインダー",
+      "level": 60,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f39927d0bec5c6d20e72bddd59b9a9f250c99e2c.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__21",
+      "name": "トルバドゥール",
+      "level": 62,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/6618d7a1a2770ce51edecf1c26a2937b5fc95963.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__22",
+      "name": "コースティックバイト",
+      "level": 64,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d9dd6ba8d37d6319c1eafd39f665bfb7dc6953d5.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__23",
+      "name": "ストームバイト",
+      "level": 64,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f40a7b8d145d3419b05d7c491c388a448773c995.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__24",
+      "name": "地神のミンネ",
+      "level": 66,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/03c3c2cabca1caf35d1c9a6ef8d0fe150e03762c.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__25",
+      "name": "リフルジェントアロー",
+      "level": 70,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3595a008f1495d37a1cf915ecd72b10754e1fbc9.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__26",
+      "name": "シャドウバイト",
+      "level": 72,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/88f59edc609d2adbd323ced0d409048e30ca0b35.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__27",
+      "name": "バーストショット",
+      "level": 76,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/5690bdb5a291ff736672ec4e52eb99fbed475e94.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__28",
+      "name": "エイペックスアロー",
+      "level": 80,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/7f89a5408c4dec6ee1ccdc71968eed0c0a3e97bc.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    }
+  ],
+  "MCH": [
+    {
+      "id": "pve_action__01",
+      "name": "スプリットショット",
+      "level": 1,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8060c2f198141fb9c4d4202e298c212c15a82e88.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__02",
+      "name": "スラッグショット",
+      "level": 2,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/63bb059658f193d08de8cd45e4a95e7bed0418b8.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__03",
+      "name": "ホットショット",
+      "level": 4,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b297b6034baa7347d3a53a12910b102914ce3c3e.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "prange_action__01",
+      "name": "レッググレイズ",
+      "level": 6,
+      "kind": "アビリティ",
+      "group": "遠隔物理DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2a6b7be8517f51d8cbcc60be2ae5970668f515eb.png",
+      "quest": "遠隔物理DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "prange_action__02",
+      "name": "内丹",
+      "level": 8,
+      "kind": "アビリティ",
+      "group": "遠隔物理DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2b79d78f1ed471ace5708898e3388062fbd555fb.png",
+      "quest": "遠隔物理DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "prange_action__03",
+      "name": "フットグレイズ",
+      "level": 10,
+      "kind": "アビリティ",
+      "group": "遠隔物理DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8b1f979d2b1428f9791f54ad0e429ea94a8d95d6.png",
+      "quest": "遠隔物理DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__04",
+      "name": "整備",
+      "level": 10,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/55906cd43fffdf7bcc09790b1b02b19edc6b2e8e.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__05",
+      "name": "ガウスラウンド",
+      "level": 15,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e6959a3306b601fc9e5987712f6d9ea247a7a566.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__06",
+      "name": "スプレッドショット",
+      "level": 18,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/7c4e991ed4e6b585ceb2dda1c03dec0278ff28f0.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "prange_action__04",
+      "name": "プロトン",
+      "level": 20,
+      "kind": "アビリティ",
+      "group": "遠隔物理DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/fb8b0f0ca18af4362d27f6699579bd5a18b40137.png",
+      "quest": "遠隔物理DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "prange_action__05",
+      "name": "ヘッドグレイズ",
+      "level": 24,
+      "kind": "アビリティ",
+      "group": "遠隔物理DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/748fe5fc8262b58e9a35aa9e4d40e67a0dd006a5.png",
+      "quest": "遠隔物理DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__07",
+      "name": "クリーンショット",
+      "level": 26,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d6d762f987ab51e9840cbf5229251838b16078b5.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__08",
+      "name": "ハイパーチャージ",
+      "level": 30,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/092ad12e9867fd64a23a705bd0dd67215b793ae5.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "prange_action__06",
+      "name": "アームズレングス",
+      "level": 32,
+      "kind": "アビリティ",
+      "group": "遠隔物理DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/00ff21ad3e1fb26d7b292a9d912931e7ea64daa4.png",
+      "quest": "遠隔物理DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__09",
+      "name": "ヒートブラスト",
+      "level": 35,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/868f1e47a66f3d747213accc2b7d37f2c4464f8e.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__10",
+      "name": "オートタレット・ルーク",
+      "level": 40,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/7d6539171b0c158f7ca5e1ed4a112e6336601646.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__11",
+      "name": "オーバードライブ・ルーク",
+      "level": 40,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b2703467384768bbc34517f6137898961ee5db6f.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__12",
+      "name": "オーバーロード・ルーク",
+      "level": 40,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/1ab647949d0dd2caed010390a84f687390e762d9.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__14",
+      "name": "デトネーター",
+      "level": 45,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/4fd81a7627fd0706b03ca3685e383bf8a19518c9.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__13",
+      "name": "ワイルドファイア",
+      "level": 45,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/6d73e45fbbfb35ad0a4f8b4a73753e6a06a37651.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__15",
+      "name": "リコシェット",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/5556960a2e8ce389c2117d13c6d182f41943c3c9.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__16",
+      "name": "オートボウガン",
+      "level": 52,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/73035ee439401fc6216782e74ce892f061d71214.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__17",
+      "name": "ヒートスプリットショット",
+      "level": 54,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/cac7ff217edfabca410218ec69323060aed0caaa.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__18",
+      "name": "タクティシャン",
+      "level": 56,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/570cc0bbf4a1478e35f52075640fd9ec6c7ed0f6.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__19",
+      "name": "ドリル",
+      "level": 58,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/ecb2da5330a2f9bfa05671f5fa843daecde471a6.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__20",
+      "name": "ヒートスラッグショット",
+      "level": 60,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/bb394365a76fac1c38ff540c8c81881d79680b62.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__21",
+      "name": "ウェポンブレイク",
+      "level": 62,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/94eaa7aadfa4d857c00551af690f42bb5d7a4a94.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__22",
+      "name": "ヒートクリーンショット",
+      "level": 64,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/57fa0a309dc4d53d5edc52aad068a93788715c4c.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__23",
+      "name": "バレルヒーター",
+      "level": 66,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/4a4a5d764fa65a4514f89fdc77ac7956e3f2e7de.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__24",
+      "name": "ブレイズショット",
+      "level": 68,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c70341dbb174a9c43c76249ae4b7c40aefbbf40a.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__25",
+      "name": "フレイムスロアー",
+      "level": 70,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2d88d4346b2dc86970c797bed3cc8ca902c26593.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__26",
+      "name": "バイオブラスト",
+      "level": 72,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/23329a987c4b36fd72121e3362363a179a16d8d0.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__27",
+      "name": "エアアンカー",
+      "level": 76,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2d5e4d7a3787c164fa36605a5e868143326f5b9a.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__28",
+      "name": "オートマトン・クイーン",
+      "level": 80,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/6b7ba10a27554510b8d25429592d040331405b14.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__29",
+      "name": "オーバードライブ・クイーン",
+      "level": 80,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/cc0d8c0798f0a092f546726f06a8deb067ad44d3.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__30",
+      "name": "クイーン・アームパンチ",
+      "level": 80,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/25db329264856ae1c870925c989bad8fa6ffa067.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__32",
+      "name": "クイーン・パイルバンカー",
+      "level": 80,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/7a8751b813d4db6533661dda2d9ba29810fa287f.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__31",
+      "name": "クイーン・ローラーダッシュ",
+      "level": 80,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c8df61cf6471343f9e55b57a9b06711155b298bf.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    }
+  ],
+  "DNC": [
+    {
+      "id": "pve_action__01",
+      "name": "カスケード",
+      "level": 1,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/6843786e4a944ff2e315004f38416b9098b62988.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__02",
+      "name": "ファウンテン",
+      "level": 2,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/25291ed46a237d93b8ada8db02fdeb34f5706c6e.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "prange_action__01",
+      "name": "レッググレイズ",
+      "level": 6,
+      "kind": "アビリティ",
+      "group": "遠隔物理DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2a6b7be8517f51d8cbcc60be2ae5970668f515eb.png",
+      "quest": "遠隔物理DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "prange_action__02",
+      "name": "内丹",
+      "level": 8,
+      "kind": "アビリティ",
+      "group": "遠隔物理DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2b79d78f1ed471ace5708898e3388062fbd555fb.png",
+      "quest": "遠隔物理DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "prange_action__03",
+      "name": "フットグレイズ",
+      "level": 10,
+      "kind": "アビリティ",
+      "group": "遠隔物理DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8b1f979d2b1428f9791f54ad0e429ea94a8d95d6.png",
+      "quest": "遠隔物理DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__03",
+      "name": "ウィンドミル",
+      "level": 15,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2b56bd032544ac3119cf459288984ea195837486.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__04",
+      "name": "スタンダードステップ",
+      "level": 15,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/601122ac0085d666731203ba91b41a5099457eca.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__05",
+      "name": "スタンダードフィニッシュ",
+      "level": 15,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3be799f98318288057e0c0957fce44d32d8f2974.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_jyutsu_action__04",
+      "name": "金冠のピルエッテ",
+      "level": 15,
+      "kind": "ウェポン スキル",
+      "group": "派生アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8ca01b65d44ad053609372bdb5f7c3dc621ce218.png",
+      "quest": "派生アクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_jyutsu_action__02",
+      "name": "小鳥のアントルシャ",
+      "level": 15,
+      "kind": "ウェポン スキル",
+      "group": "派生アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e3b6714319b3125e5fbab101fe2944821c2e23c6.png",
+      "quest": "派生アクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_jyutsu_action__03",
+      "name": "緑葉のジュテ",
+      "level": 15,
+      "kind": "ウェポン スキル",
+      "group": "派生アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e80edc2d0bbfa228d89dabef2e14dc81d234a343.png",
+      "quest": "派生アクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_jyutsu_action__01",
+      "name": "薔薇のアンボワテ",
+      "level": 15,
+      "kind": "ウェポン スキル",
+      "group": "派生アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d953ffb6694914914ec78257c3f0b1f7039d57e6.png",
+      "quest": "派生アクション",
+      "questRequired": false
+    },
+    {
+      "id": "prange_action__04",
+      "name": "プロトン",
+      "level": 20,
+      "kind": "アビリティ",
+      "group": "遠隔物理DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/fb8b0f0ca18af4362d27f6699579bd5a18b40137.png",
+      "quest": "遠隔物理DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__06",
+      "name": "リバースカスケード",
+      "level": 20,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/a03ec89f3860e636fa459b5ac4212031aea5c8f7.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "prange_action__05",
+      "name": "ヘッドグレイズ",
+      "level": 24,
+      "kind": "アビリティ",
+      "group": "遠隔物理DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/748fe5fc8262b58e9a35aa9e4d40e67a0dd006a5.png",
+      "quest": "遠隔物理DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__07",
+      "name": "ブレードシャワー",
+      "level": 25,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/65c0208ef7c6b132558c6aab0a15832fec601e5b.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__08",
+      "name": "扇の舞い【序】",
+      "level": 30,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/62a211c886bd5b46f47b11419f3b55fb628f6535.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "prange_action__06",
+      "name": "アームズレングス",
+      "level": 32,
+      "kind": "アビリティ",
+      "group": "遠隔物理DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/00ff21ad3e1fb26d7b292a9d912931e7ea64daa4.png",
+      "quest": "遠隔物理DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__09",
+      "name": "ライジングウィンドミル",
+      "level": 35,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e233509e4d32c5f7aef385766026a3e161d2d142.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__10",
+      "name": "ファウンテンフォール",
+      "level": 40,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e4e0f0c2d152720e33f1759219de09ab52051a21.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__11",
+      "name": "ブラッドシャワー",
+      "level": 45,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/75fa1885b19b76db73429a0661588d544e5bc974.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__13",
+      "name": "アン・アヴァン",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b855b43c6fa93b143a93b339527a31950f6cdc47.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__12",
+      "name": "扇の舞い【破】",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/835016d35e3f62a1ce42a3519e70714b25d91969.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__14",
+      "name": "癒やしのワルツ",
+      "level": 52,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/30a793f0a1bae7d643449bd69b63722b8bbf1b3a.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__15",
+      "name": "守りのサンバ",
+      "level": 56,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f9692ff39ee50c5901429aaca48c066b8952732a.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__16",
+      "name": "クローズドポジション",
+      "level": 60,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/6bdcca52407a9435fe5a8578742995382e38f097.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__17",
+      "name": "クローズドポジション解除",
+      "level": 60,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/93294a32bcae356f21ad6373d561df40db347ed2.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__18",
+      "name": "攻めのタンゴ",
+      "level": 62,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/5dbf1b6a363454e48f1a32f92fe5c5cb6d8d229b.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__19",
+      "name": "扇の舞い【急】",
+      "level": 66,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d786bf59396fce45e0e1bdf96cb1196b48b4a98a.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__20",
+      "name": "テクニカルステップ",
+      "level": 70,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2b0f0944de8d90ce1e9413cc3294bde99b7e1d7a.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__21",
+      "name": "テクニカルフィニッシュ",
+      "level": 70,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/4fa04453ce7de1db88f05bd6f931d489961cc6b1.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__22",
+      "name": "フラリッシュ",
+      "level": 72,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2255baa09f4cd761ec63575d79cb6a94e2c61db4.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__23",
+      "name": "剣の舞い",
+      "level": 76,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/69b1d581e573e922634e9e66da798f9d1d13e3e5.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__24",
+      "name": "インプロビゼーション",
+      "level": 80,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/ccba8c0dd5fc79db6437cd65d4a23daf8393b1fb.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__25",
+      "name": "インプロビゼーション・フィニッシュ",
+      "level": 80,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/778e3634d9ab8d9e60cf6dd43e5942d494d1c9e0.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    }
+  ],
+  "BLM": [
+    {
+      "id": "pve_action__01",
+      "name": "ブリザド",
+      "level": 1,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/dab74d4a196c546228d67c91db4bde70c32c45df.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__02",
+      "name": "ファイア",
+      "level": 2,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/0f0b18de207de52d394b2ca8cb990a38e96587e0.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__03",
+      "name": "トランス",
+      "level": 4,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/11343c230e7ebd41588ca8f684cb99ee13809398.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__04",
+      "name": "サンダー",
+      "level": 6,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/db30f0fa05ce4f541f839c5b2c57cfe0e9fb77f8.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "mrange_action__01",
+      "name": "アドル",
+      "level": 8,
+      "kind": "アビリティ",
+      "group": "遠隔魔法DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b45e688d81b5607246600f904aac008364db0d1e.png",
+      "quest": "遠隔魔法DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "mrange_action__02",
+      "name": "スリプル",
+      "level": 10,
+      "kind": "魔法",
+      "group": "遠隔魔法DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/10e9fb5302668c923b8237ffbd4841ccc6c2edb4.png",
+      "quest": "遠隔魔法DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__05",
+      "name": "ブリザラ",
+      "level": 12,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c4883e7698b37e901837be6a0bcc8de043847479.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "mrange_action__03",
+      "name": "ルーシッドドリーム",
+      "level": 14,
+      "kind": "アビリティ",
+      "group": "遠隔魔法DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3629c6854aa559656623925e2489b60c2fa91e18.png",
+      "quest": "遠隔魔法DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__06",
+      "name": "コラプス",
+      "level": 15,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/9b763aecc46c5559bbbccadfe866fe42d56a9597.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__07",
+      "name": "ファイラ",
+      "level": 18,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8876f1b3cf116acf7138253e0193396c75698651.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "mrange_action__04",
+      "name": "迅速魔",
+      "level": 18,
+      "kind": "アビリティ",
+      "group": "遠隔魔法DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/27d401b3cfbf90c846ffeaa9f661afb4bd77ce98.png",
+      "quest": "遠隔魔法DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__08",
+      "name": "サンダラ",
+      "level": 26,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/67205b06f51ddd0e07f16441e38e90d59840f1b6.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__10",
+      "name": "マナフォント",
+      "level": 30,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/1b9ba4e020c77e1768d7d15d3c8aac1e7b7d88ea.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__09",
+      "name": "マバリア",
+      "level": 30,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/75ed92265dc2dcc6fa1e0b8f22a01258799f222d.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__13",
+      "name": "アンブラルソウル",
+      "level": 35,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/7dbfbe8ecadac526c0a2739cd45571f6ea2732fc.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__11",
+      "name": "ファイガ",
+      "level": 35,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3ff8dcabba57f6a697d5a86fc7490884b74eddff.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__12",
+      "name": "ブリザガ",
+      "level": 35,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/6dbb819d3f64b93d6f6ffa23a73101c79592ae2f.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__14",
+      "name": "フリーズ",
+      "level": 40,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/a26308be548e58eb346aae1b4850ceabc417f35e.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "mrange_action__05",
+      "name": "堅実魔",
+      "level": 44,
+      "kind": "アビリティ",
+      "group": "遠隔魔法DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/477d1e7f7115db19c344c0f5cadfcfa2ac0cdcc0.png",
+      "quest": "遠隔魔法DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__15",
+      "name": "サンダガ",
+      "level": 45,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2efb022c0715f802a88e1edef4924c075e92a53d.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__16",
+      "name": "エーテリアルステップ",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/a8c94264a1522d4e1f80e9dcac7864eb6170d722.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__17",
+      "name": "フレア",
+      "level": 50,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/bc3d31c27d861d18280280b18a5f2e5ab0f2858e.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__18",
+      "name": "黒魔紋",
+      "level": 52,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f3540a1d13a0387b442767d1a4279e94d9d24097.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__19",
+      "name": "ブリザジャ",
+      "level": 58,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d370de07c30f08bd306ed3c58f0f0490b4541870.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__20",
+      "name": "ファイジャ",
+      "level": 60,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/92e87bf20382bc6359c7448008c3423724b9f0b4.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__21",
+      "name": "ラインズステップ",
+      "level": 62,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f12a8a4f87f81ce00e56922f8c61c58e47e8a3c8.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__22",
+      "name": "サンダジャ",
+      "level": 64,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c141aa71c34830d6b161c667042815c5d7805320.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__23",
+      "name": "三連魔",
+      "level": 66,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/61cd894fc6b3e28004512ed61ffc0eb4fef170f2.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__24",
+      "name": "ファウル",
+      "level": 70,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/801f21d137c07c099140d653b8a69995fc2b8404.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__25",
+      "name": "デスペア",
+      "level": 72,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/ec2a834393b6ffaf415b043fb9e2c6d23afde9cd.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__26",
+      "name": "ゼノグロシー",
+      "level": 80,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b1fcdd06d76b9eb7c7a55364b81bc3ed2674631c.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    }
+  ],
+  "SMN": [
+    {
+      "id": "pve_action__01",
+      "name": "ルイン",
+      "level": 1,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/1c74fa1688f3d89d6f5b972ce384df15f62e35d1.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__02",
+      "name": "サモン・カーバンクル",
+      "level": 2,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/14a64b174c103f36179809458245dc5e4f4fe0a6.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__03",
+      "name": "守りの光",
+      "level": 2,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/a116b861109158ee5db8e36cf922fae8f923e7d5.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__04",
+      "name": "フィジク",
+      "level": 4,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e51f309947cde0c36f3a0cd815ca01e268928eb6.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__05",
+      "name": "エーテルチャージ",
+      "level": 6,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/ad9a8a02fa446a43dc54439c8ac1d04dad1384b2.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__06",
+      "name": "サモン・ルビー",
+      "level": 6,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/23ce1df0ac3aa5df6aa4b22cdf2369ff364cabc0.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__07",
+      "name": "ジェムシャイン",
+      "level": 6,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b1b0a655e18e0c446a0774ef264f010a8766db7f.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__08",
+      "name": "ルビー・ルイン",
+      "level": 6,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/1c74fa1688f3d89d6f5b972ce384df15f62e35d1.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "mrange_action__01",
+      "name": "アドル",
+      "level": 8,
+      "kind": "アビリティ",
+      "group": "遠隔魔法DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b45e688d81b5607246600f904aac008364db0d1e.png",
+      "quest": "遠隔魔法DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__10",
+      "name": "エナジードレイン",
+      "level": 10,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/92ea9227a8a09c62eb53852e2c26c0d6763a35c2.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "mrange_action__02",
+      "name": "スリプル",
+      "level": 10,
+      "kind": "魔法",
+      "group": "遠隔魔法DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/10e9fb5302668c923b8237ffbd4841ccc6c2edb4.png",
+      "quest": "遠隔魔法DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__09",
+      "name": "ミアズマバースト",
+      "level": 10,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/34e34cc7ee016c8dc1493838cefc523aea784378.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__11",
+      "name": "リザレク",
+      "level": 12,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/9e61ea15caf1f7c0e4b44943dcbee0178e61a9fd.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "mrange_action__03",
+      "name": "ルーシッドドリーム",
+      "level": 14,
+      "kind": "アビリティ",
+      "group": "遠隔魔法DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3629c6854aa559656623925e2489b60c2fa91e18.png",
+      "quest": "遠隔魔法DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__12",
+      "name": "サモン・トパーズ",
+      "level": 15,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/45345cb4f108a07c372f8a355b26c13661d51887.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__13",
+      "name": "トパーズ・ルイン",
+      "level": 15,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/1c74fa1688f3d89d6f5b972ce384df15f62e35d1.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "mrange_action__04",
+      "name": "迅速魔",
+      "level": 18,
+      "kind": "アビリティ",
+      "group": "遠隔魔法DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/27d401b3cfbf90c846ffeaa9f661afb4bd77ce98.png",
+      "quest": "遠隔魔法DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__15",
+      "name": "エメラルド・ルイン",
+      "level": 22,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/1c74fa1688f3d89d6f5b972ce384df15f62e35d1.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__14",
+      "name": "サモン・エメラルド",
+      "level": 22,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d9d328ec1a7b30579dd56ad69fad33981e197f70.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__16",
+      "name": "アウトバースト",
+      "level": 26,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2b85c12f6f9b3f7bd5d4599d9fb2d88f42e7d551.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__20",
+      "name": "エメラルド・アウトバースト",
+      "level": 26,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2b85c12f6f9b3f7bd5d4599d9fb2d88f42e7d551.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__17",
+      "name": "ジェムブリリアンス",
+      "level": 26,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/1fa3119e51a423fedea3e3a238497548d0c64960.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__19",
+      "name": "トパーズ・アウトバースト",
+      "level": 26,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2b85c12f6f9b3f7bd5d4599d9fb2d88f42e7d551.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__18",
+      "name": "ルビー・アウトバースト",
+      "level": 26,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2b85c12f6f9b3f7bd5d4599d9fb2d88f42e7d551.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__25",
+      "name": "エメラルド・ルインラ",
+      "level": 30,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d6875ae1008a9e4b2d04562cff42646752e919c5.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__22",
+      "name": "サモン・イフリート",
+      "level": 30,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/715b4b554a74c32f7c76258400c2e254c6b9d401.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__24",
+      "name": "トパーズ・ルインラ",
+      "level": 30,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d6875ae1008a9e4b2d04562cff42646752e919c5.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__21",
+      "name": "ルインラ",
+      "level": 30,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d6875ae1008a9e4b2d04562cff42646752e919c5.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__23",
+      "name": "ルビー・ルインラ",
+      "level": 30,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d6875ae1008a9e4b2d04562cff42646752e919c5.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__26",
+      "name": "サモン・タイタン",
+      "level": 35,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/0e63c4fe037c46bb8fcb3b1402319d0cf1084711.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__27",
+      "name": "ペインフレア",
+      "level": 40,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f9335b8757ce19d93307eb4686a8271552de608d.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "mrange_action__05",
+      "name": "堅実魔",
+      "level": 44,
+      "kind": "アビリティ",
+      "group": "遠隔魔法DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/477d1e7f7115db19c344c0f5cadfcfa2ac0cdcc0.png",
+      "quest": "遠隔魔法DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__28",
+      "name": "サモン・ガルーダ",
+      "level": 45,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f0d45cc564da364190b10ea26b9978147b3813fd.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__29",
+      "name": "エナジーサイフォン",
+      "level": 52,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f7611746e0238a496d85af166ef6da7cff071f43.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__33",
+      "name": "エメラルド・ルインガ",
+      "level": 54,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d133d1c9ecf315375c76bc25ddd5c01d9ce56512.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__32",
+      "name": "トパーズ・ルインガ",
+      "level": 54,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d133d1c9ecf315375c76bc25ddd5c01d9ce56512.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__30",
+      "name": "ルインガ",
+      "level": 54,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d133d1c9ecf315375c76bc25ddd5c01d9ce56512.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__31",
+      "name": "ルビー・ルインガ",
+      "level": 54,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d133d1c9ecf315375c76bc25ddd5c01d9ce56512.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__35",
+      "name": "アストラルインパルス",
+      "level": 58,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/2ba7ab41cd2f8dac96ba0c89426eebff963d6be0.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__36",
+      "name": "アストラルフレア",
+      "level": 58,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/41380367e3ff56dfc723ac049dbcacd00ac5c6f8.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__34",
+      "name": "トランス・バハムート",
+      "level": 58,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/7509846b70611448faedd354f58cb626c90fe0b5.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__37",
+      "name": "アストラルフロウ",
+      "level": 60,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3fd44c9091d6888f7b3b3ee449d3f71d94d9b05a.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__38",
+      "name": "デスフレア",
+      "level": 60,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e88a1de4bbb8cdaa4c08ef5717797c2872bb42dd.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__39",
+      "name": "ルインジャ",
+      "level": 62,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/289900e8f6153efeabb601c5cce046b80eed4c88.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__40",
+      "name": "シアリングライト",
+      "level": 66,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/6c4b1ae3c69201feb415963f374cd3449a4ad7db.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__44",
+      "name": "アク・モーン",
+      "level": 70,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/ffbcb07b5ee81884939776d358768995cb4083ae.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__42",
+      "name": "ウィルムウェーブ",
+      "level": 70,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/0e7bcb6dd7b20399f831c58338994005b10da6b3.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__43",
+      "name": "エンキンドル・バハムート",
+      "level": 70,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/7841102eeddcd359b9bc0af66a8c51aee6c7b258.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__41",
+      "name": "サモン・バハムート",
+      "level": 70,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/88e476ec7f35cfb0f94120dc2ef1b7ed0c00768a.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__47",
+      "name": "エメラルド・リチュアル",
+      "level": 72,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/87c16672ddea00204d4c0489b5417166cdb2546a.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__46",
+      "name": "トパーズ・リチュアル",
+      "level": 72,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/4c4900529cf628e2f3fda4134c996741f8b465c3.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__45",
+      "name": "ルビー・リチュアル",
+      "level": 72,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3c739e3604ba2d045b691a46c0dbef1a658951f3.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__51",
+      "name": "エメラルド・ディザスター",
+      "level": 74,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/20e1e40922c159401231154ab0cc94c789b1f58f.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__50",
+      "name": "トパーズ・ディザスター",
+      "level": 74,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/20e1e40922c159401231154ab0cc94c789b1f58f.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__48",
+      "name": "トライディザスター",
+      "level": 74,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/20e1e40922c159401231154ab0cc94c789b1f58f.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__49",
+      "name": "ルビー・ディザスター",
+      "level": 74,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/20e1e40922c159401231154ab0cc94c789b1f58f.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__56",
+      "name": "エンキンドル・フェニックス",
+      "level": 80,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/596917791c140eef84754e4488df04bfb7aabf87.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__52",
+      "name": "サモン・フェニックス",
+      "level": 80,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e38e769e9f268f4dcc345b25d310cd53d10d4795.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__59",
+      "name": "リヴァレーション",
+      "level": 80,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/9358e80cfda84c41bef60f05c6f66218842a6f74.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__58",
+      "name": "火焔",
+      "level": 80,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/865ff61841e27dc0ede5742b0109c45b672c2ef2.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__55",
+      "name": "再生の炎",
+      "level": 80,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/6b2befa4d39ad77fa8992d934bd796e836eed13f.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__57",
+      "name": "不死鳥の翼",
+      "level": 80,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/47555a1b908cba86b377560667afa40e8471b69a.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__53",
+      "name": "霊泉の炎",
+      "level": 80,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/1b50beab981774f701d16ac61674bfc01747f38b.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__54",
+      "name": "煉獄の炎",
+      "level": 80,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/daebb0133d31dbdcc989ecf9fd04ef3acf040cba.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    }
+  ],
+  "RDM": [
+    {
+      "id": "pve_action__37",
+      "name": "エンリポスト",
+      "level": 1,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/bc05c7159bffb94c061a5d64130da539350bbc6e.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__01",
+      "name": "リポスト",
+      "level": 1,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/8c24d1459dbae096bb8927efb52db5feb9b0d316.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__02",
+      "name": "ジョルト",
+      "level": 2,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/9fc8c455d50ec08c721f4674e7e9015f4700debe.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__03",
+      "name": "ヴァルサンダー",
+      "level": 4,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f5a91b090922e24a43d172f2cdfb85fc4ff9423a.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__04",
+      "name": "コル・ア・コル",
+      "level": 6,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/ca149fa59c97f3ce000ba2cdd143dd181a25def6.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "mrange_action__01",
+      "name": "アドル",
+      "level": 8,
+      "kind": "アビリティ",
+      "group": "遠隔魔法DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/b45e688d81b5607246600f904aac008364db0d1e.png",
+      "quest": "遠隔魔法DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__05",
+      "name": "ヴァルエアロ",
+      "level": 10,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/a774e32d6c268433b5e2c56dc152cae973605e2e.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "mrange_action__02",
+      "name": "スリプル",
+      "level": 10,
+      "kind": "魔法",
+      "group": "遠隔魔法DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/10e9fb5302668c923b8237ffbd4841ccc6c2edb4.png",
+      "quest": "遠隔魔法DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "mrange_action__03",
+      "name": "ルーシッドドリーム",
+      "level": 14,
+      "kind": "アビリティ",
+      "group": "遠隔魔法DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3629c6854aa559656623925e2489b60c2fa91e18.png",
+      "quest": "遠隔魔法DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__06",
+      "name": "スキャッター",
+      "level": 15,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/adbad46ea7684b2e5914b23c4ec7de0ecb19432d.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__07",
+      "name": "ヴァルサンダラ",
+      "level": 18,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/949abe2a408930b92fc5bc34881a60396909e623.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "mrange_action__04",
+      "name": "迅速魔",
+      "level": 18,
+      "kind": "アビリティ",
+      "group": "遠隔魔法DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/27d401b3cfbf90c846ffeaa9f661afb4bd77ce98.png",
+      "quest": "遠隔魔法DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__08",
+      "name": "ヴァルエアロラ",
+      "level": 22,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/272b22305a75f5649d2dbe16e733e2a714b8a1c4.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__09",
+      "name": "ヴァルファイア",
+      "level": 26,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/ce7efb90e13d0fef394abb8d2e57a09402452890.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__10",
+      "name": "ヴァルストーン",
+      "level": 30,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/c5ddf887a06b23a2ae9426a5a6288b863b92eced.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__38",
+      "name": "エンツヴェルクハウ",
+      "level": 35,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/5ca771d95d91f9eec6795ec72317da6fc77029f3.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__11",
+      "name": "ツヴェルクハウ",
+      "level": 35,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/adef75e55602967f0c722896b45d5be518cd9dd4.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__13",
+      "name": "アンガジェマン",
+      "level": 40,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f07faaccae974c9f7fdd16072a406c81db81b3ad.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__12",
+      "name": "デプラスマン",
+      "level": 40,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/3a7bcdd99a2d4f40c95c39ce19d97be8ee0a151b.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "mrange_action__05",
+      "name": "堅実魔",
+      "level": 44,
+      "kind": "アビリティ",
+      "group": "遠隔魔法DPSロールアクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/477d1e7f7115db19c344c0f5cadfcfa2ac0cdcc0.png",
+      "quest": "遠隔魔法DPSロールアクション",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__14",
+      "name": "フレッシュ",
+      "level": 45,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/f950d18911258503ab8a8ec2fa28ca3fdb6a8a6d.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__16",
+      "name": "アクセラレーション",
+      "level": 50,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/831a96d8378a68659074d13e8a1e90e0de2da5a4.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__39",
+      "name": "エンルドゥブルマン",
+      "level": 50,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/ef85b6e60966279a1352b01b582c9bc3bfae5646.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__15",
+      "name": "ルドゥブルマン",
+      "level": 50,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/292f17a2bcaebf7db4560ff8c977f64908db9917.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__40",
+      "name": "エンムーリネ・アン",
+      "level": 52,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/4698cb3715e5b08d30ae8d80cb30c4b22daf3573.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__41",
+      "name": "エンムーリネ・ドゥ",
+      "level": 52,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e5dfc01b5048f6bef58d504d6e6f633004ad8fc7.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__42",
+      "name": "エンムーリネ・トロワ",
+      "level": 52,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/0f1ad21893a66c8f4b9253821fee9044ba1b4464.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__17",
+      "name": "ムーリネ",
+      "level": 52,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/fe9877c05ef3a4622f0488b580b6ea36b7446bca.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__18",
+      "name": "ヴァルケアル",
+      "level": 54,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d23f5785bdb0f0c398a14087753ddcedab6d4e78.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__19",
+      "name": "コントルシクスト",
+      "level": 56,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e9183e5932215335efe798ce4d6422d37befaf27.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__20",
+      "name": "エンボルデン",
+      "level": 58,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/85d6955ad939bb051fe8b893c194497b9499d89e.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__21",
+      "name": "マナフィケーション",
+      "level": 60,
+      "kind": "アビリティ",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/5f145a66018e2f197e16b966e30c53bba09e13bd.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__22",
+      "name": "ジョルラ",
+      "level": 62,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/e2b3cc05547ba6a37ba5e883f190570d32eabb10.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__23",
+      "name": "ヴァルレイズ",
+      "level": 64,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/6be6c45a105e3890f5390c26a2d5532a7e2eea43.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__24",
+      "name": "インパクト",
+      "level": 66,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/1c5d66100b8539f4dd5779a760ccbc29f5878e6a.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__25",
+      "name": "ヴァルフレア",
+      "level": 68,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/d20080ca189b4843d89ac2faab14d42099bd2e4c.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__26",
+      "name": "ヴァルホーリー",
+      "level": 70,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/34f4be861c3f40879653fef7fe7039f8df1108c1.png",
+      "quest": "ジョブクエストで習得",
+      "questRequired": true
+    },
+    {
+      "id": "pve_action__43",
+      "name": "エンルプリーズ",
+      "level": 76,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/18af98a63cd9850c3e064220d9237ec80aad136d.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__27",
+      "name": "ルプリーズ",
+      "level": 76,
+      "kind": "ウェポン スキル",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/26403c905bb62b3221f7b1930e64efdd1fe13619.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    },
+    {
+      "id": "pve_action__28",
+      "name": "スコーチ",
+      "level": 80,
+      "kind": "魔法",
+      "group": "専用アクション",
+      "icon": "https://lds-img.finalfantasyxiv.com/d/fa744aa271e8cb2fae5bbe2cdb55ccf70d4685e8.png",
+      "quest": "レベル到達で習得",
+      "questRequired": false
+    }
+  ]
+}

@@ -326,14 +326,18 @@
 
     .profile-summary-card {
       display: grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns: minmax(0, 1fr) 42px;
       gap: 10px;
       align-items: center;
-      margin-top: 10px;
-      padding: 12px;
+      margin-top: 4px;
+      padding: 10px;
       border-radius: 16px;
       background: var(--paper-2);
       border: 1px solid rgba(32, 90, 97, 0.08);
+    }
+
+    #profileSummary {
+      min-width: 0;
     }
 
     .profile-summary-card strong,
@@ -344,6 +348,9 @@
     .profile-summary-card strong {
       font-size: 15px;
       line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .profile-summary-card span {
@@ -370,6 +377,22 @@
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.2),
         0 6px 14px rgba(10, 17, 23, 0.18);
+    }
+
+    .icon-button {
+      width: 42px;
+      min-width: 42px;
+      padding: 0;
+    }
+
+    .icon-button svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .settings-overlay {
@@ -1347,7 +1370,7 @@
     }
 
     .my-character-link {
-      margin-top: 10px;
+      margin-top: 6px;
     }
 
     .duty-control-row,
@@ -1405,6 +1428,14 @@
       border-radius: 15px;
       background: var(--paper-2);
       border: 1px solid rgba(32, 90, 97, 0.08);
+    }
+
+    .my-character-link .character-card {
+      margin-top: 0;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
     }
 
     .duty-summary h3,
@@ -1488,7 +1519,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 10px;
+      margin-top: 0;
     }
 
     .character-links a,
@@ -1665,7 +1696,6 @@
         flex-direction: column;
       }
 
-      .profile-summary-card,
       .settings-actions {
         grid-template-columns: 1fr;
       }
@@ -1754,23 +1784,20 @@
 
     <section class="panel profile-panel" id="adventureProfile">
       <h2>マイキャラ</h2>
-      <p class="footer-note">ジョブ、レベル、進行状況と、自分のLodestoneページをここにまとめます。リンクを保存しておくとワンタップで自キャラページを開けます。</p>
       <div class="profile-summary-card">
         <div id="profileSummary">
-          <strong>召喚士 / Lv20</strong>
-          <span>グランドカンパニー加入済み / 詩学0</span>
+          <strong>キャラ名未設定 / 召喚士 / Lv20</strong>
         </div>
-        <button class="settings-button" id="openSettingsButton" type="button">設定</button>
+        <button class="settings-button icon-button" id="openSettingsButton" type="button" aria-label="マイキャラを編集">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 20h4.2L19.4 8.8a2 2 0 0 0 0-2.8L18 4.6a2 2 0 0 0-2.8 0L4 15.8V20Z"></path>
+            <path d="M13.8 6 18 10.2"></path>
+          </svg>
+        </button>
       </div>
-      <div class="character-controls my-character-link">
-        <label for="lodestoneUrl">LodestoneキャラクターURL</label>
-        <div class="character-row">
-          <input id="lodestoneUrl" type="url" placeholder="https://jp.finalfantasyxiv.com/lodestone/character/.../">
-          <button class="character-button" id="saveCharacterButton" type="button">リンク保存</button>
-        </div>
+      <div class="my-character-link">
         <div class="character-card" id="characterCard">
-          <h3>自キャラページ未登録</h3>
-          <p>Lodestoneの自分のキャラクターページURLを貼ると、ここからすぐ開けます。</p>
+          <div class="character-links"></div>
         </div>
       </div>
     </section>
@@ -1780,6 +1807,10 @@
         <h3 id="settingsTitle">マイキャラ設定を変える</h3>
         <p>ここを変えると、装備/入手法、スキル/成長、楽しみナビがまとめて切り替わります。</p>
         <div class="profile-controls">
+        <div>
+          <label for="characterName">キャラ名</label>
+          <input id="characterName" type="text" placeholder="例: 自分のキャラ名">
+        </div>
         <div class="profile-input-row">
           <div>
             <label for="gearJob">ジョブ</label>
@@ -1806,6 +1837,14 @@
             <label for="poeticsInput">詩学</label>
             <input id="poeticsInput" type="number" min="0" max="2000" step="10" value="0">
           </div>
+        </div>
+        <div>
+          <label for="lodestoneUrl">LodestoneキャラクターURL</label>
+          <input id="lodestoneUrl" type="url" placeholder="https://jp.finalfantasyxiv.com/lodestone/character/.../">
+        </div>
+        <div class="settings-actions">
+          <button class="settings-close" id="clearCharacterButton" type="button">登録を消す</button>
+          <button class="profile-action" id="saveCharacterButton" type="button">保存</button>
         </div>
         <div class="settings-actions">
           <button class="settings-close" id="closeSettingsButton" type="button">閉じる</button>
@@ -3481,6 +3520,7 @@
     const closeSettingsButton = document.getElementById("closeSettingsButton");
     const routeBoard = document.getElementById("routeBoard");
     const rewardBoard = document.getElementById("rewardBoard");
+    const characterName = document.getElementById("characterName");
     const dutyType = document.getElementById("dutyType");
     const dutySearch = document.getElementById("dutySearch");
     const dutySelect = document.getElementById("dutySelect");
@@ -3488,6 +3528,7 @@
     const mechanicGrid = document.getElementById("mechanicGrid");
     const lodestoneUrl = document.getElementById("lodestoneUrl");
     const saveCharacterButton = document.getElementById("saveCharacterButton");
+    const clearCharacterButton = document.getElementById("clearCharacterButton");
     const characterCard = document.getElementById("characterCard");
     let activeResourceCategory = "all";
     const pageParams = new URLSearchParams(window.location.search);
@@ -4325,10 +4366,9 @@
 
     function updateProfileSummary() {
       const { job, level } = currentJobAndLevel();
-      const poetics = Math.min(2000, Math.max(0, Number(poeticsInput.value) || 0));
+      const name = characterName.value.trim() || "キャラ名未設定";
       profileSummary.innerHTML = `
-        <strong>${job.label} / Lv${level}</strong>
-        <span>${storyLabel()} / 詩学${poetics}</span>
+        <strong>${escapeHtml(name)} / ${job.label} / Lv${level}</strong>
       `;
     }
 
@@ -4865,9 +4905,11 @@
 
     function saveCharacter() {
       const data = {
+        characterName: characterName.value.trim(),
         lodestoneUrl: lodestoneUrl.value.trim()
       };
       safeStorageSet("ff14-guide-character", JSON.stringify(data));
+      updateProfileSummary();
       renderCharacter();
     }
 
@@ -4875,11 +4917,14 @@
       try {
         const data = JSON.parse(localStorage.getItem("ff14-guide-character") || "{}");
         if (data && typeof data === "object" && !Array.isArray(data)) {
+          characterName.value = data.characterName || "";
           lodestoneUrl.value = data.lodestoneUrl || "";
         }
       } catch (error) {
+        characterName.value = "";
         lodestoneUrl.value = "";
       }
+      updateProfileSummary();
       renderCharacter();
     }
 
@@ -4887,21 +4932,18 @@
       const profile = lodestoneUrl.value.trim();
       const validProfile = profile && profile.startsWith("https://jp.finalfantasyxiv.com/lodestone/character/");
       characterCard.innerHTML = `
-        <h3>${validProfile ? "自キャラページ登録済み" : "自キャラページ未登録"}</h3>
-        <p>${validProfile ? "Lodestoneの自分のキャラクターページをワンタップで開けます。" : "Lodestoneの自分のキャラクターページURLを貼って「リンク保存」を押してください。"}</p>
         <div class="character-links">
           ${validProfile ? `<a href="${profile}" target="_blank" rel="noreferrer noopener">自キャラページを開く</a>` : ""}
-          <button type="button" id="clearCharacterButton">登録を消す</button>
         </div>
       `;
-      const clearButton = document.getElementById("clearCharacterButton");
-      if (clearButton) {
-        clearButton.addEventListener("click", () => {
-          safeStorageRemove("ff14-guide-character");
-          lodestoneUrl.value = "";
-          renderCharacter();
-        });
-      }
+    }
+
+    function clearCharacter() {
+      safeStorageRemove("ff14-guide-character");
+      characterName.value = "";
+      lodestoneUrl.value = "";
+      updateProfileSummary();
+      renderCharacter();
     }
 
     async function renderGearFinder() {
@@ -5013,6 +5055,7 @@
 
     function refreshAll() {
       saveProfile();
+      saveCharacter();
       updateProfileSummary();
       updateStoryVisual();
       renderGearFinder();
@@ -5063,6 +5106,7 @@
     gearJob.addEventListener("change", refreshAll);
     gearLevel.addEventListener("change", refreshAll);
     storyStage.addEventListener("change", refreshAll);
+    characterName.addEventListener("input", updateProfileSummary);
     poeticsInput.addEventListener("input", () => {
       saveProfile();
       updateProfileSummary();
@@ -5087,6 +5131,7 @@
     });
     dutySelect.addEventListener("change", renderDutyGuide);
     saveCharacterButton.addEventListener("click", saveCharacter);
+    clearCharacterButton.addEventListener("click", clearCharacter);
     activateFeature(normalizeFeature(pageParams.get("tab"), "") || featureFromHash(window.location.hash) || "gear");
     updateProfileSummary();
     updateStoryVisual();

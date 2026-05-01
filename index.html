@@ -1715,7 +1715,7 @@
     <div class="settings-overlay" id="settingsOverlay" aria-hidden="true">
       <div class="settings-card" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
         <h3 id="settingsTitle">今の設定を変える</h3>
-        <p>ここを変えると、装備/入手法、スキル/成長、楽しみナビ、ごほうびがまとめて切り替わります。</p>
+        <p>ここを変えると、装備/入手法、スキル/成長、楽しみナビがまとめて切り替わります。</p>
         <div class="profile-controls">
         <div class="profile-input-row">
           <div>
@@ -1757,7 +1757,6 @@
         <button class="jump feature-tab active" type="button" data-tab="gear">装備/入手法</button>
         <button class="jump feature-tab" type="button" data-tab="rotation">スキル/成長</button>
         <button class="jump feature-tab" type="button" data-tab="goals">楽しみナビ</button>
-        <button class="jump feature-tab" type="button" data-tab="rewards">ごほうび</button>
         <button class="jump feature-tab" type="button" data-tab="duty">初見ギミック</button>
         <button class="jump feature-tab" type="button" data-tab="character">キャラ確認</button>
         <button class="jump feature-tab" type="button" data-tab="links">リンク/出典</button>
@@ -1826,7 +1825,7 @@
 
     <section class="panel next-panel feature-panel" id="nextPlanner" data-feature="goals">
       <h2>次の楽しみナビ</h2>
-      <p class="footer-note">今日やる3つ、あと少しで解放される要素、ジョブが気持ちよくなる節目をまとめます。迷った時の行き先メモもこの下にまとめています。</p>
+      <p class="footer-note">今日やる3つ、あと少しで解放される要素、ジョブが気持ちよくなる節目をまとめます。迷った時の行き先メモとごほうび候補もこの下にまとめています。</p>
       <div class="next-board" id="nextBoard"></div>
     </section>
 
@@ -1836,9 +1835,9 @@
       <div class="next-board" id="routeBoard"></div>
     </section>
 
-    <section class="panel reward-panel feature-panel" id="rewardPanel" data-feature="rewards">
-      <h2>ごほうび図鑑</h2>
-      <p class="footer-note">強さ以外のモチベ用。マウント、ミニオン、ミラプリ、MGPなど、次に集める理由を表示します。</p>
+    <section class="panel reward-panel feature-panel" id="rewardPanel" data-feature="goals">
+      <h2>楽しみナビ内のごほうび候補</h2>
+      <p class="footer-note">強さ以外のモチベ用です。マウント、ミニオン、ミラプリ、MGPなど、「次に寄り道したい理由」をここにまとめています。</p>
       <div class="next-board" id="rewardBoard"></div>
     </section>
 
@@ -4930,7 +4929,7 @@
     }
 
     function normalizeFeature(feature, fallback = "gear") {
-      const normalized = feature === "home" ? "rotation" : (feature === "route" ? "goals" : feature);
+      const normalized = feature === "home" ? "rotation" : (["route", "rewards"].includes(feature) ? "goals" : feature);
       return isValidFeature(normalized) ? normalized : fallback;
     }
 

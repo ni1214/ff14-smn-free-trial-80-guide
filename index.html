@@ -1305,6 +1305,10 @@
       margin-top: 10px;
     }
 
+    .my-character-link {
+      margin-top: 10px;
+    }
+
     .duty-control-row,
     .character-row {
       display: grid;
@@ -1701,8 +1705,8 @@
     </header>
 
     <section class="panel profile-panel" id="adventureProfile">
-      <h2>今の設定</h2>
-      <p class="footer-note">入力はポップアップにまとめました。普段はここで現在値だけ確認します。</p>
+      <h2>マイキャラ</h2>
+      <p class="footer-note">ジョブ、レベル、進行状況と、自分のLodestoneページをここにまとめます。リンクを保存しておくとワンタップで自キャラページを開けます。</p>
       <div class="profile-summary-card">
         <div id="profileSummary">
           <strong>召喚士 / Lv20</strong>
@@ -1710,11 +1714,22 @@
         </div>
         <button class="settings-button" id="openSettingsButton" type="button">設定</button>
       </div>
+      <div class="character-controls my-character-link">
+        <label for="lodestoneUrl">LodestoneキャラクターURL</label>
+        <div class="character-row">
+          <input id="lodestoneUrl" type="url" placeholder="https://jp.finalfantasyxiv.com/lodestone/character/.../">
+          <button class="character-button" id="saveCharacterButton" type="button">リンク保存</button>
+        </div>
+        <div class="character-card" id="characterCard">
+          <h3>自キャラページ未登録</h3>
+          <p>Lodestoneの自分のキャラクターページURLを貼ると、ここからすぐ開けます。</p>
+        </div>
+      </div>
     </section>
 
     <div class="settings-overlay" id="settingsOverlay" aria-hidden="true">
       <div class="settings-card" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
-        <h3 id="settingsTitle">今の設定を変える</h3>
+        <h3 id="settingsTitle">マイキャラ設定を変える</h3>
         <p>ここを変えると、装備/入手法、スキル/成長、楽しみナビがまとめて切り替わります。</p>
         <div class="profile-controls">
         <div class="profile-input-row">
@@ -1758,14 +1773,13 @@
         <button class="jump feature-tab" type="button" data-tab="rotation">スキル/成長</button>
         <button class="jump feature-tab" type="button" data-tab="goals">楽しみナビ</button>
         <button class="jump feature-tab" type="button" data-tab="duty">初見ギミック</button>
-        <button class="jump feature-tab" type="button" data-tab="character">キャラ確認</button>
         <button class="jump feature-tab" type="button" data-tab="links">リンク/出典</button>
       </div>
     </nav>
 
     <section class="panel cockpit-panel feature-panel" id="cockpit" data-feature="rotation">
       <h2>ジョブレベル別スキル回し</h2>
-      <p class="footer-note">上の「今の設定」に合わせて、その時点での基本回しを公式アイコン付きで表示します。</p>
+      <p class="footer-note">上の「マイキャラ」に合わせて、その時点での基本回しを公式アイコン付きで表示します。</p>
       <div class="tool-grid">
         <div class="control-card">
           <div>
@@ -1811,9 +1825,9 @@
 
     <section class="panel gear-panel feature-panel active" id="gearFinder" data-feature="gear">
       <h2>装備/入手法</h2>
-      <p class="footer-note">上の「今の設定」から、無料範囲でまず揃えたい装備、入手先、交換順、詩学目安をまとめて出します。武器からアクセサリーまで最初から表示します。</p>
+      <p class="footer-note">上の「マイキャラ」から、無料範囲でまず揃えたい装備、入手先、交換順、詩学目安をまとめて出します。武器からアクセサリーまで最初から表示します。</p>
       <div class="gear-summary" id="gearSummary">
-        <h3>今の設定で装備を表示</h3>
+        <h3>マイキャラ設定で装備を表示</h3>
         <p>武器・防具・アクセの候補をゲーム内アイコン付きで表示します。</p>
       </div>
       <div class="gear-list" id="gearList"></div>
@@ -1839,28 +1853,6 @@
       <h2>楽しみナビ内のごほうび候補</h2>
       <p class="footer-note">強さ以外のモチベ用です。マウント、ミニオン、ミラプリ、MGPなど、「次に寄り道したい理由」をここにまとめています。</p>
       <div class="next-board" id="rewardBoard"></div>
-    </section>
-
-    <section class="panel character-panel feature-panel" id="characterPanel" data-feature="character">
-      <h2>キャラクター確認</h2>
-      <p class="footer-note">完全な装備自動取得はLodestone側の仕様でこの静的サイトだけでは難しいため、公式プロフィールをすぐ開けるメモとして使います。</p>
-      <div class="character-controls">
-        <div class="character-row">
-          <div>
-            <label for="lodestoneUrl">LodestoneキャラクターURL</label>
-            <input id="lodestoneUrl" type="url" placeholder="https://jp.finalfantasyxiv.com/lodestone/character/.../">
-          </div>
-          <div>
-            <label for="portraitUrl">キャラ画像URL 任意</label>
-            <input id="portraitUrl" type="url" placeholder="画像を貼るとこのページ内に表示">
-          </div>
-        </div>
-        <button class="character-button" id="saveCharacterButton" type="button">保存</button>
-      </div>
-      <div class="character-card" id="characterCard">
-        <h3>公式プロフィールを登録</h3>
-        <p>Lodestoneの自分のキャラクターページを貼ると、スマホからすぐ装備確認へ飛べます。</p>
-      </div>
     </section>
 
     <section class="panel feature-panel" id="resourceHub" data-feature="links">
@@ -3447,7 +3439,6 @@
     const dutySummary = document.getElementById("dutySummary");
     const mechanicGrid = document.getElementById("mechanicGrid");
     const lodestoneUrl = document.getElementById("lodestoneUrl");
-    const portraitUrl = document.getElementById("portraitUrl");
     const saveCharacterButton = document.getElementById("saveCharacterButton");
     const characterCard = document.getElementById("characterCard");
     let activeResourceCategory = "all";
@@ -4825,8 +4816,7 @@
 
     function saveCharacter() {
       const data = {
-        lodestoneUrl: lodestoneUrl.value.trim(),
-        portraitUrl: portraitUrl.value.trim()
+        lodestoneUrl: lodestoneUrl.value.trim()
       };
       safeStorageSet("ff14-guide-character", JSON.stringify(data));
       renderCharacter();
@@ -4837,25 +4827,21 @@
         const data = JSON.parse(localStorage.getItem("ff14-guide-character") || "{}");
         if (data && typeof data === "object" && !Array.isArray(data)) {
           lodestoneUrl.value = data.lodestoneUrl || "";
-          portraitUrl.value = data.portraitUrl || "";
         }
       } catch (error) {
         lodestoneUrl.value = "";
-        portraitUrl.value = "";
       }
       renderCharacter();
     }
 
     function renderCharacter() {
       const profile = lodestoneUrl.value.trim();
-      const portrait = portraitUrl.value.trim();
       const validProfile = profile && profile.startsWith("https://jp.finalfantasyxiv.com/lodestone/character/");
       characterCard.innerHTML = `
-        <h3>${validProfile ? "公式プロフィール登録済み" : "公式プロフィールを登録"}</h3>
-        <p>キャラクターの装備を完全自動でこのページ内に取り込むには公式APIが必要ですが、現在はLodestoneの公開ページをすぐ開く導線が一番確実です。</p>
-        ${portrait ? `<div class="character-preview"><img src="${portrait}" alt="登録したキャラクター画像"><p>画像URLを登録中。装備確認は公式プロフィールを開いて確認してください。</p></div>` : ""}
+        <h3>${validProfile ? "自キャラページ登録済み" : "自キャラページ未登録"}</h3>
+        <p>${validProfile ? "Lodestoneの自分のキャラクターページをワンタップで開けます。" : "Lodestoneの自分のキャラクターページURLを貼って「リンク保存」を押してください。"}</p>
         <div class="character-links">
-          ${validProfile ? `<a href="${profile}" target="_blank" rel="noreferrer noopener">公式プロフィールを開く</a>` : ""}
+          ${validProfile ? `<a href="${profile}" target="_blank" rel="noreferrer noopener">自キャラページを開く</a>` : ""}
           <button type="button" id="clearCharacterButton">登録を消す</button>
         </div>
       `;
@@ -4864,7 +4850,6 @@
         clearButton.addEventListener("click", () => {
           safeStorageRemove("ff14-guide-character");
           lodestoneUrl.value = "";
-          portraitUrl.value = "";
           renderCharacter();
         });
       }

@@ -4333,7 +4333,7 @@
     }
 
     function eorzeaReaderUrl(url) {
-      return `https://r.jina.ai/http://${url}`;
+      return `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(`https://r.jina.ai/http://${url}`)}`;
     }
 
     function fallbackGlamoursForRace(race = "") {
@@ -4373,6 +4373,29 @@
 
     function glamourSlotLabel(slot = "") {
       return glamourSlotLabels[slot.toUpperCase()] || "装備";
+    }
+
+    function glamourSlotFromContext(context = "") {
+      const slotMatches = [...context.matchAll(/(?:^|\n)(WEAPON|OFF HAND|SHIELD|HEAD|BODY|HANDS|LEGS|FEET|EARS|NECK|WRISTS|RINGS?|FACEWEAR)\s*(?=\n|$)/gi)];
+      if (slotMatches.length) {
+        return slotMatches[slotMatches.length - 1][1].toUpperCase();
+      }
+      const iconMatches = [...context.matchAll(/\/slots\/(weapon|offhand|shield|head|body|hands|legs|feet|ears|neck|wrists|ring|facewear)\.png/gi)];
+      if (!iconMatches.length) {
+        return "";
+      }
+      const slot = iconMatches[iconMatches.length - 1][1].toUpperCase();
+      return slot === "OFFHAND" ? "OFF HAND" : slot;
+    }
+
+    function glamourItemNameFromContext(context = "", itemId = "") {
+      const escapedId = itemId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const textLink = context.match(new RegExp(`\\[([^\\]]+)]\\(https:\\/\\/(?:[a-z]+\\.)?finalfantasyxiv\\.com\\/lodestone\\/playguide\\/db\\/item\\/${escapedId}\\)`, "i"));
+      if (textLink?.[1] && !textLink[1].startsWith("![")) {
+        return textLink[1];
+      }
+      const imageAlt = context.match(/!\[Image \d+:\s*([^\]]+)]\(https:\/\/icons\.eorzeacollection\.com\//i);
+      return imageAlt?.[1] || "";
     }
 
     async function fetchJapaneseItemName(itemId, fallbackName = "") {
@@ -4424,7 +4447,7 @@
           currentSlot = slotKey;
           return;
         }
-        const link = trimmed.match(/^\[([^\]]+)]\(https:\/\/(?:na|eu|jp)\.finalfantasyxiv\.com\/lodestone\/playguide\/db\/item\/([a-f0-9]+)\)/i);
+        const link = trimmed.match(/^\[([^\]]+)]\(https:\/\/(?:[a-z]+\.)?finalfantasyxiv\.com\/lodestone\/playguide\/db\/item\/([a-f0-9]+)\/?\)/i);
         if (!link || seen.has(link[2])) {
           return;
         }
@@ -4435,6 +4458,25 @@
           slotLabel: glamourSlotLabel(currentSlot),
           englishName: link[1],
           url: lodestoneItemUrl(link[2])
+        });
+      });
+      const broadMatches = [...markdown.matchAll(/https:\/\/(?:[a-z]+\.)?finalfantasyxiv\.com\/lodestone\/playguide\/db\/item\/([a-f0-9]+)/gi)];
+      broadMatches.forEach((match) => {
+        const itemId = match[1];
+        if (seen.has(itemId)) {
+          return;
+        }
+        const start = Math.max(0, match.index - 900);
+        const end = Math.min(markdown.length, match.index + 700);
+        const context = markdown.slice(start, end);
+        seen.add(itemId);
+        const slot = glamourSlotFromContext(context);
+        items.push({
+          id: itemId,
+          slot,
+          slotLabel: glamourSlotLabel(slot),
+          englishName: glamourItemNameFromContext(context, itemId),
+          url: lodestoneItemUrl(itemId)
         });
       });
       return items;

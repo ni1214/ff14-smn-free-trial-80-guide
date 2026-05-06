@@ -1146,6 +1146,7 @@
     }
 
     .glamour-actions a,
+    .glamour-actions button,
     .glamour-random-button {
       display: flex;
       align-items: center;
@@ -1161,15 +1162,47 @@
       font-size: 13px;
       font-weight: 900;
       text-decoration: none;
+      cursor: pointer;
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.18),
         0 8px 18px rgba(10, 17, 23, 0.16);
     }
 
     .glamour-actions a:first-child,
+    .glamour-actions button:first-child,
     .glamour-random-button {
       background:
         linear-gradient(180deg, rgba(188, 148, 67, 0.98), rgba(128, 91, 31, 0.98));
+    }
+
+    .glamour-equipment-panel {
+      display: none;
+      gap: 8px;
+      padding: 0 12px 12px;
+      background: rgba(255, 250, 243, 0.96);
+    }
+
+    .glamour-equipment-panel.open {
+      display: grid;
+    }
+
+    .glamour-equipment-panel p {
+      margin: 0;
+      color: rgba(28, 32, 36, 0.72);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .glamour-equipment-link {
+      display: block;
+      padding: 10px 12px;
+      border: 1px solid rgba(188, 148, 67, 0.24);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.72);
+      color: #1d3550;
+      font-size: 13px;
+      font-weight: 900;
+      text-decoration: none;
     }
 
     .glamour-random-button {
@@ -4141,6 +4174,8 @@
     let itemIconOverrides = {};
     let gearCatalog = {};
     let jobActionCatalog = {};
+    const glamourEquipmentCache = new Map();
+    const itemNameCache = new Map();
     const iconDataReady = Promise.all([
       fetch("action-icons.json").then((response) => response.ok ? response.json() : {}).catch(() => ({})),
       fetch("item-icons.json").then((response) => response.ok ? response.json() : {}).catch(() => ({})),
@@ -4284,6 +4319,75 @@
       return `https://images.weserv.nl/?url=${encodeURIComponent(url)}&output=webp`;
     }
 
+    function lodestoneItemUrl(itemId) {
+      return `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/${itemId}/`;
+    }
+
+    function japaneseItemNameFromMarkdown(markdown, itemId) {
+      const title = markdown.match(/^Title:\s*エオルゼアデータベース「(.+?)」/m)?.[1]
+        || markdown.match(/^#\s*エオルゼアデータベース「(.+?)」/m)?.[1];
+      return title || `公式DB item/${itemId}`;
+    }
+
+    async function fetchJapaneseItemName(itemId) {
+      if (itemNameCache.has(itemId)) {
+        return itemNameCache.get(itemId);
+      }
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 10000);
+      try {
+        const response = await fetch(eorzeaReaderUrl(lodestoneItemUrl(itemId)), {
+          cache: "force-cache",
+          signal: controller.signal
+        });
+        const name = response.ok
+          ? japaneseItemNameFromMarkdown(await response.text(), itemId)
+          : `公式DB item/${itemId}`;
+        itemNameCache.set(itemId, name);
+        return name;
+      } catch (error) {
+        const fallbackName = `公式DB item/${itemId}`;
+        itemNameCache.set(itemId, fallbackName);
+        return fallbackName;
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+
+    function parseLodestoneItemIds(markdown) {
+      const matches = [...markdown.matchAll(/finalfantasyxiv\.com\/lodestone\/playguide\/db\/item\/([a-f0-9]+)/gi)];
+      return [...new Set(matches.map((match) => match[1]))];
+    }
+
+    async function fetchGlamourEquipment(source) {
+      if (glamourEquipmentCache.has(source)) {
+        return glamourEquipmentCache.get(source);
+      }
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 14000);
+      try {
+        const response = await fetch(eorzeaReaderUrl(source), {
+          cache: "force-cache",
+          signal: controller.signal
+        });
+        if (!response.ok) {
+          return [];
+        }
+        const itemIds = parseLodestoneItemIds(await response.text()).slice(0, 12);
+        const items = await Promise.all(itemIds.map(async (itemId) => ({
+          id: itemId,
+          name: await fetchJapaneseItemName(itemId),
+          url: lodestoneItemUrl(itemId)
+        })));
+        glamourEquipmentCache.set(source, items);
+        return items;
+      } catch (error) {
+        return [];
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+
     function glamourEntryKey(entry) {
       return entry?.source || entry?.image || entry?.title || "";
     }
@@ -4418,10 +4522,11 @@
           </div>
         </div>
         <div class="glamour-actions">
-          <a href="${glamour.source}" target="_blank" rel="noreferrer noopener">この投稿の装備を見る</a>
+          <button type="button" data-glamour-equipment data-source="${escapeHtml(glamour.source)}">この投稿の装備を見る</button>
           <a href="${officialItemSearch(glamour.search || glamour.title)}" target="_blank" rel="noreferrer noopener">似た装備を公式DBで探す</a>
           <a href="https://ffxiv.eorzeacollection.com/glamours" target="_blank" rel="noreferrer noopener">もっと世界のミラプリを見る</a>
         </div>
+        <div class="glamour-equipment-panel" data-glamour-equipment-panel></div>
         </article>
       `;
     }
@@ -4431,6 +4536,36 @@
       const cards = entries.map((entry) => glamourCardHtml(entry)).join("");
       glamourSpotlight.insertAdjacentHTML("beforeend", cards);
       glamourRenderedCount += entries.length;
+    }
+
+    async function showGlamourEquipment(button) {
+      const source = button.dataset.source || "";
+      const card = button.closest("[data-glamour-card]");
+      const panel = card?.querySelector("[data-glamour-equipment-panel]");
+      if (!source || !panel) {
+        return;
+      }
+      panel.classList.add("open");
+      panel.innerHTML = `<p>日本語版Lodestoneの装備名を読み込み中...</p>`;
+      button.disabled = true;
+      try {
+        const safeSource = escapeHtml(source);
+        const items = await fetchGlamourEquipment(source);
+        if (!items.length) {
+          panel.innerHTML = `
+            <p>この投稿から装備IDを取得できませんでした。元投稿側で確認してください。</p>
+            <a class="glamour-equipment-link" href="${safeSource}" target="_blank" rel="noreferrer noopener">元投稿を開く</a>
+          `;
+          return;
+        }
+        panel.innerHTML = `
+          <p>日本語版Lodestoneの公式DBで開きます。染色や組み合わせは元投稿側も確認できます。</p>
+          ${items.map((item) => `<a class="glamour-equipment-link" href="${item.url}" target="_blank" rel="noreferrer noopener">${escapeHtml(item.name)}</a>`).join("")}
+          <a class="glamour-equipment-link" href="${safeSource}" target="_blank" rel="noreferrer noopener">元投稿も開く</a>
+        `;
+      } finally {
+        button.disabled = false;
+      }
     }
 
     function jumpToRandomGlamour() {
@@ -6033,6 +6168,11 @@
       loadExternalGlamours(glamourRaceFilter.value);
     });
     glamourSpotlight.addEventListener("click", (event) => {
+      const equipmentButton = event.target.closest("[data-glamour-equipment]");
+      if (equipmentButton) {
+        showGlamourEquipment(equipmentButton);
+        return;
+      }
       const button = event.target.closest("[data-glamour-toggle]");
       if (!button) {
         return;

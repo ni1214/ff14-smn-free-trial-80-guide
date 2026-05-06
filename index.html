@@ -2947,9 +2947,15 @@
     };
 
     let glamourFeed = [...glamourFeedFallback];
+    let glamourPool = [...glamourFeedFallback];
+    let glamourRecentKeys = [];
     let glamourCursor = 0;
     let glamourRenderedCount = 0;
     let glamourAppendLock = false;
+    const GLAMOUR_INITIAL_CARD_COUNT = 7;
+    const GLAMOUR_SCROLL_APPEND_COUNT = 5;
+    const GLAMOUR_PAGE_COUNT = 4;
+    const GLAMOUR_MAX_EXTERNAL_ITEMS = 120;
 
     const gearJobs = [
       { id: "PLD", label: "ナイト", min: 1, role: "tank", className: "剣術士" },
@@ -4248,25 +4254,26 @@
     }
 
     function parseEorzeaGlamours(markdown) {
-      const matches = [...markdown.matchAll(/\[!\[Image \d+\]\((https:\/\/glamours\.eorzeacollection\.com\/[^)\s]+)\)\]\((https:\/\/ffxiv\.eorzeacollection\.com\/glamour\/\d+\/([^)]+))\)/g)];
-      return matches.map((match) => ({
+      const matches = [...markdown.matchAll(/\[!\[[^\]]*]\((https:\/\/glamours\.eorzeacollection\.com\/[^)\s]+)\)]\((https:\/\/ffxiv\.eorzeacollection\.com\/glamour\/\d+\/([^)]+))\)/g)];
+      return uniqueGlamours(matches.map((match) => ({
         image: match[1],
         source: match[2],
         title: glamourTitleFromSlug(match[3]),
         search: glamourTitleFromSlug(match[3])
-      }));
+      })));
     }
 
     function glamourRaceLabel(slug = glamourRaceFilter.value) {
       return glamourRaceFilter.querySelector(`option[value="${slug}"]`)?.textContent || "すべての種族";
     }
 
-    function eorzeaGlamourUrl(race = "") {
-      return `https://ffxiv.eorzeacollection.com/glamours${race ? `/${race}` : ""}`;
+    function eorzeaGlamourUrl(race = "", page = 1) {
+      const baseUrl = `https://ffxiv.eorzeacollection.com/glamours${race ? `/${race}` : ""}`;
+      return page > 1 ? `${baseUrl}?page=${page}` : baseUrl;
     }
 
     function eorzeaReaderUrl(url) {
-      return `https://r.jina.ai/http://r.jina.ai/http://${url}`;
+      return `https://r.jina.ai/http://${url}`;
     }
 
     function fallbackGlamoursForRace(race = "") {
@@ -4274,33 +4281,93 @@
     }
 
     function displayGlamourImage(url) {
-      return `https://wsrv.nl/?url=${encodeURIComponent(url)}`;
+      return `https://images.weserv.nl/?url=${encodeURIComponent(url)}&output=webp`;
+    }
+
+    function glamourEntryKey(entry) {
+      return entry?.source || entry?.image || entry?.title || "";
+    }
+
+    function uniqueGlamours(entries = []) {
+      const seen = new Set();
+      return entries.filter((entry) => {
+        const key = glamourEntryKey(entry);
+        if (!key || !entry?.image || !entry?.source || seen.has(key)) {
+          return false;
+        }
+        seen.add(key);
+        return true;
+      });
+    }
+
+    function glamourRecentLimit() {
+      if (glamourPool.length < 3) {
+        return glamourPool.length;
+      }
+      return Math.max(1, Math.min(36, Math.floor(glamourPool.length * 0.7), glamourPool.length - 1));
+    }
+
+    function rememberGlamour(entry) {
+      const key = glamourEntryKey(entry);
+      if (!key) {
+        return;
+      }
+      glamourRecentKeys = glamourRecentKeys.filter((item) => item !== key);
+      glamourRecentKeys.push(key);
+      const limit = glamourRecentLimit();
+      if (glamourRecentKeys.length > limit) {
+        glamourRecentKeys = glamourRecentKeys.slice(glamourRecentKeys.length - limit);
+      }
+    }
+
+    function buildGlamourDeck(entries = glamourPool, avoidRecent = true) {
+      const pool = uniqueGlamours(entries.length ? entries : glamourFeedFallback);
+      const candidates = avoidRecent
+        ? pool.filter((entry) => !glamourRecentKeys.includes(glamourEntryKey(entry)))
+        : pool;
+      return shuffledGlamours(candidates.length ? candidates : pool);
+    }
+
+    async function fetchEorzeaGlamourPage(race = "", page = 1) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), page === 1 ? 10000 : 14000);
+      try {
+        const response = await fetch(eorzeaReaderUrl(eorzeaGlamourUrl(race, page)), {
+          cache: "no-store",
+          signal: controller.signal
+        });
+        return response.ok ? parseEorzeaGlamours(await response.text()) : [];
+      } catch (error) {
+        return [];
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+
+    async function loadEorzeaGlamourPages(race = "") {
+      const pages = Array.from({ length: GLAMOUR_PAGE_COUNT }, (_, index) => index + 1);
+      const results = await Promise.allSettled(pages.map((page) => fetchEorzeaGlamourPage(race, page)));
+      return uniqueGlamours(results.flatMap((result) => (
+        result.status === "fulfilled" ? result.value : []
+      )));
     }
 
     async function loadExternalGlamours(race = glamourRaceFilter.value) {
       const raceLabel = glamourRaceLabel(race);
       resetGlamourFeed(fallbackGlamoursForRace(race));
       glamourFeedStatus.textContent = `${raceLabel}の保存済み候補を表示中。最新候補も確認中...`;
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 6000);
       try {
-        const response = await fetch(eorzeaReaderUrl(eorzeaGlamourUrl(race)), { cache: "no-store", signal: controller.signal });
-        if (!response.ok) {
-          glamourFeedStatus.textContent = `${raceLabel}の保存済み候補を表示しています。`;
-          return;
-        }
-        const parsed = parseEorzeaGlamours(await response.text());
+        const parsed = await loadEorzeaGlamourPages(race);
         if (parsed.length) {
-          resetGlamourFeed(parsed.slice(0, 36));
-          glamourFeedStatus.textContent = `${raceLabel}の候補を表示中。下へスクロールすると続きが増えます。`;
+          const entries = parsed.slice(0, GLAMOUR_MAX_EXTERNAL_ITEMS);
+          resetGlamourFeed(entries);
+          glamourFeedStatus.textContent = `${raceLabel}の候補を${entries.length}件表示中。下へスクロールすると続きが増えます。`;
         } else {
           glamourFeedStatus.textContent = `${raceLabel}の保存済み候補を表示しています。`;
         }
       } catch (error) {
         resetGlamourFeed(fallbackGlamoursForRace(race));
         glamourFeedStatus.textContent = `${raceLabel}の保存済み候補を表示しています。`;
-      } finally {
-        clearTimeout(timer);
       }
     }
 
@@ -4314,24 +4381,27 @@
     }
 
     function resetGlamourFeed(entries = glamourFeedFallback) {
-      glamourFeed = shuffledGlamours(entries.length ? entries : glamourFeedFallback);
+      glamourPool = uniqueGlamours(entries.length ? entries : glamourFeedFallback);
+      glamourFeed = buildGlamourDeck(glamourPool, false);
+      glamourRecentKeys = [];
       glamourCursor = 0;
       glamourRenderedCount = 0;
       glamourAppendLock = false;
       glamourSpotlight.innerHTML = "";
-      appendGlamourCards(5);
+      appendGlamourCards(GLAMOUR_INITIAL_CARD_COUNT);
     }
 
     function nextGlamourEntry() {
-      if (!glamourFeed.length) {
-        glamourFeed = shuffledGlamours(glamourFeedFallback);
+      if (!glamourPool.length) {
+        glamourPool = uniqueGlamours(glamourFeedFallback);
       }
       if (glamourCursor >= glamourFeed.length) {
-        glamourFeed = shuffledGlamours(glamourFeed);
+        glamourFeed = buildGlamourDeck(glamourPool, true);
         glamourCursor = 0;
       }
-      const entry = glamourFeed[glamourCursor];
+      const entry = glamourFeed[glamourCursor] || buildGlamourDeck(glamourPool, false)[0];
       glamourCursor += 1;
+      rememberGlamour(entry);
       return entry;
     }
 
@@ -4340,7 +4410,7 @@
       return `
         <article class="glamour-card" data-glamour-card>
         <div class="glamour-photo-wrap">
-          <img src="${displayGlamourImage(glamour.image)}" alt="${escapeHtml(glamour.title)}" loading="eager" decoding="async" referrerpolicy="no-referrer">
+          <img src="${displayGlamourImage(glamour.image)}" data-original-src="${escapeHtml(glamour.image)}" alt="${escapeHtml(glamour.title)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if (this.dataset.originalSrc && this.src !== this.dataset.originalSrc) { this.src = this.dataset.originalSrc; }">
           <button class="glamour-save-button ${saved ? "saved" : ""}" type="button" data-glamour-toggle data-title="${escapeHtml(glamour.title)}" data-source="${escapeHtml(glamour.source)}" data-image="${escapeHtml(glamour.image)}" data-search="${escapeHtml(glamour.search || glamour.title)}" aria-pressed="${saved ? "true" : "false"}">${saved ? "★ 保存済み" : "☆ 保存"}</button>
           <div class="glamour-photo-info">
             <h3>${escapeHtml(glamour.title)}</h3>
@@ -4357,9 +4427,10 @@
     }
 
     function appendGlamourCards(count = 3) {
-      const cards = Array.from({ length: count }, () => glamourCardHtml(nextGlamourEntry())).join("");
+      const entries = Array.from({ length: count }, () => nextGlamourEntry()).filter(Boolean);
+      const cards = entries.map((entry) => glamourCardHtml(entry)).join("");
       glamourSpotlight.insertAdjacentHTML("beforeend", cards);
-      glamourRenderedCount += count;
+      glamourRenderedCount += entries.length;
     }
 
     function jumpToRandomGlamour() {
@@ -4376,7 +4447,7 @@
       const nearBottom = window.innerHeight + window.scrollY > document.documentElement.scrollHeight - 900;
       if (nearBottom && !glamourAppendLock) {
         glamourAppendLock = true;
-        appendGlamourCards(3);
+        appendGlamourCards(GLAMOUR_SCROLL_APPEND_COUNT);
         setTimeout(() => {
           glamourAppendLock = false;
         }, 300);

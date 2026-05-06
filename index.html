@@ -1190,7 +1190,10 @@
     }
 
     .glamour-equipment-link {
-      display: block;
+      display: grid;
+      grid-template-columns: 46px 1fr;
+      gap: 10px;
+      align-items: center;
       padding: 10px 12px;
       border: 1px solid rgba(188, 148, 67, 0.24);
       border-radius: 10px;
@@ -1199,6 +1202,19 @@
       font-size: 13px;
       font-weight: 900;
       text-decoration: none;
+    }
+
+    .glamour-equipment-slot {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 24px;
+      border-radius: 999px;
+      background: rgba(188, 148, 67, 0.16);
+      color: #805b1f;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
     }
 
     .glamour-random-button {
@@ -4335,15 +4351,36 @@
     function japaneseItemNameFromMarkdown(markdown, itemId) {
       const title = markdown.match(/^Title:\s*エオルゼアデータベース「(.+?)」/m)?.[1]
         || markdown.match(/^#\s*エオルゼアデータベース「(.+?)」/m)?.[1];
-      return title || `公式DB item/${itemId}`;
+      return title || `item/${itemId}`;
     }
 
-    async function fetchJapaneseItemName(itemId) {
+    const glamourSlotLabels = {
+      WEAPON: "武器",
+      "OFF HAND": "副手",
+      SHIELD: "盾",
+      HEAD: "頭",
+      BODY: "胴",
+      HANDS: "手",
+      LEGS: "脚",
+      FEET: "足",
+      EARS: "耳",
+      NECK: "首",
+      WRISTS: "腕",
+      RING: "指",
+      RINGS: "指",
+      FACEWEAR: "顔"
+    };
+
+    function glamourSlotLabel(slot = "") {
+      return glamourSlotLabels[slot.toUpperCase()] || "装備";
+    }
+
+    async function fetchJapaneseItemName(itemId, fallbackName = "") {
       if (itemNameCache.has(itemId)) {
         return itemNameCache.get(itemId);
       }
       const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 10000);
+      const timer = setTimeout(() => controller.abort(), 14000);
       try {
         const response = await fetch(eorzeaReaderUrl(lodestoneItemUrl(itemId)), {
           cache: "force-cache",
@@ -4351,21 +4388,56 @@
         });
         const name = response.ok
           ? japaneseItemNameFromMarkdown(await response.text(), itemId)
-          : `公式DB item/${itemId}`;
-        itemNameCache.set(itemId, name);
-        return name;
+          : fallbackName;
+        const displayName = name && !name.startsWith("公式DB item/") ? name : (fallbackName || `item/${itemId}`);
+        itemNameCache.set(itemId, displayName);
+        return displayName;
       } catch (error) {
-        const fallbackName = `公式DB item/${itemId}`;
-        itemNameCache.set(itemId, fallbackName);
-        return fallbackName;
+        const fallbackDisplayName = fallbackName || `item/${itemId}`;
+        itemNameCache.set(itemId, fallbackDisplayName);
+        return fallbackDisplayName;
       } finally {
         clearTimeout(timer);
       }
     }
 
-    function parseLodestoneItemIds(markdown) {
-      const matches = [...markdown.matchAll(/finalfantasyxiv\.com\/lodestone\/playguide\/db\/item\/([a-f0-9]+)/gi)];
-      return [...new Set(matches.map((match) => match[1]))];
+    async function resolveJapaneseEquipmentItems(items) {
+      const resolved = [];
+      for (const item of items) {
+        resolved.push({
+          ...item,
+          name: await fetchJapaneseItemName(item.id, item.englishName)
+        });
+      }
+      return resolved;
+    }
+
+    function parseEorzeaEquipmentItems(markdown) {
+      const lines = markdown.split(/\r?\n/);
+      let currentSlot = "";
+      const items = [];
+      const seen = new Set();
+      lines.forEach((line) => {
+        const trimmed = line.trim();
+        const slotKey = trimmed.toUpperCase();
+        if (glamourSlotLabels[slotKey]) {
+          currentSlot = slotKey;
+          return;
+        }
+        const link = trimmed.match(/^\[([^\]]+)]\(https:\/\/(?:na|eu|jp)\.finalfantasyxiv\.com\/lodestone\/playguide\/db\/item\/([a-f0-9]+)\)/i);
+        if (!link || seen.has(link[2])) {
+          return;
+        }
+        seen.add(link[2]);
+        items.push({
+          id: link[2],
+          slot: currentSlot,
+          slotLabel: glamourSlotLabel(currentSlot),
+          englishName: link[1],
+          url: lodestoneItemUrl(link[2])
+        });
+      });
+      return items;
     }
 
     async function fetchGlamourEquipment(source) {
@@ -4382,12 +4454,8 @@
         if (!response.ok) {
           return [];
         }
-        const itemIds = parseLodestoneItemIds(await response.text()).slice(0, 12);
-        const items = await Promise.all(itemIds.map(async (itemId) => ({
-          id: itemId,
-          name: await fetchJapaneseItemName(itemId),
-          url: lodestoneItemUrl(itemId)
-        })));
+        const parsedItems = parseEorzeaEquipmentItems(await response.text()).slice(0, 12);
+        const items = await resolveJapaneseEquipmentItems(parsedItems);
         glamourEquipmentCache.set(source, items);
         return items;
       } catch (error) {
@@ -4598,15 +4666,15 @@
           panel.dataset.equipmentState = "failed";
           panel.innerHTML = `
             <p>この投稿から装備IDを取得できませんでした。元投稿側で確認してください。</p>
-            <a class="glamour-equipment-link" href="${safeSource}" target="_blank" rel="noreferrer noopener">元投稿を開く</a>
+            <a class="glamour-equipment-link" href="${safeSource}" target="_blank" rel="noreferrer noopener"><span class="glamour-equipment-slot">投稿</span><span>元投稿を開く</span></a>
           `;
           return;
         }
         panel.dataset.equipmentState = "loaded";
         panel.innerHTML = `
           <p>日本語版Lodestoneの公式DBで開きます。染色や組み合わせは元投稿側も確認できます。</p>
-          ${items.map((item) => `<a class="glamour-equipment-link" href="${item.url}" target="_blank" rel="noreferrer noopener">${escapeHtml(item.name)}</a>`).join("")}
-          <a class="glamour-equipment-link" href="${safeSource}" target="_blank" rel="noreferrer noopener">元投稿も開く</a>
+          ${items.map((item) => `<a class="glamour-equipment-link" href="${item.url}" target="_blank" rel="noreferrer noopener"><span class="glamour-equipment-slot">${escapeHtml(item.slotLabel || "装備")}</span><span>${escapeHtml(item.name)}</span></a>`).join("")}
+          <a class="glamour-equipment-link" href="${safeSource}" target="_blank" rel="noreferrer noopener"><span class="glamour-equipment-slot">投稿</span><span>元投稿も開く</span></a>
         `;
       } catch (error) {
         panel.dataset.equipmentState = "failed";

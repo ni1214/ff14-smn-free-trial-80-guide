@@ -1531,6 +1531,15 @@
       font-size: 12px;
     }
 
+    .gear-detail {
+      color: var(--ink);
+    }
+
+    .gear-detail strong {
+      color: var(--teal);
+      font-weight: 900;
+    }
+
     .gear-links {
       display: flex;
       flex-wrap: wrap;
@@ -4324,7 +4333,7 @@
     const iconDataReady = Promise.all([
       fetch("action-icons.json").then((response) => response.ok ? response.json() : {}).catch(() => ({})),
       fetch("item-icons.json").then((response) => response.ok ? response.json() : {}).catch(() => ({})),
-      fetch("gear-catalog.json").then((response) => response.ok ? response.json() : {}).catch(() => ({}))
+      fetch("gear-catalog.json?v=20260508-detail").then((response) => response.ok ? response.json() : {}).catch(() => ({}))
     ]).then(([actionIcons, itemIcons, catalog]) => {
       actionIconOverrides = actionIcons;
       itemIconOverrides = itemIcons;
@@ -5555,12 +5564,16 @@
       const fallback = item.sourceBand && item.sourceBand !== item.activeBand
         ? `<span class="next-pill locked">${item.sourceBand}</span>`
         : "";
+      const performance = gearPerformanceText(item);
+      const source = gearSourceText(item);
       return `
         <div class="gear-card">
           ${iconBox(item.icon, item.name, "gear-icon")}
           <div>
             <h3>${slotLabelByField(item.slot)}: ${item.name}</h3>
             <p>IL${item.itemLevel} / Lv${item.equipLevel} ${fallback}</p>
+            ${performance ? `<p class="gear-detail"><strong>性能</strong> ${escapeHtml(performance)}</p>` : ""}
+            ${source ? `<p class="gear-detail"><strong>入手</strong> ${escapeHtml(source)}</p>` : ""}
             <div class="gear-links">
               <a href="${item.href}" target="_blank" rel="noreferrer noopener">公式DBで入手法を見る</a>
             </div>
@@ -5571,6 +5584,32 @@
           </div>
         </div>
       `;
+    }
+
+    function gearPerformanceText(item) {
+      const details = item.details || {};
+      const specLimit = ["MainHand", "OffHand"].includes(item.slot) ? 1 : 2;
+      const specs = (details.specs || []).slice(0, specLimit);
+      const primaryLabels = ["STR", "DEX", "VIT", "INT", "MND"];
+      const bonusLimit = Math.max(2, 4 - specs.length);
+      const primary = (details.bonuses || []).filter((bonus) => primaryLabels.includes(bonus.label)).slice(0, 2);
+      const secondary = (details.bonuses || [])
+        .filter((bonus) => !primaryLabels.includes(bonus.label))
+        .slice(0, bonusLimit - primary.length);
+      return [...specs, ...primary, ...secondary]
+        .map((entry) => `${entry.label}${entry.value}`)
+        .join(" / ");
+    }
+
+    function gearSourceText(item) {
+      const source = item.details?.sources?.[0]?.summary || "";
+      if (source) {
+        return source;
+      }
+      if (item.href) {
+        return "詳細な入手先は公式DBで確認";
+      }
+      return "";
     }
 
     function resetGearSlotBandState(job, level) {

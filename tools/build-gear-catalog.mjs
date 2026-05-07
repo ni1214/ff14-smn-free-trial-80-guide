@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import { fetchItemDetail, mapLimit } from "./gear-detail-utils.mjs";
 
 const BASE = "https://jp.finalfantasyxiv.com";
 const USER_AGENT = "Mozilla/5.0";
@@ -127,20 +128,6 @@ async function fetchItems(params) {
   return unique;
 }
 
-async function mapLimit(items, limit, mapper) {
-  const results = new Array(items.length);
-  let nextIndex = 0;
-  const workers = Array.from({ length: Math.min(limit, items.length) }, async () => {
-    while (nextIndex < items.length) {
-      const index = nextIndex;
-      nextIndex += 1;
-      results[index] = await mapper(items[index], index);
-    }
-  });
-  await Promise.all(workers);
-  return results;
-}
-
 function classJobForBand(job, band) {
   if (job.classId && band.max < 30) return job.classId;
   return job.classjob;
@@ -226,7 +213,7 @@ async function findItem(job, band, slot) {
   const pool = roleMatches.length ? roleMatches : rows.filter((item) => !bannedGeneric(item));
   const found = pool.sort((a, b) => itemScore(b, band, keywords, slot, job) - itemScore(a, band, keywords, slot, job))[0];
   if (!found) return null;
-  return { slot: slot.slot, ...found };
+  return { slot: slot.slot, ...found, details: await fetchItemDetail(found.href) };
 }
 
 async function main() {

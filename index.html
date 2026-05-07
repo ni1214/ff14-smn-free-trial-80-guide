@@ -2450,6 +2450,14 @@
           ジョブごとのレベル別スキル回し記事への移動先として使用。
         </div>
         <div class="source-item">
+          <a href="https://game8.jp/ff14/539537" target="_blank" rel="noreferrer noopener">Game8 装備と武器情報まとめ</a><br>
+          Game8側の装備情報の確認先として使用。細かいレベル別適正装備表がないため、アプリ内では節目の詩学装備を案内。
+        </div>
+        <div class="source-item">
+          <a href="https://game8.jp/ff14/455613" target="_blank" rel="noreferrer noopener">Game8 詩学の効率的な集め方</a><br>
+          詩学集め、交換場所、解放方法の確認先として使用。
+        </div>
+        <div class="source-item">
           <a href="https://jp.finalfantasyxiv.com/lodestone/playguide/db/" target="_blank" rel="noreferrer noopener">エオルゼアデータベース</a><br>
           クエスト、アイテム、装備の日本語名と公式DB検索の導線に使用。
         </div>
@@ -3189,11 +3197,13 @@
     };
 
     const poeticsRoutes = [
-      { title: "毎日1回: コンテンツルーレット", text: "レベリング、討伐・討滅戦、メインクエスト、アライアンスレイド、50/60/70/80ダンジョンを解放済みの範囲で回す。迷ったらまずこれ。" },
-      { title: "初回攻略ボーナス", text: "未クリアID・討滅戦・レイドを進める。経験値、解放、詩学が同時に進むので一番気持ちよく強くなれます。" },
-      { title: "短時間で少しだけ", text: "討伐・討滅戦ルーレットや短いIDを1回。時間がない日の詩学補給向きです。" },
-      { title: "装備更新の優先順", text: "武器 → 胴/脚 → 頭/手/足 → アクセ。全部一気に無理なら武器と胴脚だけ先に交換。" },
-      { title: "躓かない流れ", text: "Lv到達 → メインを節目まで進める → 交換NPCを開放 → ルーレットで詩学 → 優先順に交換。" }
+      { title: "毎日1回: ルーレット", text: "Game8ではメインクエスト、アライアンスレイド、ハイレベリング、ノーマルレイドが詩学集めの主力。解放済みのものを上から1つでOK。" },
+      { title: "短時間ならノーマル/ハイレベリング", text: "時間が短い日はノーマルレイドかハイレベリング。まとまった時間がある日はメインクエストルーレットやアライアンスレイド。" },
+      { title: "周回候補", text: "ルーレット後に足りない時は、魔科学研究所、古代の民の迷宮、黙約の塔などが候補。開いている範囲で無理なく。" },
+      { title: "初回攻略ボーナス", text: "未制覇コンテンツの初クリアは詩学100が目安。経験値、解放、詩学が同時に進むので一番きれいに強くなれます。" },
+      { title: "イディルシャイア後: クロの空想帳", text: "週1回ですが、対象まで進んでいれば500詩学を狙える大きな補給源です。" },
+      { title: "PvPが好きならクリコン", text: "クリスタルコンフリクトは1試合20詩学。好きな人向けの気軽な補給ルートです。" },
+      { title: "装備更新の優先順", text: "武器 → 胴/脚 → 頭/手/足 → アクセ。全部一気に無理なら武器と胴脚だけ先に交換。" }
     ];
 
     const rotationGuides = {
@@ -3338,7 +3348,7 @@
         label: "クリプトラーカーRE",
         ilvl: 530,
         vendor: "ユールモア X:10.2 Y:11.8 のアイマーク、またはクリスタリウムのモーエン商会。詩学で交換。",
-        unlock: "漆黒メインクエスト進行後に利用。Lv80のフリートライアル到達点としてまずここ。"
+        unlock: "漆黒メインクエストクリア後に交換導線が安定。Lv80のフリートライアル到達点としてまずここ。"
       },
       {
         min: 70,
@@ -3346,7 +3356,7 @@
         label: "スカエウァRE",
         ilvl: 400,
         vendor: "ラールガーズリーチ X:13.8 Y:11.6 のエンナ、または三都市/クガネのロウェナ商会の商人。詩学で交換。",
-        unlock: "紅蓮メインクエスト進行後に利用。Lv70から漆黒序盤まで長く使いやすい。"
+        unlock: "紅蓮メインクエストクリア後に交換導線が安定。Lv70から漆黒序盤まで長く使いやすい。"
       },
       {
         min: 60,
@@ -3354,7 +3364,7 @@
         label: "イディルRE",
         ilvl: 270,
         vendor: "イディルシャイア X:5.7 Y:5.2 のヒスメナ、または三都市のロウェナ商会の商人。詩学で交換。",
-        unlock: "蒼天メインクエスト進行後に利用。Lv60から紅蓮序盤の土台。"
+        unlock: "蒼天メインクエストクリア後に交換導線が安定。Lv60から紅蓮序盤の土台。"
       },
       {
         min: 50,
@@ -3362,7 +3372,7 @@
         label: "ガーロンドRE",
         ilvl: 130,
         vendor: "モードゥナ X:22.7 Y:6.7 のオーリアナ、または三都市のロウェナ商会の商人。詩学で交換。",
-        unlock: "新生メインクエスト「究極幻想アルテマウェポン」後の節目装備。"
+        unlock: "メインクエストクリア後の節目装備。ネタバレを避けるため、ここではクエスト名を出しません。"
       }
     ];
 
@@ -3817,7 +3827,7 @@
         title: "ガーロンドRE交換",
         iconName: "アラガントームストーン:詩学",
         detail: "Lv50の大きな装備更新。武器、胴、脚から順に交換すると失敗しにくいです。",
-        steps: ["新生メイン「究極幻想アルテマウェポン」後まで進める", "モードゥナ X:22.7 Y:6.7 のオーリアナへ", "詩学で武器、胴、脚から交換"]
+        steps: ["メインクエストクリアまで進める", "モードゥナ X:22.7 Y:6.7 のオーリアナへ", "詩学で武器、胴、脚から交換"]
       },
       {
         level: 50,
@@ -5522,10 +5532,27 @@
         {
           name: "アラガントームストーン:詩学",
           title: "次の大更新: ガーロンドRE",
-          text: `Lv50到達後、新生クリアで${nextTier.label} IL${nextTier.ilvl}へ。武器、胴、脚から交換すると一気に楽になります。`
+          text: `Lv50到達後、メインクエストクリアまで進めると${nextTier.label} IL${nextTier.ilvl}が見えてきます。武器、胴、脚から交換すると一気に楽になります。`
         }
       ];
-      gearList.innerHTML = "";
+      const itemCards = await Promise.all(concreteItems.map(async (item) => {
+        const iconUrl = await fetchItemIconByName(item.name);
+        return `
+          <div class="gear-card">
+            ${iconBox(iconUrl, item.title, "gear-icon")}
+            <div>
+              <h3>${item.title}</h3>
+              <p>${item.text}</p>
+            </div>
+          </div>
+        `;
+      }));
+      const poeticsIcon = await fetchItemIconByName("アラガントームストーン:詩学");
+      const guideIcon = await fetchItemIconByName("ビギナーリング");
+      gearList.innerHTML = `
+        ${itemCards.join("")}
+        ${gearReferenceCards(job, level, null, poeticsIcon, guideIcon)}
+      `;
     }
 
     function gearRoleLabel(job) {
@@ -5601,6 +5628,54 @@
         return "Lv80帯の到達装備です。ここからはコンテンツ目的や見た目集めを増やすと楽しいです。";
       }
       return `この装備はLv${nextTier.min - 1}まで安心。あと${levelDelta(level, nextTier.min)}Lvで${nextTier.label} IL${nextTier.ilvl}に更新できます。`;
+    }
+
+    function rowenaUnlockText(tier) {
+      if (!tier) {
+        return "Lv50まではロウェナ商会より、クエスト報酬、初心者の館、直近ID装備、さいきょう装備を優先します。";
+      }
+      const rows = {
+        50: "三都市のロウェナ商会の商人は、メインクエストクリア後に利用しやすくなります。モードゥナのオーリアナでも交換できます。",
+        60: "イシュガルドのロウェナ商会の商人は、蒼天メインクエストクリア後に利用しやすくなります。イディルシャイアのヒスメナでも交換できます。",
+        70: "クガネのロウェナ商会の商人は、紅蓮メインクエストクリア後に利用しやすくなります。ラールガーズリーチのエンナでも交換できます。",
+        80: "クリスタリウムのモーエン商会は、漆黒メインクエストクリア後に利用しやすくなります。ユールモアのアイマークでも交換できます。"
+      };
+      return rows[tier.min] || tier.unlock;
+    }
+
+    function gearApproachText(level, tier) {
+      if (level < 50) {
+        return "Lv50までは細かく買い替えすぎず、初心者の館、ジョブクエスト報酬、直近IDドロップ、さいきょう装備で進めます。";
+      }
+      return `Game8には全レベルの細かい適正装備表は見当たらないため、このアプリではLv${tier.min}節目の詩学装備を基準にします。${tier.label}はIL${tier.ilvl}で、次の節目までの土台です。`;
+    }
+
+    function gearReferenceCards(job, level, tier, poeticsIcon, guideIcon) {
+      const currentTier = tier || gearTiers[gearTiers.length - 1];
+      return `
+        <div class="gear-card">
+          ${iconBox(guideIcon, "適正装備の考え方", "gear-icon")}
+          <div>
+            <h3>レベル別の適正装備</h3>
+            <p>${gearApproachText(level, tier)}</p>
+            <div class="gear-links">
+              <a href="https://game8.jp/ff14/539537" target="_blank" rel="noreferrer noopener">Game8装備まとめ</a>
+              <a href="https://jp.finalfantasyxiv.com/uiguide/equipment/equipment-saikyo/equipment_best.html" target="_blank" rel="noreferrer noopener">さいきょう装備</a>
+            </div>
+          </div>
+        </div>
+        <div class="gear-card">
+          ${iconBox(poeticsIcon, "ロウェナ商会と詩学", "gear-icon")}
+          <div>
+            <h3>ロウェナ商会の解放目安</h3>
+            <p>${rowenaUnlockText(currentTier)}</p>
+            <div class="gear-links">
+              <a href="https://game8.jp/ff14/455613" target="_blank" rel="noreferrer noopener">詩学の集め方</a>
+              <a href="https://jp.finalfantasyxiv.com/lodestone/playguide/db/" target="_blank" rel="noreferrer noopener">公式DB</a>
+            </div>
+          </div>
+        </div>
+      `;
     }
 
     function nextJobGoal(job, level) {
@@ -5959,6 +6034,9 @@
               <div>
                 <h3>${route.title}</h3>
                 <p>${route.text}</p>
+                <div class="gear-links">
+                  <a href="https://game8.jp/ff14/455613" target="_blank" rel="noreferrer noopener">Game8詩学記事</a>
+                </div>
               </div>
             </div>
           `;
@@ -6326,6 +6404,7 @@
 
       if (!tierStoryUnlocked(tier)) {
         const poeticsIcon = await fetchItemIconByName("アラガントームストーン:詩学");
+        const guideIcon = await fetchItemIconByName("ビギナーリング");
         gearSummary.innerHTML = `
           <h3>Lv${level} ${job.label}: ${tier.label}はまだ交換条件前</h3>
           <p>${tierStoryLabel(tier)}まで進むと交換しやすくなります。今は高額な買い物を避け、メイン進行・ジョブクエスト・直近ID装備・さいきょう装備で十分です。</p>
@@ -6339,6 +6418,7 @@
               <p>${tier.unlock}<br>${tier.vendor}<br>条件が揃うまでは、下の入手順も「温存」と表示します。</p>
             </div>
           </div>
+          ${gearReferenceCards(job, level, tier, poeticsIcon, guideIcon)}
         `;
         await renderNextPlanner(job, level);
         return;
@@ -6351,7 +6431,9 @@
         <p>${tier.vendor}<br>${tier.unlock}<br>${nextGearText(level, tier)}</p>
         <div class="life-meter" aria-hidden="true"><span style="--meter:${gearLife(level, tier)}%"></span></div>
       `;
-      gearList.innerHTML = "";
+      const poeticsIcon = await fetchItemIconByName("アラガントームストーン:詩学");
+      const guideIcon = await fetchItemIconByName("ビギナーリング");
+      gearList.innerHTML = gearReferenceCards(job, level, tier, poeticsIcon, guideIcon);
       findGearButton.disabled = false;
       findGearButton.textContent = "この設定で更新";
       await renderNextPlanner(job, level);

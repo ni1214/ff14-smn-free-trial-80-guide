@@ -2418,11 +2418,7 @@
         </div>
         <div class="source-item">
           <a href="https://jp.finalfantasyxiv.com/lodestone/playguide/db/" target="_blank" rel="noreferrer noopener">エオルゼアデータベース</a><br>
-          クエスト、アイテム、装備の日本語名、三国の武具屋/防具屋/アクセサリ屋の座標確認に使用。
-        </div>
-        <div class="source-item">
-          <a href="https://www.mtgames.jp/ff14/map/0018.html" target="_blank" rel="noreferrer noopener">パママ ウルダハ：ナル回廊マップ</a><br>
-          ウルダハ側の武具屋位置確認に使用。
+          クエスト、アイテム、装備の日本語名、公式DB検索の導線に使用。
         </div>
         <div class="source-item">
           <a href="https://game8.jp/ff14/283755" target="_blank" rel="noreferrer noopener">Game8 討滅戦攻略一覧</a><br>
@@ -3167,39 +3163,6 @@
       { title: "イディルシャイア後: クロの空想帳", text: "週1回ですが、対象まで進んでいれば500詩学を狙える大きな補給源です。" },
       { title: "PvPが好きならクリコン", text: "クリスタルコンフリクトは1試合20詩学。好きな人向けの気軽な補給ルートです。" },
       { title: "装備更新の優先順", text: "武器 → 胴/脚 → 頭/手/足 → アクセ。全部一気に無理なら武器と胴脚だけ先に交換。" }
-    ];
-
-    const cityGearShops = [
-      {
-        city: "リムサ",
-        route: "下甲板層の東国際街商通りへ。",
-        shops: "武具屋 フェーズギム X:6.5 Y:11.9 / 防具屋 アイアンサンダー X:8.1 Y:11.6 / アクセサリ屋 ソルチャ X:8.5 Y:11.4",
-        links: [
-          { label: "武具屋", href: "https://jp.finalfantasyxiv.com/lodestone/playguide/db/shop/4416c62758c/" },
-          { label: "防具屋", href: "https://jp.finalfantasyxiv.com/lodestone/playguide/db/shop/378e5c3a3b5/" },
-          { label: "アクセ屋", href: "https://jp.finalfantasyxiv.com/lodestone/playguide/db/shop/1af58d555e6/" }
-        ]
-      },
-      {
-        city: "グリダニア",
-        route: "新市街から旧市街の黒檀商店街へ。",
-        shops: "武具屋 ゲレイント X:14.6 Y:9.7 / 防具屋 ドミシアン X:14.3 Y:9.8 / アクセサリ屋 イロリ X:14.4 Y:9.6",
-        links: [
-          { label: "武具屋", href: "https://jp.finalfantasyxiv.com/lodestone/playguide/db/shop/782cfae36c0/" },
-          { label: "防具屋", href: "https://jp.finalfantasyxiv.com/lodestone/playguide/db/shop/5c0bdbdc542/" },
-          { label: "アクセ屋", href: "https://jp.finalfantasyxiv.com/lodestone/playguide/db/shop/daca4a934fe/" }
-        ]
-      },
-      {
-        city: "ウルダハ",
-        route: "ナル回廊/ザル回廊の市場まわりへ。",
-        shops: "武具屋 ザギルスヴェルド X:7.9 Y:11.3 / 防具屋 グワルター X:13.6 Y:10.0 / アクセサリ屋 ロロヌ X:13.6 Y:9.8",
-        links: [
-          { label: "防具屋", href: "https://jp.finalfantasyxiv.com/lodestone/playguide/db/shop/8c7f7e1f932/" },
-          { label: "アクセ屋", href: "https://jp.finalfantasyxiv.com/lodestone/playguide/db/shop/0a28d50ddd2/" },
-          { label: "地図", href: "https://www.mtgames.jp/ff14/map/0018.html" }
-        ]
-      }
     ];
 
     const rotationGuides = {
@@ -5538,27 +5501,113 @@
 
     function gearApproachText(level, tier) {
       if (level < 50) {
-        return "Lv50までは細かく買い替えすぎず、初心者の館、ジョブクエスト報酬、直近IDドロップ、さいきょう装備で進めます。";
+        return "一つ下、今の適正、一つ上を公式DBで検索します。クリック先のアイテムページで入手方法を確認できます。";
       }
-      return `Game8には全レベルの細かい適正装備表は見当たらないため、このアプリではLv${tier.min}節目の詩学装備を基準にします。${tier.label}はIL${tier.ilvl}で、次の節目までの土台です。`;
+      return `${tier.label}を基準に、一つ下、今の適正、一つ上を公式DBで検索します。クリック先のアイテムページで入手方法を確認できます。`;
     }
 
-    function cityGearShopCard(iconUrl) {
-      const rows = cityGearShops.map((shop) => `
-        <p><strong>${shop.city}</strong>: ${shop.route}<br>${shop.shops}</p>
-        <div class="gear-links">
-          ${shop.links.map((link) => `<a href="${link.href}" target="_blank" rel="noreferrer noopener">${shop.city}${link.label}</a>`).join("")}
-        </div>
-      `).join("");
-      return `
-        <div class="gear-card">
-          ${iconBox(iconUrl, "三国店売り装備", "gear-icon")}
-          <div>
-            <h3>IL不足なら店売り（Lv1-49）</h3>
-            ${rows}
+    function highGearTiersAscending() {
+      return [...gearTiers].sort((a, b) => a.min - b.min);
+    }
+
+    function lowRecommendedLevel(level) {
+      if (level < 10) {
+        return 1;
+      }
+      return Math.min(45, Math.max(5, Math.floor(level / 5) * 5));
+    }
+
+    function lowGearCandidate(level, label, relation) {
+      return {
+        label,
+        relation,
+        level,
+        title: `Lv${level}装備`,
+        iconName: level < 15 ? "ビギナーリング" : "クリスタル",
+        note: "公式DB検索。クエスト報酬、ID品、店売り、製作装備の候補を見ます。"
+      };
+    }
+
+    function tierGearCandidate(tier, label, relation) {
+      return {
+        label,
+        relation,
+        level: tier.min,
+        title: `${tier.label} IL${tier.ilvl}`,
+        tier,
+        iconName: "アラガントームストーン:詩学",
+        note: "詩学装備の公式DB検索。入手先は各アイテムページで確認します。"
+      };
+    }
+
+    function gearSearchCandidates(level) {
+      const tiers = highGearTiersAscending();
+      if (level < 50) {
+        const current = lowRecommendedLevel(level);
+        return [
+          lowGearCandidate(Math.max(1, current - 5), "一つ下", "below"),
+          lowGearCandidate(current, "今の適正", "current"),
+          current >= 45
+            ? tierGearCandidate(tiers[0], "一つ上", "above")
+            : lowGearCandidate(current + 5, "一つ上", "above")
+        ];
+      }
+      const currentIndex = Math.max(0, tiers.findIndex((tier, index) => (
+        level >= tier.min && (!tiers[index + 1] || level < tiers[index + 1].min)
+      )));
+      const currentTier = tiers[currentIndex] || tiers[0];
+      const below = tiers[currentIndex - 1] || lowGearCandidate(45, "一つ下", "below");
+      const above = tiers[currentIndex + 1] || currentTier;
+      return [
+        below.min ? tierGearCandidate(below, "一つ下", "below") : below,
+        tierGearCandidate(currentTier, "今の適正", "current"),
+        tierGearCandidate(above, tiers[currentIndex + 1] ? "一つ上" : "上限", "above")
+      ];
+    }
+
+    function gearSearchQueries(candidate, job) {
+      const role = gearRoleLabel(job);
+      if (candidate.tier) {
+        return [
+          { label: "武器", query: `${candidate.tier.label} ${job.label} 武器` },
+          { label: "防具", query: `${candidate.tier.label} ${role}` },
+          { label: "アクセ", query: `${candidate.tier.label} ${role} アクセサリ` }
+        ];
+      }
+      return [
+        { label: "武器", query: `Lv${candidate.level} ${job.label} 武器` },
+        { label: "防具", query: `Lv${candidate.level} ${role} 防具` },
+        { label: "アクセ", query: `Lv${candidate.level} ${job.label} アクセサリ` }
+      ];
+    }
+
+    function fullGearSearchQuery(candidate, job) {
+      return candidate.tier
+        ? `${candidate.tier.label} ${job.label} ${gearRoleLabel(job)}`
+        : `Lv${candidate.level} ${job.label} ${gearRoleLabel(job)} 装備`;
+    }
+
+    async function officialGearSearchCards(job, level) {
+      const cards = await Promise.all(gearSearchCandidates(level).map(async (candidate) => {
+        const iconUrl = await fetchItemIconByName(candidate.iconName);
+        const links = gearSearchQueries(candidate, job).map((link) => (
+          `<a href="${officialItemSearch(link.query)}" target="_blank" rel="noreferrer noopener">${link.label}</a>`
+        )).join("");
+        return `
+          <div class="gear-card">
+            ${iconBox(iconUrl, candidate.title, "gear-icon")}
+            <div>
+              <h3>${candidate.label}: ${candidate.title}</h3>
+              <p>${candidate.note}</p>
+              <div class="gear-links">
+                <a href="${officialItemSearch(fullGearSearchQuery(candidate, job))}" target="_blank" rel="noreferrer noopener">まとめて検索</a>
+                ${links}
+              </div>
+            </div>
           </div>
-        </div>
-      `;
+        `;
+      }));
+      return cards.join("");
     }
 
     function gearReferenceCards(job, level, tier, poeticsIcon, guideIcon) {
@@ -5574,7 +5623,6 @@
             </div>
           </div>
         </div>
-        ${cityGearShopCard(guideIcon)}
         <div class="gear-card">
           ${iconBox(poeticsIcon, "ロウェナ商会と詩学", "gear-icon")}
           <div>
@@ -6266,46 +6314,17 @@
       }
 
       const tier = getGearTier(level);
-      if (!tier) {
-        await renderLowLevelGear(job, level);
-        await renderNextPlanner(job, level);
-        return;
-      }
-
-      if (!tierStoryUnlocked(tier)) {
-        const poeticsIcon = await fetchItemIconByName("アラガントームストーン:詩学");
-        const guideIcon = await fetchItemIconByName("ビギナーリング");
-        gearSummary.innerHTML = `
-          <h3>Lv${level} ${job.label}: まだ温存</h3>
-          <p>${tierStoryLabel(tier)}までメイン優先。装備はさいきょうでOK。</p>
-          <div class="life-meter" aria-hidden="true"><span style="--meter:${gearLife(level, tier)}%"></span></div>
-        `;
-        gearList.innerHTML = `
-          <div class="gear-card">
-            ${iconBox(poeticsIcon, `${tier.label}の交換条件`, "gear-icon")}
-            <div>
-              <h3>次: ${tier.label} IL${tier.ilvl}</h3>
-              <p>交換は条件後。詩学は温存。</p>
-            </div>
-          </div>
-          ${await gearPriorityCards(job, level, false)}
-          ${gearReferenceCards(job, level, tier, poeticsIcon, guideIcon)}
-        `;
-        await renderNextPlanner(job, level);
-        return;
-      }
-
       findGearButton.disabled = true;
       findGearButton.textContent = "取得中...";
       gearSummary.innerHTML = `
-        <h3>Lv${level} ${job.label}: ${tier.label} IL${tier.ilvl}</h3>
-        <p>武器 → 胴/脚 → 残り。${nextGearText(level, tier)}</p>
-        <div class="life-meter" aria-hidden="true"><span style="--meter:${gearLife(level, tier)}%"></span></div>
+        <h3>Lv${level} ${job.label}: 公式DBで装備候補</h3>
+        <p>${gearApproachText(level, tier)}</p>
+        <div class="life-meter" aria-hidden="true"><span style="--meter:${tier ? gearLife(level, tier) : Math.min(95, Math.max(8, level * 2))}%"></span></div>
       `;
       const poeticsIcon = await fetchItemIconByName("アラガントームストーン:詩学");
       const guideIcon = await fetchItemIconByName("ビギナーリング");
       gearList.innerHTML = `
-        ${await gearPriorityCards(job, level, true)}
+        ${await officialGearSearchCards(job, level)}
         ${gearReferenceCards(job, level, tier, poeticsIcon, guideIcon)}
       `;
       findGearButton.disabled = false;

@@ -2203,7 +2203,7 @@
     <div class="settings-overlay" id="settingsOverlay" aria-hidden="true">
       <div class="settings-card" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
         <h3 id="settingsTitle">マイキャラ設定を変える</h3>
-        <p>ここを変えると、装備/入手法、スキル/成長、楽しみナビがまとめて切り替わります。</p>
+        <p>ここを変えると、装備/入手法、スキル/成長、迷子防止ナビがまとめて切り替わります。</p>
         <div class="profile-controls">
         <div>
           <label for="characterName">キャラ名</label>
@@ -2256,7 +2256,7 @@
       <div class="jumpbar-track">
         <button class="jump feature-tab active" type="button" data-tab="gear">装備/入手法</button>
         <button class="jump feature-tab" type="button" data-tab="rotation">スキル/成長</button>
-        <button class="jump feature-tab" type="button" data-tab="goals">楽しみナビ</button>
+        <button class="jump feature-tab" type="button" data-tab="goals">迷子防止ナビ</button>
         <button class="jump feature-tab" type="button" data-tab="duty">ギミック</button>
         <button class="jump feature-tab" type="button" data-tab="links">ミラプリ</button>
       </div>
@@ -2312,20 +2312,16 @@
     </section>
 
     <section class="panel next-panel feature-panel" id="nextPlanner" data-feature="goals">
-      <h2>次の楽しみナビ</h2>
-      <p class="footer-note">今日やる3つ、あと少しで解放される要素、ジョブが気持ちよくなる節目をまとめます。迷った時の行き先メモとごほうび候補もこの下にまとめています。</p>
+      <h2>迷子防止ナビ</h2>
       <div class="next-board" id="nextBoard"></div>
     </section>
 
     <section class="panel route-panel feature-panel" id="routePanel" data-feature="goals">
-      <h2>楽しみナビ内の迷子防止メモ</h2>
-      <p class="footer-note">「次に何をすればいい？」となった時用に、行く場所、NPC、座標、終わった後に見るものを細かく書いています。上の楽しみ目標を見てから、ここで移動先だけ確認してください。</p>
+      <h2>行き先メモ</h2>
       <div class="next-board" id="routeBoard"></div>
     </section>
 
-    <section class="panel reward-panel feature-panel" id="rewardPanel" data-feature="goals">
-      <h2>楽しみナビ内のごほうび候補</h2>
-      <p class="footer-note">強さ以外のモチベ用です。マウント、ミニオン、ミラプリ、MGPなど、「次に寄り道したい理由」をここにまとめています。</p>
+    <section class="panel reward-panel feature-panel" id="rewardPanel" data-feature="goals" hidden>
       <div class="next-board" id="rewardBoard"></div>
     </section>
 
@@ -2422,7 +2418,11 @@
         </div>
         <div class="source-item">
           <a href="https://jp.finalfantasyxiv.com/lodestone/playguide/db/" target="_blank" rel="noreferrer noopener">エオルゼアデータベース</a><br>
-          クエスト、アイテム、装備の日本語名と公式DB検索の導線に使用。
+          クエスト、アイテム、装備の日本語名、三国の武具屋/防具屋の座標確認に使用。
+        </div>
+        <div class="source-item">
+          <a href="https://www.mtgames.jp/ff14/map/0018.html" target="_blank" rel="noreferrer noopener">パママ ウルダハ：ナル回廊マップ</a><br>
+          ウルダハ側の武具屋位置確認に使用。
         </div>
         <div class="source-item">
           <a href="https://game8.jp/ff14/283755" target="_blank" rel="noreferrer noopener">Game8 討滅戦攻略一覧</a><br>
@@ -3167,6 +3167,36 @@
       { title: "イディルシャイア後: クロの空想帳", text: "週1回ですが、対象まで進んでいれば500詩学を狙える大きな補給源です。" },
       { title: "PvPが好きならクリコン", text: "クリスタルコンフリクトは1試合20詩学。好きな人向けの気軽な補給ルートです。" },
       { title: "装備更新の優先順", text: "武器 → 胴/脚 → 頭/手/足 → アクセ。全部一気に無理なら武器と胴脚だけ先に交換。" }
+    ];
+
+    const cityGearShops = [
+      {
+        city: "リムサ",
+        route: "下甲板層の東国際街商通りへ。",
+        shops: "武具屋 フェーズギム X:6.5 Y:11.9 / 防具屋 アイアンサンダー X:8.1 Y:11.6",
+        links: [
+          { label: "武具屋", href: "https://jp.finalfantasyxiv.com/lodestone/playguide/db/shop/4416c62758c/" },
+          { label: "防具屋", href: "https://jp.finalfantasyxiv.com/lodestone/playguide/db/shop/378e5c3a3b5/" }
+        ]
+      },
+      {
+        city: "グリダニア",
+        route: "新市街から旧市街の黒檀商店街へ。",
+        shops: "武具屋 ゲレイント X:14.6 Y:9.7 / 防具屋 ドミシアン X:14.3 Y:9.8",
+        links: [
+          { label: "武具屋", href: "https://jp.finalfantasyxiv.com/lodestone/playguide/db/shop/782cfae36c0/" },
+          { label: "防具屋", href: "https://jp.finalfantasyxiv.com/lodestone/playguide/db/shop/5c0bdbdc542/" }
+        ]
+      },
+      {
+        city: "ウルダハ",
+        route: "ナル回廊/ザル回廊の市場まわりへ。",
+        shops: "武具屋 ザギルスヴェルド X:7.9 Y:11.3 / 防具屋 グワルター X:13.6 Y:10.0",
+        links: [
+          { label: "防具屋", href: "https://jp.finalfantasyxiv.com/lodestone/playguide/db/shop/8c7f7e1f932/" },
+          { label: "地図", href: "https://www.mtgames.jp/ff14/map/0018.html" }
+        ]
+      }
     ];
 
     const rotationGuides = {
@@ -5510,6 +5540,24 @@
       return `Game8には全レベルの細かい適正装備表は見当たらないため、このアプリではLv${tier.min}節目の詩学装備を基準にします。${tier.label}はIL${tier.ilvl}で、次の節目までの土台です。`;
     }
 
+    function cityGearShopCard(iconUrl) {
+      const rows = cityGearShops.map((shop) => `
+        <p><strong>${shop.city}</strong>: ${shop.route}<br>${shop.shops}</p>
+        <div class="gear-links">
+          ${shop.links.map((link) => `<a href="${link.href}" target="_blank" rel="noreferrer noopener">${shop.city}${link.label}</a>`).join("")}
+        </div>
+      `).join("");
+      return `
+        <div class="gear-card">
+          ${iconBox(iconUrl, "三国店売り装備", "gear-icon")}
+          <div>
+            <h3>IL不足なら店売り（Lv1-49）</h3>
+            ${rows}
+          </div>
+        </div>
+      `;
+    }
+
     function gearReferenceCards(job, level, tier, poeticsIcon, guideIcon) {
       const currentTier = tier || gearTiers[gearTiers.length - 1];
       return `
@@ -5523,6 +5571,7 @@
             </div>
           </div>
         </div>
+        ${cityGearShopCard(guideIcon)}
         <div class="gear-card">
           ${iconBox(poeticsIcon, "ロウェナ商会と詩学", "gear-icon")}
           <div>
@@ -5655,42 +5704,121 @@
         || unlockGoals[unlockGoals.length - 1];
     }
 
-    function buildTodayTasks(job, level) {
-      const tasks = [];
-      const tier = getGearTier(level);
-      if (level < 15) {
-        tasks.push({ level: 15, title: "まずLv15へ進める", category: "今日", iconName: "ビギナーリング", story: "airship", detail: "初心者の館と初IDが見える節目です。メインとクラスクエストを優先。", action: "今の街のメインクエストを1つ進める。" });
-      } else if (level < 30) {
-        tasks.push({ level: 15, title: "初心者の館を終わらせる", category: "今日", iconName: "ビギナーリング", story: "airship", detail: "ビギナー装備とビギナーリングでLv30まで快適になります。", action: "冒険者指導教官からロール訓練へ。" });
-      } else if (level < 50) {
-        tasks.push({ level: level, title: "ジョブクエスト確認", category: "今日", iconName: "ソウルクリスタル", story: "airship", detail: "Lv30以降はジョブクエストで重要アクションや装備が増えます。", action: "受注中/未受注のジョブクエストを確認。" });
-      } else if (tier && !tierStoryUnlocked(tier)) {
-        tasks.push({ level, title: `${tier.label}の交換条件を開く`, category: "今日", iconName: "アラガントームストーン:詩学", story: storyStage.value, detail: `${tier.label}は${tierStoryLabel(tier)}から交換しやすくなります。今は装備を買い急がず、メイン進行を優先。`, action: "楽しみナビ下段の迷子防止メモで次の行き先を確認。" });
-      } else {
-        tasks.push({ level: tier?.min || 50, title: "詩学装備を1部位進める", category: "今日", iconName: "アラガントームストーン:詩学", story: storyStage.value, detail: "武器、胴、脚から更新すると強さを感じやすいです。", action: "所持詩学を見て装備/入手法タブでチェック。" });
-      }
-
+    function jobQuestCheckpoint(job, level) {
       if (level < job.min) {
-        tasks.push({ level, title: "今使えるジョブに戻す", category: "今日", iconName: "ソウルクリスタル", story: storyStage.value, detail: `${job.label}はLv${job.min}からです。今のレベルで使えるジョブに戻すと装備とスキルが矛盾しません。`, action: "上のジョブ欄を現在使えるジョブに変更。" });
-      } else {
-        const rotationTier = getRotationTier(job.id, level);
-        const firstAction = rotationTier?.single?.[0] || "";
-        tasks.push({ level, title: "今のスキル回しを1回確認", category: "今日", actionName: firstAction, iconName: "ソウルクリスタル", story: storyStage.value, detail: `${rotationTier.title}の単体/範囲を見て、ID前に押す順番を揃えます。`, action: "スキル/成長タブで単体か範囲を見る。" });
+        return {
+          level: job.min,
+          title: `${job.label}解放`,
+          iconName: "ソウルクリスタル",
+          detail: `Lv${job.min}になったら解放。`,
+          action: "今使えるジョブに戻す。"
+        };
       }
+      if (level < 30 && job.min <= 1) {
+        return {
+          level: 30,
+          title: "Lv30ジョブクエ",
+          iconName: "ソウルクリスタル",
+          detail: "ジョブクリスタルを装備。",
+          action: "クラスクエスト完了後に受注。"
+        };
+      }
+      const nextLevel = [30, 35, 40, 45, 50, 52, 54, 56, 58, 60, 63, 65, 68, 70, 80]
+        .find((target) => target >= Math.max(level, job.min)) || 80;
+      return {
+        level: nextLevel,
+        title: `Lv${nextLevel}ジョブクエ確認`,
+        iconName: "ソウルクリスタル",
+        detail: "未完了があれば先に消化。",
+        action: "ジャーナル/受注NPCを確認。"
+      };
+    }
 
-      const route = routeGuides
-        .filter((item) => item.level <= level && storyStages[item.story].rank <= storyRank())
-        .sort((a, b) => b.level - a.level || (storyStages[b.story].rank - storyStages[a.story].rank))[0];
-      tasks.push({
-        level: route?.level || level,
-        title: route ? `${route.title}を確認` : "次の行き先を確認",
-        category: "今日",
-        iconName: route?.iconName || "クリスタル",
-        story: storyStage.value,
-        detail: route?.detail || "次に進む場所を1つだけ決めると、スマホを見ながら迷いにくくなります。",
-        action: route?.steps?.[0] || "楽しみナビを開く。"
-      });
-      return tasks.filter((task, index, array) => array.findIndex((item) => item.title === task.title) === index).slice(0, 3);
+    function mainQuestCheckpoint(level) {
+      const rank = storyRank();
+      if (rank < 3 && level >= 50) {
+        return {
+          level: 50,
+          title: "メインクエストクリア",
+          iconName: "クリスタル",
+          detail: "Lv50詩学装備の入口。",
+          action: "メインを優先。"
+        };
+      }
+      if (rank < 4 && level >= 60) {
+        return {
+          level: 60,
+          title: "蒼天メインを進める",
+          iconName: "クリスタル",
+          detail: "Lv60詩学装備の入口。",
+          action: "メインを優先。"
+        };
+      }
+      if (rank < 5 && level >= 70) {
+        return {
+          level: 70,
+          title: "紅蓮メインを進める",
+          iconName: "クリスタル",
+          detail: "Lv70詩学装備の入口。",
+          action: "メインを優先。"
+        };
+      }
+      if (rank < 6 && level >= 80) {
+        return {
+          level: 80,
+          title: "漆黒メインを進める",
+          iconName: "クリスタル",
+          detail: "Lv80詩学装備の入口。",
+          action: "メインを優先。"
+        };
+      }
+      return {
+        level,
+        title: "メインクエスト確認",
+        iconName: "クリスタル",
+        detail: storyLabel(),
+        action: "迷ったらメインを1つ進める。"
+      };
+    }
+
+    function gearCheckpoint(level) {
+      const tier = getGearTier(level);
+      if (!tier) {
+        return {
+          level: 15,
+          title: level < 30 ? "初心者の館" : "さいきょう装備",
+          iconName: level < 30 ? "ビギナーリング" : "ソウルクリスタル",
+          detail: level < 30 ? "ビギナー装備とリング。" : "ジョブクリスタルと武器を確認。",
+          action: "装備タブを見る。"
+        };
+      }
+      return {
+        level: tier.min,
+        title: `${tier.label}装備`,
+        iconName: "アラガントームストーン:詩学",
+        detail: tierStoryUnlocked(tier) ? "武器、胴、脚から交換。" : `${tierStoryLabel(tier)}まで温存。`,
+        action: "装備タブを見る。"
+      };
+    }
+
+    function unlockCheckpoint(level) {
+      const next = nextUnlockGoal(level);
+      return {
+        level: next.level,
+        title: next.title,
+        iconName: next.iconName,
+        detail: next.level > level ? `あと${next.level - level}Lv。` : "解放できるものを確認。",
+        action: "行き先メモで確認。"
+      };
+    }
+
+    function buildTodayTasks(job, level) {
+      return [
+        mainQuestCheckpoint(level),
+        jobQuestCheckpoint(job, level),
+        gearCheckpoint(level),
+        unlockCheckpoint(level)
+      ].filter((task, index, array) => array.findIndex((item) => item.title === task.title) === index);
     }
 
     function jobFunMoment(job, level) {
@@ -5704,11 +5832,20 @@
     }
 
     async function renderCheckableGoal(goal, level, prefix) {
-      const state = goalState(goal, level);
-      const extra = state.className === "hot"
-        ? checkControl(`${prefix}:${goal.title}:${goal.level}`, "今日できた")
-        : `<span class="footer-note">条件が揃ったらチェックできます。</span>`;
-      return (await renderGoalCard(goal, level, extra));
+      let iconUrl = goal.actionIcon ? actions[goal.actionIcon]?.icon : "";
+      if (!iconUrl && goal.actionName) iconUrl = await fetchActionIconByName(goal.actionName);
+      if (!iconUrl) iconUrl = await fetchItemIconByName(goal.iconName || "クリスタル");
+      return `
+        <div class="next-card">
+          ${iconBox(iconUrl, goal.title)}
+          <div>
+            <h3>${goal.title}</h3>
+            <p>${goal.detail}</p>
+            <p>${goal.action}</p>
+            ${checkControl(`${prefix}:${goal.title}:${goal.level}`, "やった")}
+          </div>
+        </div>
+      `;
     }
 
     function shoppingTierForLevel(level) {
@@ -5908,7 +6045,7 @@
           }
           return aDone ? b.level - a.level : a.level - b.level;
         })
-        .slice(0, 8);
+        .slice(0, 4);
       const cards = await Promise.all(routes.map(async (route) => {
         const iconUrl = await fetchItemIconByName(route.iconName);
         const state = goalState(route, level);
@@ -5917,145 +6054,29 @@
             ${iconBox(iconUrl, route.title)}
             <div>
               <h3>${route.title}</h3>
-              <p>${route.detail}</p>
-              ${route.steps.map((step, index) => `<div class="route-step"><span>${index + 1}</span><div>${step}</div></div>`).join("")}
+              ${route.steps.slice(0, 2).map((step, index) => `<div class="route-step"><span>${index + 1}</span><div>${step}</div></div>`).join("")}
               <div class="next-meta">
                 <span class="next-pill ${state.className}">${state.label}</span>
                 <span class="next-pill">Lv${route.level}</span>
               </div>
+              ${checkControl(`route:${route.title}:${route.level}`, "やった")}
             </div>
           </div>
         `;
       }));
       routeBoard.innerHTML = cards.join("");
-      foldContainer(routeBoard, 3, "行き先候補をすべて見る");
     }
 
     async function renderRewardsGallery() {
-      const { level } = currentJobAndLevel();
-      const rank = storyRank();
-      const rewards = rewardGoals
-        .filter((reward) => reward.level <= level + 20 && storyStages[reward.story].rank <= rank + 1)
-        .sort((a, b) => {
-          const aReady = level >= a.level && rank >= storyStages[a.story].rank;
-          const bReady = level >= b.level && rank >= storyStages[b.story].rank;
-          return Number(bReady) - Number(aReady) || a.level - b.level;
-        })
-        .slice(0, 9);
-      const cards = await Promise.all(rewards.map(async (reward) => {
-        const state = goalState(reward, level);
-        const iconUrl = await fetchItemIconByName(reward.iconName);
-        return `
-          <div class="next-card">
-            ${iconBox(iconUrl, reward.title)}
-            <div>
-              <h3>${reward.title}</h3>
-              <p>${reward.detail}</p>
-              <p>${reward.action}</p>
-              <div class="next-meta">
-                <span class="next-pill ${state.className}">${state.label}</span>
-                <span class="next-pill">${reward.category}</span>
-                <span class="next-pill">Lv${reward.level}</span>
-              </div>
-              ${checkControl(`reward:${reward.title}:${reward.level}`, "集めたい")}
-            </div>
-          </div>
-        `;
-      }));
-      rewardBoard.innerHTML = cards.join("");
-      foldContainer(rewardBoard, 3, "ごほうびをすべて見る");
+      rewardBoard.innerHTML = "";
     }
 
     async function renderNextPlanner(job, level) {
-      const tier = getGearTier(level);
-      const nextTier = tier
-        ? gearTiers.filter((item) => item.min > tier.min).sort((a, b) => a.min - b.min)[0]
-        : gearTiers[gearTiers.length - 1];
-      const gearGoal = nextTier
-        ? {
-          level: nextTier.min,
-          title: `${nextTier.label} IL${nextTier.ilvl}`,
-          category: "装備",
-          iconName: "アラガントームストーン:詩学",
-          story: nextTier.min === 50 ? "arr" : nextTier.min === 60 ? "hw" : nextTier.min === 70 ? "sb" : "shb",
-          detail: `${job.label}の次の大きな装備更新。${nextTier.vendor}`,
-          action: nextTier.min > level ? `あと${nextTier.min - level}Lv。詩学を温存しておくと更新が早いです。` : "今すぐ更新候補です。"
-        }
-        : {
-          level: 80,
-          title: "Lv80到達後の遊び",
-          category: "目標",
-          iconName: "チョコボホイッスル",
-          story: "shb",
-          detail: "クリプトラーカーREを揃えたら、ミラプリ、収集、未解放コンテンツを広げると長く遊べます。",
-          action: "装備は強くなったので、次は遊ぶ理由を増やす段階です。"
-        };
-
-      const nearGoals = unlockGoals
-        .filter((goal) => goal.level >= level && goal.level <= level + 5)
-        .sort((a, b) => a.level - b.level)
-        .slice(0, 6);
-      const fallbackGoals = unlockGoals
-        .filter((goal) => goal.level > level + 5)
-        .sort((a, b) => a.level - b.level)
-        .slice(0, 3);
-      const availableGoals = unlockGoals
-        .filter((goal) => goal.level <= level && storyRank() >= storyStages[goal.story]?.rank)
-        .sort((a, b) => b.level - a.level)
-        .slice(0, 2);
-      const goals = [
-        gearGoal,
-        nextJobGoal(job, level),
-        ...(nearGoals.length ? nearGoals : fallbackGoals),
-        ...availableGoals
-      ];
-
-      const uniqueGoals = goals.filter((goal, index, array) => (
-        array.findIndex((item) => item.title === goal.title && item.level === goal.level) === index
-      )).slice(0, 8);
       const todayTasks = buildTodayTasks(job, level);
-      const fun = jobFunMoment(job, level);
-      const introIcon = await fetchItemIconByName(level >= 50 ? "アラガントームストーン:詩学" : "ビギナーリング");
-      const funGoal = {
-        level: fun.level,
-        title: fun.title,
-        category: "気持ちいい",
-        actionName: fun.actionName,
-        iconName: "ソウルクリスタル",
-        story: "airship",
-        detail: fun.detail,
-        action: fun.level > level ? `あと${fun.level - level}Lvで触れます。` : "今のレベルで楽しめます。"
-      };
-
-      const intro = `
-        <div class="next-card">
-          ${iconBox(introIcon, "今日メニュー")}
-          <div>
-            <h3>Lv${level} ${job.label} / ${storyLabel()} の今日メニュー</h3>
-            <p>${level < 50 ? "まずはLv50装備更新まで、武器と解放コンテンツを取り逃がさないのが近道です。" : nextGearText(level, tier)}</p>
-            <div class="next-meta">
-              <span class="next-pill hot">次に遊ぶ理由</span>
-              <span class="next-pill">スマホ用</span>
-            </div>
-          </div>
-        </div>
-      `;
-
       const todayCards = await Promise.all(todayTasks.map((goal) => renderCheckableGoal(goal, level, "today")));
-      const nextCards = await Promise.all(uniqueGoals.map((goal) => renderGoalCard(goal, level)));
-      const funCard = await renderGoalCard(funGoal, level, checkControl(`fun:${job.id}:${fun.level}`, "楽しみにする"));
       nextBoard.innerHTML = `
-        ${intro}
-        <div class="next-section-title">今日やることはこの3つ</div>
+        <div class="next-section-title">迷子防止メモ</div>
         ${todayCards.join("")}
-        <details class="more-details">
-          <summary>次に解放されるものを見る（${nextCards.length}件）</summary>
-          <div class="folded-grid">${nextCards.join("")}</div>
-        </details>
-        <details class="more-details">
-          <summary>ジョブの気持ちいい瞬間を見る</summary>
-          <div class="folded-grid">${funCard}</div>
-        </details>
       `;
     }
 

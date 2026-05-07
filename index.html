@@ -1551,6 +1551,37 @@
       text-decoration: none;
     }
 
+    .gear-tier-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .gear-tier-tab {
+      appearance: none;
+      min-height: 42px;
+      border: 1px solid rgba(32, 90, 97, 0.14);
+      border-radius: 10px;
+      background: #fffdf8;
+      color: var(--teal);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .gear-tier-tab.active {
+      background: linear-gradient(180deg, rgba(219, 189, 118, 0.92), rgba(130, 91, 37, 0.95));
+      border-color: rgba(255, 239, 178, 0.82);
+      color: #fffdf5;
+    }
+
+    .gear-set-grid {
+      display: grid;
+      gap: 8px;
+    }
+
     .next-panel {
       border-color: rgba(200, 105, 33, 0.18);
       background:
@@ -4286,6 +4317,7 @@
     let itemIconOverrides = {};
     let gearCatalog = {};
     let jobActionCatalog = {};
+    let selectedGearTierRelation = "current";
     const glamourEquipmentCache = new Map();
     const itemNameCache = new Map();
     const iconDataReady = Promise.all([
@@ -5587,27 +5619,56 @@
         : `Lv${candidate.level} ${job.label} ${gearRoleLabel(job)} 装備`;
     }
 
-    async function officialGearSearchCards(job, level) {
-      const cards = await Promise.all(gearSearchCandidates(level).map(async (candidate) => {
-        const iconUrl = await fetchItemIconByName(candidate.iconName);
-        const links = gearSearchQueries(candidate, job).map((link) => (
-          `<a href="${officialItemSearch(link.query)}" target="_blank" rel="noreferrer noopener">${link.label}</a>`
-        )).join("");
-        return `
-          <div class="gear-card">
-            ${iconBox(iconUrl, candidate.title, "gear-icon")}
-            <div>
-              <h3>${candidate.label}: ${candidate.title}</h3>
-              <p>${candidate.note}</p>
-              <div class="gear-links">
-                <a href="${officialItemSearch(fullGearSearchQuery(candidate, job))}" target="_blank" rel="noreferrer noopener">まとめて検索</a>
-                ${links}
-              </div>
+    function gearItemCard(item) {
+      return `
+        <div class="gear-card">
+          ${iconBox(item.icon, item.name, "gear-icon")}
+          <div>
+            <h3>${slotLabelByField(item.slot)}: ${item.name}</h3>
+            <p>IL${item.itemLevel} / Lv${item.equipLevel}</p>
+            <div class="gear-links">
+              <a href="${item.href}" target="_blank" rel="noreferrer noopener">公式DBで入手法を見る</a>
             </div>
           </div>
+        </div>
+      `;
+    }
+
+    async function officialGearSearchCards(job, level) {
+      const candidates = gearSearchCandidates(level);
+      const activeCandidate = candidates.find((candidate) => candidate.relation === selectedGearTierRelation) || candidates[1] || candidates[0];
+      const tabs = candidates.map((candidate) => `
+        <button class="gear-tier-tab ${candidate === activeCandidate ? "active" : ""}" type="button" data-gear-relation="${candidate.relation}">
+          ${candidate.label}<br>${candidate.title}
+        </button>
+      `).join("");
+      const directItems = activeCandidate.tier ? catalogGearItems(job, activeCandidate.tier) : null;
+      if (directItems?.length) {
+        return `
+          <div class="gear-tier-tabs">${tabs}</div>
+          <div class="gear-set-grid">
+            ${directItems.map(gearItemCard).join("")}
+          </div>
         `;
-      }));
-      return cards.join("");
+      }
+      const iconUrl = await fetchItemIconByName(activeCandidate.iconName);
+      const links = gearSearchQueries(activeCandidate, job).map((link) => (
+        `<a href="${officialItemSearch(link.query)}" target="_blank" rel="noreferrer noopener">${link.label}</a>`
+      )).join("");
+      return `
+        <div class="gear-tier-tabs">${tabs}</div>
+        <div class="gear-card">
+          ${iconBox(iconUrl, activeCandidate.title, "gear-icon")}
+          <div>
+            <h3>${activeCandidate.label}: ${activeCandidate.title}</h3>
+            <p>Lv50未満は公式DB検索で候補を確認します。</p>
+            <div class="gear-links">
+              <a href="${officialItemSearch(fullGearSearchQuery(activeCandidate, job))}" target="_blank" rel="noreferrer noopener">まとめて検索</a>
+              ${links}
+            </div>
+          </div>
+        </div>
+      `;
     }
 
     function gearReferenceCards(job, level, tier, poeticsIcon, guideIcon) {
@@ -6485,6 +6546,14 @@
       saveProfile();
       updateProfileSummary();
       renderShoppingList();
+    });
+    gearList.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-gear-relation]");
+      if (!button) {
+        return;
+      }
+      selectedGearTierRelation = button.dataset.gearRelation || "current";
+      renderGearFinder();
     });
     document.addEventListener("change", (event) => {
       const check = event.target.closest("[data-check-key]");

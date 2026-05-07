@@ -5479,8 +5479,10 @@
       return gearSlots.find((slot) => slot.field === field)?.label || field;
     }
 
-    function catalogGearItems(job, tier) {
-      return gearCatalog[job.id]?.[String(tier.min)] || null;
+    function catalogGearItems(job, bandOrTier) {
+      const key = bandOrTier?.key || String(bandOrTier?.min || "");
+      const entry = gearCatalog[job.id]?.[key] || null;
+      return Array.isArray(entry) ? entry : entry?.items || null;
     }
 
     function gearPriorityText(field) {
@@ -5532,106 +5534,69 @@
     }
 
     function gearApproachText(level, tier) {
-      if (level < 50) {
-        return "一つ下、今の適正、一つ上を公式DBで検索します。クリック先のアイテムページで入手方法を確認できます。";
-      }
-      return `${tier.label}を基準に、一つ下、今の適正、一つ上を公式DBで検索します。クリック先のアイテムページで入手方法を確認できます。`;
+      const band = currentGearBand(level);
+      return `${band.label}を基準に、一つ下、今の適正、一つ上の装備一式を表示します。クリック先の公式DBで入手方法を確認できます。`;
     }
 
-    function highGearTiersAscending() {
-      return [...gearTiers].sort((a, b) => a.min - b.min);
+    function gearBands() {
+      return Array.from({ length: 16 }, (_, index) => {
+        const min = index * 5 + 1;
+        const max = Math.min(80, min + 4);
+        return { key: String(min), min, max, label: `Lv${min}-${max}` };
+      });
     }
 
-    function lowRecommendedLevel(level) {
-      if (level < 10) {
-        return 1;
-      }
-      return Math.min(45, Math.max(5, Math.floor(level / 5) * 5));
-    }
-
-    function lowGearCandidate(level, label, relation) {
-      return {
-        label,
-        relation,
-        level,
-        title: `Lv${level}装備`,
-        iconName: level < 15 ? "ビギナーリング" : "クリスタル",
-        note: "公式DB検索。クエスト報酬、ID品、店売り、製作装備の候補を見ます。"
-      };
-    }
-
-    function tierGearCandidate(tier, label, relation) {
-      return {
-        label,
-        relation,
-        level: tier.min,
-        title: `${tier.label} IL${tier.ilvl}`,
-        tier,
-        iconName: "アラガントームストーン:詩学",
-        note: "詩学装備の公式DB検索。入手先は各アイテムページで確認します。"
-      };
+    function currentGearBand(level) {
+      return gearBands().find((band) => level >= band.min && level <= band.max) || gearBands()[0];
     }
 
     function gearSearchCandidates(level) {
-      const tiers = highGearTiersAscending();
-      if (level < 50) {
-        const current = lowRecommendedLevel(level);
-        return [
-          lowGearCandidate(Math.max(1, current - 5), "一つ下", "below"),
-          lowGearCandidate(current, "今の適正", "current"),
-          current >= 45
-            ? tierGearCandidate(tiers[0], "一つ上", "above")
-            : lowGearCandidate(current + 5, "一つ上", "above")
-        ];
-      }
-      const currentIndex = Math.max(0, tiers.findIndex((tier, index) => (
-        level >= tier.min && (!tiers[index + 1] || level < tiers[index + 1].min)
-      )));
-      const currentTier = tiers[currentIndex] || tiers[0];
-      const below = tiers[currentIndex - 1] || lowGearCandidate(45, "一つ下", "below");
-      const above = tiers[currentIndex + 1] || currentTier;
+      const bands = gearBands();
+      const currentIndex = Math.max(0, bands.findIndex((band) => level >= band.min && level <= band.max));
+      const current = bands[currentIndex] || bands[0];
+      const below = bands[currentIndex - 1] || current;
+      const above = bands[currentIndex + 1] || current;
       return [
-        below.min ? tierGearCandidate(below, "一つ下", "below") : below,
-        tierGearCandidate(currentTier, "今の適正", "current"),
-        tierGearCandidate(above, tiers[currentIndex + 1] ? "一つ上" : "上限", "above")
+        { ...below, title: below.label, label: "一つ下", relation: "below" },
+        { ...current, title: current.label, label: "今の適正", relation: "current" },
+        { ...above, title: above.label, label: bands[currentIndex + 1] ? "一つ上" : "上限", relation: "above" }
       ];
-    }
-
-    function gearSearchQueries(candidate, job) {
-      const role = gearRoleLabel(job);
-      if (candidate.tier) {
-        return [
-          { label: "武器", query: `${candidate.tier.label} ${job.label} 武器` },
-          { label: "防具", query: `${candidate.tier.label} ${role}` },
-          { label: "アクセ", query: `${candidate.tier.label} ${role} アクセサリ` }
-        ];
-      }
-      return [
-        { label: "武器", query: `Lv${candidate.level} ${job.label} 武器` },
-        { label: "防具", query: `Lv${candidate.level} ${role} 防具` },
-        { label: "アクセ", query: `Lv${candidate.level} ${job.label} アクセサリ` }
-      ];
-    }
-
-    function fullGearSearchQuery(candidate, job) {
-      return candidate.tier
-        ? `${candidate.tier.label} ${job.label} ${gearRoleLabel(job)}`
-        : `Lv${candidate.level} ${job.label} ${gearRoleLabel(job)} 装備`;
     }
 
     function gearItemCard(item) {
+      const fallback = item.sourceBand && item.sourceBand !== item.activeBand
+        ? `<span class="next-pill locked">${item.sourceBand}</span>`
+        : "";
       return `
         <div class="gear-card">
           ${iconBox(item.icon, item.name, "gear-icon")}
           <div>
             <h3>${slotLabelByField(item.slot)}: ${item.name}</h3>
-            <p>IL${item.itemLevel} / Lv${item.equipLevel}</p>
+            <p>IL${item.itemLevel} / Lv${item.equipLevel} ${fallback}</p>
             <div class="gear-links">
               <a href="${item.href}" target="_blank" rel="noreferrer noopener">公式DBで入手法を見る</a>
             </div>
           </div>
         </div>
       `;
+    }
+
+    function completeGearSet(job, candidate) {
+      const slots = gearSlots.filter((slot) => !slot.jobs || slot.jobs.includes(job.id));
+      const bands = gearBands();
+      const currentIndex = bands.findIndex((band) => band.key === candidate.key);
+      const searchOrder = [0, -1, -2, 1, -3, 2]
+        .map((offset) => bands[currentIndex + offset])
+        .filter(Boolean);
+      return slots.map((slot) => {
+        for (const band of searchOrder) {
+          const found = gearCatalog[job.id]?.[band.key]?.items?.find((item) => item.slot === slot.field);
+          if (found) {
+            return { ...found, activeBand: candidate.label, sourceBand: band.label };
+          }
+        }
+        return null;
+      }).filter(Boolean);
     }
 
     async function officialGearSearchCards(job, level) {
@@ -5642,7 +5607,7 @@
           ${candidate.label}<br>${candidate.title}
         </button>
       `).join("");
-      const directItems = activeCandidate.tier ? catalogGearItems(job, activeCandidate.tier) : null;
+      const directItems = completeGearSet(job, activeCandidate);
       if (directItems?.length) {
         return `
           <div class="gear-tier-tabs">${tabs}</div>
@@ -5651,21 +5616,13 @@
           </div>
         `;
       }
-      const iconUrl = await fetchItemIconByName(activeCandidate.iconName);
-      const links = gearSearchQueries(activeCandidate, job).map((link) => (
-        `<a href="${officialItemSearch(link.query)}" target="_blank" rel="noreferrer noopener">${link.label}</a>`
-      )).join("");
       return `
         <div class="gear-tier-tabs">${tabs}</div>
         <div class="gear-card">
-          ${iconBox(iconUrl, activeCandidate.title, "gear-icon")}
+          ${iconBox(await fetchItemIconByName("クリスタル"), activeCandidate.title, "gear-icon")}
           <div>
             <h3>${activeCandidate.label}: ${activeCandidate.title}</h3>
-            <p>Lv50未満は公式DB検索で候補を確認します。</p>
-            <div class="gear-links">
-              <a href="${officialItemSearch(fullGearSearchQuery(activeCandidate, job))}" target="_blank" rel="noreferrer noopener">まとめて検索</a>
-              ${links}
-            </div>
+            <p>この帯の装備データが足りません。レベル帯を切り替えて確認してください。</p>
           </div>
         </div>
       `;
@@ -5678,7 +5635,7 @@
           ${iconBox(guideIcon, "適正装備の考え方", "gear-icon")}
           <div>
             <h3>装備の考え方</h3>
-            <p>${level < 50 ? "さいきょう装備でOK。" : `${currentTier.label}を節目で更新。`}</p>
+            <p>近いLv帯の一式を見て、武器、胴、脚から更新。迷ったらゲーム内のさいきょう装備で確認。</p>
             <div class="gear-links">
               <a href="https://jp.finalfantasyxiv.com/uiguide/equipment/equipment-saikyo/equipment_best.html" target="_blank" rel="noreferrer noopener">さいきょう装備</a>
             </div>
@@ -6364,6 +6321,7 @@
       const job = gearJobs.find((item) => item.id === gearJob.value) || gearJobs.find((item) => item.id === "SMN");
       const level = Math.min(80, Math.max(1, Number(gearLevel.value) || 1));
       gearLevel.value = level;
+      await iconDataReady;
       if (level < job.min) {
         gearSummary.innerHTML = `
           <h3>${job.label}はLv${job.min}から使えます</h3>

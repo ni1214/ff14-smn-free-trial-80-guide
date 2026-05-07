@@ -2263,19 +2263,8 @@
     </nav>
 
     <section class="panel cockpit-panel feature-panel" id="cockpit" data-feature="rotation">
-      <h2>ジョブレベル別スキル回し</h2>
-      <p class="footer-note">上の「マイキャラ」に合わせて、Game8のレベル別スキル回し記事へ移動します。</p>
+      <h2>スキル回しリンク</h2>
       <div class="tool-grid">
-        <div class="control-card">
-          <div>
-            <label for="cockpitMode">見たい回し</label>
-            <select id="cockpitMode">
-              <option value="single">単体 / ボス</option>
-              <option value="aoe">3体以上 / まとめ</option>
-              <option value="opener">開幕/バースト</option>
-            </select>
-          </div>
-        </div>
         <div class="answer-card" id="cockpitAnswer"></div>
       </div>
     </section>
@@ -2384,51 +2373,26 @@
       </details>
     </section>
 
-    <section class="panel feature-panel" id="summary" data-feature="rotation">
-      <h2>まず結論</h2>
+    <section class="panel feature-panel" id="summary" data-feature="rotation" hidden>
+      <h2>必要なリンク</h2>
       <div class="lead-grid" id="jobSummaryGrid"></div>
     </section>
 
-    <section class="panel feature-panel" data-feature="rotation">
+    <section class="panel feature-panel" data-feature="rotation" hidden>
       <h2 id="growthTitle">成長マップ</h2>
-      <p class="footer-note" id="growthNote">レベルシンクで急に押すボタンが減っても、この節目だけ覚えておけば戻しやすいです。</p>
+      <p class="footer-note" id="growthNote"></p>
       <div class="milestones" id="milestones"></div>
     </section>
 
-    <section class="panel feature-panel" data-feature="rotation">
-      <h2>スキル説明リンク</h2>
-      <p class="footer-note" id="skillListNote">選んだジョブの公式ジョブガイドへ移動します。</p>
+    <section class="panel feature-panel" data-feature="rotation" hidden>
+      <h2>スキル説明</h2>
+      <p class="footer-note" id="skillListNote"></p>
       <div class="skill-list" id="skillList"></div>
-    </section>
-
-    <section class="panel feature-panel" data-feature="rotation">
-      <h2>外部ページの見方</h2>
-      <div class="mini-grid">
-        <div class="quick-block">
-          <strong>スキル回し</strong>
-          レベルごとの順番はGame8の記事で確認します。単体、範囲、開幕の表がある場合は、今行くコンテンツに近いものを見ます。
-        </div>
-        <div class="quick-block">
-          <strong>スキル説明</strong>
-          威力、効果時間、修得レベル、特性による置き換わりは公式ジョブガイドで確認します。
-        </div>
-        <div class="quick-block">
-          <strong>レベルシンク</strong>
-          低レベルIDでは使えるボタンが減ります。Game8に近いレベルの記事がない場合は、現在Lv検索から近い記事を探します。
-        </div>
-        <div class="quick-block">
-          <strong>この資料の前提</strong>
-          パッチで変わりやすい内容は外部の更新元へ任せ、ここは目的のページへ迷わず移動する入口にします。
-        </div>
-      </div>
     </section>
 
     <div class="feature-panel" id="sections" data-feature="rotation"></div>
 
-    <section class="panel feature-panel" data-feature="rotation">
-      <h2>ユーティリティの使いどころ</h2>
-      <div class="utility" id="utility"></div>
-    </section>
+    <div class="feature-panel" id="utility" data-feature="rotation"></div>
 
     <section class="panel feature-panel" id="sources" data-feature="sources">
       <h2>出典</h2>
@@ -4375,24 +4339,17 @@
     async function renderCockpit() {
       const job = selectedRotationJob();
       const level = selectedRotationLevel();
-      const mode = cockpitMode.value;
-      const modeTitle = {
-        single: "単体 / ボス",
-        aoe: "3体以上 / まとめ",
-        opener: "開幕 / バースト"
-      }[mode] || "単体 / ボス";
 
       await renderSkillList(job, level);
       cockpitAnswer.innerHTML = `
-        <h3>Lv${level} ${job.label}: Game8のレベル別スキル回しへ</h3>
-        <p>${modeTitle}の具体的な順番は、更新が早いGame8の記事で確認します。このページ内には古くなりやすい回しを固定表示しません。</p>
+        <h3>${job.label} Lv${level}</h3>
         <div class="external-link-grid">
           ${game8RotationCards(job, level)}
           ${externalLinkCard({
-            title: `${job.label}の公式ジョブガイド`,
-            text: "アクション説明、特性、修得レベル、ジョブHUDは公式ページで確認します。",
+            title: "公式ジョブガイド",
+            text: "スキル説明、修得Lv、特性。",
             url: officialJobGuideUrl(job.id),
-            label: "公式ジョブガイドを開く",
+            label: "公式を開く",
             secondary: true
           })}
         </div>
@@ -5235,35 +5192,22 @@
 
     function game8RotationCards(job, level) {
       const nearest = nearestGame8Rotation(job, level);
-      const levels = game8RotationLevels(job.id);
       const searchUrl = game8SiteSearchUrl(`${job.label} スキル回し Lv${level}`);
       const cards = [{
-        title: `Lv${level}に近いスキル回し`,
+        title: `スキル回し: Lv${nearest.level}`,
         text: nearest.direct
-          ? `Game8のLv${nearest.level}記事を開きます。今のレベルに近い回しを外部ページで確認します。`
-          : `Game8内で${job.label}のLv${level}向けスキル回しを検索します。`,
+          ? `${job.label} / Lv${level}用。`
+          : `${job.label} / Lv${level}で検索。`,
         url: nearest.url,
-        label: nearest.direct ? `Game8 Lv${nearest.level}を開く` : "Game8で検索",
+        label: nearest.direct ? "Game8を開く" : "Game8で検索",
         secondary: false
       }];
 
-      levels
-        .filter((item) => item !== nearest.level)
-        .forEach((item) => {
-          cards.push({
-            title: `${job.label} Lv${item}スキル回し`,
-            text: `Game8の${job.label} Lv${item}向けスキル回し記事へ移動します。`,
-            url: game8RotationUrl(job, item),
-            label: `Lv${item}記事を開く`,
-            secondary: true
-          });
-        });
-
       cards.push({
-        title: "別レベルの記事を探す",
-        text: "Game8側に新しいレベル別記事が追加された時は、検索から最新候補を確認できます。",
+        title: "別レベルを探す",
+        text: "近い記事が違う時だけ。",
         url: searchUrl,
-        label: "Game8で現在Lvを検索",
+        label: "検索する",
         secondary: true
       });
 
@@ -5295,28 +5239,17 @@
 
     async function renderSkillList(job, level) {
       await actionCatalogReady;
-      const actions = actionsForJob(job.id);
       if (!skillList || !skillListNote) {
         return;
       }
-      const learnedCount = actions.filter((action) => action.level <= level).length;
-      skillListNote.textContent = actions.length
-        ? `このページ内の説明文は固定表示せず、公式ジョブガイドへ移動します。参考: Lv${level}時点で習得済み ${learnedCount}件 / Lv80まで ${actions.length}件。`
-        : `${job.label}のアクション説明は公式ジョブガイドで確認します。`;
+      skillListNote.textContent = "";
       skillList.innerHTML = `
         <div class="external-link-grid">
           ${externalLinkCard({
-            title: `${job.label} 公式ジョブガイド`,
-            text: "アクション、特性、修得レベル、ジョブHUD、パッチ反映後の説明を公式ページで確認します。",
+            title: "公式ジョブガイド",
+            text: `${job.label} / スキル説明`,
             url: officialJobGuideUrl(job.id),
-            label: "公式ジョブガイドを開く"
-          })}
-          ${externalLinkCard({
-            title: `${job.label}のスキル回しも確認`,
-            text: "スキル説明を見たあと、そのレベルでの回しはGame8の記事へ移動します。",
-            url: nearestGame8Rotation(job, level).url,
-            label: "Game8スキル回しを開く",
-            secondary: true
+            label: "公式を開く"
           })}
         </div>
       `;
@@ -5342,89 +5275,37 @@
       const job = selectedRotationJob();
       const level = selectedRotationLevel();
       await renderSkillList(job, level);
-      const rotationLevels = game8RotationLevels(job.id);
       const nearest = nearestGame8Rotation(job, level);
-      const steps = rotationLevels.length
-        ? rotationLevels.map((item, index) => `
-          <span class="flow-step ${flowClass(index)}">Lv${item} Game8</span>
-        `).join("")
-        : `<span class="flow-step ruby">Game8検索</span>`;
       jobSummaryGrid.innerHTML = `
         <div class="quick-block">
-          <strong>${job.label}の確認先</strong>
-          <div class="flow">${steps}</div>
-          <div class="mantra">
-            スキル回しはGame8、アクション説明は公式ジョブガイドへ移動します。パッチで数字や順番が変わっても、ここから更新済みページを開けます。
+          <strong>スキル回し</strong>
+          <div class="external-link-actions">
+            ${externalGuideButton(nearest.url, nearest.direct ? `Game8 Lv${nearest.level}` : "Game8で検索")}
           </div>
         </div>
         <div class="quick-block">
-          <strong>今開くなら</strong>
-          <ul>
-            <li>Lv${level}に近いGame8記事: ${nearest.direct ? `Lv${nearest.level}` : "Game8検索"}</li>
-            <li>各スキルの効果と修得レベル: 公式ジョブガイド</li>
-            <li>Game8に別レベルの記事が追加された時は、検索リンクから確認できます。</li>
-          </ul>
-        </div>
-      `;
-      growthTitle.textContent = `${job.label} 外部ガイドリンク`;
-      growthNote.textContent = `選んだジョブとレベルに合わせて、Game8のレベル別スキル回しと公式ジョブガイドへ移動します。`;
-
-      const milestoneTargets = rotationLevels.length ? rotationLevels : [level];
-      const milestoneHtml = milestoneTargets.map((item) => `
-        <div class="milestone">
-          <div class="lv">Lv${item}</div>
-          <div>
-            <p>${job.label} Lv${item}のスキル回しをGame8で確認します。</p>
-            <div class="external-link-actions">
-              ${externalGuideButton(game8RotationUrl(job, item), `Game8 Lv${item}を開く`, item !== nearest.level)}
-            </div>
+          <strong>スキル説明</strong>
+          <div class="external-link-actions">
+            ${externalGuideButton(officialJobGuideUrl(job.id), "公式ジョブガイド", true)}
           </div>
         </div>
-      `);
-      document.getElementById("milestones").innerHTML = milestoneHtml.join("");
+      `;
+      growthTitle.textContent = "";
+      growthNote.textContent = "";
+      document.getElementById("milestones").innerHTML = "";
 
       currentGuideSections = [{
         title: `${job.label} Game8スキル回し`,
         href: "#cockpit",
-        text: `${job.label} Game8 スキル回し Lv${level} ${rotationLevels.join(" ")}`
+        text: `${job.label} Game8 スキル回し Lv${level}`
       }, {
         title: `${job.label} 公式ジョブガイド`,
         href: "#skillList",
         text: `${job.label} 公式ジョブガイド アクション 特性 修得レベル`
       }];
 
-      document.getElementById("sections").innerHTML = `
-        <section class="section-card" id="job-${job.id.toLowerCase()}-external">
-          <div class="section-top">
-            <div>
-              <div class="level-tag">${job.label} / Lv${level}</div>
-              <h2>スキル回しとスキル説明の移動先</h2>
-            </div>
-          </div>
-          <div class="section-grid">
-            <div class="subcard">
-              <h3>スキル回し</h3>
-              <p class="footer-note">Game8のレベル別記事へ移動します。</p>
-              <div class="external-link-grid">${game8RotationCards(job, level)}</div>
-            </div>
-            <div class="subcard">
-              <h3>アクション説明</h3>
-              <p class="footer-note">公式ジョブガイドで、スキル説明と修得レベルを確認します。</p>
-              <div class="external-link-actions">
-                ${externalGuideButton(officialJobGuideUrl(job.id), "公式ジョブガイドを開く")}
-              </div>
-            </div>
-          </div>
-        </section>
-      `;
-      document.getElementById("utility").innerHTML = `
-        <div class="utility-line">
-          <p><strong>ロールアクションも公式で確認</strong><br>各ジョブページ内のロールアクション欄から、最新の効果と修得条件を確認します。</p>
-          <div class="external-link-actions">
-            ${externalGuideButton(officialJobGuideUrl(job.id), "公式ジョブガイドを開く")}
-          </div>
-        </div>
-      `;
+      document.getElementById("sections").innerHTML = "";
+      document.getElementById("utility").innerHTML = "";
       renderSearchResults();
     }
 
@@ -6521,7 +6402,7 @@
         activateFeature(feature);
       }
     });
-    cockpitMode.addEventListener("change", renderCockpit);
+    cockpitMode?.addEventListener("change", renderCockpit);
     document.getElementById("resourceTabs").addEventListener("click", (event) => {
       const button = event.target.closest(".resource-tab");
       if (!button) {

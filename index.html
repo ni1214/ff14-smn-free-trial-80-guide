@@ -4345,8 +4345,33 @@
       return page > 1 ? `${baseUrl}?page=${page}` : baseUrl;
     }
 
-    function eorzeaReaderUrl(url) {
-      return `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(`https://r.jina.ai/http://${url}`)}`;
+    function eorzeaReaderUrl(url, attempt = 0) {
+      const readerUrl = `https://r.jina.ai/http://${url}`;
+      const cacheBust = attempt ? `&retry=${attempt}-${Date.now()}` : "";
+      return `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(readerUrl)}${cacheBust}`;
+    }
+
+    async function fetchReaderText(url, { attempts = 3, timeout = 14000, cache = "no-store" } = {}) {
+      let lastError = null;
+      for (let attempt = 0; attempt < attempts; attempt += 1) {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), timeout);
+        try {
+          const response = await fetch(eorzeaReaderUrl(url, attempt), {
+            cache,
+            signal: controller.signal
+          });
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+          return await response.text();
+        } catch (error) {
+          lastError = error;
+        } finally {
+          clearTimeout(timer);
+        }
+      }
+      throw lastError || new Error("Reader request failed");
     }
 
     function fallbackGlamoursForRace(race = "") {
@@ -4415,16 +4440,13 @@
       if (itemNameCache.has(itemId)) {
         return itemNameCache.get(itemId);
       }
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 14000);
       try {
-        const response = await fetch(eorzeaReaderUrl(lodestoneItemUrl(itemId)), {
-          cache: "force-cache",
-          signal: controller.signal
+        const markdown = await fetchReaderText(lodestoneItemUrl(itemId), {
+          attempts: 2,
+          timeout: 12000,
+          cache: "force-cache"
         });
-        const name = response.ok
-          ? japaneseItemNameFromMarkdown(await response.text(), itemId)
-          : fallbackName;
+        const name = japaneseItemNameFromMarkdown(markdown, itemId) || fallbackName;
         const displayName = name && !name.startsWith("公式DB item/") ? name : (fallbackName || `item/${itemId}`);
         itemNameCache.set(itemId, displayName);
         return displayName;
@@ -4432,8 +4454,6 @@
         const fallbackDisplayName = fallbackName || `item/${itemId}`;
         itemNameCache.set(itemId, fallbackDisplayName);
         return fallbackDisplayName;
-      } finally {
-        clearTimeout(timer);
       }
     }
 
@@ -4499,25 +4519,31 @@
       if (glamourEquipmentCache.has(source)) {
         return glamourEquipmentCache.get(source);
       }
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 14000);
       try {
-        const response = await fetch(eorzeaReaderUrl(source), {
-          cache: "force-cache",
-          signal: controller.signal
+        const markdown = await fetchReaderText(source, {
+          attempts: 4,
+          timeout: 15000,
+          cache: "no-store"
         });
-        if (!response.ok) {
-          return [];
-        }
-        const parsedItems = parseEorzeaEquipmentItems(await response.text()).slice(0, 12);
-        const items = await resolveJapaneseEquipmentItems(parsedItems);
+        const items = parseEorzeaEquipmentItems(markdown).slice(0, 12).map((item) => ({
+          ...item,
+          name: item.englishName || `item/${item.id}`
+        }));
         glamourEquipmentCache.set(source, items);
         return items;
       } catch (error) {
         return [];
-      } finally {
-        clearTimeout(timer);
       }
+    }
+
+    async function enhanceGlamourEquipmentNames(panel, items) {
+      await Promise.allSettled(items.map(async (item) => {
+        const name = await fetchJapaneseItemName(item.id, item.englishName || item.name);
+        const target = panel.querySelector(`[data-glamour-item-name="${item.id}"]`);
+        if (target && name) {
+          target.textContent = name;
+        }
+      }));
     }
 
     function glamourEntryKey(entry) {
@@ -4565,18 +4591,15 @@
     }
 
     async function fetchEorzeaGlamourPage(race = "", page = 1) {
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), page === 1 ? 10000 : 14000);
       try {
-        const response = await fetch(eorzeaReaderUrl(eorzeaGlamourUrl(race, page)), {
-          cache: "no-store",
-          signal: controller.signal
+        const markdown = await fetchReaderText(eorzeaGlamourUrl(race, page), {
+          attempts: 2,
+          timeout: page === 1 ? 10000 : 14000,
+          cache: "no-store"
         });
-        return response.ok ? parseEorzeaGlamours(await response.text()) : [];
+        return parseEorzeaGlamours(markdown);
       } catch (error) {
         return [];
-      } finally {
-        clearTimeout(timer);
       }
     }
 
@@ -4708,10 +4731,11 @@
         }
         panel.dataset.equipmentState = "loaded";
         panel.innerHTML = `
-          <p>日本語版Lodestoneの公式DBで開きます。染色や組み合わせは元投稿側も確認できます。</p>
-          ${items.map((item) => `<a class="glamour-equipment-link" href="${item.url}" target="_blank" rel="noreferrer noopener"><span class="glamour-equipment-slot">${escapeHtml(item.slotLabel || "装備")}</span><span>${escapeHtml(item.name)}</span></a>`).join("")}
+          <p>まず投稿側の装備名を表示し、日本語名が取れた行から自動で差し替えます。</p>
+          ${items.map((item) => `<a class="glamour-equipment-link" href="${item.url}" target="_blank" rel="noreferrer noopener"><span class="glamour-equipment-slot">${escapeHtml(item.slotLabel || "装備")}</span><span data-glamour-item-name="${escapeHtml(item.id)}">${escapeHtml(item.name)}</span></a>`).join("")}
           <a class="glamour-equipment-link" href="${safeSource}" target="_blank" rel="noreferrer noopener"><span class="glamour-equipment-slot">投稿</span><span>元投稿も開く</span></a>
         `;
+        enhanceGlamourEquipmentNames(panel, items);
       } catch (error) {
         panel.dataset.equipmentState = "failed";
         panel.innerHTML = `<p>装備名を読み込めませんでした。時間を置いてもう一度ボタンを押してください。</p>`;

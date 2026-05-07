@@ -2300,16 +2300,15 @@
 
     <section class="panel gear-panel feature-panel active" id="gearFinder" data-feature="gear">
       <h2>装備/入手法</h2>
-      <p class="footer-note">上の「マイキャラ」から、無料範囲でまず揃えたい装備、入手先、交換順、詩学目安をまとめて出します。武器からアクセサリーまで最初から表示します。</p>
       <div class="gear-summary" id="gearSummary">
         <h3>マイキャラ設定で装備を表示</h3>
-        <p>武器・防具・アクセの候補をゲーム内アイコン付きで表示します。</p>
+        <p>今見る装備だけ表示します。</p>
       </div>
       <div class="gear-list" id="gearList"></div>
-      <div class="shopping-head">
+      <div class="shopping-head" hidden>
         <div class="shopping-summary" id="shoppingSummary">所持詩学を入れると今日買える目安を出します。</div>
       </div>
-      <div class="next-board" id="shoppingBoard"></div>
+      <div class="next-board" id="shoppingBoard" hidden></div>
     </section>
 
     <section class="panel next-panel feature-panel" id="nextPlanner" data-feature="goals">
@@ -5357,63 +5356,43 @@
 
     async function renderLowLevelGear(job, level) {
       const plan = lowLevelGearPlans.find((item) => level >= item.min && level <= item.max) || lowLevelGearPlans[0];
-      const beginnerItems = beginnerGearByRole[job.role] || beginnerGearByRole.caster;
       const nextTier = gearTiers[gearTiers.length - 1];
       gearSummary.innerHTML = `
         <h3>Lv${level} ${job.label}: ${plan.title}</h3>
-        <p>${plan.reason}<br>あと${levelDelta(level, 50)}Lvで${nextTier.label} IL${nextTier.ilvl}が見えてきます。</p>
+        <p>${plan.reason}</p>
         <div class="life-meter" aria-hidden="true"><span style="--meter:${Math.min(100, Math.round((level / 50) * 100))}%"></span></div>
       `;
-      const beginnerHallCards = [
+      const concreteItems = level < 30 ? [
         {
           name: "ビギナーリング",
-          title: "初心者の館への行き方",
-          text: "Lv15以上のバトルクラスで、三都市の冒険者ギルド付近にいるNPC「冒険者指導教官」へ。リムサ・ロミンサ: 上甲板層 X11.5 Y11.3、グリダニア: 新市街 X11.7 Y13.1、ウルダハ: ナル回廊 X11.8 Y9.6 が目印です。開放後はメインコマンド「コンテンツ情報」→「初心者の館」から再挑戦できます。最後まで進めるとビギナーリングがもらえます。"
+          title: "初心者の館",
+          text: "Lv15で行く。ビギナー装備とリング。"
         },
-        ...beginnerItems.map((item) => ({
-          name: item.name,
-          title: `${item.slot}: ${item.name}`,
-          text: `${item.source}で入手。Lv15-29の防具と指輪はここを取れば十分強く、Lv20でも迷わずこれでOKです。`
-        })),
         {
           name: plan.iconName,
-          title: "武器: レベルに近いもの",
-          text: `${job.className || job.label}クエスト報酬を最優先。古ければ現在行ける街の武器屋、または直近IDドロップで更新。`
+          title: "武器",
+          text: "クエスト報酬か直近ID品。"
         }
-      ];
-      const levelingCards = [
+      ] : [
         {
           name: "ソウルクリスタル",
           title: "ジョブクリスタル",
-          text: "Lv30以降はジョブクリスタル装備が最優先。クラスのままだと強いアクションが使えません。"
+          text: "Lv30以降は最優先。"
         },
         {
           name: plan.iconName,
-          title: "武器: ジョブクエスト報酬 / 直近IDドロップ",
-          text: `${job.label}で装備できる武器を、ジョブクエスト報酬、直近IDドロップ、店売りの順で更新。Lv40ならビギナー武器ではなく、Lv35-41付近の武器を狙います。`
-        },
-        {
-          name: "ビギナーリング",
-          title: "ビギナー装備は卒業目安",
-          text: "Lv40でビギナー装備が主役として出るのは不親切でした。Lv30以降は「マイキャラクター」→「さいきょう」で更新し、足りない部位を直近IDドロップ、メイン/ジョブクエスト報酬、グランドカンパニー軍票装備、店売りで補います。"
+          title: "武器",
+          text: "ジョブクエスト報酬か直近ID品。"
         },
         {
           name: "クリスタル",
-          title: "Lv45ジョブクエスト防具",
-          text: "Lv45になったらジョブクエストで専用防具を回収。Lv50直前なので高額な買い物は避け、Lv50でガーロンドREへ一気に更新します。"
-        }
-      ];
-      const concreteItems = [
-        ...(level < 30 ? beginnerHallCards : levelingCards),
-        ...(level < 30 ? [{
-          name: "ソウルクリスタル",
-          title: "Lv30でジョブ化",
-          text: `あと${levelDelta(level, 30)}Lvでジョブ化。Lv30クラスクエスト完了後に必ずジョブクリスタルを装備します。`
-        }] : []),
+          title: "さいきょう装備",
+          text: "迷ったら押す。"
+        },
         {
           name: "アラガントームストーン:詩学",
-          title: "次の大更新: ガーロンドRE",
-          text: `Lv50到達後、メインクエストクリアまで進めると${nextTier.label} IL${nextTier.ilvl}が見えてきます。武器、胴、脚から交換すると一気に楽になります。`
+          title: `次: ${nextTier.label}`,
+          text: "Lv50到達後、武器/胴/脚から。"
         }
       ];
       const itemCards = await Promise.all(concreteItems.map(async (item) => {
@@ -5537,10 +5516,9 @@
         <div class="gear-card">
           ${iconBox(guideIcon, "適正装備の考え方", "gear-icon")}
           <div>
-            <h3>レベル別の適正装備</h3>
-            <p>${gearApproachText(level, tier)}</p>
+            <h3>装備の考え方</h3>
+            <p>${level < 50 ? "さいきょう装備でOK。" : `${currentTier.label}を節目で更新。`}</p>
             <div class="gear-links">
-              <a href="https://game8.jp/ff14/539537" target="_blank" rel="noreferrer noopener">Game8装備まとめ</a>
               <a href="https://jp.finalfantasyxiv.com/uiguide/equipment/equipment-saikyo/equipment_best.html" target="_blank" rel="noreferrer noopener">さいきょう装備</a>
             </div>
           </div>
@@ -5548,11 +5526,11 @@
         <div class="gear-card">
           ${iconBox(poeticsIcon, "ロウェナ商会と詩学", "gear-icon")}
           <div>
-            <h3>ロウェナ商会の解放目安</h3>
+            <h3>詩学/交換場所</h3>
             <p>${rowenaUnlockText(currentTier)}</p>
             <div class="gear-links">
               <a href="https://game8.jp/ff14/455613" target="_blank" rel="noreferrer noopener">詩学の集め方</a>
-              <a href="https://jp.finalfantasyxiv.com/lodestone/playguide/db/" target="_blank" rel="noreferrer noopener">公式DB</a>
+              <a href="https://game8.jp/ff14/539537" target="_blank" rel="noreferrer noopener">Game8装備</a>
             </div>
           </div>
         </div>
@@ -5869,6 +5847,31 @@
         .map((slot) => ({ title: staticGearTitle(tier, job, slot), iconName: "アラガントームストーン:詩学", cost: costs[slot.field] || 280, text: `${tier.vendor} ${gearPriorityText(slot.field)}`, href: officialItemSearch(`${tier.label} ${job.label} ${slot.label}`), key: `${job.id}:${tier.min}:${slot.field}` }));
     }
 
+    function priorityShoppingItems(job, level, count = 3) {
+      return shoppingItems(job, level).slice(0, count);
+    }
+
+    async function gearPriorityCards(job, level, canExchangeTier = true) {
+      const items = priorityShoppingItems(job, level, 3);
+      const cards = await Promise.all(items.map(async (item, index) => {
+        const iconUrl = item.iconUrl || await fetchItemIconByName(item.iconName);
+        const costText = item.costLabel || `${item.cost}詩学`;
+        return `
+          <div class="gear-card">
+            ${iconBox(iconUrl, item.title, "gear-icon")}
+            <div>
+              <h3>${index + 1}. ${item.title}</h3>
+              <p>${canExchangeTier ? costText : "まだ温存"}</p>
+              <div class="gear-links">
+                <a href="${item.href}" target="_blank" rel="noreferrer noopener">${item.linkLabel || "確認"}</a>
+              </div>
+            </div>
+          </div>
+        `;
+      }));
+      return cards.join("");
+    }
+
     async function renderShoppingList() {
       const { job, level } = currentJobAndLevel();
       await iconDataReady;
@@ -5889,45 +5892,7 @@
           ? `次は「${firstUnchecked.title}」。目安${firstUnchecked.cost}詩学、今は${poetics}。${poetics >= firstUnchecked.cost ? "今日買えます。" : `あと${firstUnchecked.cost - poetics}詩学です。`}`
           : `${tier.label}の主要部位はチェック済み。次は見た目や未解放コンテンツへ。`;
       }
-      const cards = await Promise.all(items.map(async (item, index) => {
-        const iconUrl = item.iconUrl || await fetchItemIconByName(item.iconName);
-        const costText = item.costLabel || `目安: ${item.cost}詩学`;
-        return `
-          <div class="next-card">
-            ${iconBox(iconUrl, item.title)}
-            <div>
-              <h3>${index + 1}. ${item.title}</h3>
-              <p>${item.text}<br>${costText}</p>
-              <div class="gear-links">
-                <a href="${item.href}" target="_blank" rel="noreferrer noopener">${item.linkLabel || "公式DB"}</a>
-              </div>
-              ${canExchangeTier ? checkControl(`shopping:${item.key}`, level < 50 ? "済んだ" : "交換した") : `<div class="next-meta"><span class="next-pill locked">${tierStoryLabel(tier)}で交換</span></div>`}
-            </div>
-          </div>
-        `;
-      }));
-      const routeCards = level >= 50
-        ? await Promise.all(poeticsRoutes.map(async (route) => {
-          const iconUrl = await fetchItemIconByName("アラガントームストーン:詩学");
-          return `
-            <div class="next-card">
-              ${iconBox(iconUrl, route.title)}
-              <div>
-                <h3>${route.title}</h3>
-                <p>${route.text}</p>
-                <div class="gear-links">
-                  <a href="https://game8.jp/ff14/455613" target="_blank" rel="noreferrer noopener">Game8詩学記事</a>
-                </div>
-              </div>
-            </div>
-          `;
-        }))
-        : [];
-      shoppingBoard.innerHTML = `
-        <div class="next-section-title">${level < 50 ? "Lv50までの準備順" : "交換優先順"}</div>
-        ${cards.join("")}
-        ${routeCards.length ? `<div class="next-section-title">詩学の集め方</div>${routeCards.join("")}` : ""}
-      `;
+      shoppingBoard.innerHTML = "";
     }
 
     async function renderNavigationGuide() {
@@ -6287,18 +6252,19 @@
         const poeticsIcon = await fetchItemIconByName("アラガントームストーン:詩学");
         const guideIcon = await fetchItemIconByName("ビギナーリング");
         gearSummary.innerHTML = `
-          <h3>Lv${level} ${job.label}: ${tier.label}はまだ交換条件前</h3>
-          <p>${tierStoryLabel(tier)}まで進むと交換しやすくなります。今は高額な買い物を避け、メイン進行・ジョブクエスト・直近ID装備・さいきょう装備で十分です。</p>
+          <h3>Lv${level} ${job.label}: まだ温存</h3>
+          <p>${tierStoryLabel(tier)}までメイン優先。装備はさいきょうでOK。</p>
           <div class="life-meter" aria-hidden="true"><span style="--meter:${gearLife(level, tier)}%"></span></div>
         `;
         gearList.innerHTML = `
           <div class="gear-card">
             ${iconBox(poeticsIcon, `${tier.label}の交換条件`, "gear-icon")}
             <div>
-              <h3>${tier.label} IL${tier.ilvl}への道</h3>
-              <p>${tier.unlock}<br>${tier.vendor}<br>条件が揃うまでは、下の入手順も「温存」と表示します。</p>
+              <h3>次: ${tier.label} IL${tier.ilvl}</h3>
+              <p>交換は条件後。詩学は温存。</p>
             </div>
           </div>
+          ${await gearPriorityCards(job, level, false)}
           ${gearReferenceCards(job, level, tier, poeticsIcon, guideIcon)}
         `;
         await renderNextPlanner(job, level);
@@ -6309,12 +6275,15 @@
       findGearButton.textContent = "取得中...";
       gearSummary.innerHTML = `
         <h3>Lv${level} ${job.label}: ${tier.label} IL${tier.ilvl}</h3>
-        <p>${tier.vendor}<br>${tier.unlock}<br>${nextGearText(level, tier)}</p>
+        <p>武器 → 胴/脚 → 残り。${nextGearText(level, tier)}</p>
         <div class="life-meter" aria-hidden="true"><span style="--meter:${gearLife(level, tier)}%"></span></div>
       `;
       const poeticsIcon = await fetchItemIconByName("アラガントームストーン:詩学");
       const guideIcon = await fetchItemIconByName("ビギナーリング");
-      gearList.innerHTML = gearReferenceCards(job, level, tier, poeticsIcon, guideIcon);
+      gearList.innerHTML = `
+        ${await gearPriorityCards(job, level, true)}
+        ${gearReferenceCards(job, level, tier, poeticsIcon, guideIcon)}
+      `;
       findGearButton.disabled = false;
       findGearButton.textContent = "この設定で更新";
       await renderNextPlanner(job, level);

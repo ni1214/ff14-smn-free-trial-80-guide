@@ -1551,19 +1551,25 @@
       text-decoration: none;
     }
 
-    .gear-tier-tabs {
+    .gear-set-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
       gap: 8px;
-      margin-bottom: 10px;
     }
 
-    .gear-tier-tab {
+    .gear-step-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 7px;
+    }
+
+    .gear-step-controls button {
       appearance: none;
-      min-height: 42px;
+      min-height: 28px;
+      padding: 5px 9px;
+      border-radius: 999px;
       border: 1px solid rgba(32, 90, 97, 0.14);
-      border-radius: 10px;
-      background: #fffdf8;
+      background: rgba(32, 90, 97, 0.08);
       color: var(--teal);
       cursor: pointer;
       font: inherit;
@@ -1571,15 +1577,9 @@
       font-weight: 900;
     }
 
-    .gear-tier-tab.active {
-      background: linear-gradient(180deg, rgba(219, 189, 118, 0.92), rgba(130, 91, 37, 0.95));
-      border-color: rgba(255, 239, 178, 0.82);
-      color: #fffdf5;
-    }
-
-    .gear-set-grid {
-      display: grid;
-      gap: 8px;
+    .gear-step-controls button:disabled {
+      cursor: default;
+      opacity: 0.42;
     }
 
     .next-panel {
@@ -4317,7 +4317,8 @@
     let itemIconOverrides = {};
     let gearCatalog = {};
     let jobActionCatalog = {};
-    let selectedGearTierRelation = "current";
+    let gearSlotBandKeys = {};
+    let gearProfileKey = "";
     const glamourEquipmentCache = new Map();
     const itemNameCache = new Map();
     const iconDataReady = Promise.all([
@@ -5535,7 +5536,7 @@
 
     function gearApproachText(level, tier) {
       const band = currentGearBand(level);
-      return `${band.label}を基準に、一つ下、今の適正、一つ上の装備一式を表示します。クリック先の公式DBで入手方法を確認できます。`;
+      return `${band.label}の適正一式を表示します。各部位の前へ/次へで、その部位だけ前後の装備に切り替えます。`;
     }
 
     function gearBands() {
@@ -5548,19 +5549,6 @@
 
     function currentGearBand(level) {
       return gearBands().find((band) => level >= band.min && level <= band.max) || gearBands()[0];
-    }
-
-    function gearSearchCandidates(level) {
-      const bands = gearBands();
-      const currentIndex = Math.max(0, bands.findIndex((band) => level >= band.min && level <= band.max));
-      const current = bands[currentIndex] || bands[0];
-      const below = bands[currentIndex - 1] || current;
-      const above = bands[currentIndex + 1] || current;
-      return [
-        { ...below, title: below.label, label: "一つ下", relation: "below" },
-        { ...current, title: current.label, label: "今の適正", relation: "current" },
-        { ...above, title: above.label, label: bands[currentIndex + 1] ? "一つ上" : "上限", relation: "above" }
-      ];
     }
 
     function gearItemCard(item) {
@@ -5576,52 +5564,94 @@
             <div class="gear-links">
               <a href="${item.href}" target="_blank" rel="noreferrer noopener">公式DBで入手法を見る</a>
             </div>
+            <div class="gear-step-controls">
+              <button type="button" data-gear-slot="${item.slot}" data-gear-step="-1" ${item.hasPrevious ? "" : "disabled"}>前へ</button>
+              <button type="button" data-gear-slot="${item.slot}" data-gear-step="1" ${item.hasNext ? "" : "disabled"}>次へ</button>
+            </div>
           </div>
         </div>
       `;
     }
 
-    function completeGearSet(job, candidate) {
-      const slots = gearSlots.filter((slot) => !slot.jobs || slot.jobs.includes(job.id));
+    function resetGearSlotBandState(job, level) {
+      const key = `${job.id}:${currentGearBand(level).key}`;
+      if (gearProfileKey !== key) {
+        gearProfileKey = key;
+        gearSlotBandKeys = {};
+      }
+    }
+
+    function gearBandByKey(key) {
+      return gearBands().find((band) => band.key === String(key)) || null;
+    }
+
+    function availableBandsForSlot(job, slotField) {
+      return gearBands().filter((band) => gearCatalog[job.id]?.[band.key]?.items?.some((item) => item.slot === slotField));
+    }
+
+    function nearestGearItemForSlot(job, slotField, targetBand) {
       const bands = gearBands();
-      const currentIndex = bands.findIndex((band) => band.key === candidate.key);
-      const searchOrder = [0, -1, -2, 1, -3, 2]
+      const currentIndex = bands.findIndex((band) => band.key === targetBand.key);
+      const searchOrder = [0, -1, 1, -2, 2, -3, 3, -4, 4]
         .map((offset) => bands[currentIndex + offset])
         .filter(Boolean);
-      return slots.map((slot) => {
-        for (const band of searchOrder) {
-          const found = gearCatalog[job.id]?.[band.key]?.items?.find((item) => item.slot === slot.field);
-          if (found) {
-            return { ...found, activeBand: candidate.label, sourceBand: band.label };
-          }
+      for (const band of searchOrder) {
+        const found = gearCatalog[job.id]?.[band.key]?.items?.find((item) => item.slot === slotField);
+        if (found) {
+          const available = availableBandsForSlot(job, slotField);
+          const availableIndex = available.findIndex((item) => item.key === band.key);
+          return {
+            ...found,
+            activeBand: targetBand.label,
+            sourceBand: band.label,
+            bandKey: band.key,
+            hasPrevious: availableIndex > 0,
+            hasNext: availableIndex >= 0 && availableIndex < available.length - 1
+          };
         }
-        return null;
+      }
+      return null;
+    }
+
+    function moveGearSlot(job, slotField, step) {
+      const level = Math.min(80, Math.max(1, Number(gearLevel.value) || 1));
+      const currentBand = currentGearBand(level);
+      const currentItem = nearestGearItemForSlot(job, slotField, gearBandByKey(gearSlotBandKeys[slotField]) || currentBand);
+      if (!currentItem) {
+        return;
+      }
+      const available = availableBandsForSlot(job, slotField);
+      const index = available.findIndex((band) => band.key === currentItem.bandKey);
+      const next = available[index + step];
+      if (next) {
+        gearSlotBandKeys[slotField] = next.key;
+      }
+    }
+
+    function completeGearSet(job, level) {
+      const slots = gearSlots.filter((slot) => !slot.jobs || slot.jobs.includes(job.id));
+      const currentBand = currentGearBand(level);
+      return slots.map((slot) => {
+        const targetBand = gearBandByKey(gearSlotBandKeys[slot.field]) || currentBand;
+        return nearestGearItemForSlot(job, slot.field, targetBand);
       }).filter(Boolean);
     }
 
     async function officialGearSearchCards(job, level) {
-      const candidates = gearSearchCandidates(level);
-      const activeCandidate = candidates.find((candidate) => candidate.relation === selectedGearTierRelation) || candidates[1] || candidates[0];
-      const tabs = candidates.map((candidate) => `
-        <button class="gear-tier-tab ${candidate === activeCandidate ? "active" : ""}" type="button" data-gear-relation="${candidate.relation}">
-          ${candidate.label}<br>${candidate.title}
-        </button>
-      `).join("");
-      const directItems = completeGearSet(job, activeCandidate);
+      resetGearSlotBandState(job, level);
+      const directItems = completeGearSet(job, level);
       if (directItems?.length) {
         return `
-          <div class="gear-tier-tabs">${tabs}</div>
           <div class="gear-set-grid">
             ${directItems.map(gearItemCard).join("")}
           </div>
         `;
       }
       return `
-        <div class="gear-tier-tabs">${tabs}</div>
         <div class="gear-card">
-          ${iconBox(await fetchItemIconByName("クリスタル"), activeCandidate.title, "gear-icon")}
+          ${iconBox(await fetchItemIconByName("クリスタル"), "装備データ")}
           <div>
-            <h3>${activeCandidate.label}: ${activeCandidate.title}</h3>
+            <h3>装備データなし</h3>
             <p>この帯の装備データが足りません。レベル帯を切り替えて確認してください。</p>
           </div>
         </div>
@@ -6506,11 +6536,12 @@
       renderShoppingList();
     });
     gearList.addEventListener("click", (event) => {
-      const button = event.target.closest("[data-gear-relation]");
+      const button = event.target.closest("[data-gear-slot][data-gear-step]");
       if (!button) {
         return;
       }
-      selectedGearTierRelation = button.dataset.gearRelation || "current";
+      const { job } = currentJobAndLevel();
+      moveGearSlot(job, button.dataset.gearSlot, Number(button.dataset.gearStep) || 0);
       renderGearFinder();
     });
     document.addEventListener("change", (event) => {

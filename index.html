@@ -1176,10 +1176,14 @@
     }
 
     .glamour-equipment-panel {
-      display: grid;
+      display: none;
       gap: 8px;
       padding: 0 12px 12px;
       background: rgba(255, 250, 243, 0.96);
+    }
+
+    .glamour-equipment-panel.open {
+      display: grid;
     }
 
     .glamour-equipment-panel p {
@@ -1215,6 +1219,28 @@
       font-size: 12px;
       font-weight: 900;
       white-space: nowrap;
+    }
+
+    .glamour-extra-details {
+      padding: 0 12px 12px;
+      background: rgba(255, 250, 243, 0.96);
+    }
+
+    .glamour-extra-details summary {
+      min-height: 40px;
+      padding: 10px 12px;
+      border: 1px solid rgba(188, 148, 67, 0.22);
+      border-radius: 10px;
+      color: #1d3550;
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .glamour-extra-links {
+      display: grid;
+      gap: 8px;
+      margin-top: 8px;
     }
 
     .glamour-random-button {
@@ -4188,19 +4214,6 @@
     let jobActionCatalog = {};
     const glamourEquipmentCache = new Map();
     const itemNameCache = new Map();
-    const glamourEquipmentQueue = [];
-    let glamourEquipmentActiveLoads = 0;
-    const GLAMOUR_EQUIPMENT_MAX_ACTIVE = 2;
-    const glamourEquipmentObserver = "IntersectionObserver" in window
-      ? new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            glamourEquipmentObserver.unobserve(entry.target);
-            scheduleGlamourEquipmentPanel(entry.target);
-          }
-        });
-      }, { rootMargin: "900px 0px" })
-      : null;
     const iconDataReady = Promise.all([
       fetch("action-icons.json").then((response) => response.ok ? response.json() : {}).catch(() => ({})),
       fetch("item-icons.json").then((response) => response.ok ? response.json() : {}).catch(() => ({})),
@@ -4641,13 +4654,17 @@
           </div>
         </div>
         <div class="glamour-actions">
-          <a href="${glamour.source}" target="_blank" rel="noreferrer noopener">元投稿を開く</a>
-          <a href="${officialItemSearch(glamour.search || glamour.title)}" target="_blank" rel="noreferrer noopener">似た装備を公式DBで探す</a>
-          <a href="https://ffxiv.eorzeacollection.com/glamours" target="_blank" rel="noreferrer noopener">もっと世界のミラプリを見る</a>
+          <button type="button" data-glamour-equipment data-source="${escapeHtml(glamour.source)}">装備を日本語名で確認</button>
         </div>
-        <div class="glamour-equipment-panel" data-glamour-equipment-panel data-source="${escapeHtml(glamour.source)}" data-equipment-state="idle">
-          <p>日本語版Lodestoneの装備名を自動で読み込みます。</p>
-        </div>
+        <div class="glamour-equipment-panel" data-glamour-equipment-panel data-source="${escapeHtml(glamour.source)}" data-equipment-state="idle"></div>
+        <details class="glamour-extra-details">
+          <summary>外部リンクを開く</summary>
+          <div class="glamour-extra-links">
+            <a class="glamour-equipment-link" href="${glamour.source}" target="_blank" rel="noreferrer noopener"><span class="glamour-equipment-slot">投稿</span><span>元投稿を開く</span></a>
+            <a class="glamour-equipment-link" href="${officialItemSearch(glamour.search || glamour.title)}" target="_blank" rel="noreferrer noopener"><span class="glamour-equipment-slot">検索</span><span>似た装備を公式DBで探す</span></a>
+            <a class="glamour-equipment-link" href="https://ffxiv.eorzeacollection.com/glamours" target="_blank" rel="noreferrer noopener"><span class="glamour-equipment-slot">一覧</span><span>もっと世界のミラプリを見る</span></a>
+          </div>
+        </details>
         </article>
       `;
     }
@@ -4657,41 +4674,9 @@
       const cards = entries.map((entry) => glamourCardHtml(entry)).join("");
       glamourSpotlight.insertAdjacentHTML("beforeend", cards);
       glamourRenderedCount += entries.length;
-      observeGlamourEquipmentPanels();
     }
 
-    function observeGlamourEquipmentPanels() {
-      const panels = [...glamourSpotlight.querySelectorAll('[data-glamour-equipment-panel][data-equipment-state="idle"]')];
-      panels.forEach((panel) => {
-        if (glamourEquipmentObserver) {
-          glamourEquipmentObserver.observe(panel);
-        } else {
-          scheduleGlamourEquipmentPanel(panel);
-        }
-      });
-    }
-
-    function scheduleGlamourEquipmentPanel(panel) {
-      if (!panel || !panel.isConnected || panel.dataset.equipmentState !== "idle") {
-        return;
-      }
-      panel.dataset.equipmentState = "queued";
-      glamourEquipmentQueue.push(panel);
-      pumpGlamourEquipmentQueue();
-    }
-
-    function pumpGlamourEquipmentQueue() {
-      while (glamourEquipmentActiveLoads < GLAMOUR_EQUIPMENT_MAX_ACTIVE && glamourEquipmentQueue.length) {
-        const panel = glamourEquipmentQueue.shift();
-        glamourEquipmentActiveLoads += 1;
-        loadGlamourEquipmentPanel(panel).finally(() => {
-          glamourEquipmentActiveLoads -= 1;
-          pumpGlamourEquipmentQueue();
-        });
-      }
-    }
-
-    async function loadGlamourEquipmentPanel(panel) {
+    async function loadGlamourEquipmentPanel(panel, button) {
       if (!panel?.isConnected) {
         return;
       }
@@ -4699,8 +4684,17 @@
       if (!source) {
         return;
       }
+      if (panel.dataset.equipmentState === "loaded" || panel.dataset.equipmentState === "loading") {
+        panel.classList.add("open");
+        return;
+      }
+      panel.classList.add("open");
       panel.dataset.equipmentState = "loading";
       panel.innerHTML = `<p>日本語版Lodestoneの装備名を読み込み中...</p>`;
+      if (button) {
+        button.disabled = true;
+        button.textContent = "装備名を読み込み中...";
+      }
       try {
         const safeSource = escapeHtml(source);
         const items = await fetchGlamourEquipment(source);
@@ -4720,7 +4714,12 @@
         `;
       } catch (error) {
         panel.dataset.equipmentState = "failed";
-        panel.innerHTML = `<p>装備名を読み込めませんでした。少しスクロールしてから再読み込みしてください。</p>`;
+        panel.innerHTML = `<p>装備名を読み込めませんでした。時間を置いてもう一度ボタンを押してください。</p>`;
+      } finally {
+        if (button) {
+          button.disabled = false;
+          button.textContent = "装備を日本語名で確認";
+        }
       }
     }
 
@@ -6324,6 +6323,13 @@
       loadExternalGlamours(glamourRaceFilter.value);
     });
     glamourSpotlight.addEventListener("click", (event) => {
+      const equipmentButton = event.target.closest("[data-glamour-equipment]");
+      if (equipmentButton) {
+        const card = equipmentButton.closest("[data-glamour-card]");
+        const panel = card?.querySelector("[data-glamour-equipment-panel]");
+        loadGlamourEquipmentPanel(panel, equipmentButton);
+        return;
+      }
       const button = event.target.closest("[data-glamour-toggle]");
       if (!button) {
         return;

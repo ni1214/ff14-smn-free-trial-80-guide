@@ -4,23 +4,23 @@ const BASE = "https://jp.finalfantasyxiv.com";
 const USER_AGENT = "Mozilla/5.0";
 
 const jobs = [
-  { id: "PLD", label: "ナイト", min: 1, role: "tank", weaponCategories: [2], offhand: true },
-  { id: "WAR", label: "戦士", min: 1, role: "tank", weaponCategories: [3] },
-  { id: "DRK", label: "暗黒騎士", min: 30, role: "tank", weaponCategories: [87] },
-  { id: "GNB", label: "ガンブレイカー", min: 60, role: "tank", weaponCategories: [106] },
-  { id: "WHM", label: "白魔道士", min: 1, role: "healer", weaponCategories: [9, 8] },
-  { id: "SCH", label: "学者", min: 30, role: "healer", weaponCategories: [98] },
-  { id: "AST", label: "占星術師", min: 30, role: "healer", weaponCategories: [89] },
-  { id: "MNK", label: "モンク", min: 1, role: "melee", weaponCategories: [1] },
-  { id: "DRG", label: "竜騎士", min: 1, role: "melee", weaponCategories: [5] },
-  { id: "NIN", label: "忍者", min: 1, role: "melee", weaponCategories: [84] },
-  { id: "SAM", label: "侍", min: 50, role: "melee", weaponCategories: [96] },
-  { id: "BRD", label: "吟遊詩人", min: 1, role: "ranged", weaponCategories: [4] },
-  { id: "MCH", label: "機工士", min: 30, role: "ranged", weaponCategories: [88] },
-  { id: "DNC", label: "踊り子", min: 60, role: "ranged", weaponCategories: [107] },
-  { id: "BLM", label: "黒魔道士", min: 1, role: "caster", weaponCategories: [7, 6] },
-  { id: "SMN", label: "召喚士", min: 1, role: "caster", weaponCategories: [10] },
-  { id: "RDM", label: "赤魔道士", min: 50, role: "caster", weaponCategories: [97] }
+  { id: "PLD", label: "ナイト", min: 1, role: "tank", classjob: 19, classId: 1, weaponCategories: [2], offhand: true },
+  { id: "WAR", label: "戦士", min: 1, role: "tank", classjob: 21, classId: 3, weaponCategories: [3] },
+  { id: "DRK", label: "暗黒騎士", min: 30, role: "tank", classjob: 32, weaponCategories: [87] },
+  { id: "GNB", label: "ガンブレイカー", min: 60, role: "tank", classjob: 37, weaponCategories: [106] },
+  { id: "WHM", label: "白魔道士", min: 1, role: "healer", classjob: 24, classId: 6, weaponCategories: [9, 8] },
+  { id: "SCH", label: "学者", min: 30, role: "healer", classjob: 28, weaponCategories: [98] },
+  { id: "AST", label: "占星術師", min: 30, role: "healer", classjob: 33, weaponCategories: [89] },
+  { id: "MNK", label: "モンク", min: 1, role: "melee", classjob: 20, classId: 2, weaponCategories: [1] },
+  { id: "DRG", label: "竜騎士", min: 1, role: "melee", classjob: 22, classId: 4, weaponCategories: [5] },
+  { id: "NIN", label: "忍者", min: 1, role: "melee", classjob: 30, classId: 29, weaponCategories: [84] },
+  { id: "SAM", label: "侍", min: 50, role: "melee", classjob: 34, weaponCategories: [96] },
+  { id: "BRD", label: "吟遊詩人", min: 1, role: "ranged", classjob: 23, classId: 5, weaponCategories: [4] },
+  { id: "MCH", label: "機工士", min: 30, role: "ranged", classjob: 31, weaponCategories: [88] },
+  { id: "DNC", label: "踊り子", min: 60, role: "ranged", classjob: 38, weaponCategories: [107] },
+  { id: "BLM", label: "黒魔道士", min: 1, role: "caster", classjob: 25, classId: 7, weaponCategories: [7, 6] },
+  { id: "SMN", label: "召喚士", min: 1, role: "caster", classjob: 27, classId: 26, weaponCategories: [10] },
+  { id: "RDM", label: "赤魔道士", min: 50, role: "caster", classjob: 35, weaponCategories: [97] }
 ];
 
 const slotCategories = [
@@ -43,6 +43,17 @@ const bands = Array.from({ length: 16 }, (_, index) => {
   return { key: String(min), min, max, label: `Lv${min}-${max}` };
 });
 
+const recommendedSeriesByBand = {
+  46: "ガーロンド",
+  56: "イディル",
+  66: "スカエウァ",
+  76: "クリプトラーカー"
+};
+
+const preferredItemFragments = {
+  "SAM:56:MainHand": ["新都刀"]
+};
+
 const rowCache = new Map();
 
 function dbItemUrl(params) {
@@ -56,13 +67,21 @@ function dbItemUrl(params) {
 async function fetchHtml(url) {
   let lastError;
   for (let attempt = 1; attempt <= 4; attempt += 1) {
+    let timeout;
     try {
-      const response = await fetch(url, { headers: { "User-Agent": USER_AGENT } });
+      const controller = new AbortController();
+      timeout = setTimeout(() => controller.abort(), 15000);
+      const response = await fetch(url, {
+        headers: { "User-Agent": USER_AGENT },
+        signal: controller.signal
+      });
       if (!response.ok) throw new Error(`${response.status} ${url}`);
       return await response.text();
     } catch (error) {
       lastError = error;
       await new Promise((resolve) => setTimeout(resolve, attempt * 900));
+    } finally {
+      clearTimeout(timeout);
     }
   }
   throw new Error(`Fetch failed after retries: ${url}\n${lastError?.message || lastError}`);
@@ -95,7 +114,7 @@ async function fetchItems(params) {
   const cacheKey = JSON.stringify(params);
   if (rowCache.has(cacheKey)) return rowCache.get(cacheKey);
   const all = [];
-  for (let page = 1; page <= 5; page += 1) {
+  for (let page = 1; page <= 2; page += 1) {
     const html = await fetchHtml(dbItemUrl({ ...params, page }));
     const rows = parseRows(html);
     if (!rows.length) break;
@@ -106,6 +125,35 @@ async function fetchItems(params) {
   rowCache.set(cacheKey, unique);
   process.stdout.write(".");
   return unique;
+}
+
+async function mapLimit(items, limit, mapper) {
+  const results = new Array(items.length);
+  let nextIndex = 0;
+  const workers = Array.from({ length: Math.min(limit, items.length) }, async () => {
+    while (nextIndex < items.length) {
+      const index = nextIndex;
+      nextIndex += 1;
+      results[index] = await mapper(items[index], index);
+    }
+  });
+  await Promise.all(workers);
+  return results;
+}
+
+function classJobForBand(job, band) {
+  if (job.classId && band.max < 30) return job.classId;
+  return job.classjob;
+}
+
+async function fetchItemsForJob(job, band, params) {
+  const classjob = classJobForBand(job, band);
+  if (!classjob) return fetchItems(params);
+
+  const filtered = await fetchItems({ ...params, classjob });
+  if (filtered.length) return filtered;
+
+  return fetchItems(params);
 }
 
 function broadRoleKeywords(job, slot) {
@@ -131,11 +179,16 @@ function bannedGeneric(item) {
   return /クラフター|ギャザラー|製作|採集|ギャザ|園芸|採掘|漁師|木工|鍛冶|甲冑|彫金|革細工|裁縫|錬金|調理/.test(item.name);
 }
 
-function itemScore(item, band, keywords, slot) {
+function itemScore(item, band, keywords, slot, job) {
   let score = item.itemLevel * 100 + item.equipLevel;
+  const recommended = recommendedSeriesByBand[band.key];
+  const preferred = preferredItemFragments[`${job.id}:${band.key}:${slot.slot}`] || [];
+  if (preferred.some((fragment) => item.name.includes(fragment))) score += 30000;
+  if (recommended && item.name.includes(recommended)) score += 30000;
   if (item.name.endsWith("RE")) score += 50;
   if (item.name.includes("【改】")) score += 50;
-  if (item.name.includes("オメガ") || item.name.includes("アレキサンダー") || item.name.includes("エデンモーン")) score -= 20;
+  if (item.name.includes("オメガ") || item.name.includes("アレキサンダー") || item.name.includes("エデンモーン")) score -= 2500;
+  if (item.name.includes("コヴン") || item.name.includes("ゴブコン") || item.name.includes("ゼータ")) score -= recommended ? 5000 : 0;
   if (item.equipLevel === band.max) score += 10;
   if (keywords.some((keyword) => item.name.includes(keyword))) score += 5000;
   if (!keywords.length || slot.weapon || slot.slot === "OffHand") score += 1000;
@@ -147,7 +200,7 @@ async function candidatesForSlot(job, band, slot) {
   if (slot.weapon) {
     const rows = [];
     for (const category3 of job.weaponCategories) {
-      rows.push(...await fetchItems({
+      rows.push(...await fetchItemsForJob(job, band, {
         category2: slot.category2,
         category3,
         min_gear_lv: band.min,
@@ -156,7 +209,7 @@ async function candidatesForSlot(job, band, slot) {
     }
     return rows;
   }
-  return fetchItems({
+  return fetchItemsForJob(job, band, {
     category2: slot.category2,
     category3: slot.category3,
     min_gear_lv: band.min,
@@ -171,7 +224,7 @@ async function findItem(job, band, slot) {
   const keywords = broadRoleKeywords(job, slot);
   const roleMatches = rows.filter((item) => keywords.length === 0 || keywords.some((keyword) => item.name.includes(keyword)));
   const pool = roleMatches.length ? roleMatches : rows.filter((item) => !bannedGeneric(item));
-  const found = pool.sort((a, b) => itemScore(b, band, keywords, slot) - itemScore(a, band, keywords, slot))[0];
+  const found = pool.sort((a, b) => itemScore(b, band, keywords, slot, job) - itemScore(a, band, keywords, slot, job))[0];
   if (!found) return null;
   return { slot: slot.slot, ...found };
 }
@@ -181,16 +234,17 @@ async function main() {
   const missing = [];
   for (const job of jobs) {
     catalog[job.id] = {};
+    console.log(`Building ${job.id}`);
     for (const band of bands.filter((item) => item.max >= job.min)) {
-      const items = [];
-      for (const slot of slotCategories.filter((item) => !item.jobs || item.jobs.includes(job.id))) {
+      const slots = slotCategories.filter((item) => !item.jobs || item.jobs.includes(job.id));
+      const foundItems = await mapLimit(slots, 5, async (slot) => {
         const item = await findItem(job, band, slot);
-        if (item) {
-          items.push(item);
-        } else {
+        if (!item) {
           missing.push(`${job.id} ${band.label} ${slot.slot}`);
         }
-      }
+        return item;
+      });
+      const items = foundItems.filter(Boolean);
       catalog[job.id][band.key] = { ...band, items };
     }
   }

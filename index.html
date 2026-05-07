@@ -1062,6 +1062,13 @@
       line-height: 1.4;
     }
 
+    .glamour-quick-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+
     .glamour-card {
       overflow: hidden;
       border-radius: 18px;
@@ -1248,6 +1255,20 @@
       margin-top: 8px;
       margin-bottom: 2px;
       cursor: pointer;
+    }
+
+    .glamour-quick-actions .glamour-random-button {
+      margin: 0;
+    }
+
+    .glamour-random-button.secondary {
+      background:
+        linear-gradient(180deg, rgba(50, 69, 82, 0.96), rgba(19, 31, 43, 0.98));
+    }
+
+    .glamour-random-button:disabled {
+      cursor: not-allowed;
+      opacity: 0.58;
     }
 
     .glamour-details {
@@ -2304,12 +2325,15 @@
         </select>
         <p class="glamour-feed-status" id="glamourFeedStatus">公開ミラプリを読み込みます。</p>
       </div>
-      <div class="glamour-spotlight" id="glamourSpotlight"></div>
-      <button class="glamour-random-button" id="glamourRandomButton" type="button">ランダムなミラプリへジャンプ</button>
+      <div class="glamour-quick-actions">
+        <button class="glamour-random-button secondary" id="glamourFavoritesButton" type="button">お気に入りを見る</button>
+        <button class="glamour-random-button" id="glamourRandomButton" type="button">ランダムへ</button>
+      </div>
       <details class="more-details glamour-details" id="glamourFavoritesDetails">
         <summary id="glamourFavoritesSummary">お気に入り 0件</summary>
         <div class="glamour-favorites-list" id="glamourFavoritesList"></div>
       </details>
+      <div class="glamour-spotlight" id="glamourSpotlight"></div>
       <details class="more-details glamour-details">
         <summary>装備検索や他のミラプリサイトを開く</summary>
         <div class="resource-filter">
@@ -4169,6 +4193,8 @@
     const siteSearchResults = document.getElementById("siteSearchResults");
     const glamourSpotlight = document.getElementById("glamourSpotlight");
     const glamourRandomButton = document.getElementById("glamourRandomButton");
+    const glamourFavoritesButton = document.getElementById("glamourFavoritesButton");
+    const glamourFavoritesDetails = document.getElementById("glamourFavoritesDetails");
     const glamourRaceFilter = document.getElementById("glamourRaceFilter");
     const glamourFeedStatus = document.getElementById("glamourFeedStatus");
     const glamourFavoritesSummary = document.getElementById("glamourFavoritesSummary");
@@ -4812,6 +4838,10 @@
 
     function renderGlamourFavorites() {
       glamourFavoritesSummary.textContent = `お気に入り ${glamourFavorites.length}件`;
+      glamourFavoritesButton.textContent = glamourFavorites.length
+        ? `お気に入り ${glamourFavorites.length}件`
+        : "お気に入りを見る";
+      glamourFavoritesButton.disabled = !glamourFavorites.length;
       glamourFavoritesList.innerHTML = glamourFavorites.length
         ? glamourFavorites.map((item) => `
             <article class="glamour-favorite-card">
@@ -6341,6 +6371,10 @@
     siteSearch.addEventListener("input", renderSearchResults);
     glamourRandomButton.addEventListener("click", () => {
       jumpToRandomGlamour();
+    });
+    glamourFavoritesButton.addEventListener("click", () => {
+      glamourFavoritesDetails.open = true;
+      glamourFavoritesDetails.scrollIntoView({ behavior: "smooth", block: "start" });
     });
     glamourRaceFilter.addEventListener("change", () => {
       safeStorageSet(GLAMOUR_RACE_KEY, glamourRaceFilter.value);

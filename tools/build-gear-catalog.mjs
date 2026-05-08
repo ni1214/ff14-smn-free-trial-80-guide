@@ -1,8 +1,9 @@
 import fs from "node:fs/promises";
-import { fetchItemDetail, mapLimit } from "./gear-detail-utils.mjs";
+import { mapLimit } from "./gear-detail-utils.mjs";
 
 const BASE = "https://jp.finalfantasyxiv.com";
 const USER_AGENT = "Mozilla/5.0";
+const MAX_LEVEL = 100;
 
 const jobs = [
   { id: "PLD", label: "ナイト", min: 1, role: "tank", classjob: 19, classId: 1, weaponCategories: [2], offhand: true },
@@ -16,12 +17,16 @@ const jobs = [
   { id: "DRG", label: "竜騎士", min: 1, role: "melee", classjob: 22, classId: 4, weaponCategories: [5] },
   { id: "NIN", label: "忍者", min: 1, role: "melee", classjob: 30, classId: 29, weaponCategories: [84] },
   { id: "SAM", label: "侍", min: 50, role: "melee", classjob: 34, weaponCategories: [96] },
+  { id: "RPR", label: "リーパー", min: 70, role: "melee", classjob: 39, weaponCategories: [108] },
   { id: "BRD", label: "吟遊詩人", min: 1, role: "ranged", classjob: 23, classId: 5, weaponCategories: [4] },
   { id: "MCH", label: "機工士", min: 30, role: "ranged", classjob: 31, weaponCategories: [88] },
   { id: "DNC", label: "踊り子", min: 60, role: "ranged", classjob: 38, weaponCategories: [107] },
+  { id: "VPR", label: "ヴァイパー", min: 80, role: "melee", classjob: 41, weaponCategories: [110] },
   { id: "BLM", label: "黒魔道士", min: 1, role: "caster", classjob: 25, classId: 7, weaponCategories: [7, 6] },
   { id: "SMN", label: "召喚士", min: 1, role: "caster", classjob: 27, classId: 26, weaponCategories: [10] },
-  { id: "RDM", label: "赤魔道士", min: 50, role: "caster", classjob: 35, weaponCategories: [97] }
+  { id: "RDM", label: "赤魔道士", min: 50, role: "caster", classjob: 35, weaponCategories: [97] },
+  { id: "PCT", label: "ピクトマンサー", min: 80, role: "caster", classjob: 42, weaponCategories: [111] },
+  { id: "SGE", label: "賢者", min: 70, role: "healer", classjob: 40, weaponCategories: [109] }
 ];
 
 const slotCategories = [
@@ -38,9 +43,9 @@ const slotCategories = [
   { slot: "FingerL", label: "指", category2: 4, category3: 43 }
 ];
 
-const bands = Array.from({ length: 16 }, (_, index) => {
+const bands = Array.from({ length: Math.ceil(MAX_LEVEL / 5) }, (_, index) => {
   const min = index * 5 + 1;
-  const max = Math.min(80, min + 4);
+  const max = Math.min(MAX_LEVEL, min + 4);
   return { key: String(min), min, max, label: `Lv${min}-${max}` };
 });
 
@@ -48,7 +53,9 @@ const recommendedSeriesByBand = {
   46: "ガーロンド",
   56: "イディル",
   66: "スカエウァ",
-  76: "クリプトラーカー"
+  76: "クリプトラーカー",
+  86: "クレデンダム",
+  96: "グランドチャンピオン"
 };
 
 const preferredItemFragments = {
@@ -150,15 +157,15 @@ function broadRoleKeywords(job, slot) {
     if (job.role === "healer") return ["ヒーラー", "プロフェッサー"];
     if (job.role === "ranged") return ["レンジャー", "ハンター"];
     if (job.role === "caster") return ["キャスター", "フィロソファー"];
-    if (job.id === "DRG") return ["アタッカー", "スレイヤー", "パンクラティアスト"];
+    if (job.id === "DRG" || job.id === "RPR") return ["アタッカー", "スレイヤー", "パンクラティアスト"];
     return ["アタッカー", "ストライカー", "スカウト", "パンクラティアスト", "エージェント"];
   }
   if (job.role === "tank") return ["ディフェンダー", "ガーディアン", "ヘヴィ", "プレート"];
   if (job.role === "healer") return ["ヒーラー", "プロフェッサー", "ローブ"];
   if (job.role === "ranged") return ["レンジャー", "ハンター", "アーチャー"];
   if (job.role === "caster") return ["キャスター", "フィロソファー", "ローブ"];
-  if (job.id === "DRG") return ["スレイヤー", "パスファインダー", "メイル"];
-  if (job.id === "NIN") return ["スカウト", "エージェント"];
+  if (job.id === "DRG" || job.id === "RPR") return ["スレイヤー", "パスファインダー", "メイル"];
+  if (job.id === "NIN" || job.id === "VPR") return ["スカウト", "エージェント"];
   return ["ストライカー", "パンクラティアスト"];
 }
 
@@ -213,7 +220,7 @@ async function findItem(job, band, slot) {
   const pool = roleMatches.length ? roleMatches : rows.filter((item) => !bannedGeneric(item));
   const found = pool.sort((a, b) => itemScore(b, band, keywords, slot, job) - itemScore(a, band, keywords, slot, job))[0];
   if (!found) return null;
-  return { slot: slot.slot, ...found, details: await fetchItemDetail(found.href) };
+  return { slot: slot.slot, ...found };
 }
 
 async function main() {
@@ -234,6 +241,7 @@ async function main() {
       const items = foundItems.filter(Boolean);
       catalog[job.id][band.key] = { ...band, items };
     }
+    rowCache.clear();
   }
   await fs.writeFile("gear-catalog.json", `${JSON.stringify(catalog, null, 2)}\n`, "utf8");
   console.log(`\nWrote gear-catalog.json for ${Object.keys(catalog).length} jobs and ${bands.length} bands.`);

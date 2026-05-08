@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>FF14 フリートライアルLv80 攻略アプリ</title>
+  <title>FF14 Lv100 攻略アプリ</title>
   <meta name="theme-color" content="#132a3d">
   <meta name="application-name" content="FF14 Guide">
   <meta name="apple-mobile-web-app-title" content="FF14 Guide">
@@ -2323,14 +2323,14 @@
 <body>
   <div class="wrap">
     <header class="hero">
-      <div class="eyebrow">FFXIV Free Trial Lv80 2026-04-28</div>
-      <h1>FF14 フリートライアルLv80<br>二人用攻略アプリ</h1>
+      <div class="eyebrow">FFXIV Lv100 Gear Ready</div>
+      <h1>FF14 Lv100<br>二人用攻略アプリ</h1>
       <p>今のジョブとレベルから、今日見るべき装備・次の目標・ギミックだけを先に出します。</p>
       <details class="hero-details">
         <summary>調査メモと進行画像</summary>
         <div class="meta-note">
-          調査基準日: 2026年4月28日。<br>
-          4月28日実装のPatch 7.5パッチノートで、フリートライアルは公式に「レベル80」「漆黒のヴィランズまで」へ拡張されました。
+          調査基準日: 2026年5月8日。<br>
+          装備タブは公式エオルゼアデータベースからLv100帯の最新装備まで表示します。無料範囲の確認メモはLv80拡張情報を残しています。
         </div>
         <div class="story-visual" id="storyVisual">
           <img id="storyImage" alt="メイン進行に合わせた公式画像" loading="lazy">
@@ -2388,7 +2388,7 @@
           </div>
           <div>
             <label for="gearLevel">現在レベル</label>
-            <input id="gearLevel" type="number" min="1" max="80" value="20">
+            <input id="gearLevel" type="number" min="1" max="100" value="20">
           </div>
         </div>
         <div class="profile-input-row">
@@ -2401,6 +2401,8 @@
               <option value="hw">蒼天進行中</option>
               <option value="sb">紅蓮進行中</option>
               <option value="shb">漆黒進行中</option>
+              <option value="ew">暁月進行中</option>
+              <option value="dt">黄金進行中</option>
             </select>
           </div>
           <div>
@@ -2477,7 +2479,7 @@
       </div>
       <div class="duty-summary" id="dutySummary">
         <h3>データ読み込み中</h3>
-        <p>Lv80までのID、討滅戦、大人数レイドを読み込んでいます。</p>
+        <p>Lv100までのID、討滅戦、大人数レイドを読み込んでいます。</p>
       </div>
       <div class="mechanic-grid" id="mechanicGrid"></div>
     </section>
@@ -2576,7 +2578,7 @@
     <section class="panel feature-panel" id="sources" data-feature="sources">
       <h2>出典</h2>
       <p class="footer-note">
-        アクション名・修得レベル・アイコンは公式ジョブガイド、アイテム名・装備アイコンはエオルゼアデータベース、フリートライアルLv80拡張は日本語版Patch 7.5パッチノートを参照しています。<br>
+        アクション名・修得レベル・アイコンは公式ジョブガイド、アイテム名・装備アイコン・性能・入手先はエオルゼアデータベースを参照しています。<br>
         レベル別スキル回しとスキル説明はパッチで変わりやすいため、攻略記事検索、YouTube候補検索、公式ジョブガイドへ直接移動する導線にしています。
       </p>
       <div class="sources">
@@ -3261,6 +3263,7 @@
     const GLAMOUR_PAGE_COUNT = 6;
     const GLAMOUR_MIRAPRI_PAGE_COUNT = 3;
     const GLAMOUR_MAX_EXTERNAL_ITEMS = 180;
+    const MAX_LEVEL = 100;
 
     const gearJobs = [
       { id: "PLD", label: "ナイト", min: 1, role: "tank", className: "剣術士" },
@@ -3274,12 +3277,16 @@
       { id: "DRG", label: "竜騎士", min: 1, role: "melee", className: "槍術士" },
       { id: "NIN", label: "忍者", min: 1, role: "melee", className: "双剣士" },
       { id: "SAM", label: "侍", min: 50, role: "melee" },
+      { id: "RPR", label: "リーパー", min: 70, role: "melee" },
       { id: "BRD", label: "吟遊詩人", min: 1, role: "ranged", className: "弓術士" },
       { id: "MCH", label: "機工士", min: 30, role: "ranged" },
       { id: "DNC", label: "踊り子", min: 60, role: "ranged" },
+      { id: "VPR", label: "ヴァイパー", min: 80, role: "melee" },
       { id: "BLM", label: "黒魔道士", min: 1, role: "caster", className: "呪術士" },
       { id: "SMN", label: "召喚士", min: 1, role: "caster", className: "巴術士" },
-      { id: "RDM", label: "赤魔道士", min: 50, role: "caster" }
+      { id: "RDM", label: "赤魔道士", min: 50, role: "caster" },
+      { id: "PCT", label: "ピクトマンサー", min: 80, role: "caster" },
+      { id: "SGE", label: "賢者", min: 70, role: "healer" }
     ];
 
     const officialJobGuideUrls = {
@@ -3297,9 +3304,13 @@
       BRD: "https://jp.finalfantasyxiv.com/jobguide/bard/",
       MCH: "https://jp.finalfantasyxiv.com/jobguide/machinist/",
       DNC: "https://jp.finalfantasyxiv.com/jobguide/dancer/",
+      RPR: "https://jp.finalfantasyxiv.com/jobguide/reaper/",
+      VPR: "https://jp.finalfantasyxiv.com/jobguide/viper/",
       BLM: "https://jp.finalfantasyxiv.com/jobguide/blackmage/",
       SMN: "https://jp.finalfantasyxiv.com/jobguide/summoner/",
-      RDM: "https://jp.finalfantasyxiv.com/jobguide/redmage/"
+      RDM: "https://jp.finalfantasyxiv.com/jobguide/redmage/",
+      PCT: "https://jp.finalfantasyxiv.com/jobguide/pictomancer/",
+      SGE: "https://jp.finalfantasyxiv.com/jobguide/sage/"
     };
 
     const game8RotationLinks = {
@@ -3506,12 +3517,28 @@
 
     const gearTiers = [
       {
+        min: 100,
+        name: "Grand Champion",
+        label: "グランドチャンピオン",
+        ilvl: 790,
+        vendor: "Lv100最新帯。高難度/現行トークン装備を含むため、各カードの入手欄と公式DBで確認。",
+        unlock: "黄金メイン進行後の最新装備帯。まずはカードの入手欄で交換NPCや入手先を確認。"
+      },
+      {
+        min: 90,
+        name: "Augmented Credendum",
+        label: "クレデンダムRE",
+        ilvl: 660,
+        vendor: "ラザハンのキハンティ、またはオールド・シャーレアンのロウェナ商会の商人。詩学で交換。",
+        unlock: "暁月メインクエストクリア後に交換導線が安定。Lv90から黄金序盤までの土台。"
+      },
+      {
         min: 80,
         name: "Augmented Cryptlurker",
         label: "クリプトラーカーRE",
         ilvl: 530,
         vendor: "ユールモア X:10.2 Y:11.8 のアイマーク、またはクリスタリウムのモーエン商会。詩学で交換。",
-        unlock: "漆黒メインクエストクリア後に交換導線が安定。Lv80のフリートライアル到達点としてまずここ。"
+        unlock: "漆黒メインクエストクリア後に交換導線が安定。Lv80から暁月序盤まで長く使いやすい。"
       },
       {
         min: 70,
@@ -3562,7 +3589,9 @@
       arr: { rank: 3, label: "新生クリア後" },
       hw: { rank: 4, label: "蒼天進行中" },
       sb: { rank: 5, label: "紅蓮進行中" },
-      shb: { rank: 6, label: "漆黒進行中" }
+      shb: { rank: 6, label: "漆黒進行中" },
+      ew: { rank: 7, label: "暁月進行中" },
+      dt: { rank: 8, label: "黄金進行中" }
     };
 
     const storyImages = {
@@ -3598,9 +3627,21 @@
       },
       shb: {
         title: "漆黒のヴィランズ",
-        caption: "Lv80クリプトラーカーREへ。フリートライアル到達点の大きな節目。",
+        caption: "Lv80クリプトラーカーREへ。漆黒帯の大きな節目。",
         image: "https://lds-img.finalfantasyxiv.com/promo/h/l/Wpxdd7E1zDgSN7d4ITTbSMymfI.png",
         source: "https://jp.finalfantasyxiv.com/shadowbringers/"
+      },
+      ew: {
+        title: "暁月のフィナーレ",
+        caption: "Lv90クレデンダムREへ。暁月帯の装備更新を確認。",
+        image: "https://lds-img.finalfantasyxiv.com/promo/h/l/Wpxdd7E1zDgSN7d4ITTbSMymfI.png",
+        source: "https://jp.finalfantasyxiv.com/endwalker/"
+      },
+      dt: {
+        title: "黄金のレガシー",
+        caption: "Lv100最新装備へ。各カードの性能と入手先を確認。",
+        image: "https://lds-img.finalfantasyxiv.com/promo/h/l/Wpxdd7E1zDgSN7d4ITTbSMymfI.png",
+        source: "https://jp.finalfantasyxiv.com/dawntrail/"
       }
     };
 
@@ -3816,7 +3857,7 @@
         category: "装備",
         iconName: "アラガントームストーン:詩学",
         story: "shb",
-        detail: "フリートライアルLv80到達点の大きな装備更新。IL530でかなり強くなります。",
+        detail: "Lv80の大きな装備更新。IL530で暁月序盤までかなり楽になります。",
         action: "ユールモア、またはクリスタリウムのモーエン商会で交換。"
       },
       {
@@ -4021,7 +4062,7 @@
         story: "shb",
         title: "クリプトラーカーRE交換",
         iconName: "アラガントームストーン:詩学",
-        detail: "フリートライアルLv80到達点の装備更新。ここまで来たごほうびです。",
+        detail: "Lv80の装備更新。暁月序盤までの土台になります。",
         steps: ["ユールモア X:10.2 Y:11.8 のアイマークへ", "武器、胴、脚から交換", "残りは見た目集めや未解放コンテンツへ"]
       }
     ];
@@ -4506,7 +4547,7 @@
     const iconDataReady = Promise.all([
       fetch("action-icons.json").then((response) => response.ok ? response.json() : {}).catch(() => ({})),
       fetch("item-icons.json").then((response) => response.ok ? response.json() : {}).catch(() => ({})),
-      fetch("gear-catalog.json?v=20260508-detail").then((response) => response.ok ? response.json() : {}).catch(() => ({}))
+      fetch("gear-catalog.json?v=20260508-lv100").then((response) => response.ok ? response.json() : {}).catch(() => ({}))
     ]).then(([actionIcons, itemIcons, catalog]) => {
       actionIconOverrides = actionIcons;
       itemIconOverrides = itemIcons;
@@ -5348,7 +5389,7 @@
           gearJob.value = data.job;
         }
         if (data.level) {
-          gearLevel.value = Math.min(80, Math.max(1, Number(data.level) || 20));
+          gearLevel.value = Math.min(MAX_LEVEL, Math.max(1, Number(data.level) || 20));
         }
         if (storyStages[data.story]) {
           storyStage.value = data.story;
@@ -5380,7 +5421,7 @@
     function saveProfile() {
       const data = {
         job: gearJob.value,
-        level: Math.min(80, Math.max(1, Number(gearLevel.value) || 1)),
+        level: Math.min(MAX_LEVEL, Math.max(1, Number(gearLevel.value) || 1)),
         story: storyStage.value,
         poetics: Math.min(2000, Math.max(0, Number(poeticsInput.value) || 0))
       };
@@ -5420,7 +5461,7 @@
     }
 
     function selectedRotationLevel() {
-      return Math.min(80, Math.max(1, Number(gearLevel.value) || 1));
+      return Math.min(MAX_LEVEL, Math.max(1, Number(gearLevel.value) || 1));
     }
 
     function game8SiteSearchUrl(query) {
@@ -5443,7 +5484,7 @@
       return officialJobGuideUrls[jobId] || "https://jp.finalfantasyxiv.com/jobguide/";
     }
 
-    const game8RotationTargetLevels = [50, 60, 70, 80];
+    const game8RotationTargetLevels = [50, 60, 70, 80, 90, 100];
 
     function game8RotationUrl(job, level) {
       return game8RotationLinks[job.id]?.[level]
@@ -5642,6 +5683,12 @@
       if (!tier) {
         return "airship";
       }
+      if (tier.min >= 100) {
+        return "dt";
+      }
+      if (tier.min >= 90) {
+        return "ew";
+      }
       if (tier.min >= 80) {
         return "shb";
       }
@@ -5792,9 +5839,6 @@
       if (!tier) {
         return 0;
       }
-      if (tier.min === 80) {
-        return 100;
-      }
       const nextTier = gearTiers.filter((item) => item.min > tier.min).sort((a, b) => a.min - b.min)[0];
       if (!nextTier) {
         return 100;
@@ -5808,7 +5852,7 @@
       }
       const nextTier = gearTiers.filter((item) => item.min > tier.min).sort((a, b) => a.min - b.min)[0];
       if (!nextTier) {
-        return "Lv80帯の到達装備です。ここからはコンテンツ目的や見た目集めを増やすと楽しいです。";
+        return "Lv100最新帯の装備です。入手先を見ながら、遊ぶコンテンツに合わせて更新していきます。";
       }
       return `この装備はLv${nextTier.min - 1}まで安心。あと${levelDelta(level, nextTier.min)}Lvで${nextTier.label} IL${nextTier.ilvl}に更新できます。`;
     }
@@ -5821,7 +5865,9 @@
         50: "三都市のロウェナ商会の商人は、メインクエストクリア後に利用しやすくなります。モードゥナのオーリアナでも交換できます。",
         60: "イシュガルドのロウェナ商会の商人は、蒼天メインクエストクリア後に利用しやすくなります。イディルシャイアのヒスメナでも交換できます。",
         70: "クガネのロウェナ商会の商人は、紅蓮メインクエストクリア後に利用しやすくなります。ラールガーズリーチのエンナでも交換できます。",
-        80: "クリスタリウムのモーエン商会は、漆黒メインクエストクリア後に利用しやすくなります。ユールモアのアイマークでも交換できます。"
+        80: "クリスタリウムのモーエン商会は、漆黒メインクエストクリア後に利用しやすくなります。ユールモアのアイマークでも交換できます。",
+        90: "オールド・シャーレアンのロウェナ商会の商人、またはラザハンのキハンティで交換できます。",
+        100: "Lv100最新帯は装備ごとに入手経路が分かれます。各カードの入手欄を見て、必要なら公式DBで詳細確認。"
       };
       return rows[tier.min] || tier.unlock;
     }
@@ -5832,9 +5878,9 @@
     }
 
     function gearBands() {
-      return Array.from({ length: 16 }, (_, index) => {
+      return Array.from({ length: Math.ceil(MAX_LEVEL / 5) }, (_, index) => {
         const min = index * 5 + 1;
-        const max = Math.min(80, min + 4);
+        const max = Math.min(MAX_LEVEL, min + 4);
         return { key: String(min), min, max, label: `Lv${min}-${max}` };
       });
     }
@@ -5936,7 +5982,7 @@
     }
 
     function moveGearSlot(job, slotField, step) {
-      const level = Math.min(80, Math.max(1, Number(gearLevel.value) || 1));
+      const level = Math.min(MAX_LEVEL, Math.max(1, Number(gearLevel.value) || 1));
       const currentBand = currentGearBand(level);
       const currentItem = nearestGearItemForSlot(job, slotField, gearBandByKey(gearSlotBandKeys[slotField]) || currentBand);
       if (!currentItem) {
@@ -5982,6 +6028,7 @@
 
     function gearReferenceCards(job, level, tier, poeticsIcon, guideIcon) {
       const currentTier = tier || gearTiers[gearTiers.length - 1];
+      const exchangeTitle = currentTier.min >= 100 ? "入手メモ" : "詩学/交換場所";
       return `
         <div class="gear-card">
           ${iconBox(guideIcon, "適正装備の考え方", "gear-icon")}
@@ -5996,7 +6043,7 @@
         <div class="gear-card">
           ${iconBox(poeticsIcon, "ロウェナ商会と詩学", "gear-icon")}
           <div>
-            <h3>詩学/交換場所</h3>
+            <h3>${exchangeTitle}</h3>
             <p>${rowenaUnlockText(currentTier)}</p>
             <div class="gear-links">
               <a href="https://game8.jp/ff14/455613" target="_blank" rel="noreferrer noopener">詩学の集め方</a>
@@ -6029,7 +6076,7 @@
           iconName: "ソウルクリスタル"
         };
       }
-      const nextLevel = [50, 60, 70, 80].find((target) => target >= level) || 80;
+      const nextLevel = [50, 60, 70, 80, 90, 100].find((target) => target >= level) || MAX_LEVEL;
       return {
         level: nextLevel,
         title: `${job.label} Lv${nextLevel}節目`,
@@ -6078,7 +6125,7 @@
 
     function currentJobAndLevel() {
       const job = gearJobs.find((item) => item.id === gearJob.value) || gearJobs.find((item) => item.id === "SMN");
-      const level = Math.min(80, Math.max(1, Number(gearLevel.value) || 1));
+      const level = Math.min(MAX_LEVEL, Math.max(1, Number(gearLevel.value) || 1));
       return { job, level };
     }
 
@@ -6144,8 +6191,8 @@
           action: "クラスクエスト完了後に受注。"
         };
       }
-      const nextLevel = [30, 35, 40, 45, 50, 52, 54, 56, 58, 60, 63, 65, 68, 70, 80]
-        .find((target) => target >= Math.max(level, job.min)) || 80;
+      const nextLevel = [30, 35, 40, 45, 50, 52, 54, 56, 58, 60, 63, 65, 68, 70, 80, 90, 100]
+        .find((target) => target >= Math.max(level, job.min)) || MAX_LEVEL;
       return {
         level: nextLevel,
         title: `Lv${nextLevel}ジョブクエ確認`,
@@ -6190,6 +6237,24 @@
           title: "漆黒メインを進める",
           iconName: "クリスタル",
           detail: "Lv80詩学装備の入口。",
+          action: "メインを優先。"
+        };
+      }
+      if (rank < 7 && level >= 90) {
+        return {
+          level: 90,
+          title: "暁月メインを進める",
+          iconName: "クリスタル",
+          detail: "Lv90詩学装備の入口。",
+          action: "メインを優先。"
+        };
+      }
+      if (rank < 8 && level >= 100) {
+        return {
+          level: 100,
+          title: "黄金メインを進める",
+          iconName: "クリスタル",
+          detail: "Lv100最新装備の入口。",
           action: "メインを優先。"
         };
       }
@@ -6390,14 +6455,26 @@
         return lowLevelShoppingItems(job, level);
       }
       const tier = shoppingTierForLevel(level);
-      const catalogItems = catalogGearItems(job, tier);
+      const catalogItems = catalogGearItems(job, currentGearBand(level)) || catalogGearItems(job, tier);
       const priorityFields = ["MainHand", "OffHand", "Body", "Legs", "Head", "Gloves", "Feet", "Ears", "Neck", "Wrists", "FingerL"];
       const costs = { MainHand: 600, OffHand: 200, Body: 510, Legs: 510, Head: 345, Gloves: 345, Feet: 345, Ears: 280, Neck: 280, Wrists: 280, FingerL: 280 };
       if (catalogItems) {
         return priorityFields
           .map((field) => catalogItems.find((item) => item.slot === field))
           .filter(Boolean)
-          .map((item) => ({ title: `${slotLabelByField(item.slot)}: ${item.name}`, iconUrl: item.icon, cost: costs[item.slot] || 280, text: `${tier.label} IL${tier.ilvl}。${gearPriorityText(item.slot)}`, href: item.href, key: `${job.id}:${tier.min}:${item.slot}` }));
+          .map((item) => {
+            const source = item.details?.sources?.[0] || null;
+            const poeticsCost = source?.directPoetics ? Number(source.poetics) || 0 : 0;
+            return {
+              title: `${slotLabelByField(item.slot)}: ${item.name}`,
+              iconUrl: item.icon,
+              cost: poeticsCost,
+              costLabel: poeticsCost ? `${poeticsCost}詩学` : "入手欄確認",
+              text: `${tier.label} IL${item.itemLevel || tier.ilvl}。${source?.summary || gearPriorityText(item.slot)}`,
+              href: item.href,
+              key: `${job.id}:${tier.min}:${item.slot}`
+            };
+          });
       }
       return priorityFields
         .map((field) => gearSlots.find((slot) => slot.field === field))
@@ -6447,7 +6524,9 @@
         shoppingSummary.textContent = `${tier.label}は${tierStoryLabel(tier)}から交換導線が安定します。今はメイン進行を優先し、詩学は温存でOKです。`;
       } else {
         shoppingSummary.textContent = firstUnchecked
-          ? `次は「${firstUnchecked.title}」。目安${firstUnchecked.cost}詩学、今は${poetics}。${poetics >= firstUnchecked.cost ? "今日買えます。" : `あと${firstUnchecked.cost - poetics}詩学です。`}`
+          ? (firstUnchecked.cost
+            ? `次は「${firstUnchecked.title}」。目安${firstUnchecked.cost}詩学、今は${poetics}。${poetics >= firstUnchecked.cost ? "今日買えます。" : `あと${firstUnchecked.cost - poetics}詩学です。`}`
+            : `次は「${firstUnchecked.title}」。装備カードの入手欄を確認。`)
           : `${tier.label}の主要部位はチェック済み。次は見た目や未解放コンテンツへ。`;
       }
       shoppingBoard.innerHTML = "";
@@ -6836,7 +6915,7 @@
 
     async function renderGearFinder() {
       const job = gearJobs.find((item) => item.id === gearJob.value) || gearJobs.find((item) => item.id === "SMN");
-      const level = Math.min(80, Math.max(1, Number(gearLevel.value) || 1));
+      const level = Math.min(MAX_LEVEL, Math.max(1, Number(gearLevel.value) || 1));
       gearLevel.value = level;
       await iconDataReady;
       if (level < job.min) {

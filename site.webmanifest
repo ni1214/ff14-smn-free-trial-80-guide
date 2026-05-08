@@ -1,7 +1,7 @@
 {
-  "name": "FF14 Free Trial Lv80 Guide",
+  "name": "FF14 Lv100 Guide",
   "short_name": "FF14 Guide",
-  "description": "A compact FF14 free-trial Lv80 guide app.",
+  "description": "A compact FF14 Lv100 gear and guide app.",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#07111c",

@@ -2433,7 +2433,7 @@
       <h2>出典</h2>
       <p class="footer-note">
         アクション名・修得レベル・アイコンは公式ジョブガイド、アイテム名・装備アイコンはエオルゼアデータベース、フリートライアルLv80拡張は日本語版Patch 7.5パッチノートを参照しています。<br>
-        レベル別スキル回しとスキル説明はパッチで変わりやすいため、現在はGame8の該当記事と公式ジョブガイドへ直接移動する導線にしています。
+        レベル別スキル回しとスキル説明はパッチで変わりやすいため、攻略記事検索、YouTube候補検索、公式ジョブガイドへ直接移動する導線にしています。
       </p>
       <div class="sources">
         <div class="source-item">
@@ -2446,7 +2446,11 @@
         </div>
         <div class="source-item">
           <a href="https://game8.jp/ff14" target="_blank" rel="noreferrer noopener">Game8 FF14攻略</a><br>
-          ジョブごとのレベル別スキル回し記事への移動先として使用。
+          ジョブごとのレベル別スキル回し記事がある場合の移動先として使用。
+        </div>
+        <div class="source-item">
+          <a href="https://www.youtube.com/" target="_blank" rel="noreferrer noopener">YouTube</a><br>
+          Lv帯ごとの最新候補、人気候補、初心者向け解説動画の検索先として使用。
         </div>
         <div class="source-item">
           <a href="https://game8.jp/ff14/539537" target="_blank" rel="noreferrer noopener">Game8 装備と武器情報まとめ</a><br>
@@ -4397,7 +4401,7 @@
       cockpitAnswer.innerHTML = `
         <h3>${job.label} Lv${level}</h3>
         <div class="external-link-grid">
-          ${game8RotationCards(job)}
+          ${rotationGuideCards(job)}
           ${externalLinkCard({
             title: "公式ジョブガイド",
             text: "スキル説明、修得Lv、特性。",
@@ -5270,6 +5274,18 @@
       return `https://game8.jp/ff14/search?q=${encodeURIComponent(query)}`;
     }
 
+    function webSearchUrl(query) {
+      return `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+    }
+
+    function youtubeSearchUrl(query, sort = "") {
+      const params = new URLSearchParams({ search_query: query });
+      if (sort) {
+        params.set("sp", sort);
+      }
+      return `https://www.youtube.com/results?${params.toString()}`;
+    }
+
     function officialJobGuideUrl(jobId) {
       return officialJobGuideUrls[jobId] || "https://jp.finalfantasyxiv.com/jobguide/";
     }
@@ -5289,6 +5305,23 @@
       }));
     }
 
+    function rotationArticleSearchUrl(job, level) {
+      return webSearchUrl(`FF14 ${job.label} Lv${level} スキル回し レベル${level} 解説`);
+    }
+
+    function rotationVideoLinks(job, level) {
+      return [{
+        url: youtubeSearchUrl(`FF14 ${job.label} Lv${level} スキル回し 最新 パッチ`, "CAI%3D"),
+        label: "YouTube 最新候補"
+      }, {
+        url: youtubeSearchUrl(`FF14 ${job.label} Lv${level} スキル回し 解説`, "CAM%3D"),
+        label: "YouTube 人気候補"
+      }, {
+        url: youtubeSearchUrl(`FF14 ${job.label} Lv${level} スキル回し 初心者 解説`),
+        label: "初心者向け動画"
+      }];
+    }
+
     function externalGuideButton(url, label, secondary = false) {
       return `<a class="duty-open-button ${secondary ? "secondary" : ""}" href="${url}" target="_blank" rel="noreferrer noopener">${escapeHtml(label)}</a>`;
     }
@@ -5305,18 +5338,30 @@
       `;
     }
 
-    function game8RotationCards(job) {
-      const cards = game8RotationGuides(job).map((guide) => ({
-        title: `Lv${guide.level}スキル回し`,
-        text: guide.direct
-          ? `${job.label}のLv${guide.level}帯を開く。`
-          : `${job.label}のLv${guide.level}帯をGame8で検索。`,
-        url: guide.url,
-        label: guide.direct ? `Game8 Lv${guide.level}` : `Lv${guide.level}を検索`,
-        secondary: !guide.direct
-      }));
+    function rotationLevelActions(job, guide) {
+      const articleButton = externalGuideButton(
+        guide.direct ? guide.url : rotationArticleSearchUrl(job, guide.level),
+        guide.direct ? "記事を開く" : "記事を探す",
+        false
+      );
+      const videoButtons = rotationVideoLinks(job, guide.level)
+        .map((link) => externalGuideButton(link.url, link.label, true))
+        .join("");
+      return `${articleButton}${videoButtons}`;
+    }
 
-      return cards.map(externalLinkCard).join("");
+    function rotationGuideCards(job) {
+      return game8RotationGuides(job).map((guide) => `
+        <div class="external-link-card">
+          <h3>Lv${guide.level}スキル回し</h3>
+          <p>${guide.direct
+            ? `${job.label}のLv${guide.level}帯。記事と動画候補を開けます。`
+            : `${job.label}のLv${guide.level}帯。記事検索と動画候補から探せます。`}</p>
+          <div class="external-link-actions">
+            ${rotationLevelActions(job, guide)}
+          </div>
+        </div>
+      `).join("");
     }
 
     function getRotationTier(jobId, level) {
@@ -5382,13 +5427,25 @@
       await renderSkillList(job, level);
       jobSummaryGrid.innerHTML = `
         <div class="quick-block">
-          <strong>スキル回し</strong>
+          <strong>スキル回し記事</strong>
           <div class="external-link-actions">
             ${game8RotationGuides(job)
               .map((guide) => externalGuideButton(
-                guide.url,
-                guide.direct ? `Game8 Lv${guide.level}` : `Lv${guide.level}を検索`,
+                guide.direct ? guide.url : rotationArticleSearchUrl(job, guide.level),
+                guide.direct ? `Lv${guide.level}記事` : `Lv${guide.level}を探す`,
                 !guide.direct
+              ))
+              .join("")}
+          </div>
+        </div>
+        <div class="quick-block">
+          <strong>YouTube候補</strong>
+          <div class="external-link-actions">
+            ${game8RotationGuides(job)
+              .map((guide) => externalGuideButton(
+                rotationVideoLinks(job, guide.level)[0].url,
+                `Lv${guide.level}最新`,
+                true
               ))
               .join("")}
           </div>
@@ -5405,9 +5462,9 @@
       document.getElementById("milestones").innerHTML = "";
 
       currentGuideSections = [{
-        title: `${job.label} Game8スキル回し`,
+        title: `${job.label} スキル回しリンク`,
         href: "#cockpit",
-        text: `${job.label} Game8 スキル回し Lv50 Lv60 Lv70 Lv80`
+        text: `${job.label} スキル回し 記事 YouTube Lv50 Lv60 Lv70 Lv80`
       }, {
         title: `${job.label} 公式ジョブガイド`,
         href: "#skillList",

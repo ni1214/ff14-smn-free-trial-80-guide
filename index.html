@@ -1852,6 +1852,60 @@
       font-size: 13px;
     }
 
+    .duty-summary-head {
+      display: grid;
+      gap: 5px;
+    }
+
+    .duty-kicker {
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .duty-keypoints {
+      display: grid;
+      gap: 7px;
+      margin-top: 10px;
+    }
+
+    .duty-keypoint {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 8px;
+      align-items: flex-start;
+      padding: 8px;
+      border-radius: 12px;
+      background: rgba(255, 253, 248, 0.78);
+      border: 1px solid rgba(32, 90, 97, 0.08);
+    }
+
+    .duty-keypoint-mark {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      background: rgba(32, 90, 97, 0.1);
+      color: var(--teal);
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .duty-keypoint strong {
+      display: block;
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .duty-keypoint span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
     .mechanic-grid {
       display: grid;
       gap: 8px;
@@ -1897,6 +1951,13 @@
       display: grid;
       gap: 8px;
       margin-top: 10px;
+    }
+
+    .duty-link-note {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.45;
     }
 
     .duty-open-button {
@@ -2310,8 +2371,8 @@
     </section>
 
     <section class="panel duty-panel feature-panel" id="dutyGuide" data-feature="duty">
-      <h2>ギミック攻略リンク</h2>
-      <p class="footer-note">ID、討滅戦、クリスタルタワーなどの大人数レイドを検索して、Game8の日本語攻略へすぐ移動します。</p>
+      <h2>初見ギミック</h2>
+      <p class="footer-note">選んだコンテンツの要点だけ先に確認し、詳しい攻略はGame8記事と動画候補へ移動します。</p>
       <div class="duty-controls">
         <div class="duty-control-row">
           <div>
@@ -6390,8 +6451,44 @@
 
     function game8LinkLabel(duty) {
       return game8DutyLinks[duty.name] || duty.game8Url
-        ? "Game8攻略ページを開く"
-        : "Game8で攻略を検索";
+        ? "Game8記事"
+        : "Game8記事を検索";
+    }
+
+    function dutyLinkKind(duty) {
+      return game8DutyLinks[duty.name] || duty.game8Url ? "Game8個別記事" : "Game8検索";
+    }
+
+    function dutyVideoLinks(duty) {
+      const queryName = duty.name.replace(/\s+/g, " ").trim();
+      return [{
+        url: youtubeSearchUrl(`FF14 ${queryName} 攻略 解説 最新 パッチ`, "CAI%3D"),
+        label: "最新動画候補"
+      }, {
+        url: youtubeSearchUrl(`FF14 ${queryName} 攻略 解説 初見 人気`, "CAM%3D"),
+        label: "人気動画候補"
+      }];
+    }
+
+    function dutyKeypoints(duty, specificHints) {
+      const points = specificHints.length ? specificHints : dutySpecificHints(duty);
+      return [...points, ...universalMechanics].slice(0, 3);
+    }
+
+    function renderDutyKeypoints(points) {
+      return `
+        <div class="duty-keypoints">
+          ${points.map((point) => `
+            <div class="duty-keypoint">
+              <div class="duty-keypoint-mark">${escapeHtml(point.mark)}</div>
+              <div>
+                <strong>${escapeHtml(point.title)}</strong>
+                <span>${escapeHtml(point.detail)}</span>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      `;
     }
 
     function renderDutyOptions() {
@@ -6428,16 +6525,35 @@
       ];
     }
 
-    function renderMechanicCards(cards) {
-      mechanicGrid.innerHTML = cards.map((card) => `
+    function mechanicCardHtml(card) {
+      return `
         <div class="mechanic-card">
-          <div class="mechanic-mark">${card.mark}</div>
+          <div class="mechanic-mark">${escapeHtml(card.mark)}</div>
           <div>
-            <h3>${card.title}</h3>
-            <p>${card.detail}</p>
+            <h3>${escapeHtml(card.title)}</h3>
+            <p>${escapeHtml(card.detail)}</p>
           </div>
         </div>
-      `).join("");
+      `;
+    }
+
+    function renderMechanicCards(cards, collapsed = true) {
+      if (!cards.length) {
+        mechanicGrid.innerHTML = "";
+        return;
+      }
+      if (collapsed) {
+        mechanicGrid.innerHTML = `
+          <details class="more-details mechanic-details">
+            <summary>共通ギミック辞書を開く（${cards.length}件）</summary>
+            <div class="folded-grid">
+              ${cards.map(mechanicCardHtml).join("")}
+            </div>
+          </details>
+        `;
+        return;
+      }
+      mechanicGrid.innerHTML = cards.map(mechanicCardHtml).join("");
       foldContainer(mechanicGrid, 3, "ギミック辞書をすべて見る");
     }
 
@@ -6446,7 +6562,7 @@
       const duty = duties.find((item) => item.id === selectedId) || filteredDuties()[0];
       if (!duty) {
         dutySummary.innerHTML = `<h3>該当コンテンツなし</h3><p>検索語を短くするか、種類を「全部」に戻してください。</p>`;
-        renderMechanicCards(universalMechanics.slice(0, 6));
+        renderMechanicCards(universalMechanics.slice(0, 6), true);
         return;
       }
       if (String(dutySelect.value) !== String(duty.id)) {
@@ -6454,23 +6570,25 @@
       }
       const imageUrl = "";
       const specificHints = dutySpecificHints(duty);
-      const preview = [...specificHints, ...universalMechanics].slice(0, 3);
+      const keypoints = dutyKeypoints(duty, specificHints);
       const guideUrl = game8DutyUrl(duty);
-      const indexUrl = game8DutyIndexUrls[duty.type] || "https://game8.jp/ff14";
-      const linkKind = game8DutyLinks[duty.name] || duty.game8Url ? "個別記事" : "Game8内検索";
+      const videoLinks = dutyVideoLinks(duty);
+      const linkKind = dutyLinkKind(duty);
       dutySummary.innerHTML = `
-        <h3>Lv${duty.level} ${duty.name}</h3>
-        <p>${duty.type} / ${linkKind}。選んだコンテンツの詳しいギミックはGame8の日本語攻略で確認します。</p>
-        <div class="next-meta">
-          ${preview.map((hint) => `<span class="next-pill hot">${hint.title}</span>`).join("")}
+        <div class="duty-summary-head">
+          <div class="duty-kicker">Lv${escapeHtml(duty.level)} ${escapeHtml(duty.type)} / ${escapeHtml(linkKind)}</div>
+          <h3>${escapeHtml(duty.name)}</h3>
+          <p>まず要点だけ確認。詳しい図解はGame8、動きの確認はYouTube候補から開きます。</p>
         </div>
+        ${renderDutyKeypoints(keypoints)}
         <div class="duty-link-actions">
-          <a class="duty-open-button" href="${guideUrl}" target="_blank" rel="noreferrer noopener">${game8LinkLabel(duty)}</a>
-          <a class="duty-open-button secondary" href="${indexUrl}" target="_blank" rel="noreferrer noopener">${duty.type}の一覧をGame8で開く</a>
+          ${externalGuideButton(guideUrl, game8LinkLabel(duty))}
+          ${videoLinks.map((link) => externalGuideButton(link.url, link.label, true)).join("")}
         </div>
+        <div class="duty-link-note">動画候補はYouTube検索を「最新」と「人気」寄りで開きます。パッチ後や初見前は最新候補から見るのがおすすめです。</div>
         ${imageUrl ? `<div class="character-preview"><img src="${imageUrl}" alt="${duty.name}"><p>下のカードは、このコンテンツで特に見たい動きと、全ID/討滅戦で使う避け方辞書です。</p></div>` : ""}
       `;
-      renderMechanicCards([...specificHints, ...universalMechanics]);
+      renderMechanicCards(universalMechanics, true);
     }
 
     function saveCharacter() {

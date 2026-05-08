@@ -64,6 +64,19 @@
       padding-bottom: calc(86px + env(safe-area-inset-bottom));
     }
 
+    body.job-art-on {
+      background:
+        linear-gradient(180deg, rgba(10, 17, 23, 0.34), rgba(247, 242, 233, 0.78) 28%, rgba(242, 234, 223, 0.96) 100%),
+        linear-gradient(90deg, rgba(247, 242, 233, 0.9), rgba(247, 242, 233, 0.45) 52%, rgba(247, 242, 233, 0.86)),
+        var(--job-art-image),
+        var(--story-bg-image),
+        linear-gradient(180deg, #fdf8ef 0%, #f7f2e9 46%, #f2eadf 100%);
+      background-attachment: scroll, scroll, fixed, fixed, scroll;
+      background-position: center top, center top, right top, center top, center;
+      background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+      background-size: cover, cover, min(1180px, 185vw) auto, cover, auto;
+    }
+
     a {
       color: var(--teal);
     }
@@ -361,26 +374,30 @@
       z-index: 0;
       pointer-events: none;
       background:
-        linear-gradient(90deg, rgba(255, 250, 243, 0.96) 0%, rgba(255, 250, 243, 0.86) 48%, rgba(19, 31, 43, 0.46) 100%),
+        linear-gradient(180deg, rgba(255, 250, 243, 0.14) 0%, rgba(255, 250, 243, 0.44) 58%, rgba(255, 250, 243, 0.86) 100%),
+        linear-gradient(90deg, rgba(255, 250, 243, 0.9) 0%, rgba(255, 250, 243, 0.62) 48%, rgba(19, 31, 43, 0.1) 100%),
         var(--job-art-image);
-      background-position: center right;
-      background-size: cover;
+      background-position: center, center, right -84px top;
+      background-repeat: no-repeat;
+      background-size: cover, cover, min(980px, 172vw) auto;
     }
 
     body.job-art-on .gear-panel::before {
       background:
-        linear-gradient(90deg, rgba(255, 250, 243, 0.97) 0%, rgba(255, 250, 243, 0.9) 56%, rgba(19, 31, 43, 0.5) 100%),
+        linear-gradient(180deg, rgba(255, 250, 243, 0.08) 0%, rgba(255, 250, 243, 0.36) 260px, rgba(255, 250, 243, 0.9) 620px),
+        linear-gradient(90deg, rgba(255, 250, 243, 0.92) 0%, rgba(255, 250, 243, 0.64) 46%, rgba(19, 31, 43, 0.08) 100%),
         var(--job-art-image);
-      background-position: center top;
-      background-size: cover;
+      background-position: center, center, right -112px top;
+      background-repeat: no-repeat;
+      background-size: cover, cover, min(1120px, 180vw) auto;
     }
 
     body.job-art-on .profile-summary-card,
     body.job-art-on .gear-summary,
     body.job-art-on .gear-data-tools,
     body.job-art-on .gear-card {
-      background: rgba(255, 253, 248, 0.9);
-      backdrop-filter: blur(4px);
+      background: rgba(255, 253, 248, 0.82);
+      backdrop-filter: blur(3px);
     }
 
     .profile-panel h2 {
@@ -2069,6 +2086,27 @@
       margin-top: 10px;
     }
 
+    .duty-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .duty-meta-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 5px 9px;
+      border: 1px solid rgba(215, 180, 106, 0.32);
+      border-radius: 10px;
+      background:
+        linear-gradient(180deg, rgba(255, 253, 248, 0.9), rgba(239, 232, 216, 0.9));
+      color: #31434d;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
     .duty-keypoint {
       display: grid;
       grid-template-columns: 34px 1fr;
@@ -2238,6 +2276,16 @@
       font-size: 12px;
       font-weight: 800;
       text-decoration: none;
+    }
+
+    .character-links .lodestone-jump {
+      border-color: rgba(255, 226, 154, 0.48);
+      background:
+        linear-gradient(180deg, rgba(73, 91, 104, 0.98), rgba(20, 31, 42, 0.98));
+      color: #fff8e8;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        0 5px 12px rgba(10, 17, 23, 0.16);
     }
 
     .qr-overlay {
@@ -4407,6 +4455,24 @@
       { match: ["ダイヤウェポン"], hints: ["足場移動が重要。移動できるタイミングで反対側へ渡る準備。"], tags: ["足場", "移動"] }
     ];
 
+    dutyHintRules.push(
+      { match: ["ゾット"], hints: ["塔内は連続範囲が多いです。床が重なったら一度外へ出て、消えた順に戻る。", "ボスの詠唱名と腕・羽の向きを見て、直線と扇を先読みします。"], tags: ["連続範囲", "向き"] },
+      { match: ["バブイル"], hints: ["魔導兵器の直線範囲と外周攻撃を確認。雑魚が出たら範囲攻撃に切り替える。"], tags: ["直線", "雑魚"] },
+      { match: ["ヴァナスパティ"], hints: ["広い床範囲と時間差攻撃が多め。最初に出た床から順に避ける意識で。"], tags: ["時間差", "床"] },
+      { match: ["ヒュペルボレア"], hints: ["古代魔法の色・形を見て安全地帯へ。見た目が派手でも床予兆を優先。"], tags: ["床", "色"] },
+      { match: ["アイティオン"], hints: ["外周とボス周辺の両方を確認。大きな詠唱中は安全地帯を先に探す。"], tags: ["外周", "詠唱"] },
+      { match: ["レムナント", "スマイルトン", "スティグマ"], hints: ["Lv90初期IDは範囲、頭割り、雑魚処理の総まとめ。マーカーが付いたら散開か集合かを先に判断。"], tags: ["総まとめ", "マーカー"] },
+      { match: ["アルザダール", "トロイア", "ラピス", "ハーム", "月の地下"], hints: ["暁月パッチIDは時間差床と外周攻撃が多いです。床が出た順番、ボスの向き、味方の集合位置を順に見る。"], tags: ["時間差", "外周"] },
+      { match: ["イフイカ", "ウォーコー", "セノーテ", "ヴァンガード", "オリジェニクス", "アレクサンドリア"], hints: ["黄金メインIDはボスの向きと床の出現順が大事。焦って戻らず、予兆が消えた場所へ入る。"], tags: ["黄金ID", "床順"] },
+      { match: ["サボテンダーバレー", "ストレイバロー", "ユウェヤーワータ", "アンダーキープ", "メインターミナル", "ミストウェイク", "クルティウス"], hints: ["Lv100IDは時間差、外周、散開の組み合わせが増えます。まず1ギミックずつ、床が出た順番を追う。"], tags: ["Lv100ID", "時間差"] },
+      { match: ["ゾディアーク", "ハイデリン", "終焉", "終極"], hints: ["暁月討滅は演出後もすぐ次のマーカーが来ます。頭割り、散開、床回転を一つずつ確認。"], tags: ["頭割り", "散開"] },
+      { match: ["バルバリシア", "ルビカンテ", "ゴルベーザ", "ゼロムス"], hints: ["四天王系は詠唱名とフィールド変化が鍵。線、塔、外周攻撃を見てから移動。"], tags: ["線", "塔", "外周"] },
+      { match: ["ヴァリガルマンダ", "ゾラージャ", "エターナルクイーン"], hints: ["黄金メイン討滅は大技後の連続処理に注意。個人円は離れ、矢印や集合は味方へ寄る。"], tags: ["連続処理", "マーカー"] },
+      { match: ["アルシュベルド", "ゼレニア", "永遠の闇", "グラシャラボラス", "エヌオー"], hints: ["黄金パッチ討滅は床順、線、塔が重なりやすいです。自分のマーカーを確認してから安全地帯へ。"], tags: ["床順", "線", "塔"] },
+      { match: ["アグライア", "エウプロシュネ", "タレイア"], hints: ["神域レイドは巨大ボスの向きとフィールド全体を見る。味方が集まる場所を基準に動くと迷いにくいです。"], tags: ["大人数", "外周"] },
+      { match: ["ジュノ", "サンドリア", "ウィンダス"], hints: ["エコーズ系アライアンスは範囲が広く、見てから移動する時間が短め。自分のアライアンスと床順を優先。"], tags: ["大人数", "床順"] }
+    );
+
     const game8DutyIndexUrls = {
       "ダンジョン": "https://game8.jp/ff14/275813",
       "討伐・討滅戦": "https://game8.jp/ff14/283755",
@@ -4641,6 +4707,73 @@
       { id: -911, name: "人形タチノ軍事基地", level: 80, type: "アライアンスレイド", image: null, sort: 911, aliases: ["ヨルハ", "ニーア", "タチノ"] },
       { id: -912, name: "希望ノ砲台：「塔」", level: 80, type: "アライアンスレイド", image: null, sort: 912, aliases: ["ヨルハ", "ニーア", "塔"] }
     ];
+
+    const currentDuties = [
+      { id: -1001, name: "異形楼閣 ゾットの塔", level: 81, itemLevel: 500, type: "ダンジョン", image: null, sort: 1001, aliases: ["暁月", "ゾット"] },
+      { id: -1002, name: "魔導神門 バブイルの塔", level: 83, itemLevel: 505, type: "ダンジョン", image: null, sort: 1002, aliases: ["暁月", "バブイル"] },
+      { id: -1003, name: "終末樹海 ヴァナスパティ", level: 85, itemLevel: 510, type: "ダンジョン", image: null, sort: 1003, aliases: ["暁月"] },
+      { id: -1004, name: "創造環境 ヒュペルボレア造物院", level: 87, itemLevel: 515, type: "ダンジョン", image: null, sort: 1004, aliases: ["暁月", "ヒュペルボレア"] },
+      { id: -1005, name: "星海潜航 アイティオン星晶鏡", level: 89, itemLevel: 520, type: "ダンジョン", image: null, sort: 1005, aliases: ["暁月", "アイティオン"] },
+      { id: -1006, name: "最終幻想 レムナント", level: 90, itemLevel: 540, type: "ダンジョン", image: null, sort: 1006, aliases: ["暁月"] },
+      { id: -1007, name: "楽園都市 スマイルトン", level: 90, itemLevel: 540, type: "ダンジョン", image: null, sort: 1007, aliases: ["暁月"] },
+      { id: -1008, name: "電脳夢想 スティグマ・フォー", level: 90, itemLevel: 540, type: "ダンジョン", image: null, sort: 1008, aliases: ["暁月"] },
+      { id: -1009, name: "近東秘宝 アルザダール海底遺跡群", level: 90, itemLevel: 560, type: "ダンジョン", image: null, sort: 1009, aliases: ["暁月", "アルザダール"] },
+      { id: -1010, name: "異界孤城 トロイアコート", level: 90, itemLevel: 575, type: "ダンジョン", image: null, sort: 1010, aliases: ["暁月", "トロイア"] },
+      { id: -1011, name: "雪山冥洞 ラピス・マナリス", level: 90, itemLevel: 590, type: "ダンジョン", image: null, sort: 1011, aliases: ["暁月", "ラピス"] },
+      { id: -1012, name: "星霊間欠 ハーム島", level: 90, itemLevel: 605, type: "ダンジョン", image: null, sort: 1012, aliases: ["暁月", "ハーム"] },
+      { id: -1013, name: "深淵潜行 月の地下渓谷", level: 90, itemLevel: 620, type: "ダンジョン", image: null, sort: 1013, aliases: ["暁月", "月の地下"] },
+      { id: -1101, name: "濁流遡上 イフイカ・トゥム", level: 91, itemLevel: 630, type: "ダンジョン", image: null, sort: 1101, aliases: ["黄金", "イフイカ"] },
+      { id: -1102, name: "山嶺登頂 ウォーコー・ゾーモー", level: 93, itemLevel: 635, type: "ダンジョン", image: null, sort: 1102, aliases: ["黄金", "ウォーコー"] },
+      { id: -1103, name: "遺産踏査 天深きセノーテ", level: 95, itemLevel: 640, type: "ダンジョン", image: null, sort: 1103, aliases: ["黄金", "セノーテ"] },
+      { id: -1104, name: "外征前哨 ヴァンガード", level: 97, itemLevel: 645, type: "ダンジョン", image: null, sort: 1104, aliases: ["黄金"] },
+      { id: -1105, name: "魂魄工廠 オリジェニクス", level: 99, itemLevel: 650, type: "ダンジョン", image: null, sort: 1105, aliases: ["黄金", "オリジェニクス"] },
+      { id: -1106, name: "記憶幻想 アレクサンドリア", level: 100, itemLevel: 660, type: "ダンジョン", image: null, sort: 1106, aliases: ["黄金", "アレキサンドリア"] },
+      { id: -1107, name: "荒野秘境 サボテンダーバレー", level: 100, itemLevel: 670, type: "ダンジョン", image: null, sort: 1107, aliases: ["黄金", "サボテン"] },
+      { id: -1108, name: "悪夢遊園 ストレイバロー", level: 100, itemLevel: 670, type: "ダンジョン", image: null, sort: 1108, aliases: ["黄金", "ストレイバロー"] },
+      { id: -1109, name: "廃地討究 ユウェヤーワータ・フィールドステーション", level: 100, itemLevel: 690, type: "ダンジョン", image: null, sort: 1109, aliases: ["黄金", "ユウェヤーワータ", "フィールドステーション"] },
+      { id: -1110, name: "王城旧跡 アンダーキープ", level: 100, itemLevel: 700, type: "ダンジョン", image: null, sort: 1110, aliases: ["黄金", "アンダーキープ"] },
+      { id: -1111, name: "永久幽界 メインターミナル", level: 100, itemLevel: 720, type: "ダンジョン", image: null, sort: 1111, aliases: ["黄金", "メインターミナル"] },
+      { id: -1112, name: "遺忘行路 ミストウェイク", level: 100, itemLevel: 735, type: "ダンジョン", image: null, sort: 1112, aliases: ["黄金", "ミストウェイク"] },
+      { id: -1113, name: "？？？？ クルティウス魔導工廠", level: 100, itemLevel: 750, type: "ダンジョン", image: null, sort: 1113, aliases: ["黄金", "クルティウス", "The Clyteum"] },
+      { id: -1201, name: "ゾディアーク討滅戦", level: 83, itemLevel: 500, type: "討伐・討滅戦", image: null, sort: 1201, aliases: ["暁月"] },
+      { id: -1202, name: "ハイデリン討滅戦", level: 89, itemLevel: 520, type: "討伐・討滅戦", image: null, sort: 1202, aliases: ["暁月"] },
+      { id: -1203, name: "終焉の戦い", level: 90, itemLevel: 540, type: "討伐・討滅戦", image: null, sort: 1203, aliases: ["暁月", "終焉"] },
+      { id: -1204, name: "極ゾディアーク討滅戦", level: 90, itemLevel: 560, type: "討伐・討滅戦", image: null, sort: 1204, aliases: ["暁月", "極"] },
+      { id: -1205, name: "極ハイデリン討滅戦", level: 90, itemLevel: 560, type: "討伐・討滅戦", image: null, sort: 1205, aliases: ["暁月", "極"] },
+      { id: -1206, name: "終極の戦い", level: 90, itemLevel: 580, type: "討伐・討滅戦", image: null, sort: 1206, aliases: ["暁月", "極", "終焉"] },
+      { id: -1207, name: "バルバリシア討滅戦", level: 90, itemLevel: 585, type: "討伐・討滅戦", image: null, sort: 1207, aliases: ["暁月"] },
+      { id: -1208, name: "極バルバリシア討滅戦", level: 90, itemLevel: 600, type: "討伐・討滅戦", image: null, sort: 1208, aliases: ["暁月", "極"] },
+      { id: -1209, name: "ルビカンテ討滅戦", level: 90, itemLevel: 595, type: "討伐・討滅戦", image: null, sort: 1209, aliases: ["暁月"] },
+      { id: -1210, name: "極ルビカンテ討滅戦", level: 90, itemLevel: 610, type: "討伐・討滅戦", image: null, sort: 1210, aliases: ["暁月", "極"] },
+      { id: -1211, name: "ゴルベーザ討滅戦", level: 90, itemLevel: 615, type: "討伐・討滅戦", image: null, sort: 1211, aliases: ["暁月"] },
+      { id: -1212, name: "極ゴルベーザ討滅戦", level: 90, itemLevel: 630, type: "討伐・討滅戦", image: null, sort: 1212, aliases: ["暁月", "極"] },
+      { id: -1213, name: "ゼロムス討滅戦", level: 90, itemLevel: 625, type: "討伐・討滅戦", image: null, sort: 1213, aliases: ["暁月"] },
+      { id: -1214, name: "極ゼロムス討滅戦", level: 90, itemLevel: 640, type: "討伐・討滅戦", image: null, sort: 1214, aliases: ["暁月", "極"] },
+      { id: -1301, name: "ヴァリガルマンダ討滅戦", level: 93, itemLevel: 635, type: "討伐・討滅戦", image: null, sort: 1301, aliases: ["黄金"] },
+      { id: -1302, name: "ゾラージャ討滅戦", level: 99, itemLevel: 650, type: "討伐・討滅戦", image: null, sort: 1302, aliases: ["黄金"] },
+      { id: -1303, name: "エターナルクイーン討滅戦", level: 100, itemLevel: 660, type: "討伐・討滅戦", image: null, sort: 1303, aliases: ["黄金"] },
+      { id: -1304, name: "極ヴァリガルマンダ討滅戦", level: 100, itemLevel: 690, type: "討伐・討滅戦", image: null, sort: 1304, aliases: ["黄金", "極"] },
+      { id: -1305, name: "極ゾラージャ討滅戦", level: 100, itemLevel: 690, type: "討伐・討滅戦", image: null, sort: 1305, aliases: ["黄金", "極"] },
+      { id: -1306, name: "極エターナルクイーン討滅戦", level: 100, itemLevel: 710, type: "討伐・討滅戦", image: null, sort: 1306, aliases: ["黄金", "極"] },
+      { id: -1307, name: "護竜アルシュベルド狩猟戦", level: 100, itemLevel: 700, type: "討伐・討滅戦", image: null, sort: 1307, aliases: ["黄金", "アルシュベルド"] },
+      { id: -1308, name: "極護竜アルシュベルド狩猟戦", level: 100, itemLevel: 710, type: "討伐・討滅戦", image: null, sort: 1308, aliases: ["黄金", "極", "アルシュベルド"] },
+      { id: -1309, name: "ゼレニア討滅戦", level: 100, itemLevel: 715, type: "討伐・討滅戦", image: null, sort: 1309, aliases: ["黄金"] },
+      { id: -1310, name: "極ゼレニア討滅戦", level: 100, itemLevel: 730, type: "討伐・討滅戦", image: null, sort: 1310, aliases: ["黄金", "極"] },
+      { id: -1311, name: "永遠の闇討滅戦", level: 100, itemLevel: 720, type: "討伐・討滅戦", image: null, sort: 1311, aliases: ["黄金"] },
+      { id: -1312, name: "極永遠の闇討滅戦", level: 100, itemLevel: 735, type: "討伐・討滅戦", image: null, sort: 1312, aliases: ["黄金", "極"] },
+      { id: -1313, name: "グラシャラボラス討滅戦", level: 100, itemLevel: 745, type: "討伐・討滅戦", image: null, sort: 1313, aliases: ["黄金"] },
+      { id: -1314, name: "極グラシャラボラス討滅戦", level: 100, itemLevel: 760, type: "討伐・討滅戦", image: null, sort: 1314, aliases: ["黄金", "極"] },
+      { id: -1315, name: "エヌオー討滅戦", level: 100, itemLevel: 750, type: "討伐・討滅戦", image: null, sort: 1315, aliases: ["黄金", "N.O."] },
+      { id: -1316, name: "極エヌオー討滅戦", level: 100, itemLevel: 770, type: "討伐・討滅戦", image: null, sort: 1316, aliases: ["黄金", "極", "N.O."] },
+      { id: -1401, name: "輝ける神域 アグライア", level: 90, itemLevel: 565, type: "アライアンスレイド", image: null, sort: 1401, aliases: ["暁月", "ミソロジー", "アグライア"] },
+      { id: -1402, name: "喜びの神域 エウプロシュネ", level: 90, itemLevel: 595, type: "アライアンスレイド", image: null, sort: 1402, aliases: ["暁月", "ミソロジー", "エウプロシュネ"] },
+      { id: -1403, name: "華めく神域 タレイア", level: 90, itemLevel: 625, type: "アライアンスレイド", image: null, sort: 1403, aliases: ["暁月", "ミソロジー", "タレイア"] },
+      { id: -1501, name: "ジュノ：ザ・ファーストウォーク", level: 100, itemLevel: 695, type: "アライアンスレイド", image: null, sort: 1501, aliases: ["黄金", "エコーズ", "ジュノ"] },
+      { id: -1502, name: "サンドリア：ザ・セカンドウォーク", level: 100, itemLevel: 725, type: "アライアンスレイド", image: null, sort: 1502, aliases: ["黄金", "エコーズ", "サンドリア"] },
+      { id: -1503, name: "ウィンダス：ザ・サードウォーク", level: 100, itemLevel: 755, type: "アライアンスレイド", image: null, sort: 1503, aliases: ["黄金", "エコーズ", "ウィンダス"] }
+    ];
+
+    fallbackDuties.push(...currentDuties);
 
     const featureTabs = document.querySelectorAll(".feature-tab");
     const cockpitMode = document.getElementById("cockpitMode");
@@ -6846,11 +6979,26 @@
           duty.name,
           duty.type,
           String(duty.level),
+          String(duty.itemLevel || ""),
           ...(duty.aliases || [])
         ].join(" ").toLowerCase();
-        const matchQuery = !query || searchText.includes(query) || String(duty.level) === query;
+        const matchQuery = !query || searchText.includes(query) || String(duty.level) === query || String(duty.itemLevel || "") === query;
         return matchType && matchQuery;
       }).sort((a, b) => (a.sort || a.level) - (b.sort || b.level) || a.name.localeCompare(b.name, "ja"));
+    }
+
+    function dutyItemLevelText(duty) {
+      if (Number.isFinite(Number(duty.itemLevel)) && Number(duty.itemLevel) > 0) {
+        return `平均IL${Number(duty.itemLevel)}以上`;
+      }
+      if (duty.level < 50) {
+        return "IL制限なし";
+      }
+      return "ゲーム内CFで確認";
+    }
+
+    function dutyOptionLabel(duty) {
+      return `Lv${duty.level} ${dutyTypeShortLabel(duty.type)} / ${dutyItemLevelText(duty)}: ${duty.name}`;
     }
 
     function dutyTypeShortLabel(type) {
@@ -6916,7 +7064,7 @@
     function renderDutyOptions() {
       const list = filteredDuties();
       dutySelect.innerHTML = list.length
-        ? list.map((duty) => `<option value="${duty.id}">Lv${duty.level} ${dutyTypeShortLabel(duty.type)}: ${duty.name}</option>`).join("")
+        ? list.map((duty) => `<option value="${duty.id}">${escapeHtml(dutyOptionLabel(duty))}</option>`).join("")
         : `<option value="">該当なし</option>`;
     }
 
@@ -7000,6 +7148,10 @@
         <div class="duty-summary-head">
           <div class="duty-kicker">Lv${escapeHtml(duty.level)} ${escapeHtml(duty.type)} / ${escapeHtml(linkKind)}</div>
           <h3>${escapeHtml(duty.name)}</h3>
+          <div class="duty-meta-row">
+            <span class="duty-meta-pill">挑戦IL: ${escapeHtml(dutyItemLevelText(duty))}</span>
+            <span class="duty-meta-pill">分類: ${escapeHtml(duty.type)}</span>
+          </div>
           <p>まず要点だけ確認。詳しい図解はGame8、動きの確認はYouTube候補から開きます。</p>
         </div>
         ${renderDutyKeypoints(keypoints)}
@@ -7040,10 +7192,9 @@
 
     function renderCharacter() {
       const profile = lodestoneUrl.value.trim();
-      const validProfile = profile && profile.startsWith("https://jp.finalfantasyxiv.com/lodestone/character/");
       characterCard.innerHTML = `
         <div class="character-links">
-          ${validProfile ? `<a href="${profile}" target="_blank" rel="noreferrer noopener">自キャラページを開く</a>` : ""}
+          ${lodestoneJumpButton(profile, "マイキャラを開く")}
         </div>
       `;
     }
@@ -7094,7 +7245,14 @@
     }
 
     function validLodestoneCharacterUrl(url) {
-      return url.startsWith("https://jp.finalfantasyxiv.com/lodestone/character/");
+      return /^https:\/\/(?:jp|na|eu|fr|de)\.finalfantasyxiv\.com\/lodestone\/character\/\d+\/?/.test(url);
+    }
+
+    function lodestoneJumpButton(url, label = "Lodestoneを開く") {
+      if (!validLodestoneCharacterUrl(url)) {
+        return "";
+      }
+      return `<a class="lodestone-jump" href="${escapeHtml(url)}" target="_blank" rel="noreferrer noopener">${escapeHtml(label)}</a>`;
     }
 
     function addOrUpdateFriend() {
@@ -7155,7 +7313,7 @@
               ${validProfile ? "" : `<p class="friend-empty">Lodestone URL未設定</p>`}
             </div>
             <div class="friend-actions character-links">
-              ${validProfile ? `<a href="${escapeHtml(profile)}" target="_blank" rel="noreferrer noopener">Lodestoneを開く</a>` : ""}
+              ${lodestoneJumpButton(profile, "キャラページを開く")}
               <button type="button" data-friend-edit="${escapeHtml(friend.id)}">編集</button>
               <button type="button" data-friend-remove="${escapeHtml(friend.id)}">削除</button>
             </div>

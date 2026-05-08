@@ -1570,6 +1570,16 @@
       text-decoration: none;
     }
 
+    .gear-alt-links {
+      align-items: center;
+    }
+
+    .gear-alt-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
     .gear-data-tools {
       display: flex;
       align-items: center;
@@ -5952,8 +5962,8 @@
         60: "イシュガルドのロウェナ商会の商人は、蒼天メインクエストクリア後に利用しやすくなります。イディルシャイアのヒスメナでも交換できます。",
         70: "クガネのロウェナ商会の商人は、紅蓮メインクエストクリア後に利用しやすくなります。ラールガーズリーチのエンナでも交換できます。",
         80: "クリスタリウムのモーエン商会は、漆黒メインクエストクリア後に利用しやすくなります。ユールモアのアイマークでも交換できます。",
-        90: "オールド・シャーレアンのロウェナ商会の商人、またはラザハンのキハンティで交換できます。",
-        100: "Lv100最新帯は装備ごとに入手経路が分かれます。各カードの入手欄を見て、必要なら公式DBで詳細確認。"
+        90: "防具/アクセはクレデンダムRE、武器はルナエンヴォイREを詩学交換の軸にします。ラザハンのキハンティなどで交換できます。",
+        100: "初期表示は高難度ではなくキングダムブラスRE系を軸にします。各カードのLv100候補から高難度最強や製作REも確認できます。"
       };
       return rows[tier.min] || tier.unlock;
     }
@@ -5989,6 +5999,7 @@
             <p>IL${item.itemLevel} / Lv${item.equipLevel} ${fallback}</p>
             ${performance ? `<p class="gear-detail"><strong>性能</strong> ${escapeHtml(performance)}</p>` : ""}
             ${source ? `<p class="gear-detail"><strong>入手</strong> ${escapeHtml(source)}</p>` : ""}
+            ${gearAlternativeLinks(item)}
             <div class="gear-links">
               <a href="${item.href}" target="_blank" rel="noreferrer noopener">公式DBで入手法を見る</a>
             </div>
@@ -5997,6 +6008,20 @@
               <button type="button" data-gear-slot="${item.slot}" data-gear-step="1" ${item.hasNext ? "" : "disabled"}>次へ</button>
             </div>
           </div>
+        </div>
+      `;
+    }
+
+    function gearAlternativeLinks(item) {
+      if (!item.alternatives?.length) {
+        return "";
+      }
+      return `
+        <div class="gear-links gear-alt-links">
+          <span class="gear-alt-label">Lv100候補</span>
+          ${item.alternatives.map((alt) => `
+            <a href="${alt.href}" target="_blank" rel="noreferrer noopener">${alt.label}: ${alt.name} IL${alt.itemLevel}</a>
+          `).join("")}
         </div>
       `;
     }

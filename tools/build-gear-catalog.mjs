@@ -55,7 +55,7 @@ const recommendedSeriesByBand = {
   66: "スカエウァ",
   76: "クリプトラーカー",
   86: "クレデンダム",
-  96: "グランドチャンピオン"
+  96: "キングダムブラス"
 };
 
 const preferredItemFragments = {
@@ -176,18 +176,55 @@ function bannedGeneric(item) {
 function itemScore(item, band, keywords, slot, job) {
   let score = item.itemLevel * 100 + item.equipLevel;
   const recommended = recommendedSeriesByBand[band.key];
-  const preferred = preferredItemFragments[`${job.id}:${band.key}:${slot.slot}`] || [];
+  const preferred = [
+    ...(preferredItemFragments[`${job.id}:${band.key}:${slot.slot}`] || []),
+    ...(band.key === "86" && slot.weapon ? ["ルナエンヴォイ"] : []),
+    ...(band.key === "96" ? ["キングダムブラス"] : [])
+  ];
   if (preferred.some((fragment) => item.name.includes(fragment))) score += 30000;
   if (recommended && item.name.includes(recommended)) score += 30000;
   if (item.name.endsWith("RE")) score += 50;
   if (item.name.includes("【改】")) score += 50;
   if (item.name.includes("オメガ") || item.name.includes("アレキサンダー") || item.name.includes("エデンモーン")) score -= 2500;
+  if (band.key === "96" && item.name.includes("グランドチャンピオン")) score -= 5000;
   if (item.name.includes("コヴン") || item.name.includes("ゴブコン") || item.name.includes("ゼータ")) score -= recommended ? 5000 : 0;
   if (item.equipLevel === band.max) score += 10;
   if (keywords.some((keyword) => item.name.includes(keyword))) score += 5000;
   if (!keywords.length || slot.weapon || slot.slot === "OffHand") score += 1000;
   if (bannedGeneric(item)) score -= 10000;
   return score;
+}
+
+function lv100AlternativeLabel(item) {
+  if (item.name.includes("グランドチャンピオン")) return "高難度最強";
+  if (item.name.includes("キングダムブラス") && item.name.endsWith("RE")) return "現実的最終";
+  if (item.name.includes("キングダムブラス")) return "週制限トークン";
+  if (item.name.includes("コートリーラヴァー") && item.name.endsWith("RE")) return "製作RE";
+  if (item.name.includes("キングダムテール") && item.name.endsWith("RE")) return "旧トークンRE";
+  if (item.name.includes("オールドキングダム") && item.name.endsWith("RE")) return "製作RE";
+  return "";
+}
+
+function alternativesForItem(pool, found, band) {
+  if (band.key !== "96") return [];
+  const labels = ["現実的最終", "高難度最強", "週制限トークン", "製作RE", "旧トークンRE"];
+  const alternatives = [];
+  for (const label of labels) {
+    const candidate = pool
+      .filter((item) => item.href !== found.href && lv100AlternativeLabel(item) === label)
+      .sort((a, b) => b.itemLevel - a.itemLevel || b.equipLevel - a.equipLevel)[0];
+    if (candidate) {
+      alternatives.push({
+        label,
+        name: candidate.name,
+        icon: candidate.icon,
+        href: candidate.href,
+        itemLevel: candidate.itemLevel,
+        equipLevel: candidate.equipLevel
+      });
+    }
+  }
+  return alternatives.slice(0, 4);
 }
 
 async function candidatesForSlot(job, band, slot) {
@@ -218,9 +255,11 @@ async function findItem(job, band, slot) {
   const keywords = broadRoleKeywords(job, slot);
   const roleMatches = rows.filter((item) => keywords.length === 0 || keywords.some((keyword) => item.name.includes(keyword)));
   const pool = roleMatches.length ? roleMatches : rows.filter((item) => !bannedGeneric(item));
-  const found = pool.sort((a, b) => itemScore(b, band, keywords, slot, job) - itemScore(a, band, keywords, slot, job))[0];
+  const sortedPool = [...pool].sort((a, b) => itemScore(b, band, keywords, slot, job) - itemScore(a, band, keywords, slot, job));
+  const found = sortedPool[0];
   if (!found) return null;
-  return { slot: slot.slot, ...found };
+  const alternatives = alternativesForItem(pool, found, band);
+  return alternatives.length ? { slot: slot.slot, ...found, alternatives } : { slot: slot.slot, ...found };
 }
 
 async function main() {

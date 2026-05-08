@@ -1849,6 +1849,60 @@
       box-shadow: none;
     }
 
+    .friend-section {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .friend-section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .friend-section-head h3 {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .friend-count,
+    .friend-empty {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .friend-empty {
+      margin: 0;
+    }
+
+    .friend-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .friend-item {
+      display: grid;
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid rgba(32, 90, 97, 0.1);
+      border-radius: 12px;
+      background: rgba(255, 253, 248, 0.78);
+    }
+
+    .friend-name {
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .friend-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
     .duty-summary h3,
     .character-card h3 {
       margin: 0 0 6px;
@@ -2309,6 +2363,13 @@
           <div class="character-links"></div>
         </div>
       </div>
+      <div class="friend-section">
+        <div class="friend-section-head">
+          <h3>フレンド</h3>
+          <span class="friend-count" id="friendsCount">0人</span>
+        </div>
+        <div class="friend-list" id="friendList"></div>
+      </div>
     </section>
 
     <div class="settings-overlay" id="settingsOverlay" aria-hidden="true">
@@ -2350,6 +2411,18 @@
         <div>
           <label for="lodestoneUrl">LodestoneキャラクターURL</label>
           <input id="lodestoneUrl" type="url" placeholder="https://jp.finalfantasyxiv.com/lodestone/character/.../">
+        </div>
+        <div>
+          <label for="friendName">フレンド名</label>
+          <input id="friendName" type="text" placeholder="例: フレンドのキャラ名">
+        </div>
+        <div>
+          <label for="friendLodestoneUrl">フレンドのLodestone URL</label>
+          <input id="friendLodestoneUrl" type="url" placeholder="https://jp.finalfantasyxiv.com/lodestone/character/.../">
+        </div>
+        <div class="settings-actions">
+          <button class="settings-close" id="cancelFriendEditButton" type="button">入力を消す</button>
+          <button class="profile-action" id="saveFriendButton" type="button">フレンドを保存</button>
         </div>
         <div class="settings-actions">
           <button class="settings-close" id="clearCharacterButton" type="button">登録を消す</button>
@@ -4401,6 +4474,12 @@
     const dutySummary = document.getElementById("dutySummary");
     const mechanicGrid = document.getElementById("mechanicGrid");
     const lodestoneUrl = document.getElementById("lodestoneUrl");
+    const friendName = document.getElementById("friendName");
+    const friendLodestoneUrl = document.getElementById("friendLodestoneUrl");
+    const saveFriendButton = document.getElementById("saveFriendButton");
+    const cancelFriendEditButton = document.getElementById("cancelFriendEditButton");
+    const friendList = document.getElementById("friendList");
+    const friendsCount = document.getElementById("friendsCount");
     const saveCharacterButton = document.getElementById("saveCharacterButton");
     const clearCharacterButton = document.getElementById("clearCharacterButton");
     const characterCard = document.getElementById("characterCard");
@@ -4410,7 +4489,10 @@
     const CHECK_STORAGE_KEY = "ff14-guide-checks-v1";
     const GLAMOUR_FAVORITES_KEY = "ff14-guide-glamour-favorites-v1";
     const GLAMOUR_RACE_KEY = "ff14-guide-glamour-race-v1";
+    const FRIENDS_STORAGE_KEY = "ff14-guide-friends-v1";
     let savedChecks = {};
+    let savedFriends = [];
+    let editingFriendId = "";
     let glamourFavorites = [];
     let duties = [];
     let actionIconOverrides = {};
@@ -6644,6 +6726,114 @@
       renderCharacter();
     }
 
+    function normalizeFriendEntry(entry) {
+      if (!entry || typeof entry !== "object" || Array.isArray(entry)) {
+        return null;
+      }
+      const name = String(entry.name || "").trim();
+      const lodestone = String(entry.lodestone || "").trim();
+      if (!name && !lodestone) {
+        return null;
+      }
+      return {
+        id: String(entry.id || `friend-${Date.now()}-${Math.random().toString(36).slice(2)}`),
+        name,
+        lodestone
+      };
+    }
+
+    function saveFriends() {
+      safeStorageSet(FRIENDS_STORAGE_KEY, JSON.stringify(savedFriends));
+    }
+
+    function loadFriends() {
+      try {
+        const data = JSON.parse(localStorage.getItem(FRIENDS_STORAGE_KEY) || "[]");
+        savedFriends = Array.isArray(data) ? data.map(normalizeFriendEntry).filter(Boolean) : [];
+      } catch (error) {
+        savedFriends = [];
+      }
+      renderFriends();
+    }
+
+    function resetFriendForm() {
+      editingFriendId = "";
+      friendName.value = "";
+      friendLodestoneUrl.value = "";
+      saveFriendButton.textContent = "フレンドを保存";
+    }
+
+    function validLodestoneCharacterUrl(url) {
+      return url.startsWith("https://jp.finalfantasyxiv.com/lodestone/character/");
+    }
+
+    function addOrUpdateFriend() {
+      const entry = normalizeFriendEntry({
+        id: editingFriendId || `friend-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+        name: friendName.value,
+        lodestone: friendLodestoneUrl.value
+      });
+      if (!entry) {
+        resetFriendForm();
+        return;
+      }
+      if (editingFriendId) {
+        savedFriends = savedFriends.map((friend) => friend.id === editingFriendId ? entry : friend);
+      } else {
+        savedFriends = [entry, ...savedFriends];
+      }
+      saveFriends();
+      renderFriends();
+      resetFriendForm();
+    }
+
+    function editFriend(friendId) {
+      const friend = savedFriends.find((item) => item.id === friendId);
+      if (!friend) {
+        return;
+      }
+      editingFriendId = friend.id;
+      friendName.value = friend.name;
+      friendLodestoneUrl.value = friend.lodestone;
+      saveFriendButton.textContent = "フレンドを更新";
+      openSettings();
+      setTimeout(() => friendName.focus(), 0);
+    }
+
+    function removeFriend(friendId) {
+      savedFriends = savedFriends.filter((item) => item.id !== friendId);
+      if (editingFriendId === friendId) {
+        resetFriendForm();
+      }
+      saveFriends();
+      renderFriends();
+    }
+
+    function renderFriends() {
+      friendsCount.textContent = `${savedFriends.length}人`;
+      if (!savedFriends.length) {
+        friendList.innerHTML = `<p class="friend-empty">まだ保存されていません。</p>`;
+        return;
+      }
+      friendList.innerHTML = savedFriends.map((friend) => {
+        const profile = friend.lodestone;
+        const validProfile = profile && validLodestoneCharacterUrl(profile);
+        return `
+          <div class="friend-item">
+            <div>
+              <div class="friend-name">${escapeHtml(friend.name || "名前未設定")}</div>
+              ${validProfile ? "" : `<p class="friend-empty">Lodestone URL未設定</p>`}
+            </div>
+            <div class="friend-actions character-links">
+              ${validProfile ? `<a href="${escapeHtml(profile)}" target="_blank" rel="noreferrer noopener">Lodestoneを開く</a>` : ""}
+              <button type="button" data-friend-edit="${escapeHtml(friend.id)}">編集</button>
+              <button type="button" data-friend-remove="${escapeHtml(friend.id)}">削除</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
     async function renderGearFinder() {
       const job = gearJobs.find((item) => item.id === gearJob.value) || gearJobs.find((item) => item.id === "SMN");
       const level = Math.min(80, Math.max(1, Number(gearLevel.value) || 1));
@@ -6861,6 +7051,19 @@
       renderDutyGuide();
     });
     dutySelect.addEventListener("change", renderDutyGuide);
+    saveFriendButton.addEventListener("click", addOrUpdateFriend);
+    cancelFriendEditButton.addEventListener("click", resetFriendForm);
+    friendList.addEventListener("click", (event) => {
+      const editButton = event.target.closest("[data-friend-edit]");
+      if (editButton) {
+        editFriend(editButton.dataset.friendEdit);
+        return;
+      }
+      const removeButton = event.target.closest("[data-friend-remove]");
+      if (removeButton) {
+        removeFriend(removeButton.dataset.friendRemove);
+      }
+    });
     saveCharacterButton.addEventListener("click", saveCharacter);
     clearCharacterButton.addEventListener("click", clearCharacter);
     activateFeature(normalizeFeature(pageParams.get("tab"), "") || featureFromHash(window.location.hash) || "gear");
@@ -6877,6 +7080,7 @@
     renderRewardsGallery();
     loadDuties();
     loadCharacter();
+    loadFriends();
 
     const qrOverlay = document.getElementById("qrOverlay");
     const qrImage = document.getElementById("qrImage");

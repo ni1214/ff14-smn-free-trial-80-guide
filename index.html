@@ -3087,6 +3087,21 @@
       ]
     };
 
+    const glamourDiscoveryFallback = [
+      { title: "ピンク", source: "https://mirapri.com/98837", image: "https://assets.mirapri.com/uploads/photo/image/246769/ad6f9206183b8726021fc202a0d2dfc8_thumb.webp", search: "ピンク", sourceSite: "MIRAPRI SNAP", equipmentEnabled: false },
+      { title: "スポーティギャザラー", source: "https://mirapri.com/98836", image: "https://assets.mirapri.com/uploads/photo/image/246765/f656a6fcbaf7eeb9811ed88f6a2bfadc_thumb.webp", search: "スポーティギャザラー", sourceSite: "MIRAPRI SNAP", equipmentEnabled: false },
+      { title: "キングダムブラス・ラヴァーズ", source: "https://mirapri.com/98827", image: "https://assets.mirapri.com/uploads/photo/image/246740/c9f268c63f9f2133ed17ffebc597dfc4_thumb.webp", search: "キングダムブラス・ラヴァーズ", sourceSite: "MIRAPRI SNAP", equipmentEnabled: false },
+      { title: "ヴァナ・ディーリアン・スカウトベスト", source: "https://mirapri.com/98826", image: "https://assets.mirapri.com/uploads/photo/image/246737/48442998ecf9cede2873aff9077718a7_thumb.webp", search: "ヴァナ・ディーリアン・スカウトベスト", sourceSite: "MIRAPRI SNAP", equipmentEnabled: false },
+      { title: "ヴァナ・ディーリアン・レンジャーベスト", source: "https://mirapri.com/98825", image: "https://assets.mirapri.com/uploads/photo/image/246734/bdb43178ba5283bd7d60edbab9b96711_thumb.webp", search: "ヴァナ・ディーリアン・レンジャーベスト", sourceSite: "MIRAPRI SNAP", equipmentEnabled: false },
+      { title: "ギャザラーの夏服", source: "https://mirapri.com/98821", image: "https://assets.mirapri.com/uploads/photo/image/246725/b9a279192e37e8925722fdc4f023ef84_thumb.webp", search: "ギャザラーの夏服", sourceSite: "MIRAPRI SNAP", equipmentEnabled: false },
+      { title: "海賊風", source: "https://mirapri.com/98820", image: "https://assets.mirapri.com/uploads/photo/image/246724/45a6e3dbe64c8a79ed9de3d14586684d_thumb.webp", search: "海賊風", sourceSite: "MIRAPRI SNAP", equipmentEnabled: false },
+      { title: "ブレイクストリート", source: "https://mirapri.com/98819", image: "https://assets.mirapri.com/uploads/photo/image/246720/64cdae8012a4d2348280f1f9557a8ec6_thumb.webp", search: "ブレイクストリート", sourceSite: "MIRAPRI SNAP", equipmentEnabled: false },
+      { title: "黒魔道士", source: "https://mirapri.com/98816", image: "https://assets.mirapri.com/uploads/photo/image/246713/40c9a52c7c015da1c9c28abbe6353095_thumb.webp", search: "黒魔道士", sourceSite: "MIRAPRI SNAP", equipmentEnabled: false },
+      { title: "ナイト", source: "https://mirapri.com/98815", image: "https://assets.mirapri.com/uploads/photo/image/246712/b242530dbfb679e4189c1eac189aefc5_thumb.webp", search: "ナイト", sourceSite: "MIRAPRI SNAP", equipmentEnabled: false },
+      { title: "遊牧民風", source: "https://mirapri.com/98813", image: "https://assets.mirapri.com/uploads/photo/image/246708/ec14cfde7a84374badbefeafa8a2bddb_thumb.webp", search: "遊牧民風", sourceSite: "MIRAPRI SNAP", equipmentEnabled: false },
+      { title: "ブレイクストリートベスト", source: "https://mirapri.com/98803", image: "https://assets.mirapri.com/uploads/photo/image/246689/591662615794f5393f83a01d3ddad4b9_thumb.webp", search: "ブレイクストリートベスト", sourceSite: "MIRAPRI SNAP", equipmentEnabled: false }
+    ];
+
     let glamourFeed = [...glamourFeedFallback];
     let glamourPool = [...glamourFeedFallback];
     let glamourRecentKeys = [];
@@ -3095,8 +3110,9 @@
     let glamourAppendLock = false;
     const GLAMOUR_INITIAL_CARD_COUNT = 7;
     const GLAMOUR_SCROLL_APPEND_COUNT = 5;
-    const GLAMOUR_PAGE_COUNT = 4;
-    const GLAMOUR_MAX_EXTERNAL_ITEMS = 120;
+    const GLAMOUR_PAGE_COUNT = 6;
+    const GLAMOUR_MIRAPRI_PAGE_COUNT = 3;
+    const GLAMOUR_MAX_EXTERNAL_ITEMS = 180;
 
     const gearJobs = [
       { id: "PLD", label: "ナイト", min: 1, role: "tank", className: "剣術士" },
@@ -4420,12 +4436,37 @@
     }
 
     function parseEorzeaGlamours(markdown) {
-      const matches = [...markdown.matchAll(/\[!\[[^\]]*]\((https:\/\/glamours\.eorzeacollection\.com\/[^)\s]+)\)]\((https:\/\/ffxiv\.eorzeacollection\.com\/glamour\/\d+\/([^)]+))\)/g)];
-      return uniqueGlamours(matches.map((match) => ({
+      const linkedMatches = [...markdown.matchAll(/\[!\[[^\]]*]\((https:\/\/glamours\.eorzeacollection\.com\/[^)\s]+)\)]\((https:\/\/ffxiv\.eorzeacollection\.com\/glamour\/(\d+)\/?([^)]+)?)\)/g)];
+      const linkedEntries = linkedMatches.map((match) => {
+        const title = glamourTitleFromSlug(match[4] || `glamour-${match[3]}`);
+        return {
+          image: match[1],
+          source: match[2],
+          title,
+          search: title,
+          sourceSite: "Eorzea Collection"
+        };
+      });
+      const imageMatches = [...markdown.matchAll(/!\[[^\]]*]\((https:\/\/glamours\.eorzeacollection\.com\/(\d+)\/[^)\s]+)\)/g)];
+      const imageEntries = imageMatches.map((match) => ({
         image: match[1],
-        source: match[2],
-        title: glamourTitleFromSlug(match[3]),
-        search: glamourTitleFromSlug(match[3])
+        source: `https://ffxiv.eorzeacollection.com/glamour/${match[2]}`,
+        title: `Eorzea Glamour ${match[2]}`,
+        search: `glamour ${match[2]}`,
+        sourceSite: "Eorzea Collection"
+      }));
+      return uniqueGlamours([...linkedEntries, ...imageEntries]);
+    }
+
+    function parseMirapriGlamours(markdown) {
+      const matches = [...markdown.matchAll(/\[!\[Image\s+\d+:\s*([^\]]+)]\((https:\/\/assets\.mirapri\.com\/uploads\/photo\/image\/[^)\s]+)\)]\((https:\/\/mirapri\.com\/\d+)\)/g)];
+      return uniqueGlamours(matches.map((match) => ({
+        image: match[2],
+        source: match[3],
+        title: match[1].trim() || "MIRAPRI SNAP",
+        search: match[1].trim() || "ミラプリ",
+        sourceSite: "MIRAPRI SNAP",
+        equipmentEnabled: false
       })));
     }
 
@@ -4438,8 +4479,12 @@
       return page > 1 ? `${baseUrl}?page=${page}` : baseUrl;
     }
 
+    function mirapriGlamourUrl(page = 1) {
+      return `https://mirapri.com/?page=${page}&r=3`;
+    }
+
     function eorzeaReaderUrl(url, attempt = 0) {
-      const readerUrl = `https://r.jina.ai/http://${url}`;
+      const readerUrl = `https://r.jina.ai/${url}`;
       const cacheBust = attempt ? `&retry=${attempt}-${Date.now()}` : "";
       return `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(readerUrl)}${cacheBust}`;
     }
@@ -4468,7 +4513,14 @@
     }
 
     function fallbackGlamoursForRace(race = "") {
-      return race && glamourRaceFallbacks[race]?.length ? glamourRaceFallbacks[race] : glamourFeedFallback;
+      const raceEntries = race && glamourRaceFallbacks[race]?.length ? glamourRaceFallbacks[race] : [];
+      const allRaceEntries = Object.values(glamourRaceFallbacks).flat();
+      return uniqueGlamours([
+        ...raceEntries,
+        ...glamourFeedFallback,
+        ...glamourDiscoveryFallback,
+        ...allRaceEntries
+      ]);
     }
 
     function displayGlamourImage(url) {
@@ -4704,12 +4756,39 @@
       )));
     }
 
+    async function fetchMirapriGlamourPage(page = 1) {
+      try {
+        const markdown = await fetchReaderText(mirapriGlamourUrl(page), {
+          attempts: 2,
+          timeout: page === 1 ? 10000 : 14000,
+          cache: "no-store"
+        });
+        return parseMirapriGlamours(markdown);
+      } catch (error) {
+        return [];
+      }
+    }
+
+    async function loadMirapriGlamourPages() {
+      const pages = Array.from({ length: GLAMOUR_MIRAPRI_PAGE_COUNT }, (_, index) => index + 1);
+      const results = await Promise.allSettled(pages.map((page) => fetchMirapriGlamourPage(page)));
+      return uniqueGlamours(results.flatMap((result) => (
+        result.status === "fulfilled" ? result.value : []
+      )));
+    }
+
     async function loadExternalGlamours(race = glamourRaceFilter.value) {
       const raceLabel = glamourRaceLabel(race);
       resetGlamourFeed(fallbackGlamoursForRace(race));
       glamourFeedStatus.textContent = `${raceLabel}の保存済み候補を表示中。最新候補も確認中...`;
       try {
-        const parsed = await loadEorzeaGlamourPages(race);
+        const results = await Promise.allSettled([
+          loadEorzeaGlamourPages(race),
+          loadMirapriGlamourPages()
+        ]);
+        const parsed = uniqueGlamours(results.flatMap((result) => (
+          result.status === "fulfilled" ? result.value : []
+        )));
         if (parsed.length) {
           const entries = parsed.slice(0, GLAMOUR_MAX_EXTERNAL_ITEMS);
           resetGlamourFeed(entries);
@@ -4759,26 +4838,32 @@
 
     function glamourCardHtml(glamour) {
       const saved = isGlamourFavorite(glamour.source);
+      const sourceSite = glamour.sourceSite || (glamour.source.includes("mirapri.com") ? "MIRAPRI SNAP" : "Eorzea Collection");
+      const canLoadEquipment = glamour.equipmentEnabled !== false && glamour.source.includes("eorzeacollection.com");
+      const sourceExploreUrl = sourceSite === "MIRAPRI SNAP" ? "https://mirapri.com/?r=3" : "https://ffxiv.eorzeacollection.com/glamours";
+      const equipmentAction = canLoadEquipment
+        ? `<div class="glamour-actions">
+          <button type="button" data-glamour-equipment data-source="${escapeHtml(glamour.source)}">装備を日本語名で確認</button>
+        </div>
+        <div class="glamour-equipment-panel" data-glamour-equipment-panel data-source="${escapeHtml(glamour.source)}" data-equipment-state="idle"></div>`
+        : "";
       return `
         <article class="glamour-card" data-glamour-card>
         <div class="glamour-photo-wrap">
           <img src="${displayGlamourImage(glamour.image)}" data-original-src="${escapeHtml(glamour.image)}" alt="${escapeHtml(glamour.title)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if (this.dataset.originalSrc && this.src !== this.dataset.originalSrc) { this.src = this.dataset.originalSrc; }">
-          <button class="glamour-save-button ${saved ? "saved" : ""}" type="button" data-glamour-toggle data-title="${escapeHtml(glamour.title)}" data-source="${escapeHtml(glamour.source)}" data-image="${escapeHtml(glamour.image)}" data-search="${escapeHtml(glamour.search || glamour.title)}" aria-pressed="${saved ? "true" : "false"}">${saved ? "★ 保存済み" : "☆ 保存"}</button>
+          <button class="glamour-save-button ${saved ? "saved" : ""}" type="button" data-glamour-toggle data-title="${escapeHtml(glamour.title)}" data-source="${escapeHtml(glamour.source)}" data-image="${escapeHtml(glamour.image)}" data-search="${escapeHtml(glamour.search || glamour.title)}" data-source-site="${escapeHtml(sourceSite)}" data-equipment-enabled="${canLoadEquipment ? "true" : "false"}" aria-pressed="${saved ? "true" : "false"}">${saved ? "★ 保存済み" : "☆ 保存"}</button>
           <div class="glamour-photo-info">
             <h3>${escapeHtml(glamour.title)}</h3>
-            <p>Eorzea Collectionの公開投稿を表示中。画像はこのサイトに保存していません。</p>
+            <p>${escapeHtml(sourceSite)}の公開ミラプリを表示中。画像はこのサイトに保存していません。</p>
           </div>
         </div>
-        <div class="glamour-actions">
-          <button type="button" data-glamour-equipment data-source="${escapeHtml(glamour.source)}">装備を日本語名で確認</button>
-        </div>
-        <div class="glamour-equipment-panel" data-glamour-equipment-panel data-source="${escapeHtml(glamour.source)}" data-equipment-state="idle"></div>
+        ${equipmentAction}
         <details class="glamour-extra-details">
           <summary>外部リンクを開く</summary>
           <div class="glamour-extra-links">
             <a class="glamour-equipment-link" href="${glamour.source}" target="_blank" rel="noreferrer noopener"><span class="glamour-equipment-slot">投稿</span><span>元投稿を開く</span></a>
             <a class="glamour-equipment-link" href="${officialItemSearch(glamour.search || glamour.title)}" target="_blank" rel="noreferrer noopener"><span class="glamour-equipment-slot">検索</span><span>似た装備を公式DBで探す</span></a>
-            <a class="glamour-equipment-link" href="https://ffxiv.eorzeacollection.com/glamours" target="_blank" rel="noreferrer noopener"><span class="glamour-equipment-slot">一覧</span><span>もっと世界のミラプリを見る</span></a>
+            <a class="glamour-equipment-link" href="${sourceExploreUrl}" target="_blank" rel="noreferrer noopener"><span class="glamour-equipment-slot">一覧</span><span>${escapeHtml(sourceSite)}でもっと見る</span></a>
           </div>
         </details>
         </article>
@@ -6527,7 +6612,9 @@
         title: button.dataset.title || "Glamour",
         source: button.dataset.source || "",
         image: button.dataset.image || "",
-        search: button.dataset.search || button.dataset.title || "glamour"
+        search: button.dataset.search || button.dataset.title || "glamour",
+        sourceSite: button.dataset.sourceSite || "",
+        equipmentEnabled: button.dataset.equipmentEnabled !== "false"
       });
     });
     glamourFavoritesList.addEventListener("click", (event) => {
@@ -6596,7 +6683,7 @@
     updateStoryVisual();
     renderCockpit();
     renderGlamourFavorites();
-    resetGlamourFeed(glamourFeedFallback);
+    resetGlamourFeed(fallbackGlamoursForRace(glamourRaceFilter.value));
     loadExternalGlamours(glamourRaceFilter.value);
     renderResources();
     renderGearFinder();

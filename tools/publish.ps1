@@ -12,20 +12,7 @@ Write-Host "Repository: $RepoRoot"
 
 if (Get-Command node -ErrorAction SilentlyContinue) {
   Write-Host "Checking inline JavaScript and JSON..."
-  $checkScript = @'
-const fs = require("fs");
-const html = fs.readFileSync("index.html", "utf8");
-const scriptMatch = html.match(/<script>([\s\S]*?)<\/script>/);
-if (!scriptMatch) {
-  throw new Error("No inline script found in index.html.");
-}
-new Function(scriptMatch[1]);
-for (const file of ["action-icons.json", "item-icons.json", "gear-catalog.json", "job-actions.json"]) {
-  JSON.parse(fs.readFileSync(file, "utf8"));
-}
-console.log("syntax ok");
-'@
-  $checkScript | node -
+  node tools/check-site.mjs
   if ($LASTEXITCODE -ne 0) {
     throw "Syntax check failed."
   }

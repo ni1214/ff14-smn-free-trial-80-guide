@@ -1,0 +1,50 @@
+name: Update gear catalog
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 18 * * 2"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-gear-catalog
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Build gear candidates
+        run: node --max-old-space-size=8192 tools/build-gear-catalog.mjs
+
+      - name: Add gear details
+        run: node --max-old-space-size=8192 tools/enrich-gear-catalog.mjs
+
+      - name: Write metadata
+        run: node tools/write-gear-catalog-meta.mjs
+
+      - name: Check generated site data
+        run: node tools/check-site.mjs
+
+      - name: Commit updated catalog
+        run: |
+          if [ -z "$(git status --porcelain gear-catalog.json gear-catalog-meta.json)" ]; then
+            echo "No gear catalog changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add gear-catalog.json gear-catalog-meta.json
+          git commit -m "装備カタログを自動更新"
+          git push

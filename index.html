@@ -1827,6 +1827,160 @@
       color: var(--muted);
     }
 
+    .mainquest-panel {
+      border-color: rgba(49, 91, 134, 0.2);
+      background:
+        linear-gradient(180deg, rgba(255, 250, 243, 0.98), rgba(239, 246, 250, 0.96));
+    }
+
+    .mainquest-tools {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .mainquest-tool-row {
+      display: grid;
+      grid-template-columns: 0.82fr 1fr;
+      gap: 8px;
+    }
+
+    .mainquest-tools label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .mainquest-tools select,
+    .mainquest-tools input {
+      width: 100%;
+      min-height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(32, 90, 97, 0.16);
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      padding: 8px 10px;
+    }
+
+    .mainquest-summary {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 15px;
+      background: var(--paper-2);
+      border: 1px solid rgba(32, 90, 97, 0.08);
+    }
+
+    .mainquest-summary h3 {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .mainquest-summary p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .mainquest-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .mainquest-card {
+      display: grid;
+      gap: 9px;
+      padding: 11px;
+      border-radius: 14px;
+      background: var(--paper-2);
+      border: 1px solid rgba(32, 90, 97, 0.08);
+    }
+
+    .mainquest-card.done {
+      border-color: rgba(47, 124, 102, 0.22);
+      background: rgba(245, 252, 248, 0.92);
+    }
+
+    .mainquest-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: start;
+    }
+
+    .mainquest-kicker {
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .mainquest-card h3 {
+      margin: 2px 0 0;
+      font-size: 15px;
+      line-height: 1.32;
+    }
+
+    .mainquest-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .mainquest-duty-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .mainquest-duty {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: rgba(32, 90, 97, 0.08);
+      color: var(--teal);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .mainquest-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .mainquest-actions a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 7px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(215, 180, 106, 0.34);
+      background:
+        linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(232, 225, 211, 0.96));
+      color: #2a3945;
+      font-size: 12px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .mainquest-actions a:first-child {
+      border-color: rgba(255, 239, 178, 0.38);
+      background:
+        linear-gradient(180deg, rgba(188, 148, 67, 0.98), rgba(128, 91, 31, 0.98));
+      color: #fffaf3;
+    }
+
     .saved-check {
       display: flex;
       align-items: center;
@@ -2456,6 +2610,7 @@
       }
 
       .duty-control-row,
+      .mainquest-tool-row,
       .character-row,
       .character-preview {
         grid-template-columns: 1fr;
@@ -2634,6 +2789,7 @@
         <button class="jump feature-tab active" type="button" data-tab="gear">装備/入手法</button>
         <button class="jump feature-tab" type="button" data-tab="rotation">スキル/成長</button>
         <button class="jump feature-tab" type="button" data-tab="goals">迷子防止ナビ</button>
+        <button class="jump feature-tab" type="button" data-tab="mainquest">メイン一覧</button>
         <button class="jump feature-tab" type="button" data-tab="duty">ギミック</button>
         <button class="jump feature-tab" type="button" data-tab="links">ミラプリ</button>
       </div>
@@ -2673,6 +2829,29 @@
         <p>Lv100までのID、討滅戦、大人数レイドを読み込んでいます。</p>
       </div>
       <div class="mechanic-grid" id="mechanicGrid"></div>
+    </section>
+
+    <section class="panel mainquest-panel feature-panel" id="mainQuestHub" data-feature="mainquest">
+      <h2>メインクエスト一覧</h2>
+      <p class="footer-note">パッチ単位で今見る範囲を絞ります。クエスト名の細かい確認は参考元と公式DBへ移動します。</p>
+      <div class="mainquest-tools">
+        <div class="mainquest-tool-row">
+          <div>
+            <label for="mainQuestPatchFilter">パッチ範囲</label>
+            <select id="mainQuestPatchFilter"></select>
+          </div>
+          <div>
+            <label for="mainQuestSearch">クエスト・ID・地名で検索</label>
+            <input id="mainQuestSearch" type="search" placeholder="例: サスタシャ / 暁月 / クリスタルタワー">
+          </div>
+        </div>
+        <label class="saved-check" for="mainQuestOpenOnly">
+          <input id="mainQuestOpenOnly" type="checkbox">
+          <span>未完了だけ表示</span>
+        </label>
+      </div>
+      <div class="mainquest-summary" id="mainQuestSummary"></div>
+      <div class="mainquest-list" id="mainQuestList"></div>
     </section>
 
     <section class="panel gear-panel feature-panel active" id="gearFinder" data-feature="gear">
@@ -2804,6 +2983,10 @@
         <div class="source-item">
           <a href="https://jp.finalfantasyxiv.com/lodestone/playguide/db/" target="_blank" rel="noreferrer noopener">エオルゼアデータベース</a><br>
           クエスト、アイテム、装備の日本語名、公式DB検索の導線に使用。
+        </div>
+        <div class="source-item">
+          <a href="https://ff14.playguide2.net/811/" target="_blank" rel="noreferrer noopener">FF14プレイガイド メインクエスト一覧</a><br>
+          メインクエスト一覧タブの参考リンクとして使用。アプリ内では全文転載せず、パッチ単位の進行管理に絞っています。
         </div>
         <div class="source-item">
           <a href="https://game8.jp/ff14/283755" target="_blank" rel="noreferrer noopener">Game8 討滅戦攻略一覧</a><br>
@@ -4775,6 +4958,55 @@
 
     fallbackDuties.push(...currentDuties);
 
+    const mainQuestSourceUrl = "https://ff14.playguide2.net/811/";
+    const mainQuestPatchGroups = [
+      { value: "all", label: "すべて" },
+      { value: "2", label: "2.X 新生" },
+      { value: "3", label: "3.X 蒼天" },
+      { value: "4", label: "4.X 紅蓮" },
+      { value: "5", label: "5.X 漆黒" },
+      { value: "6", label: "6.X 暁月" },
+      { value: "7", label: "7.X 黄金" }
+    ];
+    const mainQuestPatches = [
+      { id: "2.0", patch: "2.0", group: "2", level: "Lv1-50", title: "新生エオルゼア", summary: "三都市スタートからグランドカンパニー加入、初ID、蛮神戦、Lv50決戦まで。序盤はクラスクエストと装備更新を並行すると迷いにくいです。", duties: ["サスタシャ", "タムタラ", "カッパーベル", "イフリート", "タイタン", "ガルーダ", "アルテマウェポン"], tags: ["序盤", "ID解放", "GC"] },
+      { id: "2.1", patch: "2.1", group: "2", level: "Lv50", title: "覚醒せし者たち", summary: "新生クリア後のエオルゼア各地を回る橋渡し。真蛮神やクリスタルタワー導線も意識しておくと後が楽です。", duties: ["善王モグル・モグXII世", "クリスタルタワー入口"], tags: ["新生後日談", "寄り道解放"] },
+      { id: "2.2", patch: "2.2", group: "2", level: "Lv50", title: "混沌の渦動", summary: "ドマ難民とリムサ周辺の話が動きます。メインの合間に詩学装備の土台を整える区間です。", duties: ["真リヴァイアサン"], tags: ["ドマ", "詩学"] },
+      { id: "2.3", patch: "2.3", group: "2", level: "Lv50", title: "エオルゼアの守護者", summary: "ラムウ戦と同盟側の情勢整理。クリスタルタワーを進めていない場合はこの辺りで進捗を合わせます。", duties: ["真ラムウ", "シルクスの塔"], tags: ["蛮神", "レイド導線"] },
+      { id: "2.4", patch: "2.4", group: "2", level: "Lv50", title: "氷結の幻想", summary: "シヴァ戦とイシュガルド方面への緊張が強まる区間。蒼天へ向けた装備更新を済ませておくと安心です。", duties: ["真シヴァ"], tags: ["イシュガルド前"] },
+      { id: "2.5", patch: "2.5", group: "2", level: "Lv50", title: "希望の灯火", summary: "新生編の締め。蒼天に入る前にクリスタルタワー必須分とLv50詩学装備を確認します。", duties: ["黙約の塔", "皇都イシュガルド防衛戦"], tags: ["蒼天直前", "必須確認"] },
+      { id: "3.0", patch: "3.0", group: "3", level: "Lv50-60", title: "蒼天のイシュガルド", summary: "イシュガルドからアバラシア雲海、ドラヴァニアへ広がる本編。Lv60到達後はイディル装備が次の土台です。", duties: ["ダスクヴィジル", "ソーム・アル", "ドラゴンズエアリー", "ラーヴァナ", "ビスマルク", "ナイツ"], tags: ["蒼天本編"] },
+      { id: "3.1", patch: "3.1", group: "3", level: "Lv60", title: "光と闇の境界", summary: "蒼天後日談の入口。アレキサンダーやヴォイドアークなど、寄り道が増える時期でもあります。", duties: ["聖モシャーヌ植物園", "ヴォイドアーク"], tags: ["蒼天後日談"] },
+      { id: "3.2", patch: "3.2", group: "3", level: "Lv60", title: "運命の歯車", summary: "竜詩戦争の決着へ向けて政治と戦線が進みます。メインIDと討滅戦の予習は短く要点だけで十分です。", duties: ["逆さの塔", "魔神セフィロト"], tags: ["竜詩戦争"] },
+      { id: "3.3", patch: "3.3", group: "3", level: "Lv60", title: "最後の咆哮", summary: "蒼天編の大きな決着。ニーズヘッグ戦前後は装備とジョブクエストを確認してから進むと安定します。", duties: ["ソール・カイ", "ニーズヘッグ征竜戦"], tags: ["蒼天山場"] },
+      { id: "3.4", patch: "3.4", group: "3", level: "Lv60", title: "魂を継ぐ者", summary: "紅蓮へ向けた新しい火種が見えてきます。クロの空想帳や詩学集めも触りやすい時期です。", duties: ["ゼルファトル", "女神ソフィア"], tags: ["紅蓮前"] },
+      { id: "3.5", patch: "3.5", group: "3", level: "Lv60", title: "運命の果て", summary: "紅蓮編へ接続する締めの区間。Lv60装備を整え、未解放の便利機能を拾ってから進むと快適です。", duties: ["バエサルの長城", "鬼神ズルワーン"], tags: ["紅蓮直前"] },
+      { id: "4.0", patch: "4.0", group: "4", level: "Lv60-70", title: "紅蓮のリベレーター", summary: "ギラバニアと東方を行き来する本編。Lv70到達後はスカエウァRE系が次の土台になります。", duties: ["セイレーン海", "バルダム覇道", "ドマ城", "スサノオ", "ラクシュミ", "神龍"], tags: ["紅蓮本編"] },
+      { id: "4.1", patch: "4.1", group: "4", level: "Lv70", title: "英雄の帰還", summary: "アラミゴ解放後の整理と次の脅威への入口。リターン・トゥ・イヴァリースも開き始めます。", duties: ["水没遺構 スカラ", "ラバナスタ"], tags: ["紅蓮後日談"] },
+      { id: "4.2", patch: "4.2", group: "4", level: "Lv70", title: "暁光の刻", summary: "ドマと帝国の動きが進む区間。四聖獣やオメガなど、好みの寄り道も増えてきます。", duties: ["紅玉火山 獄之蓋", "白虎征魂戦"], tags: ["ドマ", "四聖獣"] },
+      { id: "4.3", patch: "4.3", group: "4", level: "Lv70", title: "月下の華", summary: "ツクヨミ戦を含む紅蓮後半の山場。物語を見る時間を取りたい区間です。", duties: ["風水霊殿 ガンエン廟", "ツクヨミ討滅戦"], tags: ["紅蓮山場"] },
+      { id: "4.4", patch: "4.4", group: "4", level: "Lv70", title: "狂乱の前奏曲", summary: "漆黒へ向けた異変が濃くなります。Lv70装備を更新しておくと次の拡張序盤が楽です。", duties: ["永久焦土 ザ・バーン", "朱雀征魂戦"], tags: ["漆黒前"] },
+      { id: "4.5", patch: "4.5", group: "4", level: "Lv70", title: "英雄への鎮魂歌", summary: "紅蓮編の締め。漆黒突入前にジョブ/ロールの整理と装備確認を済ませます。", duties: ["境界戦線 ギムリトダーク", "青龍征魂戦"], tags: ["漆黒直前"] },
+      { id: "5.0", patch: "5.0", group: "5", level: "Lv70-80", title: "漆黒のヴィランズ", summary: "第一世界を進む本編。Lv80到達後はクリプトラーカーRE系を軸にすると暁月序盤まで使いやすいです。", duties: ["ホルミンスター", "ドォーヌ・メグ", "キタンナ", "マリカ", "グルグ火山", "アーモロート"], tags: ["漆黒本編"] },
+      { id: "5.1", patch: "5.1", group: "5", level: "Lv80", title: "白き誓約、黒き密約", summary: "漆黒後日談の入口。ニーアレイドなど見た目装備の寄り道も増えます。", duties: ["グラン・コスモス", "複製サレタ工場廃墟"], tags: ["漆黒後日談"] },
+      { id: "5.2", patch: "5.2", group: "5", level: "Lv80", title: "追憶の凶星", summary: "第一世界と原初世界の問題が並行して進みます。討滅戦前は要点だけ確認で十分です。", duties: ["アニドラス・アナムネーシス", "ルビーウェポン"], tags: ["ウェポン"] },
+      { id: "5.3", patch: "5.3", group: "5", level: "Lv80", title: "クリスタルの残光", summary: "漆黒編の大きな決着。物語の評価が高い区間なので、急ぎすぎず進めたいところです。", duties: ["漆黒決戦 ノルヴラント", "ウォーリア・オブ・ライト"], tags: ["漆黒山場"] },
+      { id: "5.4", patch: "5.4", group: "5", level: "Lv80", title: "もうひとつの未来", summary: "暁月へ向けた新しい章の準備。Lv80装備とロールクエストの残りを確認します。", duties: ["マトーヤのアトリエ", "エデン再生編"], tags: ["暁月前"] },
+      { id: "5.5", patch: "5.5", group: "5", level: "Lv80", title: "黎明の死闘", summary: "暁月直前の締め。パガルザン後はLv90までの長い本編に入ります。", duties: ["黄金平原 パガルザン", "ダイヤウェポン"], tags: ["暁月直前"] },
+      { id: "6.0", patch: "6.0", group: "6", level: "Lv80-90", title: "暁月のフィナーレ", summary: "ハイデリン・ゾディアーク編の完結。Lv90到達後はクレデンダムRE/ルナエンヴォイRE系が土台です。", duties: ["ゾットの塔", "バブイルの塔", "ヴァナスパティ", "ヒュペルボレア", "アイティオン", "終焉"], tags: ["暁月本編", "完結編"] },
+      { id: "6.1", patch: "6.1", group: "6", level: "Lv90", title: "新たなる冒険", summary: "第2章へ向けた新しい旅の入口。ミソロジー・オブ・エオルゼアも開きます。", duties: ["アルザダール海底遺跡群", "アグライア"], tags: ["新章入口"] },
+      { id: "6.2", patch: "6.2", group: "6", level: "Lv90", title: "禁断の記憶", summary: "第十三世界方面の話が進行。討滅戦や零式寄り道は必要な分だけでOKです。", duties: ["トロイアコート", "バルバリシア"], tags: ["第十三世界"] },
+      { id: "6.3", patch: "6.3", group: "6", level: "Lv90", title: "天の祝祭、地の鳴動", summary: "エウプロシュネなど週課の入口も増える区間。メインは次の討滅戦へ進みます。", duties: ["ラピス・マナリス", "ルビカンテ", "エウプロシュネ"], tags: ["ミソロジー"] },
+      { id: "6.4", patch: "6.4", group: "6", level: "Lv90", title: "玉座の咎人", summary: "第十三世界編の終盤。黄金に向けてLv90装備を更新しておくと安心です。", duties: ["ハーム島", "ゴルベーザ"], tags: ["黄金前"] },
+      { id: "6.5", patch: "6.5", group: "6", level: "Lv90", title: "光明の起点", summary: "暁月後日談の締め。黄金突入前に装備、ロールクエスト、未解放の便利機能を整理します。", duties: ["月の地下渓谷", "ゼロムス", "タレイア"], tags: ["黄金直前"] },
+      { id: "7.0", patch: "7.0", group: "7", level: "Lv90-100", title: "黄金のレガシー", summary: "トラル大陸を進む新章本編。Lv100到達後は現在の装備タブで最新候補を確認します。", duties: ["濁流遡上 イフイカ・トゥム", "山嶺登攀 ウォーコー・ゾーモー", "外征前哨 ヴァンガード", "アレクサンドリア", "ゾラージャ"], tags: ["黄金本編"] },
+      { id: "7.1", patch: "7.1", group: "7", level: "Lv100", title: "未知との邂逅", summary: "黄金後日談の入口。エコーズ オブ ヴァナ・ディールのアライアンスレイドも始まります。", duties: ["廃地討究 ユウェヤーワータ", "ジュノ：ザ・ファーストウォーク"], tags: ["黄金後日談"] },
+      { id: "7.2", patch: "7.2", group: "7", level: "Lv100", title: "永久の探求者", summary: "黄金編の次章。Lv100装備候補と合わせて、メインで開いたコンテンツを順に確認します。", duties: ["王城旧跡 アンダーキープ"], tags: ["Lv100"] },
+      { id: "7.3", patch: "7.3", group: "7", level: "Lv100", title: "明日への道標", summary: "黄金後日談の続き。新IDや討滅戦の要点はギミックタブで短く確認します。", duties: ["新ID/討滅戦"], tags: ["Lv100", "今後更新"] },
+      { id: "7.4", patch: "7.4", group: "7", level: "Lv100", title: "霧の中の理想郷", summary: "公開情報の更新に合わせて詳細確認が必要な区間。外部のメイン一覧で最新の並びを確認します。", duties: ["更新確認"], tags: ["今後更新"] },
+      { id: "7.5", patch: "7.5", group: "7", level: "Lv100", title: "彼方に至る路", summary: "参照元では7.5までの導線として整理されています。最新パッチ実装後は外部ページと公式情報で確認します。", duties: ["更新確認"], tags: ["最新確認"] }
+    ];
+
     const featureTabs = document.querySelectorAll(".feature-tab");
     const cockpitMode = document.getElementById("cockpitMode");
     const cockpitAnswer = document.getElementById("cockpitAnswer");
@@ -4788,6 +5020,11 @@
     const storyImageCaption = document.getElementById("storyImageCaption");
     const siteSearch = document.getElementById("siteSearch");
     const siteSearchResults = document.getElementById("siteSearchResults");
+    const mainQuestPatchFilter = document.getElementById("mainQuestPatchFilter");
+    const mainQuestSearch = document.getElementById("mainQuestSearch");
+    const mainQuestOpenOnly = document.getElementById("mainQuestOpenOnly");
+    const mainQuestSummary = document.getElementById("mainQuestSummary");
+    const mainQuestList = document.getElementById("mainQuestList");
     const glamourSpotlight = document.getElementById("glamourSpotlight");
     const glamourRandomButton = document.getElementById("glamourRandomButton");
     const glamourFavoritesButton = document.getElementById("glamourFavoritesButton");
@@ -5808,6 +6045,90 @@
           <span>${label}</span>
         </label>
       `;
+    }
+
+    function mainQuestCheckKey(patch) {
+      return `msq:${patch.id}`;
+    }
+
+    function mainQuestOfficialSearchUrl(patch) {
+      return `https://jp.finalfantasyxiv.com/lodestone/playguide/db/search/?q=${encodeURIComponent(`メインクエスト ${patch.patch} ${patch.title}`)}`;
+    }
+
+    function mainQuestSearchText(patch) {
+      return [
+        patch.patch,
+        patch.level,
+        patch.title,
+        patch.summary,
+        ...(patch.duties || []),
+        ...(patch.tags || [])
+      ].join(" ").toLowerCase();
+    }
+
+    function filteredMainQuestPatches() {
+      const group = mainQuestPatchFilter?.value || "all";
+      const query = (mainQuestSearch?.value || "").trim().toLowerCase();
+      return mainQuestPatches.filter((patch) => {
+        const matchGroup = group === "all" || patch.group === group;
+        const matchOpen = !mainQuestOpenOnly?.checked || !isChecked(mainQuestCheckKey(patch));
+        const matchQuery = !query || mainQuestSearchText(patch).includes(query);
+        return matchGroup && matchOpen && matchQuery;
+      });
+    }
+
+    function renderMainQuestFilters() {
+      if (!mainQuestPatchFilter) {
+        return;
+      }
+      const current = mainQuestPatchFilter.value || "all";
+      mainQuestPatchFilter.innerHTML = mainQuestPatchGroups
+        .map((group) => `<option value="${group.value}">${escapeHtml(group.label)}</option>`)
+        .join("");
+      mainQuestPatchFilter.value = mainQuestPatchGroups.some((group) => group.value === current) ? current : "all";
+    }
+
+    function renderMainQuestList() {
+      if (!mainQuestList || !mainQuestSummary) {
+        return;
+      }
+      const list = filteredMainQuestPatches();
+      const completed = mainQuestPatches.filter((patch) => isChecked(mainQuestCheckKey(patch))).length;
+      const groupLabel = mainQuestPatchGroups.find((group) => group.value === (mainQuestPatchFilter?.value || "all"))?.label || "すべて";
+      mainQuestSummary.innerHTML = `
+        <h3>${escapeHtml(groupLabel)} / ${completed}/${mainQuestPatches.length} 完了</h3>
+        <p>この一覧は進行管理用の要約です。全クエスト名や最新差分はFF14プレイガイド、正式名称の確認は公式DBを開いてください。</p>
+        <div class="mainquest-actions">
+          <a href="${mainQuestSourceUrl}" target="_blank" rel="noreferrer noopener">FF14プレイガイドを開く</a>
+          <a href="https://jp.finalfantasyxiv.com/lodestone/playguide/db/quest/" target="_blank" rel="noreferrer noopener">公式クエストDB</a>
+        </div>
+      `;
+      mainQuestList.innerHTML = list.length
+        ? list.map((patch) => {
+          const done = isChecked(mainQuestCheckKey(patch));
+          return `
+            <article class="mainquest-card ${done ? "done" : ""}">
+              <div class="mainquest-head">
+                <div>
+                  <div class="mainquest-kicker">Patch ${escapeHtml(patch.patch)} / ${escapeHtml(patch.level)}</div>
+                  <h3>${escapeHtml(patch.title)}</h3>
+                </div>
+                <span class="next-pill ${done ? "hot" : ""}">${done ? "完了" : "未完了"}</span>
+              </div>
+              <p>${escapeHtml(patch.summary)}</p>
+              <div class="mainquest-duty-list">
+                ${(patch.duties || []).map((duty) => `<span class="mainquest-duty">${escapeHtml(duty)}</span>`).join("")}
+              </div>
+              <div class="mainquest-actions">
+                <a href="${mainQuestSourceUrl}" target="_blank" rel="noreferrer noopener">詳細一覧</a>
+                <a href="${mainQuestOfficialSearchUrl(patch)}" target="_blank" rel="noreferrer noopener">公式DB検索</a>
+                <a href="${webSearchUrl(`FF14 ${patch.patch} ${patch.title} メインクエスト`)}" target="_blank" rel="noreferrer noopener">攻略検索</a>
+              </div>
+              ${checkControl(mainQuestCheckKey(patch), "このパッチを完了")}
+            </article>
+          `;
+        }).join("")
+        : `<div class="mainquest-card"><h3>該当する範囲がありません</h3><p>検索語を短くするか、パッチ範囲を「すべて」に戻してください。</p></div>`;
     }
 
     function selectedRotationJob() {
@@ -7419,6 +7740,7 @@
       renderShoppingList();
       renderNavigationGuide();
       renderRewardsGallery();
+      renderMainQuestList();
     }
 
     featureTabs.forEach((tab) => {
@@ -7448,6 +7770,9 @@
       renderResources();
     });
     siteSearch.addEventListener("input", renderSearchResults);
+    mainQuestPatchFilter?.addEventListener("change", renderMainQuestList);
+    mainQuestSearch?.addEventListener("input", renderMainQuestList);
+    mainQuestOpenOnly?.addEventListener("change", renderMainQuestList);
     glamourRandomButton.addEventListener("click", () => {
       jumpToRandomGlamour();
     });
@@ -7544,6 +7869,9 @@
       savedChecks[check.dataset.checkKey] = check.checked;
       saveGuideChecks();
       renderShoppingList();
+      if (check.dataset.checkKey.startsWith("msq:")) {
+        renderMainQuestList();
+      }
     });
     dutyType.addEventListener("change", () => {
       renderDutyOptions();
@@ -7573,6 +7901,8 @@
     updateProfileSummary();
     updateStoryVisual();
     renderCockpit();
+    renderMainQuestFilters();
+    renderMainQuestList();
     renderGlamourFavorites();
     resetGlamourFeed(fallbackGlamoursForRace(glamourRaceFilter.value));
     loadExternalGlamours(glamourRaceFilter.value);

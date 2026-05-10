@@ -1940,7 +1940,7 @@
       gap: 6px;
     }
 
-    .mainquest-duty {
+    .mainquest-il {
       display: inline-flex;
       align-items: center;
       min-height: 28px;
@@ -2555,6 +2555,25 @@
     }
 
     @media (max-width: 520px) {
+      body {
+        padding-bottom: calc(132px + env(safe-area-inset-bottom));
+      }
+
+      .jumpbar-track {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        overflow-x: visible;
+      }
+
+      .jump {
+        min-width: 0;
+        width: 100%;
+        min-height: 42px;
+        padding: 6px 5px;
+        white-space: normal;
+        line-height: 1.2;
+      }
+
       .section-grid {
         grid-template-columns: 1fr;
       }
@@ -2833,7 +2852,7 @@
 
     <section class="panel mainquest-panel feature-panel" id="mainQuestHub" data-feature="mainquest">
       <h2>メインクエスト一覧</h2>
-      <p class="footer-note">パッチ単位で今見る範囲を絞ります。クエスト名の細かい確認は参考元と公式DBへ移動します。</p>
+      <p class="footer-note">パッチ単位で今見る範囲を絞ります。コンテンツ名は伏せ、必要ILだけ先に確認できるようにします。</p>
       <div class="mainquest-tools">
         <div class="mainquest-tool-row">
           <div>
@@ -2841,8 +2860,8 @@
             <select id="mainQuestPatchFilter"></select>
           </div>
           <div>
-            <label for="mainQuestSearch">クエスト・ID・地名で検索</label>
-            <input id="mainQuestSearch" type="search" placeholder="例: サスタシャ / 暁月 / クリスタルタワー">
+            <label for="mainQuestSearch">パッチ・レベル・ILで検索</label>
+            <input id="mainQuestSearch" type="search" placeholder="例: 暁月 / Lv90 / IL590">
           </div>
         </div>
         <label class="saved-check" for="mainQuestOpenOnly">
@@ -5006,6 +5025,44 @@
       { id: "7.4", patch: "7.4", group: "7", level: "Lv100", title: "霧の中の理想郷", summary: "公開情報の更新に合わせて詳細確認が必要な区間。外部のメイン一覧で最新の並びを確認します。", duties: ["更新確認"], tags: ["今後更新"] },
       { id: "7.5", patch: "7.5", group: "7", level: "Lv100", title: "彼方に至る路", summary: "参照元では7.5までの導線として整理されています。最新パッチ実装後は外部ページと公式情報で確認します。", duties: ["更新確認"], tags: ["最新確認"] }
     ];
+    const mainQuestRequiredIl = {
+      "2.0": ["必要IL: なし〜42"],
+      "2.1": ["必要IL: 48〜55"],
+      "2.2": ["必要IL: 60"],
+      "2.3": ["必要IL: 65"],
+      "2.4": ["必要IL: 80"],
+      "2.5": ["必要IL: 90"],
+      "3.0": ["必要IL: 115〜142"],
+      "3.1": ["必要IL: 170〜175"],
+      "3.2": ["必要IL: 180〜190"],
+      "3.3": ["必要IL: 200〜205"],
+      "3.4": ["必要IL: 210〜220"],
+      "3.5": ["必要IL: 230〜235"],
+      "4.0": ["必要IL: 240〜280"],
+      "4.1": ["必要IL: 300"],
+      "4.2": ["必要IL: 310〜325"],
+      "4.3": ["必要IL: 330〜335"],
+      "4.4": ["必要IL: 340〜355"],
+      "4.5": ["必要IL: 360〜365"],
+      "5.0": ["必要IL: 390〜410"],
+      "5.1": ["必要IL: 430〜435"],
+      "5.2": ["必要IL: 440〜455"],
+      "5.3": ["必要IL: 460〜465"],
+      "5.4": ["必要IL: 470"],
+      "5.5": ["必要IL: 490〜495"],
+      "6.0": ["必要IL: 500〜540"],
+      "6.1": ["必要IL: 560〜565"],
+      "6.2": ["必要IL: 575〜585"],
+      "6.3": ["必要IL: 590〜595"],
+      "6.4": ["必要IL: 605〜615"],
+      "6.5": ["必要IL: 620〜625"],
+      "7.0": ["必要IL: 630〜660"],
+      "7.1": ["必要IL: 690〜695"],
+      "7.2": ["必要IL: 715"],
+      "7.3": ["必要IL: 更新確認"],
+      "7.4": ["必要IL: 更新確認"],
+      "7.5": ["必要IL: 更新確認"]
+    };
 
     const featureTabs = document.querySelectorAll(".feature-tab");
     const cockpitMode = document.getElementById("cockpitMode");
@@ -6055,13 +6112,24 @@
       return `https://jp.finalfantasyxiv.com/lodestone/playguide/db/search/?q=${encodeURIComponent(`メインクエスト ${patch.patch} ${patch.title}`)}`;
     }
 
+    function mainQuestIlLabels(patch) {
+      return mainQuestRequiredIl[patch.id] || ["必要IL: 公式DB確認"];
+    }
+
+    function mainQuestSafeSummary(patch) {
+      if (patch.group === "7" && ["7.3", "7.4", "7.5"].includes(patch.id)) {
+        return "今後の更新確認が必要な区間です。正式な必要ILや並びは、実装後に参考リンクと公式DBで確認してください。";
+      }
+      return `${patch.level}帯のメイン進行区間です。コンテンツ名とボス名は伏せ、必要ILだけ先に確認できるようにしています。`;
+    }
+
     function mainQuestSearchText(patch) {
       return [
         patch.patch,
         patch.level,
         patch.title,
-        patch.summary,
-        ...(patch.duties || []),
+        mainQuestSafeSummary(patch),
+        ...mainQuestIlLabels(patch),
         ...(patch.tags || [])
       ].join(" ").toLowerCase();
     }
@@ -6097,7 +6165,7 @@
       const groupLabel = mainQuestPatchGroups.find((group) => group.value === (mainQuestPatchFilter?.value || "all"))?.label || "すべて";
       mainQuestSummary.innerHTML = `
         <h3>${escapeHtml(groupLabel)} / ${completed}/${mainQuestPatches.length} 完了</h3>
-        <p>この一覧は進行管理用の要約です。全クエスト名や最新差分はFF14プレイガイド、正式名称の確認は公式DBを開いてください。</p>
+        <p>この一覧は進行管理用の要約です。コンテンツ名は伏せています。全クエスト名や最新差分はFF14プレイガイド、正式名称の確認は公式DBを開いてください。</p>
         <div class="mainquest-actions">
           <a href="${mainQuestSourceUrl}" target="_blank" rel="noreferrer noopener">FF14プレイガイドを開く</a>
           <a href="https://jp.finalfantasyxiv.com/lodestone/playguide/db/quest/" target="_blank" rel="noreferrer noopener">公式クエストDB</a>
@@ -6115,9 +6183,9 @@
                 </div>
                 <span class="next-pill ${done ? "hot" : ""}">${done ? "完了" : "未完了"}</span>
               </div>
-              <p>${escapeHtml(patch.summary)}</p>
+              <p>${escapeHtml(mainQuestSafeSummary(patch))}</p>
               <div class="mainquest-duty-list">
-                ${(patch.duties || []).map((duty) => `<span class="mainquest-duty">${escapeHtml(duty)}</span>`).join("")}
+                ${mainQuestIlLabels(patch).map((label) => `<span class="mainquest-il">${escapeHtml(label)}</span>`).join("")}
               </div>
               <div class="mainquest-actions">
                 <a href="${mainQuestSourceUrl}" target="_blank" rel="noreferrer noopener">詳細一覧</a>

@@ -7627,10 +7627,14 @@
     }
 
     function saveCharacter() {
+      const normalizedLodestone = normalizeLodestoneCharacterUrl(lodestoneUrl.value);
       const data = {
         characterName: characterName.value.trim(),
-        lodestoneUrl: lodestoneUrl.value.trim()
+        lodestoneUrl: normalizedLodestone || lodestoneUrl.value.trim()
       };
+      if (normalizedLodestone) {
+        lodestoneUrl.value = normalizedLodestone;
+      }
       safeStorageSet("ff14-guide-character", JSON.stringify(data));
       updateProfileSummary();
       renderCharacter();
@@ -7653,9 +7657,20 @@
 
     function renderCharacter() {
       const profile = lodestoneUrl.value.trim();
+      const normalizedProfile = normalizeLodestoneCharacterUrl(profile);
+      if (!profile) {
+        characterCard.innerHTML = "";
+        return;
+      }
       characterCard.innerHTML = `
-        <div class="character-links">
-          ${lodestoneJumpButton(profile, "マイキャラを開く")}
+        <div class="friend-item">
+          <div>
+            <div class="friend-name">${escapeHtml(characterName.value.trim() || "マイキャラ")}</div>
+            ${normalizedProfile ? "" : `<p class="friend-empty">Lodestone URLを確認してください。</p>`}
+          </div>
+          <div class="friend-actions character-links">
+            ${lodestoneJumpButton(profile, "マイキャラを開く")}
+          </div>
         </div>
       `;
     }
@@ -7705,15 +7720,21 @@
       saveFriendButton.textContent = "フレンドを保存";
     }
 
+    function normalizeLodestoneCharacterUrl(url) {
+      const match = String(url || "").trim().match(/^https:\/\/((?:jp|na|eu|fr|de)\.finalfantasyxiv\.com)\/lodestone\/character\/(\d+)(?:\/|$)/);
+      return match ? `https://${match[1]}/lodestone/character/${match[2]}/` : "";
+    }
+
     function validLodestoneCharacterUrl(url) {
-      return /^https:\/\/(?:jp|na|eu|fr|de)\.finalfantasyxiv\.com\/lodestone\/character\/\d+\/?/.test(url);
+      return Boolean(normalizeLodestoneCharacterUrl(url));
     }
 
     function lodestoneJumpButton(url, label = "Lodestoneを開く") {
-      if (!validLodestoneCharacterUrl(url)) {
+      const normalizedUrl = normalizeLodestoneCharacterUrl(url);
+      if (!normalizedUrl) {
         return "";
       }
-      return `<a class="lodestone-jump" href="${escapeHtml(url)}" target="_blank" rel="noreferrer noopener">${escapeHtml(label)}</a>`;
+      return `<a class="lodestone-jump" href="${escapeHtml(normalizedUrl)}" target="_blank" rel="noreferrer noopener">${escapeHtml(label)}</a>`;
     }
 
     function addOrUpdateFriend() {

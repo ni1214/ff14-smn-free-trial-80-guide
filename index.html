@@ -2135,10 +2135,6 @@
       margin-top: 10px;
     }
 
-    .my-character-link {
-      margin-top: 6px;
-    }
-
     .duty-control-row,
     .character-row {
       display: grid;
@@ -2194,14 +2190,6 @@
       border-radius: 15px;
       background: var(--paper-2);
       border: 1px solid rgba(32, 90, 97, 0.08);
-    }
-
-    .my-character-link .character-card {
-      margin-top: 0;
-      padding: 0;
-      background: transparent;
-      border: 0;
-      box-shadow: none;
     }
 
     .friend-section {
@@ -2784,11 +2772,6 @@
             <path d="M13.8 6 18 10.2"></path>
           </svg>
         </button>
-      </div>
-      <div class="my-character-link">
-        <div class="character-card" id="characterCard">
-          <div class="character-links"></div>
-        </div>
       </div>
       <div class="friend-section">
         <div class="friend-section-head">
@@ -5194,7 +5177,6 @@
     const friendsCount = document.getElementById("friendsCount");
     const saveCharacterButton = document.getElementById("saveCharacterButton");
     const clearCharacterButton = document.getElementById("clearCharacterButton");
-    const characterCard = document.getElementById("characterCard");
     let activeResourceCategory = "all";
     const pageParams = new URLSearchParams(window.location.search);
     const PROFILE_STORAGE_KEY = "ff14-guide-profile-v1";
@@ -7666,23 +7648,7 @@
     }
 
     function renderCharacter() {
-      const profile = lodestoneUrl.value.trim();
-      const normalizedProfile = normalizeLodestoneCharacterUrl(profile);
-      if (!profile) {
-        characterCard.innerHTML = "";
-        return;
-      }
-      characterCard.innerHTML = `
-        <div class="friend-item">
-          <div>
-            <div class="friend-name">${escapeHtml(characterName.value.trim() || "マイキャラ")}</div>
-            ${normalizedProfile ? "" : `<p class="friend-empty">Lodestone URLを確認してください。</p>`}
-          </div>
-          <div class="friend-actions character-links">
-            ${lodestoneJumpButton(profile, "キャラページを開く")}
-          </div>
-        </div>
-      `;
+      updateProfileSummary();
     }
 
     function clearCharacter() {

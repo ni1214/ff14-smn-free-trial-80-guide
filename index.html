@@ -481,6 +481,13 @@
       line-height: 1.45;
     }
 
+    .profile-inline-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 8px;
+    }
+
     .settings-button {
       appearance: none;
       border: 1px solid rgba(255, 239, 178, 0.36);
@@ -6969,6 +6976,9 @@
       const poetics = Math.min(2000, Math.max(0, Number(poeticsInput.value) || 0));
       profileSummary.innerHTML = `
         <strong>${escapeHtml(name)} / ${job.label} / Lv${level}</strong>
+        <div class="profile-inline-actions character-links">
+          ${lodestoneJumpButton(lodestoneUrl.value, "キャラページを開く")}
+        </div>
       `;
       if (heroJobStatus) {
         heroJobStatus.textContent = `${job.label} / Lv${level}`;
@@ -7669,7 +7679,7 @@
             ${normalizedProfile ? "" : `<p class="friend-empty">Lodestone URLを確認してください。</p>`}
           </div>
           <div class="friend-actions character-links">
-            ${lodestoneJumpButton(profile, "マイキャラを開く")}
+            ${lodestoneJumpButton(profile, "キャラページを開く")}
           </div>
         </div>
       `;

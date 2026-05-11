@@ -91,6 +91,7 @@
       position: relative;
       overflow: hidden;
       background:
+        radial-gradient(circle at 92% 12%, rgba(215, 180, 106, 0.18), transparent 28%),
         linear-gradient(180deg, rgba(255, 250, 243, 0.98), rgba(239, 247, 246, 0.95));
       color: var(--ink);
       border: 1px solid var(--ff-gold-soft);
@@ -101,11 +102,33 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.76);
     }
 
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(255, 250, 243, 0.96) 0%, rgba(255, 250, 243, 0.78) 52%, rgba(255, 250, 243, 0.96) 100%),
+        var(--story-bg-image);
+      background-position: center;
+      background-size: cover;
+      opacity: 0.16;
+    }
+
     .hero::after {
-      content: none;
+      content: "";
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--ff-gold), transparent);
+      opacity: 0.55;
     }
 
     .hero-layout {
+      position: relative;
+      z-index: 1;
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 12px;
@@ -116,7 +139,7 @@
       display: inline-block;
       font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0;
       text-transform: uppercase;
       padding: 6px 10px;
       border-radius: 999px;
@@ -351,6 +374,9 @@
       color: rgba(255, 250, 243, 0.9);
       background:
         linear-gradient(180deg, rgba(56, 68, 78, 0.92), rgba(24, 34, 44, 0.94));
+      display: grid;
+      place-items: center;
+      gap: 2px;
       min-width: 70px;
       min-height: 50px;
       padding: 7px 9px;
@@ -363,12 +389,33 @@
         0 5px 14px rgba(0, 0, 0, 0.2);
     }
 
+    .jump::before {
+      content: attr(data-nav-icon);
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid rgba(215, 180, 106, 0.42);
+      background: rgba(255, 250, 243, 0.08);
+      color: var(--ff-gold);
+      font-size: 12px;
+      line-height: 1;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+
     .feature-tab.active {
       background:
         linear-gradient(180deg, rgba(219, 189, 118, 0.92), rgba(130, 91, 37, 0.95));
       border-color: rgba(255, 239, 178, 0.82);
       color: #fffdf5;
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
+    }
+
+    .feature-tab.active::before {
+      border-color: rgba(255, 253, 245, 0.86);
+      background: rgba(19, 31, 43, 0.22);
+      color: #fffdf5;
     }
 
     .feature-panel {
@@ -492,6 +539,10 @@
       appearance: none;
       border: 1px solid rgba(255, 239, 178, 0.36);
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
       min-height: 42px;
       padding: 9px 12px;
       border-radius: 10px;
@@ -511,6 +562,10 @@
       width: 42px;
       min-width: 42px;
       padding: 0;
+    }
+
+    .profile-edit-label {
+      display: none;
     }
 
     .icon-button svg {
@@ -2590,24 +2645,117 @@
       font-size: 13px;
     }
 
+    .material-credit {
+      margin: 10px 0 0;
+      color: rgba(31, 42, 46, 0.68);
+      font-size: 10px;
+      line-height: 1.45;
+      text-align: center;
+    }
+
     @media (max-width: 520px) {
       body {
-        padding-bottom: calc(132px + env(safe-area-inset-bottom));
+        padding-bottom: calc(76px + env(safe-area-inset-bottom));
+      }
+
+      .wrap {
+        padding: 8px 8px 24px;
+      }
+
+      .hero {
+        padding: 13px 12px;
+        border-radius: 16px;
+      }
+
+      h1 {
+        margin: 8px 0 5px;
+        font-size: 25px;
+      }
+
+      .hero p {
+        font-size: 12px;
+      }
+
+      .hero-status-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
+        margin-top: 10px;
+      }
+
+      .hero-status {
+        padding: 7px 6px;
+        border-radius: 10px;
+      }
+
+      .hero-status span {
+        font-size: 10px;
+      }
+
+      .hero-status strong {
+        font-size: 12px;
+      }
+
+      .profile-panel {
+        margin: 8px 0;
+        padding: 12px;
+        border-radius: 16px;
+      }
+
+      .profile-panel h2 {
+        margin: 0 0 6px;
+        font-size: 16px;
+      }
+
+      .profile-summary-card {
+        grid-template-columns: minmax(0, 1fr) 68px;
+        gap: 8px;
+        padding: 8px;
+        border-radius: 12px;
+      }
+
+      .profile-summary-card strong {
+        font-size: 14px;
+      }
+
+      .profile-summary-card span {
+        font-size: 11px;
+      }
+
+      .icon-button {
+        width: auto;
+        min-width: 68px;
+        min-height: 38px;
+        padding: 0 9px;
+      }
+
+      .profile-edit-label {
+        display: inline;
+        font-size: 12px;
+        font-weight: 800;
       }
 
       .jumpbar-track {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 4px;
         overflow-x: visible;
       }
 
       .jump {
         min-width: 0;
         width: 100%;
-        min-height: 42px;
-        padding: 6px 5px;
+        min-height: 54px;
+        padding: 5px 2px 4px;
         white-space: normal;
-        line-height: 1.2;
+        line-height: 1.1;
+        font-size: 10px;
+        border-radius: 10px;
+      }
+
+      .jump::before {
+        width: 20px;
+        height: 20px;
+        font-size: 11px;
       }
 
       .section-grid {
@@ -2688,18 +2836,19 @@
 
       .hero-layout {
         grid-template-columns: 1fr;
+        gap: 10px;
       }
 
       .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         justify-content: stretch;
       }
 
       .hero-button {
-        flex: 1;
-      }
-
-      .hero-status-grid {
-        grid-template-columns: 1fr;
+        flex: none;
+        min-height: 38px;
+        padding: 8px 10px;
       }
     }
 
@@ -2740,15 +2889,15 @@
           <p>装備、メイン進行、ギミックを必要な分だけ確認できます。</p>
           <div class="hero-status-grid" aria-label="現在の設定">
             <div class="hero-status">
-              <span>ジョブ / Lv</span>
+              <span>ジョブ</span>
               <strong id="heroJobStatus">召喚士 / Lv20</strong>
             </div>
             <div class="hero-status">
-              <span>メイン進行</span>
+              <span>進行</span>
               <strong id="heroStoryStatus">三都巡り後</strong>
             </div>
             <div class="hero-status">
-              <span>所持詩学</span>
+              <span>詩学</span>
               <strong id="heroPoeticsStatus">0</strong>
             </div>
           </div>
@@ -2771,6 +2920,7 @@
             <path d="M4 20h4.2L19.4 8.8a2 2 0 0 0 0-2.8L18 4.6a2 2 0 0 0-2.8 0L4 15.8V20Z"></path>
             <path d="M13.8 6 18 10.2"></path>
           </svg>
+          <span class="profile-edit-label">編集</span>
         </button>
       </div>
       <div class="friend-section">
@@ -2856,13 +3006,13 @@
     </div>
 
     <nav class="jumpbar" aria-label="機能切り替え">
-      <div class="jumpbar-track">
-        <button class="jump feature-tab active" type="button" data-tab="gear">装備/入手法</button>
-        <button class="jump feature-tab" type="button" data-tab="rotation">スキル/成長</button>
-        <button class="jump feature-tab" type="button" data-tab="goals">迷子防止ナビ</button>
-        <button class="jump feature-tab" type="button" data-tab="mainquest">メイン一覧</button>
-        <button class="jump feature-tab" type="button" data-tab="duty">ギミック</button>
-        <button class="jump feature-tab" type="button" data-tab="links">ミラプリ</button>
+      <div class="jumpbar-track" role="tablist" aria-label="機能切り替え">
+        <button class="jump feature-tab active" type="button" data-tab="gear" data-nav-icon="◇" role="tab" aria-selected="true" aria-current="page">装備</button>
+        <button class="jump feature-tab" type="button" data-tab="mainquest" data-nav-icon="◆" role="tab" aria-selected="false">メイン</button>
+        <button class="jump feature-tab" type="button" data-tab="duty" data-nav-icon="!" role="tab" aria-selected="false">ギミック</button>
+        <button class="jump feature-tab" type="button" data-tab="links" data-nav-icon="✦" role="tab" aria-selected="false">ミラプリ</button>
+        <button class="jump feature-tab" type="button" data-tab="rotation" data-nav-icon="✧" role="tab" aria-selected="false">成長</button>
+        <button class="jump feature-tab" type="button" data-tab="goals" data-nav-icon="⌖" role="tab" aria-selected="false">ナビ</button>
       </div>
     </nav>
 
@@ -3024,9 +3174,13 @@
       <h2>出典</h2>
       <p class="footer-note">
         アクション名・修得レベル・アイコンは公式ジョブガイド、アイテム名・装備アイコン・性能・入手先はエオルゼアデータベースを参照しています。<br>
-        レベル別スキル回しとスキル説明はパッチで変わりやすいため、攻略記事検索、YouTube候補検索、公式ジョブガイドへ直接移動する導線にしています。
+        レベル別スキル回しとスキル説明はパッチで変わりやすいため、攻略記事検索、YouTube候補検索、公式ジョブガイドへ直接移動する導線にしています。公式画像・アイコンは非商用のコミュニティ支援目的で控えめに使用しています。
       </p>
       <div class="sources">
+        <div class="source-item">
+          <a href="https://support.na.square-enix.com/rule.php?id=5382&la=1&tag=authc" target="_blank" rel="noreferrer noopener">FINAL FANTASY XIV Materials Usage License</a><br>
+          公式画像・アイコン等の利用条件と著作権表記の確認に使用。
+        </div>
         <div class="source-item">
           <a href="https://jp.finalfantasyxiv.com/lodestone/topics/detail/36abe7b0b123e3dbbee0041b0b8d63b08a7141d9" target="_blank" rel="noreferrer noopener">7.5パッチノート 先行公開！</a><br>
           2026年4月28日実装分のフリートライアル拡張、装備、システム更新の確認に使用。
@@ -3093,6 +3247,7 @@
         </div>
       </div>
     </section>
+    <p class="material-credit">FINAL FANTASY XIV © SQUARE ENIX</p>
   </div>
 
   <div class="qr-overlay" id="qrOverlay" aria-hidden="true">
@@ -6474,6 +6629,21 @@
       return storyStages[storyStage.value]?.label || "三都巡り後";
     }
 
+    function shortStoryLabel() {
+      const labels = {
+        airship: "三都後",
+        gc: "GC加入済み",
+        arr: "新生後",
+        hw: "蒼天中",
+        sb: "紅蓮中",
+        shb: "漆黒中",
+        ew: "暁月中",
+        dt: "黄金中"
+      };
+      return labels[storyStage.value] || storyLabel();
+    }
+
+
     function tierStoryKey(tier) {
       if (!tier) {
         return "airship";
@@ -6508,7 +6678,7 @@
       const visual = storyImages[storyStage.value] || storyImages.gc;
       document.documentElement.style.setProperty("--story-bg-image", `url("${visual.image}")`);
       if (heroStoryStatus) {
-        heroStoryStatus.textContent = storyLabel();
+        heroStoryStatus.textContent = shortStoryLabel();
       }
     }
 
@@ -6966,7 +7136,7 @@
         heroJobStatus.textContent = `${job.label} / Lv${level}`;
       }
       if (heroStoryStatus) {
-        heroStoryStatus.textContent = storyLabel();
+        heroStoryStatus.textContent = shortStoryLabel();
       }
       if (heroPoeticsStatus) {
         heroPoeticsStatus.textContent = `${poetics}`;
@@ -6977,7 +7147,6 @@
     function openSettings() {
       settingsOverlay.classList.add("open");
       settingsOverlay.setAttribute("aria-hidden", "false");
-      setTimeout(() => gearLevel.focus(), 0);
     }
 
     function closeSettings() {
@@ -7632,6 +7801,11 @@
       renderCharacter();
     }
 
+    function saveCharacterAndClose() {
+      saveCharacter();
+      closeSettings();
+    }
+
     function loadCharacter() {
       try {
         const data = JSON.parse(localStorage.getItem("ff14-guide-character") || "{}");
@@ -7826,10 +8000,19 @@
     function activateFeature(feature) {
       const activeFeature = normalizeFeature(feature);
       document.querySelectorAll(".feature-panel").forEach((panel) => {
-        panel.classList.toggle("active", panel.dataset.feature === activeFeature);
+        const isActive = panel.dataset.feature === activeFeature;
+        panel.classList.toggle("active", isActive);
+        panel.setAttribute("aria-hidden", isActive ? "false" : "true");
       });
       featureTabs.forEach((tab) => {
-        tab.classList.toggle("active", tab.dataset.tab === activeFeature);
+        const isActive = tab.dataset.tab === activeFeature;
+        tab.classList.toggle("active", isActive);
+        tab.setAttribute("aria-selected", isActive ? "true" : "false");
+        if (isActive) {
+          tab.setAttribute("aria-current", "page");
+        } else {
+          tab.removeAttribute("aria-current");
+        }
       });
     }
 
@@ -7895,6 +8078,13 @@
       const feature = featureFromHash(anchor.getAttribute("href"));
       if (feature) {
         activateFeature(feature);
+      }
+    });
+    window.addEventListener("hashchange", () => {
+      const feature = featureFromHash(window.location.hash);
+      if (feature) {
+        activateFeature(feature);
+        requestAnimationFrame(() => scrollToFeature(feature));
       }
     });
     cockpitMode?.addEventListener("change", renderCockpit);
@@ -7985,6 +8175,14 @@
     storyStage.addEventListener("change", refreshAll);
     jobArtEnabled.addEventListener("change", refreshAll);
     characterName.addEventListener("input", updateProfileSummary);
+    lodestoneUrl.addEventListener("input", updateProfileSummary);
+    lodestoneUrl.addEventListener("change", () => {
+      const normalizedLodestone = normalizeLodestoneCharacterUrl(lodestoneUrl.value);
+      if (normalizedLodestone) {
+        lodestoneUrl.value = normalizedLodestone;
+        updateProfileSummary();
+      }
+    });
     poeticsInput.addEventListener("input", () => {
       saveProfile();
       updateProfileSummary();
@@ -8033,7 +8231,7 @@
         removeFriend(removeButton.dataset.friendRemove);
       }
     });
-    saveCharacterButton.addEventListener("click", saveCharacter);
+    saveCharacterButton.addEventListener("click", saveCharacterAndClose);
     clearCharacterButton.addEventListener("click", clearCharacter);
     activateFeature(normalizeFeature(pageParams.get("tab"), "") || featureFromHash(window.location.hash) || "gear");
     updateProfileSummary();

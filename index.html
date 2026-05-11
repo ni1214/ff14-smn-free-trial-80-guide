@@ -721,6 +721,10 @@
       margin-top: 8px;
     }
 
+    .settings-actions > :only-child {
+      grid-column: 1 / -1;
+    }
+
     .settings-close {
       appearance: none;
       border: 1px solid rgba(215, 180, 106, 0.26);
@@ -1667,6 +1671,7 @@
       appearance: none;
       border: 1px solid rgba(255, 239, 178, 0.36);
       cursor: pointer;
+      align-self: end;
       min-height: 44px;
       border-radius: 10px;
       background:
@@ -2930,7 +2935,7 @@
       <h2>マイキャラ</h2>
       <div class="profile-summary-card">
         <div id="profileSummary">
-          <strong>キャラ名未設定 / 召喚士 / Lv20</strong>
+          <strong>キャラ名未設定</strong>
         </div>
         <button class="settings-button icon-button" id="openSettingsButton" type="button" aria-label="マイキャラを編集">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -2952,21 +2957,11 @@
     <div class="settings-overlay" id="settingsOverlay" aria-hidden="true">
       <div class="settings-card" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
         <h3 id="settingsTitle">マイキャラ設定を変える</h3>
-        <p>ここを変えると、装備/入手法、スキル/成長、迷子防止ナビがまとめて切り替わります。</p>
+        <p>キャラ名、Lodestone、メイン進行、詩学を保存します。</p>
         <div class="profile-controls">
         <div>
           <label for="characterName">キャラ名</label>
           <input id="characterName" type="text" placeholder="例: 自分のキャラ名">
-        </div>
-        <div class="profile-input-row">
-          <div>
-            <label for="gearJob">ジョブ</label>
-            <select id="gearJob"></select>
-          </div>
-          <div>
-            <label for="gearLevel">現在レベル</label>
-            <input id="gearLevel" type="number" min="1" max="100" value="20">
-          </div>
         </div>
         <div class="profile-input-row">
           <div>
@@ -2991,7 +2986,7 @@
           <input id="jobArtEnabled" type="checkbox" checked>
           <span>
             <strong>ジョブ背景を表示</strong>
-            <span>マイキャラと装備に公式ジョブ画像を使う</span>
+            <span>装備画面に公式ジョブ画像を使う</span>
           </span>
         </label>
         <div>
@@ -3016,7 +3011,6 @@
         </div>
         <div class="settings-actions">
           <button class="settings-close" id="closeSettingsButton" type="button">閉じる</button>
-          <button class="profile-action" id="findGearButton" type="button">この設定で更新</button>
         </div>
       </div>
       </div>
@@ -3094,8 +3088,21 @@
 
     <section class="panel gear-panel feature-panel active" id="gearFinder" data-feature="gear">
       <h2>装備/入手法</h2>
+      <div class="gear-controls" aria-label="装備検索条件">
+        <div class="gear-input-row">
+          <div>
+            <label for="gearJob">ジョブ</label>
+            <select id="gearJob"></select>
+          </div>
+          <div>
+            <label for="gearLevel">レベル</label>
+            <input id="gearLevel" type="number" min="1" max="100" value="20">
+          </div>
+          <button class="gear-button" id="findGearButton" type="button">この条件で更新</button>
+        </div>
+      </div>
       <div class="gear-summary" id="gearSummary">
-        <h3>マイキャラ設定で装備を表示</h3>
+        <h3>条件を入れて装備を表示</h3>
         <p>今見る装備だけ表示します。</p>
       </div>
       <div class="gear-data-tools">
@@ -7144,7 +7151,7 @@
       const name = characterName.value.trim() || "キャラ名未設定";
       const poetics = Math.min(2000, Math.max(0, Number(poeticsInput.value) || 0));
       profileSummary.innerHTML = `
-        <strong>${escapeHtml(name)} / ${job.label} / Lv${level}</strong>
+        <strong>${escapeHtml(name)}</strong>
         <div class="profile-inline-actions character-links">
           ${lodestoneJumpButton(lodestoneUrl.value, "キャラページを開く")}
         </div>
@@ -8001,7 +8008,7 @@
         ${gearReferenceCards(job, level, tier, poeticsIcon, guideIcon)}
       `;
       findGearButton.disabled = false;
-      findGearButton.textContent = "この設定で更新";
+      findGearButton.textContent = "この条件で更新";
       await renderNextPlanner(job, level);
     }
 
@@ -8169,10 +8176,7 @@
         closeSettings();
       }
     });
-    findGearButton.addEventListener("click", () => {
-      refreshAll();
-      closeSettings();
-    });
+    findGearButton.addEventListener("click", refreshAll);
     gearRefreshButton.addEventListener("click", async () => {
       gearRefreshButton.disabled = true;
       gearRefreshButton.textContent = "確認中...";
